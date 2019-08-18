@@ -10,7 +10,7 @@ class uptd extends CI_Controller
 			$this->load->view('global/sidebar_login', ['list_menu'=>$list_menu]);
 			$this->load->view('global/home_login');
 		}else{
-			redirect(base_url().'uptd/login');
+			redirect(base_url().'login');
 		}
 	}
 
@@ -31,6 +31,6 @@ class uptd extends CI_Controller
 
 	function logout(){
 		$this->auth->logout();
-		redirect(base_url().'uptd/login');
+		redirect(base_url().'login');
 	}
 }
