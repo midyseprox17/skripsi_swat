@@ -36,7 +36,7 @@
                 <div class="p-5 rounded">
                   <div class="text-center">
                     <img src="../img/logo.png" class="rounded mx-auto d-block mb-4" style="width: 50%">
-                    <h1 class="h3 text-gray-900 mb-4">Login Aplikasi Surat Perintah</h1>
+                    <h1 class="h4 text-gray-900 mb-4">Login Aplikasi Surat Perintah UPTD PK WIL IV BANDUNG</h1>
                     <hr class=" mb-4" style="width: 100%">
                   </div>
                   <form class="user">
