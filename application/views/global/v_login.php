@@ -38,7 +38,6 @@
                     <img src="<?=base_url().'assets/'?>img/logo.png" class="rounded mx-auto d-block mb-4" style="width: 50%">
                     <h1 class="h3 text-gray-900 mb-4">Login Aplikasi UPTD<br>Pengawasan Ketenagakerjaan</h1>
                     <h6><font color="red"><?=$_SESSION['pesan']?></font></h6>
-                    <?=password_hash('1', PASSWORD_BCRYPT)?>
                     <hr class=" mb-4" style="width: 100%">
                   </div>
                   <form method="post" class="user" action="<?=base_url().'login'?>">
