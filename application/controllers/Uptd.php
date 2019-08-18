@@ -15,7 +15,7 @@ class uptd extends CI_Controller
 	}
 
 	function login(){
-		if(isset($_POST['submit'])){
+		if(isset($_POST['username'])){
 			$username = $_POST['username'];
 			$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
@@ -24,6 +24,7 @@ class uptd extends CI_Controller
 			}
 			redirect(base_url());
 		}else{
+			$this->session->set_flashdata('pesan', '3');
 			$this->load->view('global/v_login');
 		}
 	}

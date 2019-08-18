@@ -37,8 +37,9 @@
                 <div class="p-5">
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">Login Aplikasi</h1>
+                    <h3 class="h4 text-gray-900 mb-4"><?=$_SESSION['pesan']?></h3>
                   </div>
-                  <form class="user">
+                  <form class="user" method="post" action="<?=base_url().'uptd/login'?>">
                     <div class="form-group">
                       <input class="form-control form-control-user" name="username" id="username" aria-describedby="username" placeholder="Masukan NIP">
                     </div>
@@ -51,7 +52,7 @@
                         <label class="custom-control-label" for="customCheck">Remember Me</label>
                       </div>
                     </div>
-                    <a href="index.html" class="btn btn-primary btn-user btn-block">
+                    <a href="<?=base_url()?>" class="btn btn-primary btn-user btn-block">
                       Login
                     </a>
                   </form>

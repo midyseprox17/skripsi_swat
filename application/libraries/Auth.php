@@ -7,11 +7,11 @@ class auth{
    	}
 
 	function login($username, $password){
-		$data = [
+		$data = array(
 			'username' => $username,
 			'password' => $password, 
 			'dihapus'=>'0'
-		];
+		);
 		$login = $this->CI->db->get_where('v_user_pegawai', $data);
 		if(count($login->result())>0){
 			foreach ($login -> result() as $value){
