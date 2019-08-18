@@ -1,1 +1,1 @@
-<img src="<?php echo base_url().'img/home.jpg'; ?>" width=100% height=100%>
+<img src="<?php echo base_url().'img/logo.png'; ?>" width=100% height=100%>
