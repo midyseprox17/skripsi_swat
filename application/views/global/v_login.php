@@ -37,6 +37,7 @@
                   <div class="text-center">
                     <img src="../img/logo.png" class="rounded mx-auto d-block mb-4" style="width: 50%">
                     <h1 class="h3 text-gray-900 mb-4">Login Aplikasi Surat Perintah</h1>
+                    <h4><?=$_SESSION['pesan']?></h4>
                     <hr class=" mb-4" style="width: 100%">
                   </div>
                   <form method="post" class="user" action="<?=base_url().'uptd/login'?>">

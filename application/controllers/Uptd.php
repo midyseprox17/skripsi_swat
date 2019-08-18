@@ -15,7 +15,7 @@ class uptd extends CI_Controller
 	}
 
 	function login(){
-		if(isset($_POST['username'])){
+		if(isset($_POST['submit'])){
 			$username = $_POST['username'];
 			$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
