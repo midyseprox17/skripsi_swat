@@ -110,7 +110,7 @@ CREATE TABLE `v_user_pegawai` (
 --
 DROP TABLE IF EXISTS `v_user_pegawai`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_user_pegawai`  AS  (select `a`.`id` AS `id`,`a`.`pegawai_id` AS `pegawai_id`,`a`.`username` AS `username`,`a`.`password` AS `password`,`a`.`id_hak_akses` AS `id_hak_akses`,`b`.`nama` AS `nama`,`b`.`jabatan` AS `jabatan`,`b`.`pangkat` AS `pangkat`,`a`.`dihapus` AS `dihapus` from (`tbl_user` `a` left join `tbl_pegawai` `b` on(`a`.`pegawai_id` = `b`.`id`))) ;
+CREATE VIEW `v_user_pegawai`  AS  (select `a`.`id` AS `id`,`a`.`pegawai_id` AS `pegawai_id`,`a`.`username` AS `username`,`a`.`password` AS `password`,`a`.`id_hak_akses` AS `id_hak_akses`,`b`.`nama` AS `nama`,`b`.`jabatan` AS `jabatan`,`b`.`pangkat` AS `pangkat`,`a`.`dihapus` AS `dihapus` from (`tbl_user` `a` left join `tbl_pegawai` `b` on(`a`.`pegawai_id` = `b`.`id`))) ;
 
 --
 -- Indexes for dumped tables
