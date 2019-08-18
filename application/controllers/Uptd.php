@@ -4,11 +4,9 @@ class uptd extends CI_Controller
 	function index()
 	{
 		if($this->session->userdata('masuk') == '1'){
-			$list_menu = $this->auth->get_menu();
-
-			$this->load->view('global/header_login');
-			$this->load->view('global/sidebar_login', ['list_menu'=>$list_menu]);
-			$this->load->view('global/home_login');
+			$this->load->view('global/v_sidebar');
+			$this->load->view('global/v_content');
+			$this->load->view('global/v_footer');
 		}else{
 			redirect(base_url().'login');
 		}
@@ -16,13 +14,17 @@ class uptd extends CI_Controller
 
 	function login(){
 		if(isset($_POST['submit'])){
+
 			$username = $_POST['username'];
-			$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+			$password = $_POST['password'];
 
 			if(!$this->auth->login($username,$password)){
 				$this->session->set_flashdata('pesan', 'Login Gagal. Pastikan Username/Password Benar');
+				$this->load->view('global/v_login');
+			}else{
+				redirect(base_url());
 			}
-			redirect(base_url());
+			
 		}else{
 			$this->session->set_flashdata('pesan', '');
 			$this->load->view('global/v_login');

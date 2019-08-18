@@ -36,11 +36,13 @@
                 <div class="p-5">
                   <div class="text-center">
                     <img src="<?=base_url().'assets/'?>img/logo.png" class="rounded mx-auto d-block mb-4" style="width: 50%">
-                    <h1 class="h3 text-gray-900 mb-4">Login Aplikasi Surat Perintah</h1>
-                    <h4><?=$_SESSION['pesan']?></h4>
+                    <h1 class="h3 text-gray-900 mb-4">Login Aplikasi UPTD<br>Pengawasan Ketenagakerjaan</h1>
+                    <h6><font color="red"><?=$_SESSION['pesan']?></font></h6>
+                    <?=password_hash('1', PASSWORD_BCRYPT)?>
                     <hr class=" mb-4" style="width: 100%">
                   </div>
                   <form method="post" class="user" action="<?=base_url().'login'?>">
+                    <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" style="display: none">
                     <div class="form-group">
                       <input class="form-control form-control-user" name="username" id="username" aria-describedby="username" placeholder="Masukan NIP">
                     </div>

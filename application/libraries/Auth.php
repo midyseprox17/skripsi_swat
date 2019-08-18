@@ -9,25 +9,23 @@ class auth{
 	function login($username, $password){
 		$data = array(
 			'username' => $username,
-			'password' => $password, 
 			'dihapus'=>'0'
 		);
-		$login = $this->CI->db->get_where('v_user_pegawai', $data);
-		if(count($login->result())>0){
-			foreach ($login -> result() as $value){
+		$login = $this->CI->db->get_where('v_user_pegawai', $data)->row();
+		if($login != NULL){
+			if(password_verify($password, $login->password)){
 				$sess_data['masuk'] = '1';
-				$sess_data['pegawai_id'] = $value->pegawai_id;
-				$sess_data['nip'] = $value->username;
-				$sess_data['nama'] = $value->nama;
-				$sess_data['jabatan'] = $value->jabatan;
-				$sess_data['pangkat'] = $value->pangkat;
-				$sess_data['id_hak_akses'] = $value->id_hak_akses;
+				$sess_data['pegawai_id'] = $login->pegawai_id;
+				$sess_data['nip'] = $login->username;
+				$sess_data['nama'] = $login->nama;
+				$sess_data['jabatan'] = $login->jabatan;
+				$sess_data['pangkat'] = $login->pangkat;
+				$sess_data['id_hak_akses'] = $login->id_hak_akses;
 				$this->CI->session->set_userdata($sess_data);
+				return true;
 			}
-			return true;
-		}else{
-			return false;
 		}
+		return false;
 	}
 
 	function is_login($hak_akses){
