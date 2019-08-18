@@ -25,8 +25,9 @@ class auth{
 				$this->CI->session->set_userdata($sess_data);
 			}
 			return true;
+		}else{
+			return false;
 		}
-		return false;
 	}
 
 	function is_login($hak_akses){

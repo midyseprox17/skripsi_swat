@@ -19,7 +19,9 @@ class uptd extends CI_Controller
 			$username = $_POST['username'];
 			$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-			$log_in = $this->auth->login($username,$password);
+			if(!$this->auth->login($username,$password)){
+				$this->session->set_flashdata('pesan', 'Login Gagal. Pastikan Username/Password Benar');
+			}
 			redirect(base_url());
 		}else{
 			$this->load->view('global/v_login');
