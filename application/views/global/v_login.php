@@ -17,18 +17,17 @@
 
   <!-- Custom styles for this template-->
   <link href="<?=base_url().'assets/'?>css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="<?=base_url().'assets/'?>css/sb-admin-2.css" rel="stylesheet">
 
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-gradient-primary" style="background: #15406a">
 
   <div class="container">
 
     <!-- Outer Row -->
-    <div class="row justify-content-center" style="padding-top:6%">
-
-      <div class="col-xl-6 col-lg-6 col-md-5">
-
+    <div class="row justify-content-center" style="padding-top: 0%">
+      <div class="col-xl-5 col-lg-5 col-md-5">
         <div class="card o-hidden border-0 shadow-lg my-5">
           <div class="card-body p-0">
             <!-- Nested Row within Card Body -->
@@ -36,7 +35,9 @@
               <div class="col-lg-12">
                 <div class="p-5">
                   <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">Login Aplikasi</h1>
+                    <img src="../img/logo.png" class="rounded mx-auto d-block mb-4" style="width: 50%">
+                    <h1 class="h3 text-gray-900 mb-4">Login Aplikasi Surat Perintah</h1>
+                    <hr class=" mb-4" style="width: 100%">
                   </div>
                   <form class="user">
                     <div class="form-group">
@@ -46,22 +47,9 @@
                       <input type="password" class="form-control form-control-user" name="password" id="password" placeholder="Password">
                     </div>
                     <div class="form-group">
-                      <div class="custom-control custom-checkbox small">
-                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                        <label class="custom-control-label" for="customCheck">Remember Me</label>
-                      </div>
+                      <button type="button" class="btn btn-primary btn-user btn-block" id="submit" name="submit">Login</button>
                     </div>
-                    <a href="index.html" class="btn btn-primary btn-user btn-block">
-                      Login
-                    </a>
                   </form>
-                  <hr>
-                  <div class="text-center">
-                    <a class="small" href="forgot-password.html">Forgot Password?</a>
-                  </div>
-                  <div class="text-center">
-                    <a class="small" href="register.html">Create an Account!</a>
-                  </div>
                 </div>
               </div>
             </div>
