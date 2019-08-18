@@ -24,7 +24,7 @@ class uptd extends CI_Controller
 			}
 			redirect(base_url());
 		}else{
-			$this->session->set_flashdata('pesan', '3');
+			$this->session->set_flashdata('pesan', '');
 			$this->load->view('global/v_login');
 		}
 	}
