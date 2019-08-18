@@ -17,7 +17,7 @@ class uptd extends CI_Controller
 	function login(){
 		if(isset($_POST['submit'])){
 			$username = $_POST['username'];
-			$password = $_POST['password'];
+			$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
 			$log_in = $this->auth->login($username,$password);
 			redirect(base_url());
