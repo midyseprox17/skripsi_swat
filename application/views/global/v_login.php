@@ -47,7 +47,7 @@
                       <input type="password" class="form-control rounded form-control-user" name="password" id="password" placeholder="Password">
                     </div>
                     <div class="form-group">
-                      <button type="button" class="btn btn-primary rounded btn-user btn-block" id="submit" name="submit">Login</button>
+                      <button type="submit" class="btn btn-primary rounded btn-user btn-block" id="submit" name="submit">Login</button>
                     </div>
                   </form>
                 </div>
