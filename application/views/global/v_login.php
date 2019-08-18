@@ -39,7 +39,7 @@
                     <h1 class="h3 text-gray-900 mb-4">Login Aplikasi Surat Perintah</h1>
                     <hr class=" mb-4" style="width: 100%">
                   </div>
-                  <form class="user" action="<?=base_url().'uptd/login'?>">
+                  <form method="post" class="user" action="<?=base_url().'uptd/login'?>">
                     <div class="form-group">
                       <input class="form-control form-control-user" name="username" id="username" aria-describedby="username" placeholder="Masukan NIP">
                     </div>
@@ -47,7 +47,7 @@
                       <input type="password" class="form-control form-control-user" name="password" id="password" placeholder="Password">
                     </div>
                     <div class="form-group">
-                      <button type="button" class="btn btn-primary btn-user btn-block" id="submit" name="submit">Login</button>
+                      <button type="submit" class="btn btn-primary btn-user btn-block" id="submit" name="submit">Login</button>
                     </div>
                   </form>
                 </div>
