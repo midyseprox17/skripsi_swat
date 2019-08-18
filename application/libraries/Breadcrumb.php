@@ -81,8 +81,7 @@ class Breadcrumb {
 
     $html = '<div class="app-title">';
     $html .= '<div>';
-    $html .= '<h1><i class="fa fa-exchange"></i> '.$judul.'</h1>';
-    $html .= '<p>Halaman ini digunakan untuk '.$judul.'</p>';
+    $html .= '<h1 class="h3 mb-0 text-gray-800"> '.$judul.'</h1>';
     $html .= '</div>';
     $html .= '<ul class="app-breadcrumb breadcrumb side">';
     $html .= '<li class="breadcrumb-item"><a href="'.base_url().'">Beranda</a></li>';
