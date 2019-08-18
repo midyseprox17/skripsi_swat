@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 18, 2019 at 02:11 PM
+-- Generation Time: Aug 18, 2019 at 07:02 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.2.21
 
@@ -21,8 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `dbuptd`
 --
-CREATE DATABASE IF NOT EXISTS `dbuptd` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `dbuptd`;
 
 -- --------------------------------------------------------
 
@@ -85,7 +83,34 @@ CREATE TABLE `tbl_user` (
 --
 
 INSERT INTO `tbl_user` (`id`, `pegawai_id`, `username`, `password`, `id_hak_akses`, `dihapus`) VALUES
-(001, 001, '000000000000000000', '1', 001, '0');
+(001, 001, '1', '$2y$10$nRYbhJ2.BdqQ8GF5MKruyeHE9sy.LLds0iYTg2CT1wjBgrtzKMyMO', 001, '0');
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `v_user_pegawai`
+-- (See below for the actual view)
+--
+CREATE TABLE `v_user_pegawai` (
+`id` int(3) unsigned zerofill
+,`pegawai_id` int(3) unsigned zerofill
+,`username` char(18)
+,`password` varchar(200)
+,`id_hak_akses` int(3) unsigned zerofill
+,`nama` varchar(100)
+,`jabatan` varchar(100)
+,`pangkat` varchar(100)
+,`dihapus` enum('0','1')
+);
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `v_user_pegawai`
+--
+DROP TABLE IF EXISTS `v_user_pegawai`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_user_pegawai`  AS  (select `a`.`id` AS `id`,`a`.`pegawai_id` AS `pegawai_id`,`a`.`username` AS `username`,`a`.`password` AS `password`,`a`.`id_hak_akses` AS `id_hak_akses`,`b`.`nama` AS `nama`,`b`.`jabatan` AS `jabatan`,`b`.`pangkat` AS `pangkat`,`a`.`dihapus` AS `dihapus` from (`tbl_user` `a` left join `tbl_pegawai` `b` on(`a`.`pegawai_id` = `b`.`id`))) ;
 
 --
 -- Indexes for dumped tables
