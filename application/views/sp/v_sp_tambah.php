@@ -10,7 +10,7 @@
 				  <h6 class="m-0 font-weight-bold text-primary">Tambah Data Surat Perintah</h6>
 				</div>
 				<div class="card-body">
-					<form>
+					<form name="tambah_sp" id="tambah_sp">
 						<input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" style="display: none">
 						<table class="table">	
 							<tr>
@@ -60,14 +60,16 @@
 					    		</td>
 							</tr>
 						</table>
-						<table class="table" id="tbl_sp">
-							<tr id="tbl_sp1">
+						<!-- Dynamic Add & Remove Field -->
+						<table class="table" id="dynamic_field">
+							<tr>
 								<td style="width: 20%">Nama</td>
-								<td><input class="form-control float-left" type="text" name="qty[]" style="width: 40%">
-									<button type="button" class="btn btn-primary mx-3" id="tambah_nama" onclick="tambah_baris()"><i class="fa fa-plus"></i></button>
+								<td><input class="form-control float-left" type="text" name="nama[]" style="width: 40%">
+									<button type="button" class="btn btn-primary mx-3" id="add" name="add"><i class="fa fa-plus"></i></button>
 								</td>
 							</tr>
 						</table>
+						<!-- :) -->
 						<table class="table">	
 							<tr>
 								<td style="width: 20%">Tanggal Keluar</td>
@@ -91,6 +93,10 @@
 					    		</td>
 							</tr>
 							<tr>
+								<td>Hal</td>
+								<td><textarea type="textarea" class="form-control" placeholder="Keterangan" rows="5"></textarea>
+							</tr>
+							<tr>
 								<td>Keterangan</td>
 								<td><textarea type="textarea" class="form-control" placeholder="Keterangan" rows="5"></textarea>
 							</tr>
@@ -104,27 +110,31 @@
 		</div>		
 	</div>
 </div>
-<script type="text/javascript">
-	function delete_row(rowno)
-	{
-		$('#tbl_sp'+rowno).remove();
-	}
-
-    function tambah_baris(){
-    	$rowno=$("#tbl_sp tr").length;
-    	$rowno = $rowno + 1;
-        $.ajax({
-            method : "POST",
-            dataType : 'json',
-            success: function(data){
-                var html = '<tr id="tbl_sp'+$rowno+'"><td></td><td><select class="form-control" name="id_jenis[]" id="id_jenis'+$rowno+'" onchange="get_harga_jenis('+$rowno+')">';
-                var i;
-                for(i=0; i<data.length; i++){
-                    html += '<option value="'+data[i]['id']+'">'+data[i]['nama']+'</option>';
-                }
-                html += '</select></td><td><input class="form-control" type="text" name="harga_jenis[]" id="harga_jenis'+$rowno+'" readOnly></td><td><input class="form-control" type="number" name="qty[]"></td><td><button class="btn btn-danger" onclick=delete_row('+$rowno+')><i class="fa fa-minus"></i></button></td></tr>';
-                $("#tbl_sp tr:last").after(html); 
-            }
-        });
-    }
+<script>
+$(document).ready(function(){
+	var i=1;
+	$('#add').click(function(){
+		i++;
+		$('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="name[]" placeholder="Enter your Name" class="form-control name_list" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
+	});
+	
+	$(document).on('click', '.btn_remove', function(){
+		var button_id = $(this).attr("id"); 
+		$('#row'+button_id+'').remove();
+	});
+	
+	$('#submit').click(function(){		
+		$.ajax({
+			url:"<?php echo base_url().'jenis/get_jenis'; ?>",
+			method:"POST",
+			data:$('#tambah_sp').serialize(),
+			success:function(data)
+			{
+				alert(data);
+				$('#tambah_sp')[0].reset();
+			}
+		});
+	});
+	
+});
 </script>
