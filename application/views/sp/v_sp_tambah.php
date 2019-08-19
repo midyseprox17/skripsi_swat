@@ -68,6 +68,33 @@
 								</td>
 							</tr>
 						</table>
+						<table class="table">	
+							<tr>
+								<td style="width: 20%">Tanggal Keluar</td>
+								<td>
+									<div class="float-left">
+								        <div class="form-group row">
+								        	<div class="col-sm-2">
+								        		<input type="text" class="form-control" placeholder="Tanggal">
+								        	</div>
+								        	<div class="col-sm-2">
+								        		<input type="text" class="form-control" placeholder="Bulan">
+								        	</div>
+								        	<div class="col-sm-2">
+								        		<input type="text" class="form-control" placeholder="Tahun">
+								        	</div>
+								        	<div class="col-sm-6">
+								        		<textarea type="textarea" class="form-control" placeholder="Tujuan" rows="2"></textarea>
+								        	</div>
+								        </div>
+								    </div>
+					    		</td>
+							</tr>
+							<tr>
+								<td>Keterangan</td>
+								<td><textarea type="textarea" class="form-control" placeholder="Keterangan" rows="5"></textarea>
+							</tr>
+						</table>
 						<div class="tile-footer">
 			            	<button class="btn btn-primary" type="submit" name="submit">Tambah Data</button>
 			            </div>
