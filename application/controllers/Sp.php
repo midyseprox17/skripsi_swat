@@ -14,4 +14,14 @@ class sp extends CI_Controller
 			redirect(base_url().'login');
 		}
 	}
+
+	public function tambah(){
+		if($this->session->userdata('masuk') == '1'){
+			$this->load->view('global/v_sidebar');
+			$this->load->view('sp/v_sp_tambah');
+			$this->load->view('global/v_footer');
+		}else{
+			redirect(base_url().'login');
+		}
+	}
 }
