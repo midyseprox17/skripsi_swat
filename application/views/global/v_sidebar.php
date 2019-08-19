@@ -10,7 +10,7 @@
   <meta name="author" content="">
 
   <title>Aplikasi UPTD</title>
-  <link rel="icon" type="image/png" href="<?=base_url().'assets/'?>img/logo.png">
+  <link rel="icon" type="image/png" href="<?=base_url().'assets/'?>img/icon.png" sizes="16x32">
 
 
   <!-- Custom fonts for this template-->
