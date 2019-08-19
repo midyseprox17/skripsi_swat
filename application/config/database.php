@@ -75,9 +75,13 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => '1-3m.me',
-	'username' => 'vpaoosto_uptdpk',
-	'password' => 'eVyHSU$R~g$,',
+	// 'hostname' => '1-3m.me',
+	// 'username' => 'vpaoosto_uptdpk',
+	// 'password' => 'eVyHSU$R~g$,',
+	// 'database' => 'vpaoosto_dbuptd',
+	'hostname' => 'localhost',
+	'username' => 'root',
+	'password' => '',
 	'database' => 'vpaoosto_dbuptd',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

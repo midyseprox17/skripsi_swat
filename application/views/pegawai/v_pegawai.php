@@ -1,3 +1,6 @@
+<head>
+	<link href="<?=base_url().'assets/'?>vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+</head>
 <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Tambah Data</a>
 
 <div class="card shadow mb-4">
@@ -15,6 +18,7 @@
 	          <th>Pangkat</th>
 	          <th>Gol</th>
 	          <th>Jabatan</th>
+	          <th>Tindakan</th>
 	        </tr>
 	      </thead>
 	      <tbody>
@@ -30,6 +34,14 @@
 		          <td><?=$p->pangkat?></td>
 		          <td><?=$p->golongan?></td>
 		          <td><?=$p->jabatan?></td>
+		          <td>
+		          	<a href="#" class="btn btn-info btn-circle">
+		          		<i class="fas fa-fw fa-cog"></i>
+	                </a>
+		          	<a href="#" class="btn btn-danger btn-circle">
+		          		<i class="fas fa-trash"></i>
+	                </a>
+		          </td>
 		        </tr>
 		    <?php
 		    	$no++;
