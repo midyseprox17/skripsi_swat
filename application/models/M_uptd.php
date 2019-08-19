@@ -48,20 +48,8 @@ class m_uptd extends CI_Model
 		$this->db->insert($table,$data);
 	}
 
-	function transaksi_laporan($dari, $sampai){
-		$this->db->select('*')
-				->from('v_transaksi')
-				->where('tgl_masuk BETWEEN "'. date('Y-m-d', strtotime($dari)). '" and "'. date('Y-m-d', strtotime($sampai)).'"')
-				->where('dihapus = "0"');
-		return $this->db->get();
-	}
-
-	function transaksi_total_pendapatan($dari, $sampai){
-		$this->db->select('sum(total) as total_pendapatan')
-				->from('v_transaksi')
-				->where('tgl_masuk BETWEEN "'. date('Y-m-d', strtotime($dari)). '" and "'. date('Y-m-d', strtotime($sampai)).'"')
-				->where('dihapus = "0"');
-		return $this->db->get();
+	function cari_nomor($tanggal){
+		
 	}
 
 }
