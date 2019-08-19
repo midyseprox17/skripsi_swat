@@ -79,6 +79,10 @@ class Breadcrumb {
       $judul = $segment[$tot_segment-1]->title;
     }
 
+    if ($judul == "Sp") {
+      $judul = "Surat Perintah";
+    }
+
     $html = '<div class="app-title">';
     $html .= '<div>';
     $html .= '<h1 class="h3 mb-0 text-gray-800"> '.$judul.'</h1>';

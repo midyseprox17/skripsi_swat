@@ -52,7 +52,7 @@
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link" href="<?=base_url().'sp'?>">
-          <i class="fas fa-fw fa-users"></i>
+          <i class="fas fa-fw fa-file-alt"></i>
           <span>Surat Perintah</span></a>
       </li>
 
