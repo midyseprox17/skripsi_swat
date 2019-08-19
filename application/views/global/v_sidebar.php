@@ -30,7 +30,10 @@
 
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-        <div class="sidebar-brand-text">Aplikasi UPTD</div>
+        <div class="sidebar-brand-icon">
+         <img src="<?=base_url().'assets/'?>img/logo.png" class="mx-auto d-block" style="width: 90%">
+        </div>
+        <div class="sidebar-brand-text"><h4 class="h6 mx-4 my-3">Aplikasi UPTD</h4></div>
       </a>
 
       <!-- Divider -->
