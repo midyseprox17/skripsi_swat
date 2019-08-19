@@ -22,11 +22,16 @@ class sp extends CI_Controller
 				$tgl_d = "";
 				$tgl_m = "";
 				$tgl_y = "";
+				$nomor = 0;
 
 				if($status_tanggal == "sekarang"){
 					$tgl_d = date('d');
 					$tgl_m = date('m');
 					$tgl_y = date('Y');
+
+					$hasil = $this->m_uptd->tampil('v_sp_last_nomor')->row();
+					$nomor = $hasil->nomor+1;
+
 				}else{
 					$tgl_d = $_POST['tgl_d'];
 					$tgl_m = $_POST['tgl_m'];
