@@ -30,7 +30,7 @@ class sp extends CI_Controller
 					$tgl_y = date('Y');
 
 					$hasil = $this->m_uptd->tampil('v_sp_last_nomor')->row();
-					$nomor = $hasil->nomor+1;
+					$nomor = $hasil->nomor+3;
 
 				}else{
 					$tgl_d = $_POST['tgl_d'];
