@@ -87,7 +87,6 @@
     	$rowno=$("#tbl_sp tr").length;
     	$rowno = $rowno + 1;
         $.ajax({
-            url : "<?php echo base_url().'jenis/get_jenis'; ?>",
             method : "POST",
             dataType : 'json',
             success: function(data){
