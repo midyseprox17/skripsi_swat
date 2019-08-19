@@ -48,8 +48,4 @@ class m_uptd extends CI_Model
 		$this->db->insert($table,$data);
 	}
 
-	function cari_nomor($tanggal){
-		
-	}
-
 }
