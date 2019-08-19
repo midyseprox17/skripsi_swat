@@ -62,18 +62,9 @@
 						</table>
 						<table class="table" id="tbl_transaksi">
 							<tr id="tbl_transaksi1">
-								<td>Laundry</td>
-								<td><select class="form-control" name="id_jenis[]" id="id_jenis1" onchange="get_harga_jenis('1')">
-										<?php foreach ($jenis->result() as $j) {
-										?>
-											<option value="<?php echo $j->id; ?>"><?php echo $j->nama; ?></option>
-										<?php
-										}
-										?>
-									</select></td>
-								<td><input class="form-control" type="text" name="harga_jenis[]" id="harga_jenis1" readOnly></td>
-								<td><input class="form-control" type="number" name="qty[]"></td>
-								<td><button type="button" class="btn btn-success" id="tambah_jenis" onclick="tambah_baris()"><i class="fa fa-plus"></i></button></td>
+								<td>Nama</td>
+								<td><input class="form-control float-left" type="number" name="qty[]" style="width: 40%"></td>
+								<td><button type="button" class="btn btn-success float-left" id="tambah_jenis" onclick="tambah_baris()"><i class="fa fa-plus"></i></button></td>
 							</tr>
 						</table>
 						<div class="tile-footer">
