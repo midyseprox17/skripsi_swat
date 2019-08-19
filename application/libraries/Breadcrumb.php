@@ -83,12 +83,12 @@ class Breadcrumb {
     $html .= '<div>';
     $html .= '<h1 class="h3 mb-0 text-gray-800"> '.$judul.'</h1>';
     $html .= '</div>';
-    $html .= '<ul class="app-breadcrumb breadcrumb side">';
-    $html .= '<li class="breadcrumb-item"><a href="'.base_url().'">Beranda</a></li>';
+    $html .= '<ul class="app-breadcrumb breadcrumb side text-primary" style="color:#15406a">';
+    $html .= '<li class="breadcrumb-item text-primary" style="color:#15406a"><a href="'.base_url().'">Beranda</a></li>';
     
     // $segment must be an array object
     for ($i=0; $i<$tot_segment; $i++) {
-      $html .= '<li class="breadcrumb-item"><a href="'.$segment[$i]->url.'">'.$segment[$i]->title.'</a></li>';
+      $html .= '<li class="breadcrumb-item text-primary" style="color:#15406a"><a href="'.$segment[$i]->url.'">'.$segment[$i]->title.'</a></li>';
     }
     $html .= '</ul>';
     $html .= '</div>';

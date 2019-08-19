@@ -5140,6 +5140,7 @@ input[type="button"].btn-block {
   padding: 0.75rem 1rem;
   margin-bottom: 1rem;
   list-style: none;
+  color: #15406a;
   background-color: #eaecf4;
   border-radius: 0.35rem;
 }
@@ -5151,7 +5152,7 @@ input[type="button"].btn-block {
 .breadcrumb-item + .breadcrumb-item::before {
   display: inline-block;
   padding-right: 0.5rem;
-  color: #858796;
+  color: #15406a;
   content: "/";
 }
 
@@ -5164,7 +5165,7 @@ input[type="button"].btn-block {
 }
 
 .breadcrumb-item.active {
-  color: #858796;
+  color: #15406a;
 }
 
 .pagination {
@@ -5182,7 +5183,7 @@ input[type="button"].btn-block {
   padding: 0.5rem 0.75rem;
   margin-left: -1px;
   line-height: 1.25;
-  color: #4e73df;
+  color: #15406a;
   background-color: #fff;
   border: 1px solid #dddfeb;
 }
@@ -5216,8 +5217,8 @@ input[type="button"].btn-block {
 .page-item.active .page-link {
   z-index: 1;
   color: #fff;
-  background-color: #4e73df;
-  border-color: #4e73df;
+  background-color: #15406a;
+  border-color: #15406a;
 }
 
 .page-item.disabled .page-link {
