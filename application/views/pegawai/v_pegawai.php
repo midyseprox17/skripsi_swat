@@ -36,7 +36,7 @@
 		          <td><?=$p->jabatan?></td>
 		          <td>
 		          	<a href="#" class="btn btn-info btn-circle">
-		          		<i class="fas fa-fw fa-cog"></i>
+		          		<i class="fas fa-fw fa-edit"></i>
 	                </a>
 		          	<a href="#" class="btn btn-danger btn-circle">
 		          		<i class="fas fa-trash"></i>
