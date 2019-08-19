@@ -3,6 +3,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class sp extends CI_Controller
 {
+	public function __construct(){
+		parent::__construct();
+		$this->load->model('m_sp');
+	}
+
 	public function index(){
 		if($this->session->userdata('masuk') == '1'){
 			$data['sp'] = $this->m_uptd->tampil('v_sp');
@@ -36,6 +41,12 @@ class sp extends CI_Controller
 					$tgl_d = $_POST['tgl_d'];
 					$tgl_m = $_POST['tgl_m'];
 					$tgl_y = $_POST['tgl_y'];
+
+					$data['nomor_list'] = $this->m_sp->nomor_cari($tgl_d, $tgl_m, $tgl_y);
+					$data['nomor_minmax'] = $this->m_sp->nomor_minmax($tgl_d, $tgl_m, $tgl_y)->row();
+
+					
+
 				}
 
 				
