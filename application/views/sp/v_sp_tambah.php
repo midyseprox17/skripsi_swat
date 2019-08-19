@@ -60,11 +60,12 @@
 					    		</td>
 							</tr>
 						</table>
-						<table class="table" id="tbl_transaksi">
-							<tr id="tbl_transaksi1">
-								<td>Nama</td>
-								<td><input class="form-control float-left" type="number" name="qty[]" style="width: 40%"></td>
-								<td><button type="button" class="btn btn-success float-left" id="tambah_jenis" onclick="tambah_baris()"><i class="fa fa-plus"></i></button></td>
+						<table class="table" id="tbl_sp">
+							<tr id="tbl_sp1">
+								<td style="width: 20%">Nama</td>
+								<td><input class="form-control float-left" type="text" name="qty[]" style="width: 40%">
+									<button type="button" class="btn btn-primary mx-3" id="tambah_nama" onclick="tambah_baris()"><i class="fa fa-plus"></i></button>
+								</td>
 							</tr>
 						</table>
 						<div class="tile-footer">
@@ -79,37 +80,24 @@
 <script type="text/javascript">
 	function delete_row(rowno)
 	{
-		$('#tbl_transaksi'+rowno).remove();
-	}
-
-	function get_harga_jenis(no){
-		var id = $('#id_jenis'+no).val();
-		$.ajax({
-			url : "<?php echo base_url().'jenis/get_harga_jenis'; ?>",
-			method : "POST",
-			data : {id: id},
-            dataType : 'json',
-            success: function(data){
-            	$('#harga_jenis'+no).val(data[0]['harga']+"/"+data[0]['satuan']);
-            }
-		})
+		$('#tbl_sp'+rowno).remove();
 	}
 
     function tambah_baris(){
-    	$rowno=$("#tbl_transaksi tr").length;
+    	$rowno=$("#tbl_sp tr").length;
     	$rowno = $rowno + 1;
         $.ajax({
             url : "<?php echo base_url().'jenis/get_jenis'; ?>",
             method : "POST",
             dataType : 'json',
             success: function(data){
-                var html = '<tr id="tbl_transaksi'+$rowno+'"><td></td><td><select class="form-control" name="id_jenis[]" id="id_jenis'+$rowno+'" onchange="get_harga_jenis('+$rowno+')">';
+                var html = '<tr id="tbl_sp'+$rowno+'"><td></td><td><select class="form-control" name="id_jenis[]" id="id_jenis'+$rowno+'" onchange="get_harga_jenis('+$rowno+')">';
                 var i;
                 for(i=0; i<data.length; i++){
                     html += '<option value="'+data[i]['id']+'">'+data[i]['nama']+'</option>';
                 }
                 html += '</select></td><td><input class="form-control" type="text" name="harga_jenis[]" id="harga_jenis'+$rowno+'" readOnly></td><td><input class="form-control" type="number" name="qty[]"></td><td><button class="btn btn-danger" onclick=delete_row('+$rowno+')><i class="fa fa-minus"></i></button></td></tr>';
-                $("#tbl_transaksi tr:last").after(html); 
+                $("#tbl_sp tr:last").after(html); 
             }
         });
     }
