@@ -17,6 +17,7 @@
 
   <!-- Custom styles for this template-->
   <link href="<?=base_url().'assets/'?>css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="<?=base_url().'assets/'?>css/sb-admin-2.css" rel="stylesheet">
 
 </head>
 
@@ -26,7 +27,7 @@
   <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: #15406a">
 
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?=base_url()?>">
@@ -45,14 +46,6 @@
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider">
-
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Interface
-      </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
