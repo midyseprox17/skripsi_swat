@@ -24,32 +24,54 @@ class sp extends CI_Controller
 		if($this->session->userdata('masuk') == '1'){
 			if(isset($_POST['submit'])){
 				$status_tanggal = $_POST['status_tanggal'];
-				$tgl_d = "";
-				$tgl_m = "";
-				$tgl_y = "";
-				$nomor = 0;
+				$jumlah_sp = $_POST['jumlah_sp'];
 
-				if($status_tanggal == "sekarang"){
+				for($i = 1; $i <= $jumlah_sp; $i++){
 					$tgl_d = date('d');
 					$tgl_m = date('m');
 					$tgl_y = date('Y');
+					$nomor = 0;
 
-					$hasil = $this->m_uptd->tampil('v_sp_last_nomor')->row();
-					$nomor = $hasil->nomor+3;
+					if($status_tanggal == "sekarang" && $i == 1){
+						$hasil = $this->m_uptd->tampil('v_sp_last_nomor')->row();
+						$nomor = $hasil->nomor+3;
+					}else if($status_tanggal == "sekarang" && $i != 1){
+						$hasil = $this->m_uptd->tampil('v_sp_last_nomor')->row();
+						$nomor = $hasil->nomor+1;
+					}else if($status_tanggal == "pilih"){
+						$tgl_d = $_POST['tgl_d'];
+						$tgl_m = $_POST['tgl_m'];
+						$tgl_y = $_POST['tgl_y'];
 
-				}else{
-					$tgl_d = $_POST['tgl_d'];
-					$tgl_m = $_POST['tgl_m'];
-					$tgl_y = $_POST['tgl_y'];
+						$data['nomor_list'] = $this->m_sp->nomor_cari($tgl_d, $tgl_m, $tgl_y);
+						$data['nomor_minmax'] = $this->m_sp->nomor_minmax($tgl_d, $tgl_m, $tgl_y)->row();
+						$nomor_min = $data['nomor_minmax']->nomor_min;
+						$nomor_max = $data['nomor_minmax']->nomor_max;
+						$nomor_array = array();
 
-					$data['nomor_list'] = $this->m_sp->nomor_cari($tgl_d, $tgl_m, $tgl_y);
-					$data['nomor_minmax'] = $this->m_sp->nomor_minmax($tgl_d, $tgl_m, $tgl_y)->row();
+						foreach ($data['nomor_list'] as $value) {
+							array_push($nomor_array, $value->nomor);
+						}
 
-					
+						for($no = $nomor_min; $no <= $nomor_max; $no++){
+							if(in_array($no, $nomor_array)){
+								$data = $this->m_uptd->tampil_where('tbl_sp', array('nomor'=>$no))->row();
+								if($login == NULL){
+									$nomor = $no;
+									break;
+								}
+							}
+						}
 
+						if($nomor == 0){
+							$hasil = $this->m_uptd->tampil('v_sp_last_nomor')->row();
+							$nomor = $hasil->nomor+3;
+						}
+
+						
+
+					}
 				}
-
-				
 
 			}else{
 				$this->load->view('global/v_sidebar');
