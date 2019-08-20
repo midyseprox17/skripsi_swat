@@ -1,5 +1,6 @@
 <head>
 	<script src="<?=base_url().'assets/'?>vendor/jquery/jquery-3.3.1.min.js"></script>
+	<script src="<?=base_url().'assets/'?>js/gijgo.js"></script>
     <link href="<?=base_url().'assets/'?>css/gijgo.min.css" rel="stylesheet" type="text/css" />
 </head>
 
