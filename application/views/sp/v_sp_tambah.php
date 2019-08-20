@@ -10,7 +10,7 @@
 				  <h6 class="m-0 font-weight-bold text-primary" style="color: #15406a;">Tambah Data Surat Perintah</h6>
 				</div>
 				<div class="card-body">
-					<form name="tambah_sp" id="tambah_sp">
+					<form name="tambah_sp" id="tambah_sp" method="post" action="<?=base_url().'sp/tambah'?>">
 						<input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" style="display: none">
 						<table class="table">	
 							<tr>
@@ -37,7 +37,7 @@
 								<td>
 									<div class="col-sm-10">
 								        <div class="form-check">
-								          <input class="form-check-input" type="radio" name="status_tanggal" id="status_tanggal" onclick="status_tgl(0)" value="sekarang">
+								          <input class="form-check-input" type="radio" name="status_tanggal" id="status_tanggal" onclick="status_tgl(0)" value="sekarang" checked="">
 								          <label class="form-check-label">
 								            Tanggal Sekarang
 								          </label>
@@ -50,10 +50,10 @@
 								        </div>
 								        <div class="form-group row mt-2" id="show_status_tanggal">
 								        	<div class="col-sm-2">
-								        		Tanggal<input type="number" class="form-control" placeholder="Tgl" name="tgl_d" id="tgl_d" min="1" max="31">
+								        		Tanggal<input type="number" class="form-control" placeholder="Tgl" name="tgl_d" id="tgl_d" min="1" max="31" disabled="">
 								        	</div>
 								        	<div class="col-sm-2">
-								        		Bulan<select class="custom-select form-control form-control-sm" id="tgl_m" name="tgl_m">
+								        		Bulan<select class="custom-select form-control form-control-sm" id="tgl_m" name="tgl_m" disabled="">
 												    <option value="1">Januari</option>
 												    <option value="2">Februari</option>
 												    <option value="3">Maret</option>
@@ -69,7 +69,7 @@
 												</select>
 								        	</div>
 								        	<div class="col-sm-2">
-								        		Tahun<input type="number" class="form-control" placeholder="Tahun" name="tgl_y" id="tgl_y" value="2019" disabled="">
+								        		Tahun<input type="number" class="form-control" placeholder="Tahun" name="tgl_y" id="tgl_y" value="2019" readonly="">
 								        	</div>
 								        </div>
 								    </div>
@@ -80,7 +80,7 @@
 						<table class="table" id="dynamic_field">
 							<tr>
 								<td style="width: 20%; color: #000000">Nama</td>
-								<td><input class="form-control float-left" type="text" name="pegawai[]" style="width: 40%" placeholder="Nama">
+								<td><input class="form-control float-left" type="text" name="pegawai[]" style="width: 40%" placeholder="Nama" required="">
 									<button type="button" class="btn btn-primary mx-3" id="add" name="add"><i class="fa fa-plus"></i></button>
 								</td>
 							</tr>
@@ -92,14 +92,14 @@
 								<td style="width: 80%">
 									<div class="form-inline">
 										<div class="input-group">
-											<input type="text" name="tanggal_sp[]" id="datepicker" class="form-control docs-date" placeholder="Pilih Tanggal">
+											<input type="text" name="tanggal_sp[]" id="datepicker" class="form-control docs-date" placeholder="Pilih Tanggal" required="">
 											<div class="input-group-append">
 												<button type="button" class="btn btn-outline-secondary docs-datepicker-trigger" disabled="">
 													<i class="fa fa-calendar" aria-hidden="true"></i>
 												</button>
 								            </div>
 								        </div>
-								    	<textarea type="textarea" class="form-control ml-3" name="tujuan[]" placeholder="Tujuan" rows="1" style="width: 67%"></textarea>	
+								    	<textarea type="textarea" class="form-control ml-3" name="tujuan[]" placeholder="Tujuan" rows="1" style="width: 67%" required=""></textarea>	
 									</div>
 								    
 					    		</td>
@@ -108,7 +108,7 @@
 						<table class="table">
 							<tr>
 								<td style="color: #000000; width: 20%">Hal</td>
-								<td><textarea type="textarea" name="hal" class="form-control" placeholder="Keterangan" rows="5"></textarea>
+								<td><textarea type="textarea" name="hal" class="form-control" placeholder="Hal" rows="5" required=""></textarea>
 							</tr>
 							<tr>
 								<td style="color: #000000">Keterangan</td>
@@ -147,19 +147,19 @@ $(document).ready(function() {
 				<td style="width: 80%">
 					<div class="form-inline">
 						<div class="input-group">
-							<input type="text" name="tanggal_sp[]" id="datepicker" class="form-control docs-date" placeholder="Pilih Tanggal">
+							<input type="text" name="tanggal_sp[]" id="datepicker" class="form-control docs-date" placeholder="Pilih Tanggal" required>
 							<div class="input-group-append">
 								<button type="button" class="btn btn-outline-secondary docs-datepicker-trigger" disabled="">
 									<i class="fa fa-calendar" aria-hidden="true"></i>
 								</button>
 				            </div>
 				        </div>
-				    	<textarea type="textarea" class="form-control ml-3" name="tujuan[]" placeholder="Tujuan" rows="1" style="width: 67%"></textarea>	
+				    	<textarea type="textarea" class="form-control ml-3" name="tujuan[]" placeholder="Tujuan" rows="1" style="width: 67%" required></textarea>	
 					</div>
 				    
 				</td>
 			</tr>`;
-			
+
     	$("#tabel_tanggal").append(text);
     	for(var i = 1; i <= total-1; i++){
     		var baris = 
@@ -168,14 +168,14 @@ $(document).ready(function() {
 					<td style="width: 80%">
 						<div class="form-inline">
 							<div class="input-group">
-								<input type="text" name="tanggal_sp[]" id="datepicker" class="form-control docs-date" placeholder="Pilih Tanggal">
+								<input type="text" name="tanggal_sp[]" id="datepicker" class="form-control docs-date" placeholder="Pilih Tanggal" required>
 								<div class="input-group-append">
 									<button type="button" class="btn btn-outline-secondary docs-datepicker-trigger" disabled="">
 										<i class="fa fa-calendar" aria-hidden="true"></i>
 									</button>
 					            </div>
 					        </div>
-					    	<textarea type="textarea" class="form-control ml-3" name="tujuan[]" placeholder="Tujuan" rows="1" style="width: 67%"></textarea>	
+					    	<textarea type="textarea" class="form-control ml-3" name="tujuan[]" placeholder="Tujuan" rows="1" style="width: 67%" required></textarea>	
 						</div>
 					    
 					</td>
@@ -190,21 +190,12 @@ $(document).ready(function(){
 	var i=1;
 	$('#add').click(function(){
 		i++;
-		$('#dynamic_field').append('<tr id="row'+i+'"><td style="width: 20%; color: #000000"></td><td><input class="form-control float-left" type="text" name="pegawai[]" style="width: 40%" placeholder="Nama"><type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove mx-3"><i class="fa fa-times"></i></button></td></tr>');
+		$('#dynamic_field').append('<tr id="row'+i+'"><td style="width: 20%; color: #000000"></td><td><input class="form-control float-left" type="text" name="pegawai[]" style="width: 40%" placeholder="Nama" required><type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove mx-3"><i class="fa fa-times"></i></button></td></tr>');
 	});
 	
 	$(document).on('click', '.btn_remove', function(){
 		var button_id = $(this).attr("id"); 
 		$('#row'+button_id+'').remove();
-	});
-	
-});
-
-$(document).ready(function(){
-	var i=1;
-	$('#jumlah_sp').change(function(){
-		i++;
-		$('#dynamic_field1').append('<tr id="row'+i+'"><td style="width: 20%; color: #000000">Tanggal Keluar</td><td style="width: 80%"><div class="form-inline"><input id="datepicker" name="tanggal_sp[]" width="20%"/><textarea type="textarea" class="form-control mx-1" name="tujuan[]" placeholder="Tujuan" rows="1" style="width: 79%"></textarea></div></td></tr>');
 	});
 	
 });

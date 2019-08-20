@@ -32,6 +32,23 @@ class sp extends CI_Controller
 				$hal = $_POST['hal'];
 				$keterangan = $_POST['keterangan'];
 
+				// echo '<pre>';
+				// print_r($status_tanggal);
+				// echo '<br>';
+				// print_r($jumlah_sp);
+				// echo '<br>';
+				// print_r($pegawai[1-1]);
+				// echo '<br>';
+				// print_r($tanggal_sp[1-1]);
+				// echo '<br>';
+				// print_r($tujuan[1-1]);
+				// echo '<br>';
+				// print_r($hal);
+				// echo '<br>';
+				// print_r($keterangan);
+				// echo '<br>';
+				// echo '</pre>';
+
 				for($i = 1; $i <= $jumlah_sp; $i++){
 					$tgl_d = date('d');
 					$tgl_m = date('m');
@@ -50,29 +67,35 @@ class sp extends CI_Controller
 						$tgl_y = $_POST['tgl_y'];
 
 						$data['nomor_list'] = $this->m_sp->nomor_cari($tgl_d, $tgl_m, $tgl_y);
-						$data['nomor_minmax'] = $this->m_sp->nomor_minmax($tgl_d, $tgl_m, $tgl_y)->row();
-						$nomor_min = $data['nomor_minmax']->nomor_min;
-						$nomor_max = $data['nomor_minmax']->nomor_max;
-						$nomor_array = array();
+						if($data['nomor_list']->num_rows() > 0){
+							$data['nomor_minmax'] = $this->m_sp->nomor_minmax($tgl_d, $tgl_m, $tgl_y)->row();
+							$nomor_min = $data['nomor_minmax']->nomor_min;
+							$nomor_max = $data['nomor_minmax']->nomor_max;
+							$nomor_array = array();
 
-						foreach ($data['nomor_list'] as $value) {
-							array_push($nomor_array, $value->nomor);
-						}
+							foreach ($data['nomor_list']->result() as $value) {
+								array_push($nomor_array, $value->nomor);
+							}
 
-						for($no = $nomor_min; $no <= $nomor_max; $no++){
-							if(in_array($no, $nomor_array)){
-								$data = $this->m_uptd->tampil_where('tbl_sp', array('nomor'=>$no))->row();
-								if($login == NULL){
-									$nomor = $no;
-									break;
+							for($no = $nomor_min; $no <= $nomor_max; $no++){
+								if(in_array($no, $nomor_array)){
+									$data = $this->m_uptd->tampil_where('tbl_sp', array('nomor'=>$no))->row();
+									if($login == NULL){
+										$nomor = $no;
+										break;
+									}
 								}
 							}
-						}
 
-						if($nomor == 0){
+							if($nomor == 0){
+								$hasil = $this->m_uptd->tampil('v_sp_last_nomor')->row();
+								$nomor = $hasil->nomor+3;
+							}
+						}else{
 							$hasil = $this->m_uptd->tampil('v_sp_last_nomor')->row();
 							$nomor = $hasil->nomor+3;
 						}
+						
 					}
 
 					//SCRIPT INPUT
