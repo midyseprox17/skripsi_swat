@@ -1,9 +1,9 @@
-<div class="container-fluid">
+<div class="container-fluid" style="width: 100%; height: 70%">
 	<center>
 		<h1>UPTD Pengawasan Ketenagakerjaan</h1>
 		<h1>Wilayah IV Bandung</h1>
 	</center>
-	<div class="row">
+	<div class="row my-5">
 	    <div class="col-xl-3 col-md-6 mb-4">
 	      <div class="card border-left-primary shadow h-100 py-2">
 	        <div class="card-body">
@@ -29,7 +29,7 @@
 	              <div class="h5 mb-0 font-weight-bold text-gray-800"><?=$sp_total?></div>
 	            </div>
 	            <div class="col-auto">
-	              <i class="fas fa-calendar fa-2x text-gray-300"></i>
+	              <i class="fas fa-file-alt fa-2x text-gray-300"></i>
 	            </div>
 	          </div>
 	        </div>
@@ -45,7 +45,7 @@
 	              <div class="h5 mb-0 font-weight-bold text-gray-800"><?=$sp_total?></div>
 	            </div>
 	            <div class="col-auto">
-	              <i class="fas fa-calendar fa-2x text-gray-300"></i>
+	              <i class="fas fa-file-alt fa-2x text-gray-300"></i>
 	            </div>
 	          </div>
 	        </div>
@@ -61,7 +61,7 @@
 	              <div class="h5 mb-0 font-weight-bold text-gray-800"><?=$sp_total?></div>
 	            </div>
 	            <div class="col-auto">
-	              <i class="fas fa-calendar fa-2x text-gray-300"></i>
+	              <i class="fas fa-file-alt fa-2x text-gray-300"></i>
 	            </div>
 	          </div>
 	        </div>
