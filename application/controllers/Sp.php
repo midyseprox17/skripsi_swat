@@ -22,6 +22,7 @@ class sp extends CI_Controller
 
 	public function tambah(){
 		if($this->session->userdata('masuk') == '1'){
+			
 			if(isset($_POST['submit'])){
 				$status_tanggal = $_POST['status_tanggal'];
 				$jumlah_sp = $_POST['jumlah_sp'];
@@ -80,7 +81,7 @@ class sp extends CI_Controller
 						'tanggal' => $tgl_d,
 						'bulan' => $tgl_m,
 						'tahun' => $tgl_y,
-						'tanggal_sp' => $tanggal_sp[$i-1],
+						'tanggal_sp' => date('Y-m-d', strtotime($tanggal_sp[$i-1])),
 						'tujuan' => $tujuan[$i-1],
 						'hal' => $hal,
 						'ket' => $keterangan
@@ -88,14 +89,13 @@ class sp extends CI_Controller
 					$this->m_uptd->tambah('tbl_sp', $data);
 					$sp_terakhir = $this->m_uptd->tampil_where('tbl_sp', $data)->row();
 
-					for(var $peg = 0; $peg < count($pegawai); $peg++){
+					for($peg = 0; $peg < count($pegawai); $peg++){
 						$data_pegawai = [
 							'sp_id' => $sp_terakhir->id,
 							'pegawai_id' => $pegawai[$peg]
 						];
 						$this->m_uptd->tambah('tbl_sp_pegawai', $data_pegawai);
 					}
-					
 				}
 
 			}else{
