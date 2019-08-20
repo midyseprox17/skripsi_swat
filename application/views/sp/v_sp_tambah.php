@@ -1,7 +1,3 @@
-<head>
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-</head>
-
 <div class="container">
 	<div class="row">
 		<div class="col-xl-12">
@@ -17,7 +13,7 @@
 								<td style="width: 20%; color: #000000">Jumlah Nomor SP</td>
 								<td>
 									<div class="float-left" style="width: 30%">
-								      <select class="custom-select form-control form-control-sm" id="jumlah_sp" name="jumlah_sp">
+								      <select class="custom-select form-control form-control-sm" id="jumlah_sp" name="jumlah_sp" required="">
 									    <option value="1">1</option>
 									    <option value="2">2</option>
 									    <option value="3">3</option>
@@ -92,6 +88,7 @@
 								<td style="width: 80%">
 									<div class="form-inline">
 										<input id="datepicker" name="tanggal_sp[]" width="20%"/>
+										<input id="datepicker" name="tanggal_sp[]" width="20%"/>
 								    	<textarea type="textarea" class="form-control mx-1" name="tujuan[]" placeholder="Tujuan" rows="1" style="width: 79%"></textarea>	
 									</div>
 								    
@@ -117,7 +114,21 @@
 		</div>		
 	</div>
 </div>
+ 
+<script src="<?=base_url().'assets/'?>vendor/jquery/jquery-ui.js"></script>
+<link href="<?=base_url().'assets/'?>vendor/jquery/jquery-ui.css" rel="stylesheet">
 <script>
+$(document).ready(function() {
+    // $('.addmore').on('click', function() {
+    //     $(".mytemplate").clone().removeClass("mytemplate").show().appendTo(".dates");
+    // });
+    $(document).on("focus", "#datepicker", function(){
+        $(this).datepicker({
+            uiLibrary: 'bootstrap4'
+        });
+    });
+});
+
 $(document).ready(function(){
 	var i=1;
 	$('#add').click(function(){
