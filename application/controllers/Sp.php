@@ -54,8 +54,21 @@ class sp extends CI_Controller
 						}
 
 						for($no = $nomor_min; $no <= $nomor_max; $no++){
-							//in_array(search_value, array_name, mode) 
+							if(in_array($no, $nomor_array)){
+								$data = $this->m_uptd->tampil_where('tbl_sp', array('nomor'=>$no))->row();
+								if($login == NULL){
+									$nomor = $no;
+									break;
+								}
+							}
 						}
+
+						if($nomor == 0){
+							$hasil = $this->m_uptd->tampil('v_sp_last_nomor')->row();
+							$nomor = $hasil->nomor+3;
+						}
+
+						
 
 					}
 				}
