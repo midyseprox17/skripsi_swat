@@ -1,6 +1,5 @@
 <head>
-	<<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 </head>
@@ -24,41 +23,55 @@
 									    <option value="1">1</option>
 									    <option value="2">2</option>
 									    <option value="3">3</option>
-									    <option value="3">4</option>
-									    <option value="3">5</option>
+									    <option value="4">4</option>
+									    <option value="5">5</option>
+									    <option value="6">6</option>
+									    <option value="7">7</option>
+									    <option value="8">8</option>
+									    <option value="9">9</option>
+									    <option value="10">10</option>
 									  </select>
 								    </div>
 								</td>
-							</tr>
-							<tr>
-								<td style="color: #000000">Nomor Surat</td>
-								<td><input class="form-control float-left" type="text" name="telp" style="width: 30%"></td>
 							</tr>
 							<tr>
 								<td style="color: #000000">Tanggal Surat</td>
 								<td>
 									<div class="col-sm-10">
 								        <div class="form-check">
-								          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" onclick="status_tanggal(0)" value="option1">
-								          <label class="form-check-label" for="gridRadios1">
+								          <input class="form-check-input" type="radio" name="status_tanggal" id="status_tanggal" onclick="status_tgl(0)" value="sekarang">
+								          <label class="form-check-label">
 								            Tanggal Sekarang
 								          </label>
 								        </div>
 								        <div class="form-check">
-								          <input class="form-check-input" type="radio" id="gridRadios2" value="option2" onclick="status_tanggal(1)">
-								          <label class="form-check-label" for="gridRadios2">
-								            Pilih tanggal
+								          <input class="form-check-input" type="radio" name="status_tanggal" id="status_tanggal" value="pilih" onclick="status_tgl(1)">
+								          <label class="form-check-label">
+								            Pilih Tanggal
 								          </label>
 								        </div>
 								        <div class="form-group row mt-2" id="show_status_tanggal">
 								        	<div class="col-sm-2">
-								        		<input type="number" class="form-control" placeholder="Tgl">
+								        		Tanggal<input type="number" class="form-control" placeholder="Tgl" name="tgl_d" id="tgl_d" min="1" max="31">
 								        	</div>
 								        	<div class="col-sm-2">
-								        		<input type="number" class="form-control" placeholder="Bulan">
+								        		Bulan<select class="custom-select form-control form-control-sm" id="tgl_m" name="tgl_m">
+												    <option value="1">Januari</option>
+												    <option value="2">Februari</option>
+												    <option value="3">Maret</option>
+												    <option value="4">April</option>
+												    <option value="5">Mei</option>
+												    <option value="6">Juni</option>
+												    <option value="7">Juli</option>
+												    <option value="8">Agustus</option>
+												    <option value="9">September</option>
+												    <option value="10">Oktober</option>
+												    <option value="11">November</option>
+												    <option value="12">Desember</option>
+												</select>
 								        	</div>
 								        	<div class="col-sm-2">
-								        		<input type="number" class="form-control" placeholder="Tahun">
+								        		Tahun<input type="number" class="form-control" placeholder="Tahun" name="tgl_y" id="tgl_y" value="2019" disabled="">
 								        	</div>
 								        </div>
 								    </div>
@@ -141,19 +154,6 @@ $(document).ready(function(){
 		i++;
 		$('#dynamic_field1').append('<tr id="row'+i+'"><td style="width: 20%; color: #000000">Tanggal Keluar</td><td style="width: 80%"><div class="form-inline"><input id="datepicker" name="tanggal_sp[]" width="20%"/><textarea type="textarea" class="form-control mx-1" name="tujuan[]" placeholder="Tujuan" rows="1" style="width: 79%"></textarea></div></td></tr>');
 	});
-
-	$('#submit').click(function(){		
-		$.ajax({
-			url:"<?php echo base_url().'jenis/get_jenis'; ?>",
-			method:"POST",
-			data:$('#tambah_sp').serialize(),
-			success:function(data)
-			{
-				alert(data);
-				$('#tambah_sp')[0].reset();
-			}
-		});
-	});
 	
 });
 </script>
@@ -161,13 +161,14 @@ $(document).ready(function(){
         $('#datepicker').datepicker({
             uiLibrary: 'bootstrap4'
         });
-</script>
-<script>
-        function status_tanggal_show(x){
-        	if (x==0) {
-        		document.getElementById('show_status_tanggal(0)').style.display='block';
-        	else document.getElementById('show_status_tanggal(1)').style.display='block';
-        	return;
+
+        function status_tgl(x){
+        	if (x == 1) {
+        		document.getElementById('tgl_d').disabled = false;
+        		document.getElementById('tgl_m').disabled = false;
+        	}else{
+        		document.getElementById('tgl_d').disabled = true;
+        		document.getElementById('tgl_m').disabled = true;
         	}
         }
 </script>
