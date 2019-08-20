@@ -1,5 +1,9 @@
 <head>
-	<link href="<?=base_url().'assets/'?>vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 </head>
 
 <div class="container">
@@ -7,14 +11,14 @@
 		<div class="col-xl-12">
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
-				  <h6 class="m-0 font-weight-bold text-primary">Tambah Data Surat Perintah</h6>
+				  <h6 class="m-0 font-weight-bold text-primary" style="color: #15406a;">Tambah Data Surat Perintah</h6>
 				</div>
 				<div class="card-body">
 					<form name="tambah_sp" id="tambah_sp">
 						<input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" style="display: none">
 						<table class="table">	
 							<tr>
-								<td style="width: 20%">Jumlah Nomor SP</td>
+								<td style="width: 20%; color: #000000">Jumlah Nomor SP</td>
 								<td>
 									<div class="float-left" style="width: 30%">
 								      <select class="custom-select form-control form-control-sm">
@@ -26,11 +30,11 @@
 								</td>
 							</tr>
 							<tr>
-								<td>Nomor Surat</td>
+								<td style="color: #000000">Nomor Surat</td>
 								<td><input class="form-control float-left" type="text" name="telp" style="width: 30%"></td>
 							</tr>
 							<tr>
-								<td>Tanggal Surat</td>
+								<td style="color: #000000">Tanggal Surat</td>
 								<td>
 									<div class="col-sm-10">
 								        <div class="form-check">
@@ -47,13 +51,13 @@
 								        </div>
 								        <div class="form-group row mt-2">
 								        	<div class="col-sm-2">
-								        		<input type="text" class="form-control" placeholder="Tanggal">
+								        		<input type="number" class="form-control" placeholder="Tgl">
 								        	</div>
 								        	<div class="col-sm-2">
-								        		<input type="text" class="form-control" placeholder="Bulan">
+								        		<input type="number" class="form-control" placeholder="Bulan">
 								        	</div>
 								        	<div class="col-sm-2">
-								        		<input type="text" class="form-control" placeholder="Tahun">
+								        		<input type="number" class="form-control" placeholder="Tahun">
 								        	</div>
 								        </div>
 								    </div>
@@ -63,8 +67,8 @@
 						<!-- Dynamic Add & Remove Field -->
 						<table class="table" id="dynamic_field">
 							<tr>
-								<td style="width: 20%">Nama</td>
-								<td><input class="form-control float-left" type="text" name="nama[]" style="width: 40%">
+								<td style="width: 20%; color: #000000">Nama</td>
+								<td><input class="form-control float-left" type="text" name="nama[]" style="width: 40%" placeholder="Nama">
 									<button type="button" class="btn btn-primary mx-3" id="add" name="add"><i class="fa fa-plus"></i></button>
 								</td>
 							</tr>
@@ -72,32 +76,21 @@
 						<!-- :) -->
 						<table class="table">	
 							<tr>
-								<td style="width: 20%">Tanggal Keluar</td>
-								<td>
-									<div class="float-left">
-								        <div class="form-group row">
-								        	<div class="col-sm-2">
-								        		<input type="text" class="form-control" placeholder="Tanggal">
-								        	</div>
-								        	<div class="col-sm-2">
-								        		<input type="text" class="form-control" placeholder="Bulan">
-								        	</div>
-								        	<div class="col-sm-2">
-								        		<input type="text" class="form-control" placeholder="Tahun">
-								        	</div>
-								        	<div class="col-sm-6">
-								        		<textarea type="textarea" class="form-control" placeholder="Tujuan" rows="2"></textarea>
-								        	</div>
-								        </div>
-								    </div>
+								<td style="width: 20%; color: #000000">Tanggal Keluar</td>
+								<td style="width: 80%">
+									<div class="form-inline">
+										<input id="datepicker" name="datepicker" width="20%"/>
+								    <textarea type="textarea" class="form-control mx-1" placeholder="Tujuan" rows="1" style="width: 79%"></textarea>	
+									</div>
+								    
 					    		</td>
 							</tr>
 							<tr>
-								<td>Hal</td>
+								<td style="color: #000000">Hal</td>
 								<td><textarea type="textarea" class="form-control" placeholder="Keterangan" rows="5"></textarea>
 							</tr>
 							<tr>
-								<td>Keterangan</td>
+								<td style="color: #000000">Keterangan</td>
 								<td><textarea type="textarea" class="form-control" placeholder="Keterangan" rows="5"></textarea>
 							</tr>
 						</table>
@@ -115,7 +108,7 @@ $(document).ready(function(){
 	var i=1;
 	$('#add').click(function(){
 		i++;
-		$('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="name[]" placeholder="Enter your Name" class="form-control name_list" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
+		$('#dynamic_field').append('<tr id="row'+i+'"><td style="width: 20%"></td><td><input class="form-control float-left" type="text" name="nama[]" style="width: 40%" placeholder="Nama"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove mx-3"><i class="fa fa-times"></i></button></td></tr>');
 	});
 	
 	$(document).on('click', '.btn_remove', function(){
@@ -137,4 +130,9 @@ $(document).ready(function(){
 	});
 	
 });
+</script>
+<script>
+        $('#datepicker').datepicker({
+            uiLibrary: 'bootstrap4'
+        });
 </script>
