@@ -99,7 +99,7 @@
 												</button>
 								            </div>
 								        </div>
-								    	<textarea type="textarea" class="form-control mx-1" name="tujuan[]" placeholder="Tujuan" rows="1" style="width: 79%"></textarea>	
+								    	<textarea type="textarea" class="form-control ml-3" name="tujuan[]" placeholder="Tujuan" rows="1" style="width: 67%"></textarea>	
 									</div>
 								    
 					    		</td>
