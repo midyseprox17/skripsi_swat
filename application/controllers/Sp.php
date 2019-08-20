@@ -123,8 +123,10 @@ class sp extends CI_Controller
 				redirect(base_url().'sp');
 
 			}else{
+				$data['pegawai'] = $this->m_uptd->tampil_where('tbl_pegawai', array('dihapus' => '0'));
+
 				$this->load->view('global/v_sidebar');
-				$this->load->view('sp/v_sp_tambah');
+				$this->load->view('sp/v_sp_tambah', $data);
 				$this->load->view('global/v_footer');
 			}
 		}else{

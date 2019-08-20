@@ -1,6 +1,7 @@
 <link  href="<?=base_url().'assets/'?>vendor/jquery/datepicker.css" rel="stylesheet">
 <script src="<?=base_url().'assets/'?>vendor/jquery/datepicker.js"></script>
-
+<link rel="stylesheet" href="<?=base_url().'assets/'?>css/bootstrap-select.min.css">
+<script src="<?=base_url().'assets/'?>js/bootstrap-select.min.js"></script>
 
 <div class="container">
 	<div class="row">
@@ -17,18 +18,18 @@
 								<td style="width: 20%; color: #000000">Jumlah Nomor SP</td>
 								<td>
 									<div class="float-left" style="width: 30%">
-								      <select class="custom-select form-control form-control-sm" id="jumlah_sp" name="jumlah_sp" required="">
-									    <option value="1">1</option>
-									    <option value="2">2</option>
-									    <option value="3">3</option>
-									    <option value="4">4</option>
-									    <option value="5">5</option>
-									    <option value="6">6</option>
-									    <option value="7">7</option>
-									    <option value="8">8</option>
-									    <option value="9">9</option>
-									    <option value="10">10</option>
-									  </select>
+								      	<select class="custom-select form-control form-control-sm" id="jumlah_sp" name="jumlah_sp" required="">
+										    <option value="1">1</option>
+										    <option value="2">2</option>
+										    <option value="3">3</option>
+										    <option value="4">4</option>
+										    <option value="5">5</option>
+										    <option value="6">6</option>
+										    <option value="7">7</option>
+										    <option value="8">8</option>
+										    <option value="9">9</option>
+										    <option value="10">10</option>
+									  	</select>
 								    </div>
 								</td>
 							</tr>
@@ -77,11 +78,21 @@
 							</tr>
 						</table>
 						<!-- Dynamic Add & Remove Field -->
-						<table class="table" id="dynamic_field">
-							<tr>
+						<table class="table" id="tabel_pegawai">
+							<tr id="tabel_pegawai1">
 								<td style="width: 20%; color: #000000">Nama</td>
-								<td><input class="form-control float-left" type="text" name="pegawai[]" style="width: 40%" placeholder="Nama" required="">
-									<button type="button" class="btn btn-primary mx-3" id="add" name="add"><i class="fa fa-plus"></i></button>
+								<td>
+									<select class="form-control selectpicker" data-live-search="true" name="pegawai[]" style="width: 40%" placeholder="Nama" required="">
+										<?php foreach ($pegawai->result() as $p) {
+										?>
+											<option value="<?=$p->id?>"><?=$p->nip.' | '.$p->nama?></option>
+										<?php
+										}
+										?>
+									</select>
+								</td>
+								<td>
+									<button type="button" class="btn btn-primary mx-3" onclick="tambah_baris_pegawai()"><i class="fa fa-plus"></i></button>
 								</td>
 							</tr>
 						</table>
@@ -127,9 +138,6 @@
  
 <script>
 $(document).ready(function() {
-    // $('.addmore').on('click', function() {
-    //     $(".mytemplate").clone().removeClass("mytemplate").show().appendTo(".dates");
-    // });
     $(document).on("focus", "#datepicker", function(){
         $(this).datepicker({
         	autoHide : true,
@@ -186,19 +194,30 @@ $(document).ready(function() {
 
 });
 
-$(document).ready(function(){
-	var i=1;
-	$('#add').click(function(){
-		i++;
-		$('#dynamic_field').append('<tr id="row'+i+'"><td style="width: 20%; color: #000000"></td><td><input class="form-control float-left" type="text" name="pegawai[]" style="width: 40%" placeholder="Nama" required><type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove mx-3"><i class="fa fa-times"></i></button></td></tr>');
-	});
-	
-	$(document).on('click', '.btn_remove', function(){
-		var button_id = $(this).attr("id"); 
-		$('#row'+button_id+'').remove();
-	});
-	
-});
+function tambah_baris_pegawai(){
+	$rowno=$("#tabel_pegawai tr").length;
+	$rowno = $rowno + 1;
+    $.ajax({
+        url : "<?=base_url().'pegawai/list_pegawai'?>",
+        method : "POST",
+        dataType : 'json',
+        success: function(data){
+            var html = '<tr id="tabel_pegawai'+$rowno+'"><td>Nama</td><td><select class="form-control selectpicker" data-live-search="true" name="pegawai[]" style="width: 40%" placeholder="Nama" required="">';
+            var i;
+            for(var i = 0; i < data.length; i++){
+                html += '<option value="'+data[i]['id']+'">'+data[i]['nip']+' | '+data[i]['nama']+'</option>';
+            }
+            html += '</select></td><td><button class="btn btn-danger mx-3" onclick=hapus_baris_pegawai('+$rowno+')><i class="fa fa-minus"></i></button></td></tr>';
+            $("#tabel_pegawai tr:last").after(html); 
+            $('.selectpicker').selectpicker('refresh');
+        }
+    });
+}
+
+function hapus_baris_pegawai(rowno)
+{
+	$('#tabel_pegawai'+rowno).remove();
+}
 
 function status_tgl(x){
 	if (x == 1) {
