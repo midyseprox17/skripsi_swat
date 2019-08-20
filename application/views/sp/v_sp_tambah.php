@@ -130,22 +130,8 @@ $(document).ready(function(){
 		$('#row'+button_id+'').remove();
 	});
 	
-	$('#submit').click(function(){		
-		$.ajax({
-			url:"<?php echo base_url().'jenis/get_jenis'; ?>",
-			method:"POST",
-			data:$('#tambah_sp').serialize(),
-			success:function(data)
-			{
-				alert(data);
-				$('#tambah_sp')[0].reset();
-			}
-		});
-	});
-	
 });
-</script>
-<script>
+
 $(document).ready(function(){
 	var i=1;
 	$('#jumlah_sp').change(function(){
@@ -154,19 +140,15 @@ $(document).ready(function(){
 	});
 	
 });
-</script>
-<script>
-        $('#datepicker').datepicker({
-            uiLibrary: 'bootstrap4'
-        });
 
-        function status_tgl(x){
-        	if (x == 1) {
-        		document.getElementById('tgl_d').disabled = false;
-        		document.getElementById('tgl_m').disabled = false;
-        	}else{
-        		document.getElementById('tgl_d').disabled = true;
-        		document.getElementById('tgl_m').disabled = true;
-        	}
-        }
+function status_tgl(x){
+	if (x == 1) {
+		document.getElementById('tgl_d').disabled = false;
+		document.getElementById('tgl_m').disabled = false;
+	}else{
+		document.getElementById('tgl_d').disabled = true;
+		document.getElementById('tgl_m').disabled = true;
+	}
+}
 </script>
+
