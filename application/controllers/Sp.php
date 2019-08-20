@@ -78,9 +78,9 @@ class sp extends CI_Controller
 							}
 
 							for($no = $nomor_min; $no <= $nomor_max; $no++){
-								if(in_array($no, $nomor_array)){
+								if(!in_array($no, $nomor_array)){
 									$data = $this->m_uptd->tampil_where('tbl_sp', array('nomor'=>$no))->row();
-									if($login == NULL){
+									if($data == NULL){
 										$nomor = $no;
 										break;
 									}
@@ -120,6 +120,7 @@ class sp extends CI_Controller
 						$this->m_uptd->tambah('tbl_sp_pegawai', $data_pegawai);
 					}
 				}
+				redirect(base_url().'sp');
 
 			}else{
 				$this->load->view('global/v_sidebar');
