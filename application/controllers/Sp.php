@@ -25,6 +25,11 @@ class sp extends CI_Controller
 			if(isset($_POST['submit'])){
 				$status_tanggal = $_POST['status_tanggal'];
 				$jumlah_sp = $_POST['jumlah_sp'];
+				$pegawai = $_POST['pegawai']; //array
+				$tanggal_sp = $_POST['tanggal_sp']; //array
+				$tujuan = $_POST['tujuan']; //array
+				$hal = $_POST['hal'];
+				$keterangan = $_POST['keterangan'];
 
 				for($i = 1; $i <= $jumlah_sp; $i++){
 					$tgl_d = date('d');
@@ -67,10 +72,30 @@ class sp extends CI_Controller
 							$hasil = $this->m_uptd->tampil('v_sp_last_nomor')->row();
 							$nomor = $hasil->nomor+3;
 						}
-
-						
-
 					}
+
+					//SCRIPT INPUT
+					$data = [
+						'nomor' => $nomor,
+						'tanggal' => $tgl_d,
+						'bulan' => $tgl_m,
+						'tahun' => $tgl_y,
+						'tanggal_sp' => $tanggal_sp[$i-1],
+						'tujuan' => $tujuan[$i-1],
+						'hal' => $hal,
+						'ket' => $keterangan
+					];
+					$this->m_uptd->tambah('tbl_sp', $data);
+					$sp_terakhir = $this->m_uptd->tampil_where('tbl_sp', $data)->row();
+
+					for(var $peg = 0; $peg < count($pegawai); $peg++){
+						$data_pegawai = [
+							'sp_id' => $sp_terakhir->id,
+							'pegawai_id' => $pegawai[$peg]
+						];
+						$this->m_uptd->tambah('tbl_sp_pegawai', $data_pegawai);
+					}
+					
 				}
 
 			}else{
