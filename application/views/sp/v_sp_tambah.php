@@ -1,6 +1,10 @@
 <head>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 </head>
 
 <div class="container">
@@ -74,23 +78,12 @@
 						<table class="table">	
 							<tr>
 								<td style="width: 20%">Tanggal Keluar</td>
-								<td>
-									<div class="float-left">
-								        <div class="form-group row">
-								        	<div class="col-sm-2">
-								        		<input type="text" class="form-control" placeholder="Tanggal">
-								        	</div>
-								        	<div class="col-sm-2">
-								        		<input type="text" class="form-control" placeholder="Bulan">
-								        	</div>
-								        	<div class="col-sm-2">
-								        		<input type="text" class="form-control" placeholder="Tahun">
-								        	</div>
-								        	<div class="col-sm-6">
-								        		<textarea type="textarea" class="form-control" placeholder="Tujuan" rows="2"></textarea>
-								        	</div>
-								        </div>
-								    </div>
+								<td style="width: 80%">
+									<div class="form-inline">
+										<input id="datepicker" name="datepicker" width="20%"/>
+								    <textarea type="textarea" class="form-control mx-1" placeholder="Tujuan" rows="1" style="width: 79%"></textarea>	
+									</div>
+								    
 					    		</td>
 							</tr>
 							<tr>
@@ -138,4 +131,9 @@ $(document).ready(function(){
 	});
 	
 });
+</script>
+<script>
+        $('#datepicker').datepicker({
+            uiLibrary: 'bootstrap4'
+        });
 </script>
