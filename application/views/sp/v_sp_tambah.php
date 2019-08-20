@@ -1,3 +1,7 @@
+<link  href="<?=base_url().'assets/'?>vendor/jquery/datepicker.css" rel="stylesheet">
+<script src="<?=base_url().'assets/'?>vendor/jquery/datepicker.js"></script>
+
+
 <div class="container">
 	<div class="row">
 		<div class="col-xl-12">
@@ -87,8 +91,14 @@
 								<td style="width: 20%; color: #000000">Tanggal Keluar</td>
 								<td style="width: 80%">
 									<div class="form-inline">
-										<input id="datepicker" name="tanggal_sp[]" width="20%"/>
-										<input id="datepicker" name="tanggal_sp[]" width="20%"/>
+										<div class="input-group">
+											<input type="text" name="tanggal_sp[]" id="datepicker" class="form-control docs-date" placeholder="Pilih Tanggal">
+											<div class="input-group-append">
+												<button type="button" class="btn btn-outline-secondary docs-datepicker-trigger" disabled="">
+													<i class="fa fa-calendar" aria-hidden="true"></i>
+												</button>
+								            </div>
+								        </div>
 								    	<textarea type="textarea" class="form-control mx-1" name="tujuan[]" placeholder="Tujuan" rows="1" style="width: 79%"></textarea>	
 									</div>
 								    
@@ -115,8 +125,6 @@
 	</div>
 </div>
  
-<script src="<?=base_url().'assets/'?>vendor/jquery/jquery-ui.js"></script>
-<link href="<?=base_url().'assets/'?>vendor/jquery/jquery-ui.css" rel="stylesheet">
 <script>
 $(document).ready(function() {
     // $('.addmore').on('click', function() {
@@ -124,9 +132,12 @@ $(document).ready(function() {
     // });
     $(document).on("focus", "#datepicker", function(){
         $(this).datepicker({
-            uiLibrary: 'bootstrap4'
+        	autoHide : true,
+        	inline : true,
+        	format: 'yyyy-mm-dd'
         });
     });
+
 });
 
 $(document).ready(function(){
