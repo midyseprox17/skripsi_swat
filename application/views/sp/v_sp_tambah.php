@@ -48,13 +48,13 @@
 								        </div>
 								        <div class="form-group row mt-2">
 								        	<div class="col-sm-2">
-								        		<input type="text" class="form-control" placeholder="Tanggal">
+								        		<input type="number" class="form-control" placeholder="Tgl">
 								        	</div>
 								        	<div class="col-sm-2">
-								        		<input type="text" class="form-control" placeholder="Bulan">
+								        		<input type="number" class="form-control" placeholder="Bulan">
 								        	</div>
 								        	<div class="col-sm-2">
-								        		<input type="text" class="form-control" placeholder="Tahun">
+								        		<input type="number" class="form-control" placeholder="Tahun">
 								        	</div>
 								        </div>
 								    </div>
@@ -65,7 +65,7 @@
 						<table class="table" id="dynamic_field">
 							<tr>
 								<td style="width: 20%">Nama</td>
-								<td><input class="form-control float-left" type="text" name="nama[]" style="width: 40%">
+								<td><input class="form-control float-left" type="text" name="nama[]" style="width: 40%" placeholder="Nama">
 									<button type="button" class="btn btn-primary mx-3" id="add" name="add"><i class="fa fa-plus"></i></button>
 								</td>
 							</tr>
@@ -116,7 +116,7 @@ $(document).ready(function(){
 	var i=1;
 	$('#add').click(function(){
 		i++;
-		$('#dynamic_field').append('<tr id="row'+i+'"><td></td><td><input type="text" name="name[]" placeholder="Enter your Name" class="form-control name_list" style="width: 40%"/><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove mx-3"><i class="fa fa-times"></i></button></td></tr>');
+		$('#dynamic_field').append('<tr id="row'+i+'"><td style="width: 20%"></td><td><input class="form-control float-left" type="text" name="nama[]" style="width: 40%" placeholder="Nama"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove mx-3"><i class="fa fa-times"></i></button></td></tr>');
 	});
 	
 	$(document).on('click', '.btn_remove', function(){
