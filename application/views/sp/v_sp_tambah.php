@@ -141,9 +141,27 @@ $(document).ready(function() {
     $("#jumlah_sp").change(function(){
     	var total = $("#jumlah_sp").val();
     	$("#tabel_tanggal").empty();
-    	var text = `<td style="width: 20%; color: #000000">Tanggal Keluar</td>`;
+    	var text = 
+    		`<tr>
+				<td style="width: 20%; color: #000000">Tanggal Keluar</td>
+				<td style="width: 80%">
+					<div class="form-inline">
+						<div class="input-group">
+							<input type="text" name="tanggal_sp[]" id="datepicker" class="form-control docs-date" placeholder="Pilih Tanggal">
+							<div class="input-group-append">
+								<button type="button" class="btn btn-outline-secondary docs-datepicker-trigger" disabled="">
+									<i class="fa fa-calendar" aria-hidden="true"></i>
+								</button>
+				            </div>
+				        </div>
+				    	<textarea type="textarea" class="form-control ml-3" name="tujuan[]" placeholder="Tujuan" rows="1" style="width: 67%"></textarea>	
+					</div>
+				    
+				</td>
+			</tr>`;
+			
     	$("#tabel_tanggal").append(text);
-    	for(var i = 1; i <= total; i++){
+    	for(var i = 1; i <= total-1; i++){
     		var baris = 
 		    	`<tr>
 					<td></td>
