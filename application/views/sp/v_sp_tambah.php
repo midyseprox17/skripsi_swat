@@ -124,7 +124,7 @@ $(document).ready(function(){
 	var i=1;
 	$('#add').click(function(){
 		i++;
-		$('#dynamic_field').append('<tr id="row'+i+'"><td style="width: 20%; color: #000000">Nama</td><td><input class="form-control float-left" type="text" name="pegawai[]" style="width: 40%" placeholder="Nama"><type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove mx-3"><i class="fa fa-times"></i></button></td></tr>');
+		$('#dynamic_field').append('<tr id="row'+i+'"><td style="width: 20%; color: #000000"></td><td><input class="form-control float-left" type="text" name="pegawai[]" style="width: 40%" placeholder="Nama"><type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove mx-3"><i class="fa fa-times"></i></button></td></tr>');
 	});
 	
 	$(document).on('click', '.btn_remove', function(){
