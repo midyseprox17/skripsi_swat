@@ -41,7 +41,7 @@
 	        <div class="card-body">
 	          <div class="row no-gutters align-items-center">
 	            <div class="col mr-2">
-	              <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total SuKet</div>
+	              <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Total SuKet</div>
 	              <div class="h5 mb-0 font-weight-bold text-gray-800"><?=$sp_total?></div>
 	            </div>
 	            <div class="col-auto">
@@ -57,7 +57,7 @@
 	        <div class="card-body">
 	          <div class="row no-gutters align-items-center">
 	            <div class="col mr-2">
-	              <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total Nota</div>
+	              <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Nota</div>
 	              <div class="h5 mb-0 font-weight-bold text-gray-800"><?=$sp_total?></div>
 	            </div>
 	            <div class="col-auto">
