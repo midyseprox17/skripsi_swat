@@ -109,7 +109,7 @@ $(document).ready(function(){
 	var i=1;
 	$('#add').click(function(){
 		i++;
-		$('#dynamic_field').append('<tr id="row'+i+'"><td style="width: 20%; color: #000000">Tanggal Keluar</td><td style="width: 80%"><div class="form-inline"><input id="datepicker" name="tanggal_sp[]" width="20%"/><textarea type="textarea" class="form-control mx-1" name="tujuan[]" placeholder="Tujuan" rows="1" style="width: 79%"></textarea></div></td></tr>');
+		$('#dynamic_field').append('<tr id="row'+i+'"><td style="width: 20%; color: #000000">Nama</td><td><input class="form-control float-left" type="text" name="pegawai[]" style="width: 40%" placeholder="Nama"><button type="button" class="btn btn-primary mx-3" id="add" name="add"><i class="fa fa-times"></i></button></td></tr>');
 	});
 	
 	$(document).on('click', '.btn_remove', function(){
