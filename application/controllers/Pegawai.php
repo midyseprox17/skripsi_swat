@@ -39,7 +39,28 @@ class pegawai extends CI_Controller
 	public function tambah(){
 		if($this->session->userdata('masuk') == 1){
 			if(isset($_POST['submit'])){
+				$data = [
+					'nip' => $_POST['nip'],
+					'nama' => $_POST['nama'],
+					'pangkat' => $_POST['pangkat'],
+					'golongan' => $_POST['golongan'],
+					'jabatan' => $_POST['jabatan'],
+					'dihapus' => '0'
+				];
+				
+				$insert_id = $this->m_uptd->tambah('tbl_pegawai', $data);
 
+				$data_login = [
+					'pegawai_id' => $insert_id,
+					'username' => $_POST['nip'],
+					'password' => password_hash($_POST['nip'], PASSWORD_DEFAULT),
+					'id_hak_akses' => '1',
+					'dihapus' => '0'
+				];
+
+				$this->m_uptd->tambah('tbl_user', $data_login);
+
+				redirect(base_url().'pegawai');
 			}else{
 				$this->load->view('global/v_sidebar');
 				$this->load->view('pegawai/v_pegawai_tambah');

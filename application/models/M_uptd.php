@@ -46,6 +46,7 @@ class m_uptd extends CI_Model
 	function tambah($table,$data)
 	{
 		$this->db->insert($table,$data);
+		return $this->db->insert_id();
 	}
 
 }
