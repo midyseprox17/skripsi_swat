@@ -10,4 +10,14 @@ class m_sp extends CI_Model
 	function nomor_minmax($tanggal, $bulan, $tahun){
 		return $this->db->query("SELECT MIN(nomor) AS nomor_min, MAX(nomor) nomor_max FROM tbl_sp WHERE tanggal BETWEEN ".$this->db->escape($tanggal-1)." AND ".$this->db->escape($tanggal+1)." AND bulan = ".$this->db->escape($bulan)." AND tahun = ".$this->db->escape($tahun)." AND dihapus='0' ORDER BY nomor ASC");
 	}
+
+	function lock_tbl_sp(){
+		$this->db->query('LOCK TABLE tbl_sp WRITE');
+		$this->db->query('LOCK TABLE tbl_sp_pegawai WRITE');
+	}
+
+	function unlock_tbl_sp(){
+		$this->db->query('UNLOCK TABLE tbl_sp WRITE');
+		$this->db->query('UNLOCK TABLE tbl_sp_pegawai WRITE');
+	}
 }
