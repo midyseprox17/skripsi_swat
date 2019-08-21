@@ -10,7 +10,8 @@ class sp extends CI_Controller
 
 	public function index(){
 		if($this->session->userdata('masuk') == '1'){
-			$data['sp'] = $this->m_uptd->tampil('v_sp');
+			$where['dihapus'] = '0';
+			$data['sp'] = $this->m_uptd->tampil_where('v_sp', $where);
 
 			$this->load->view('global/v_sidebar');
 			$this->load->view('sp/v_sp', $data);
@@ -129,6 +130,22 @@ class sp extends CI_Controller
 				$this->load->view('sp/v_sp_tambah', $data);
 				$this->load->view('global/v_footer');
 			}
+		}else{
+			redirect(base_url().'login');
+		}
+	}
+
+
+	public function hapus(){
+		if($this->session->userdata('masuk') == 1){
+			$where['id'] = $this->uri->segment(3);
+			$data = [
+				'nomor' => NULL,
+				'dihapus' => '1'
+			];
+
+			$this->m_uptd->ubah('tbl_sp', $data, $where);
+			redirect(base_url().'sp');
 		}else{
 			redirect(base_url().'login');
 		}
