@@ -11,38 +11,32 @@
 						<table class="table">
 							<tr>
 								<td style="width: 20%; color: #000000">NIP</td>
-								<td style="width: 50%" class="float-left">
-									<input type="number" class="form-control" placeholder="NIP" name="nip" id="nip" min="1" max="31">
+								<td style="width: 100%" class="float-left">
+									<input type="number" class="form-control" placeholder="NIP" name="nip" id="nip" min="1" max="31" style="width: 50%">
 								</td>
 							</tr>
 							<tr>
 								<td style="width: 20%; color: #000000">Nama</td>
-								<td style="width: 50%" class="float-left">
-									<input type="text" class="form-control" placeholder="Nama" name="nama" id="nama" max="">
+								<td style="width: 100%" class="float-left">
+									<input type="text" class="form-control" placeholder="Nama" name="nama" id="nama" style="width: 50%">
 								</td>
 							</tr>
 							<tr>
 								<td style="width: 20%; color: #000000">Pangkat</td>
-								<td style="width: 50%" class="float-left">
-									<input type="text" class="form-control" placeholder="Pangkat" name="pangkat" id="pangkat">
+								<td style="width: 100%" class="float-left">
+									<input type="text" class="form-control" placeholder="Pangkat" name="pangkat" id="pangkat" style="width: 50%">
 								</td>
 							</tr>
 							<tr>
 								<td style="width: 20%; color: #000000">Golongan</td>
-								<td style="width: 50%" class="float-left">
-									<input type="text" class="form-control" placeholder="Golongan" name="golongan" id="golongan">
+								<td style="width: 100%" class="float-left">
+									<input type="text" class="form-control" placeholder="Golongan" name="golongan" id="golongan" style="width: 50%">
 								</td>
 							</tr>
 							<tr>
 								<td style="width: 20%; color: #000000">Jabatan</td>
-								<td style="width: 50%" class="float-left">
-									<input type="text" class="form-control" placeholder="Jabatan" name="jabatan" id="jabatan">
-								</td>
-							</tr>
-							<tr>
-								<td style="width: 20%; color: #000000">Jabatan</td>
-								<td style="width: 50%" class="float-left">
-									<input type="text" class="form-control" placeholder="Jabatan" name="jabatan" id="jabatan">
+								<td style="width: 100%" class="float-left">
+									<input type="text" class="form-control" placeholder="Jabatan" name="jabatan" id="jabatan" style="width: 50%">
 								</td>
 							</tr>
 						</table>
