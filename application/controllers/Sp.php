@@ -26,7 +26,6 @@ class sp extends CI_Controller
 			
 			if(isset($_POST['submit'])){
 				$this->m_sp->lock_tbl_sp();
-				$this->m_sp->lock_tbl_sp_pegawai();
 
 				$status_tanggal = $_POST['status_tanggal'];
 				$jumlah_sp = $_POST['jumlah_sp'];
@@ -76,9 +75,7 @@ class sp extends CI_Controller
 							$nomor_min = $data['nomor_minmax']->nomor_min;
 							$nomor_max = $data['nomor_minmax']->nomor_max;
 
-							if($nomor_max - $nomor_min <= $jumlah_sp){
-								$nomor_max = $nomor_max + $jumlah_sp;
-							}
+							$nomor_max = $nomor_max + $jumlah_sp;
 
 							for($no = $nomor_min; $no <= $nomor_max; $no++){
 								$data = $this->m_uptd->tampil_where('tbl_sp', array('nomor'=>$no))->row();
@@ -123,7 +120,6 @@ class sp extends CI_Controller
 				}
 
 				$this->m_sp->unlock_tbl_sp();
-				$this->m_sp->unlock_tbl_sp_pegawai();
 
 				redirect(base_url().'sp');
 
