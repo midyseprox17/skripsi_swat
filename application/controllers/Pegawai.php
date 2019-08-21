@@ -70,4 +70,36 @@ class pegawai extends CI_Controller
 			redirect(base_url().'login');
 		}
 	}
+
+
+	public function ubah(){
+		if($this->session->userdata('masuk') == 1){
+			if(isset($_POST['submit'])){
+				$where = [
+					'id' => $_POST['id']
+				];
+
+				$data = [
+					'nip' => $_POST['nip'],
+					'nama' => $_POST['nama'],
+					'pangkat' => $_POST['pangkat'],
+					'golongan' => $_POST['golongan'],
+					'jabatan' => $_POST['jabatan']
+				];
+				
+				$this->m_uptd->ubah('tbl_pegawai', $data, $where);
+
+				redirect(base_url().'pegawai');
+			}else{
+				$where['id'] = $this->uri->segment(3);
+				$hasil['pegawai'] = $this->m_uptd->tampil_where('tbl_pegawai', $where)->row();
+
+				$this->load->view('global/v_sidebar');
+				$this->load->view('pegawai/v_pegawai_ubah', $hasil);
+				$this->load->view('global/v_footer');
+			}
+		}else{
+			redirect(base_url().'login');
+		}
+	}
 }

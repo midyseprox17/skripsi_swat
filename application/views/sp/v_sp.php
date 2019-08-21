@@ -7,7 +7,8 @@
 		<div class="col-xl-10">
 		</div>
 		<div class="col-xl-2">
-			<a href="<?=base_url().'sp/tambah'?>" class="float-right d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mb-3"><i class="fas fa-plus fa-sm text-white-50"></i> Tambah Data</a>		
+			<a href="<?=base_url().'sp/tambah'?>" class="float-right d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mb-3"><i class="fas fa-plus fa-sm text-white-50"></i> Tambah Data(Belum Bernomor)</a>
+			<a href="<?=base_url().'sp/tambah'?>" class="float-right d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mb-3"><i class="fas fa-plus fa-sm text-white-50"></i> Tambah Data(Sudah Bernomor)</a>		
 		</div>
 	</div>
 	<div class="row">
@@ -44,10 +45,7 @@
 					          <td><?=$s->tujuan?></td>
 					          <td><?=$s->hal?></td>
 					          <td>
-					          	<a href="#" class="btn btn-primary btn-circle">
-					          		<i class="fas fa-fw fa-edit"></i>
-				                </a>
-				                <a href="<?=base_url().'sp/hapus/'.$s->id?>" class="btn btn-danger btn-circle" onclick="return confirm('Apakah Anda yakin untuk menghapus data <?=$s->nomor?>?');">
+					          	<a href="<?=base_url().'sp/hapus/'.$s->id?>" class="btn btn-danger btn-circle" onclick="return confirm('Apakah Anda yakin untuk menghapus data <?=$s->nomor?>?');">
 					          		<i class="fas fa-trash"></i>
 				                </a>
 					          </td>

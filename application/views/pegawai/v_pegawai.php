@@ -44,7 +44,7 @@
 					          <td><?=$p->golongan?></td>
 					          <td><?=$p->jabatan?></td>
 					          <td>
-					          	<a href="#" class="btn btn-primary btn-circle">
+					          	<a href="<?=base_url().'pegawai/ubah/'.$p->id?>" class="btn btn-primary btn-circle">
 					          		<i class="fas fa-fw fa-edit"></i>
 				                </a>
 					          	<a href="<?=base_url().'pegawai/hapus/'.$p->id?>" class="btn btn-danger btn-circle" onclick="return confirm('Apakah Anda yakin untuk menghapus data <?=$p->nama?>?');">

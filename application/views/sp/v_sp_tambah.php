@@ -15,6 +15,9 @@
 						<input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" style="display: none">
 						<table class="table">	
 							<tr>
+								<td colspan="2" align="right"><a href="">Sudah punya nomor? Klik Disini</a></td>
+							</tr>
+							<tr>
 								<td style="width: 20%; color: #000000">Jumlah Nomor SP</td>
 								<td>
 									<div class="float-left" style="width: 30%">
