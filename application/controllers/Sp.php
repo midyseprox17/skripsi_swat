@@ -72,19 +72,16 @@ class sp extends CI_Controller
 							$data['nomor_minmax'] = $this->m_sp->nomor_minmax($tgl_d, $tgl_m, $tgl_y)->row();
 							$nomor_min = $data['nomor_minmax']->nomor_min;
 							$nomor_max = $data['nomor_minmax']->nomor_max;
-							$nomor_array = array();
 
-							foreach ($data['nomor_list']->result() as $value) {
-								array_push($nomor_array, $value->nomor);
+							if($nomor_max - $nomor_min <= $jumlah_sp){
+								$nomor_max = $nomor_max + $jumlah_sp;
 							}
 
 							for($no = $nomor_min; $no <= $nomor_max; $no++){
-								if(!in_array($no, $nomor_array)){
-									$data = $this->m_uptd->tampil_where('tbl_sp', array('nomor'=>$no))->row();
-									if($data == NULL){
-										$nomor = $no;
-										break;
-									}
+								$data = $this->m_uptd->tampil_where('tbl_sp', array('nomor'=>$no)->row();
+								if($data == NULL){
+									$nomor = $no;
+									break;
 								}
 							}
 
