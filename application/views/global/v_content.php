@@ -1,9 +1,9 @@
 <div class="container-fluid" style="width: 100%; height: 70%">
 	<center>
-		<h1>UPTD Pengawasan Ketenagakerjaan</h1>
+		<h1 class="pt-5">UPTD Pengawasan Ketenagakerjaan</h1>
 		<h1>Wilayah IV Bandung</h1>
 	</center>
-	<div class="row my-5">
+	<div class="row my-5 pt-5">
 	    <div class="col-xl-3 col-md-6 mb-4">
 	      <div class="card border-left-primary shadow h-100 py-2">
 	        <div class="card-body">
