@@ -4,9 +4,9 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-xl-3">
+		<div class="col-xl-2">
 		</div>
-		<div class="col-xl-9">
+		<div class="col-xl-10">
 			<a href="<?=base_url().'sp/tambah'?>" class="float-right d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mb-3"><i class="fas fa-plus fa-sm text-white-50"></i> Tambah Data(Belum Bernomor)</a>
 			<a href="<?=base_url().'sp/tambah'?>" class="float-right d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mb-3  mr-2"><i class="fas fa-plus fa-sm text-white-50"></i> Tambah Data(Sudah Bernomor)</a>		
 		</div>
