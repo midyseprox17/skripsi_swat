@@ -108,14 +108,14 @@ class sp extends CI_Controller
 						'tanggal_sp' => date('Y-m-d', strtotime($tanggal_sp[$i-1])),
 						'tujuan' => $tujuan[$i-1],
 						'hal' => $hal,
-						'ket' => $keterangan
+						'ket' => $keterangan,
+						'dihapus' => '0'
 					];
-					$this->m_uptd->tambah('tbl_sp', $data);
-					$sp_terakhir = $this->m_uptd->tampil_where('tbl_sp', $data)->row();
+					$sp_terakhir = $this->m_uptd->tambah('tbl_sp', $data);
 
 					for($peg = 0; $peg < count($pegawai); $peg++){
 						$data_pegawai = [
-							'sp_id' => $sp_terakhir->id,
+							'sp_id' => $sp_terakhir,
 							'pegawai_id' => $pegawai[$peg]
 						];
 						$this->m_uptd->tambah('tbl_sp_pegawai', $data_pegawai);
@@ -128,6 +128,62 @@ class sp extends CI_Controller
 
 				$this->load->view('global/v_sidebar');
 				$this->load->view('sp/v_sp_tambah', $data);
+				$this->load->view('global/v_footer');
+			}
+		}else{
+			redirect(base_url().'login');
+		}
+	}
+
+	public function tambah_bernomor(){
+		if($this->session->userdata('masuk') == '1'){
+			
+			if(isset($_POST['submit'])){
+				$nomor_awal = $_POST['nomor_awal'];
+				$nomor_akhir = $_POST['nomor_akhir'];
+				$tgl_d = $_POST['tgl_d'];
+				$tgl_m = $_POST['tgl_m'];
+				$tgl_y = $_POST['tgl_y'];
+				$pegawai = $_POST['pegawai']; //array
+				$tanggal_sp = $_POST['tanggal_sp']; //array
+				$tujuan = $_POST['tujuan']; //array
+				$hal = $_POST['hal'];
+				$keterangan = $_POST['keterangan'];
+
+				$total = $nomor_akhir - $nomor_awal + 1;
+				if($total < 1){
+					$total = 1;
+				}
+
+				for($i = 0; $i < $total; $i++){
+					$data = [
+						'nomor' => $nomor_awal+$i,
+						'tanggal' => $tgl_d,
+						'bulan' => $tgl_m,
+						'tahun' => $tgl_y,
+						'tanggal_sp' => date('Y-m-d', strtotime($tanggal_sp[$i])),
+						'tujuan' => $tujuan[$i],
+						'hal' => $hal,
+						'ket' => $keterangan,
+						'dihapus' => '0'
+					];
+					$sp_terakhir = $this->m_uptd->tambah('tbl_sp', $data);
+
+					for($peg = 0; $peg < count($pegawai); $peg++){
+						$data_pegawai = [
+							'sp_id' => $sp_terakhir,
+							'pegawai_id' => $pegawai[$peg]
+						];
+						$this->m_uptd->tambah('tbl_sp_pegawai', $data_pegawai);
+					}
+				}
+				redirect(base_url().'sp');
+
+			}else{
+				$data['pegawai'] = $this->m_uptd->tampil_where('tbl_pegawai', array('dihapus' => '0'));
+
+				$this->load->view('global/v_sidebar');
+				$this->load->view('sp/v_sp_tambah_bernomor', $data);
 				$this->load->view('global/v_footer');
 			}
 		}else{
