@@ -23,4 +23,16 @@ class pegawai extends CI_Controller
 			redirect(base_url().'login');
 		}
 	}
+
+	public function hapus(){
+		if($this->session->userdata('masuk') == 1){
+			$where['id'] = $this->uri->segment(3);
+			$data['dihapus'] = '1';
+
+			$this->m_uptd->ubah('tbl_pegawai', $data, $where);
+			redirect(base_url().'pegawai');
+		}else{
+			redirect(base_url().'login');
+		}
+	}
 }

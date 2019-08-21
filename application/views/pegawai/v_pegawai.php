@@ -47,7 +47,7 @@
 					          	<a href="#" class="btn btn-primary btn-circle">
 					          		<i class="fas fa-fw fa-edit"></i>
 				                </a>
-					          	<a href="#" class="btn btn-danger btn-circle">
+					          	<a href="<?=base_url().'pegawai/hapus/'.$p->id?>" class="btn btn-danger btn-circle" onclick="return confirm('Apakah Anda yakin untuk menghapus data <?=$p->nama?>?');">
 					          		<i class="fas fa-trash"></i>
 				                </a>
 					          </td>
