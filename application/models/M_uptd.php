@@ -48,5 +48,4 @@ class m_uptd extends CI_Model
 		$this->db->insert($table,$data);
 		return $this->db->insert_id();
 	}
-
 }
