@@ -52,6 +52,11 @@
       
       <?php if($this->session->userdata('id_hak_akses') == '1'){
       ?>
+        <li class="nav-item">
+          <a class="nav-link" href="<?=base_url().'penomoran'?>">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Kode Surat</span></a>
+        </li>
 
         <li class="nav-item">
           <a class="nav-link" href="<?=base_url().'pegawai'?>">
