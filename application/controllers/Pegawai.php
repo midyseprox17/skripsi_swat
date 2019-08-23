@@ -38,7 +38,11 @@ class pegawai extends CI_Controller
 	public function hapus(){
 		if($this->session->userdata('masuk') == '1' && $this->session->userdata('id_hak_akses') == '1'){
 			$where['id'] = $this->uri->segment(3);
-			$data['dihapus'] = '1';
+			$data = [
+				'dihapus' => '1',
+				'diedit_oleh' => $this->session->userdata('pegawai_id'),
+				'tgl_edit' => date("Y-m-d H:i:s")
+			];	
 
 			$this->m_uptd->ubah('tbl_pegawai', $data, $where);
 			redirect(base_url().'pegawai');
@@ -61,7 +65,9 @@ class pegawai extends CI_Controller
 					'pangkat' => $_POST['pangkat'],
 					'golongan' => $_POST['golongan'],
 					'jabatan' => $_POST['jabatan'],
-					'dihapus' => '0'
+					'dihapus' => '0',
+					'ditambah_oleh' => $this->session->userdata('pegawai_id'),
+					'tgl_tambah' => date("Y-m-d H:i:s")
 				];
 				
 				$insert_id = $this->m_uptd->tambah('tbl_pegawai', $data);
@@ -71,7 +77,9 @@ class pegawai extends CI_Controller
 					'username' => $_POST['nip'],
 					'password' => password_hash($_POST['nip'], PASSWORD_DEFAULT),
 					'id_hak_akses' => '1',
-					'dihapus' => '0'
+					'dihapus' => '0',
+					'ditambah_oleh' => $this->session->userdata('pegawai_id'),
+					'tgl_tambah' => date("Y-m-d H:i:s")
 				];
 
 				$this->m_uptd->tambah('tbl_user', $data_login);
@@ -105,7 +113,9 @@ class pegawai extends CI_Controller
 					'nama' => $_POST['nama'],
 					'pangkat' => $_POST['pangkat'],
 					'golongan' => $_POST['golongan'],
-					'jabatan' => $_POST['jabatan']
+					'jabatan' => $_POST['jabatan'],
+					'diedit_oleh' => $this->session->userdata('pegawai_id'),
+					'tgl_edit' => date("Y-m-d H:i:s")
 				];
 				
 				$this->m_uptd->ubah('tbl_pegawai', $data, $where);

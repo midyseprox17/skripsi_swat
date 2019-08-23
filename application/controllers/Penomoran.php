@@ -24,10 +24,14 @@ class penomoran extends CI_Controller
 	public function hapus(){
 		if($this->session->userdata('masuk') == '1' && $this->session->userdata('id_hak_akses') == '1'){
 			$where['id'] = $this->uri->segment(3);
-			$data['dihapus'] = '1';
+			$data = [
+				'dihapus' => '1',
+				'diedit_oleh' => $this->session->userdata('pegawai_id'),
+				'tgl_edit' => date("Y-m-d H:i:s")
+			];;
 
-			$this->m_uptd->ubah('tbl_pegawai', $data, $where);
-			redirect(base_url().'pegawai');
+			$this->m_uptd->ubah('tbl_penomoran', $data, $where);
+			redirect(base_url().'penomoran');
 		}else if($this->session->userdata('masuk') == '1' && $this->session->userdata('id_hak_akses') != '1'){
 			$this->load->view('global/v_sidebar');
 			$this->load->view('global/v_404');
@@ -42,30 +46,21 @@ class penomoran extends CI_Controller
 		if($this->session->userdata('masuk') == '1' && $this->session->userdata('id_hak_akses') == '1'){
 			if(isset($_POST['submit'])){
 				$data = [
-					'nip' => $_POST['nip'],
+					'kode' => $_POST['kode'],
 					'nama' => $_POST['nama'],
-					'pangkat' => $_POST['pangkat'],
-					'golongan' => $_POST['golongan'],
-					'jabatan' => $_POST['jabatan'],
-					'dihapus' => '0'
+					'ket' => $_POST['ket'],
+					'format' => $_POST['format'],
+					'dihapus' => '0',
+					'ditambah_oleh' => $this->session->userdata('pegawai_id'),
+					'tgl_tambah' => date("Y-m-d H:i:s")
 				];
 				
-				$insert_id = $this->m_uptd->tambah('tbl_pegawai', $data);
+				$this->m_uptd->tambah('tbl_penomoran', $data);
 
-				$data_login = [
-					'pegawai_id' => $insert_id,
-					'username' => $_POST['nip'],
-					'password' => password_hash($_POST['nip'], PASSWORD_DEFAULT),
-					'id_hak_akses' => '1',
-					'dihapus' => '0'
-				];
-
-				$this->m_uptd->tambah('tbl_user', $data_login);
-
-				redirect(base_url().'pegawai');
+				redirect(base_url().'penomoran');
 			}else{
 				$this->load->view('global/v_sidebar');
-				$this->load->view('pegawai/v_pegawai_tambah');
+				$this->load->view('penomoran/v_penomoran_tambah');
 				$this->load->view('global/v_footer');
 			}
 		}else if($this->session->userdata('masuk') == '1' && $this->session->userdata('id_hak_akses') != '1'){
@@ -87,22 +82,23 @@ class penomoran extends CI_Controller
 				];
 
 				$data = [
-					'nip' => $_POST['nip'],
+					'kode' => $_POST['kode'],
 					'nama' => $_POST['nama'],
-					'pangkat' => $_POST['pangkat'],
-					'golongan' => $_POST['golongan'],
-					'jabatan' => $_POST['jabatan']
+					'ket' => $_POST['ket'],
+					'format' => $_POST['format'],
+					'diedit_oleh' => $this->session->userdata('pegawai_id'),
+					'tgl_edit' => date("Y-m-d H:i:s")
 				];
 				
-				$this->m_uptd->ubah('tbl_pegawai', $data, $where);
+				$this->m_uptd->ubah('tbl_penomoran', $data, $where);
 
-				redirect(base_url().'pegawai');
+				redirect(base_url().'penomoran');
 			}else{
 				$where['id'] = $this->uri->segment(3);
-				$hasil['pegawai'] = $this->m_uptd->tampil_where('tbl_pegawai', $where)->row();
+				$hasil['penomoran'] = $this->m_uptd->tampil_where('tbl_penomoran', $where)->row();
 
 				$this->load->view('global/v_sidebar');
-				$this->load->view('pegawai/v_pegawai_ubah', $hasil);
+				$this->load->view('penomoran/v_penomoran_ubah', $hasil);
 				$this->load->view('global/v_footer');
 			}
 		}else if($this->session->userdata('masuk') == '1' && $this->session->userdata('id_hak_akses') != '1'){

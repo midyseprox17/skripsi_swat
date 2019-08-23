@@ -35,6 +35,7 @@ class sp extends CI_Controller
 				$hal = $_POST['hal'];
 				$keterangan = $_POST['keterangan'];
 				$tgl_terakhir = '';
+				$data_warning['hasil'] = array();
 
 				$hasil = $this->m_sp->id_terakhir()->row();
 				$tgl_terakhir = $hasil->tahun.'-'.$hasil->bulan.'-'.$hasil->tanggal;
@@ -109,22 +110,31 @@ class sp extends CI_Controller
 						'tujuan' => $tujuan[$i-1],
 						'hal' => $hal,
 						'ket' => $keterangan,
-						'dihapus' => '0'
+						'dihapus' => '0',
+						'penomoran_id' => '3',
+						'ditambah_oleh' => $this->session->userdata('pegawai_id'),
+						'tgl_tambah' => date("Y-m-d H:i:s")
 					];
 					$sp_terakhir = $this->m_uptd->tambah('tbl_sp', $data);
 
 					for($peg = 0; $peg < count($pegawai); $peg++){
 						$data_pegawai = [
 							'sp_id' => $sp_terakhir,
-							'pegawai_id' => $pegawai[$peg]
+							'pegawai_id' => $pegawai[$peg],
+							'ditambah_oleh' => $this->session->userdata('pegawai_id'),
+							'tgl_tambah' => date("Y-m-d H:i:s")
 						];
 						$this->m_uptd->tambah('tbl_sp_pegawai', $data_pegawai);
 					}
+
+					array_push($data_warning['hasil'], array('nomor' => $nomor, 'tanggal' => $data['tanggal_sp']));
 				}
 
 				$this->m_sp->unlock_tbl_sp();
 
-				redirect(base_url().'sp');
+				$this->load->view('global/v_sidebar');
+				$this->load->view('global/v_warning', $data_warning);
+				$this->load->view('global/v_footer');
 
 			}else{
 				$data['pegawai'] = $this->m_uptd->tampil_where('tbl_pegawai', array('dihapus' => '0'));
@@ -168,7 +178,9 @@ class sp extends CI_Controller
 						'tujuan' => $tujuan[$i],
 						'hal' => $hal,
 						'ket' => $keterangan,
-						'dihapus' => '0'
+						'dihapus' => '0',
+						'ditambah_oleh' => $this->session->userdata('pegawai_id'),
+						'tgl_tambah' => date("Y-m-d H:i:s")
 					];
 					$sp_terakhir = $this->m_uptd->tambah('tbl_sp', $data);
 
@@ -200,7 +212,9 @@ class sp extends CI_Controller
 			$where['id'] = $this->uri->segment(3);
 			$data = [
 				'nomor' => NULL,
-				'dihapus' => '1'
+				'dihapus' => '1',
+				'diedit_oleh' => $this->session->userdata('pegawai_id'),
+				'tgl_edit' => date("Y-m-d H:i:s")
 			];
 
 			$this->m_uptd->ubah('tbl_sp', $data, $where);

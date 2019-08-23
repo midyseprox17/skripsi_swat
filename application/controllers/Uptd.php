@@ -11,6 +11,7 @@ class uptd extends CI_Controller
 
 			$this->load->view('global/v_sidebar');
 			$this->load->view('global/v_content', $data);
+			// $this->load->view('global/v_warning');
 			$this->load->view('global/v_footer');
 		}else{
 			redirect(base_url().'login');
