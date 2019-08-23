@@ -34,23 +34,11 @@ class sp extends CI_Controller
 				$tujuan = $_POST['tujuan']; //array
 				$hal = $_POST['hal'];
 				$keterangan = $_POST['keterangan'];
+				$tgl_terakhir = '';
 
-				// echo '<pre>';
-				// print_r($status_tanggal);
-				// echo '<br>';
-				// print_r($jumlah_sp);
-				// echo '<br>';
-				// print_r($pegawai[1-1]);
-				// echo '<br>';
-				// print_r($tanggal_sp[1-1]);
-				// echo '<br>';
-				// print_r($tujuan[1-1]);
-				// echo '<br>';
-				// print_r($hal);
-				// echo '<br>';
-				// print_r($keterangan);
-				// echo '<br>';
-				// echo '</pre>';
+				$hasil = $this->m_sp->id_terakhir()->row();
+				$tgl_terakhir = $hasil->tahun.'-'.$hasil->bulan.'-'.$hasil->tanggal;
+
 
 				for($i = 1; $i <= $jumlah_sp; $i++){
 					$tgl_d = date('d');
@@ -60,7 +48,12 @@ class sp extends CI_Controller
 
 					if($status_tanggal == "sekarang" && $i == 1){
 						$hasil = $this->m_uptd->tampil('v_sp_last_nomor')->row();
-						$nomor = $hasil->nomor+3;
+						if(strtotime($tgl_terakhir) < strtotime(date("Y-m-d"))){
+							$nomor = $hasil->nomor+6;
+						}else{
+							$nomor = $hasil->nomor+1;
+						}
+						
 					}else if($status_tanggal == "sekarang" && $i != 1){
 						$hasil = $this->m_uptd->tampil('v_sp_last_nomor')->row();
 						$nomor = $hasil->nomor+1;
@@ -87,11 +80,21 @@ class sp extends CI_Controller
 
 							if($nomor == 0){
 								$hasil = $this->m_uptd->tampil('v_sp_last_nomor')->row();
-								$nomor = $hasil->nomor+3;
+								if(strtotime($tgl_terakhir) < strtotime(date("Y-m-d"))){
+									$nomor = $hasil->nomor+6;
+								}else{
+									$nomor = $hasil->nomor+1;
+								}
+								
 							}
 						}else{
 							$hasil = $this->m_uptd->tampil('v_sp_last_nomor')->row();
-							$nomor = $hasil->nomor+3;
+							if(strtotime($tgl_terakhir) < strtotime(date("Y-m-d"))){
+								$nomor = $hasil->nomor+6;
+							}else{
+								$nomor = $hasil->nomor+1;
+							}
+							
 						}
 						
 					}

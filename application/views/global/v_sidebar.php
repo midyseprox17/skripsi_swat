@@ -49,13 +49,19 @@
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
-  
-      <li class="nav-item">
-        <a class="nav-link" href="<?=base_url().'pegawai'?>">
-          <i class="fas fa-fw fa-users"></i>
-          <span>Pegawai</span></a>
-      </li>
+      
+      <?php if($this->session->userdata('id_hak_akses') == '1'){
+      ?>
 
+        <li class="nav-item">
+          <a class="nav-link" href="<?=base_url().'pegawai'?>">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Pegawai</span></a>
+        </li>
+      <?php
+      }
+      ?>
+      
       <li class="nav-item">
         <a class="nav-link" href="<?=base_url().'sp'?>">
           <i class="fas fa-fw fa-file-alt"></i>

@@ -18,4 +18,8 @@ class m_sp extends CI_Model
 	function unlock_tbl_sp(){
 		$this->db->query('UNLOCK TABLES');
 	}
+
+	function id_terakhir(){
+		return $this->db->query("SELECT * FROM tbl_sp ORDER BY nomor DESC LIMIT 1");
+	}
 }
