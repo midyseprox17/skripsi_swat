@@ -73,6 +73,18 @@
           <span>Surat Perintah</span></a>
       </li>
 
+      <li class="nav-item">
+        <a class="nav-link" href="<?=base_url().'sp'?>">
+          <i class="fas fa-fw fa-file-alt"></i>
+          <span>Surat Keterangan</span></a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="<?=base_url().'sp'?>">
+          <i class="fas fa-fw fa-file-alt"></i>
+          <span>NOTA</span></a>
+      </li>
+
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
 

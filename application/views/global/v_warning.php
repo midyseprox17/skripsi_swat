@@ -37,7 +37,7 @@
 		<p>
 			<ol>
 				<li>Dilarang mentipe-x surat</li>
-				<li>Dilarang memberi nomor surat yang belum di TTD</li>
+				<li>Dilarang memberi nomor surat yang belum di TTD. Berikan note jika belum di TTD</li>
 				<li>Berikan angka yang kecil pada tanggal yang kecil</li>
 				<li>Pastikan cap jelas</li>
 			</ol>
