@@ -156,17 +156,18 @@ class nota extends CI_Controller
 		if($this->session->userdata('masuk') == '1'){
 			
 			if(isset($_POST['submit'])){
+				$penomoran_id = $_POST['penomoran_id'];
 				$nomor_awal = $_POST['nomor_awal'];
 				$nomor_akhir = $_POST['nomor_akhir'];
 				$tgl_d = $_POST['tgl_d'];
 				$tgl_m = $_POST['tgl_m'];
 				$tgl_y = $_POST['tgl_y'];
-				$pegawai = $_POST['pegawai']; //array
-				$tanggal_sp = $_POST['tanggal_sp']; //array
-				$tujuan = $_POST['tujuan']; //array
 				$hal = $_POST['hal'];
-				$keterangan = $_POST['keterangan'];
-
+				$isi = $_POST['isi'];
+				$catatan = $_POST['catatan'];
+				$kepada = $_POST['kepada']; //array
+				$pegawai = $_POST['pegawai']; //array
+				
 				$total = $nomor_akhir - $nomor_awal + 1;
 				if($total < 1){
 					$total = 1;
@@ -178,31 +179,35 @@ class nota extends CI_Controller
 						'tanggal' => $tgl_d,
 						'bulan' => $tgl_m,
 						'tahun' => $tgl_y,
-						'tanggal_sp' => date('Y-m-d', strtotime($tanggal_sp[$i])),
-						'tujuan' => $tujuan[$i],
 						'hal' => $hal,
-						'ket' => $keterangan,
+						'isi' => $isi,
+						'kepada' => $kepada[$i],
+						'catatan' => $catatan,
+						'penomoran_id' => $penomoran_id,
 						'dihapus' => '0',
 						'ditambah_oleh' => $this->session->userdata('pegawai_id'),
 						'tgl_tambah' => date("Y-m-d H:i:s")
 					];
-					$nota_terakhir = $this->m_uptd->tambah('tbl_sp', $data);
+					$nota_terakhir = $this->m_uptd->tambah('tbl_nota', $data);
 
 					for($peg = 0; $peg < count($pegawai); $peg++){
 						$data_pegawai = [
-							'sp_id' => $nota_terakhir,
-							'pegawai_id' => $pegawai[$peg]
+							'nota_id' => $nota_terakhir,
+							'pegawai_id' => $pegawai[$peg],
+							'ditambah_oleh' => $this->session->userdata('pegawai_id'),
+							'tgl_tambah' => date("Y-m-d H:i:s")
 						];
-						$this->m_uptd->tambah('tbl_sp_pegawai', $data_pegawai);
+						$this->m_uptd->tambah('tbl_nota_pengolah', $data_pegawai);
 					}
 				}
-				redirect(base_url().'sp');
+				redirect(base_url().'nota');
 
 			}else{
 				$data['pegawai'] = $this->m_uptd->tampil_where('tbl_pegawai', array('dihapus' => '0'));
+				$data['penomoran'] = $this->m_uptd->tampil_where('tbl_penomoran', array('nama' => 'Kendali', 'dihapus' => '0'));
 
 				$this->load->view('global/v_sidebar');
-				$this->load->view('sp/v_sp_tambah_bernomor', $data);
+				$this->load->view('nota/v_nota_tambah_bernomor', $data);
 				$this->load->view('global/v_footer');
 			}
 		}else{
@@ -221,8 +226,8 @@ class nota extends CI_Controller
 				'tgl_edit' => date("Y-m-d H:i:s")
 			];
 
-			$this->m_uptd->ubah('tbl_sp', $data, $where);
-			redirect(base_url().'sp');
+			$this->m_uptd->ubah('tbl_nota', $data, $where);
+			redirect(base_url().'nota');
 		}else{
 			redirect(base_url().'login');
 		}

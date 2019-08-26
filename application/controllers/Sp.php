@@ -187,7 +187,9 @@ class sp extends CI_Controller
 					for($peg = 0; $peg < count($pegawai); $peg++){
 						$data_pegawai = [
 							'sp_id' => $sp_terakhir,
-							'pegawai_id' => $pegawai[$peg]
+							'pegawai_id' => $pegawai[$peg],
+							'ditambah_oleh' => $this->session->userdata('pegawai_id'),
+							'tgl_tambah' => date("Y-m-d H:i:s")
 						];
 						$this->m_uptd->tambah('tbl_sp_pegawai', $data_pegawai);
 					}
