@@ -8,6 +8,7 @@ class uptd extends CI_Controller
 		if($this->session->userdata('masuk') == '1'){
 			$data['pegawai_total'] = $this->m_uptd->tampil_where('tbl_pegawai', ['dihapus'=>'0'])->num_rows();
 			$data['sp_total'] = $this->m_uptd->tampil('tbl_sp')->num_rows();
+			$data['nota_total'] = $this->m_uptd->tampil_where('tbl_nota', ['dihapus' => '0'])->num_rows();
 
 			$this->load->view('global/v_sidebar');
 			$this->load->view('global/v_content', $data);
