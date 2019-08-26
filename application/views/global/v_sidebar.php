@@ -80,9 +80,9 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="<?=base_url().'sp'?>">
+        <a class="nav-link" href="<?=base_url().'nota'?>">
           <i class="fas fa-fw fa-file-alt"></i>
-          <span>NOTA</span></a>
+          <span>Nota</span></a>
       </li>
 
       <!-- Divider -->

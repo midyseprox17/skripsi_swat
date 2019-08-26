@@ -8,20 +8,35 @@
 		<div class="col-xl-12">
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
-				  <h6 class="m-0 font-weight-bold text-primary" style="color: #15406a;">Tambah Data Surat Perintah</h6>
+				  <h6 class="m-0 font-weight-bold text-primary" style="color: #15406a;">Tambah Data NOTA</h6>
 				</div>
 				<div class="card-body">
-					<form name="tambah_sp" id="tambah_sp" method="post" action="<?=base_url().'sp/tambah'?>">
+					<form method="post" action="<?=base_url().'nota/tambah'?>">
 						<input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" style="display: none">
 						<table class="table">	
 							<tr>
-								<td colspan="2" align="right"><a href="<?=base_url().'sp/tambah_bernomor'?>">Sudah punya nomor? Klik Disini</a></td>
+								<td colspan="2" align="right"><a href="<?=base_url().'nota/tambah_bernomor'?>">Sudah punya nomor? Klik Disini</a></td>
 							</tr>
 							<tr>
-								<td style="width: 20%; color: #000000">Jumlah Nomor SP</td>
+								<td>Kode</td>
 								<td>
 									<div class="float-left" style="width: 30%">
-								      	<select class="custom-select form-control form-control-sm" id="jumlah_sp" name="jumlah_sp" required="">
+										<select name="penomoran_id" class="custom-select form-control">
+											<?php foreach ($penomoran->result() as $p) {
+											?>
+												<option value="<?=$p->id?>"><?=$p->kode?> | <?=$p->nama?></option>
+											<?php
+											}
+											?>
+										</select>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td style="width: 20%; color: #000000">Jumlah Nomor Nota</td>
+								<td>
+									<div class="float-left" style="width: 30%">
+								      	<select class="custom-select form-control form-control-sm" id="jumlah_nota" name="jumlah_nota" required="">
 										    <option value="1">1</option>
 										    <option value="2">2</option>
 										    <option value="3">3</option>
@@ -80,7 +95,29 @@
 					    		</td>
 							</tr>
 						</table>
+						<table class="table">
+							<tr>
+								<td style="color: #000000; width: 20%">Hal</td>
+								<td><input type="text" name="hal" class="form-control" required=""></td>
+							</tr>
+							<tr>
+								<td style="color: #000000">Isi Ringkasan</td>
+								<td><textarea type="textarea" name="isi" class="form-control" placeholder="Isi Ringkasan" rows="5" required=""></textarea></td>
+							</tr>
+							<tr>
+								<td style="color: #000000; width: 20%">Catatan</td>
+								<td><input type="text" name="catatan" class="form-control"></td>
+							</tr>
+						</table>
 						<!-- Dynamic Add & Remove Field -->
+						<table class="table" id="tabel_kepada">
+							<tr id="tabel_pegawai1">
+								<td style="width: 20%; color: #000000">Kepada</td>
+								<td>
+									<input type="text" name="kepada[]" class="form-control" required="">
+								</td>
+							</tr>
+						</table>
 						<table class="table" id="tabel_pegawai">
 							<tr id="tabel_pegawai1">
 								<td style="width: 20%; color: #000000">Nama</td>
@@ -99,36 +136,7 @@
 								</td>
 							</tr>
 						</table>
-						<!-- :) -->
-						<table class="table" id="tabel_tanggal">	
-							<tr>
-								<td style="width: 20%; color: #000000">Tanggal Keluar</td>
-								<td style="width: 80%">
-									<div class="form-inline">
-										<div class="input-group">
-											<input type="text" name="tanggal_sp[]" id="datepicker" class="form-control docs-date" placeholder="Pilih Tanggal" required="">
-											<div class="input-group-append">
-												<button type="button" class="btn btn-outline-secondary docs-datepicker-trigger" disabled="">
-													<i class="fa fa-calendar" aria-hidden="true"></i>
-												</button>
-								            </div>
-								        </div>
-								    	<textarea type="textarea" class="form-control ml-3" name="tujuan[]" placeholder="Tujuan" rows="1" style="width: 67%" required=""></textarea>	
-									</div>
-								    
-					    		</td>
-							</tr>
-						</table>
-						<table class="table">
-							<tr>
-								<td style="color: #000000; width: 20%">Hal</td>
-								<td><textarea type="textarea" name="hal" class="form-control" placeholder="Hal" rows="5" required=""></textarea>
-							</tr>
-							<tr>
-								<td style="color: #000000">Keterangan</td>
-								<td><textarea type="textarea" name="keterangan" class="form-control" placeholder="Keterangan" rows="5"></textarea>
-							</tr>
-						</table>
+				
 						<div class="tile-footer">
 			            	<button class="btn btn-primary" type="submit" name="submit">Tambah Data</button>
 			            </div>
@@ -148,50 +156,20 @@ $(document).ready(function() {
         	format: 'yyyy-mm-dd'
         });
     });
-
-    $("#jumlah_sp").change(function(){
-    	var total = $("#jumlah_sp").val();
-    	$("#tabel_tanggal").empty();
-    	var text = 
-    		`<tr>
-				<td style="width: 20%; color: #000000">Tanggal Keluar</td>
-				<td style="width: 80%">
-					<div class="form-inline">
-						<div class="input-group">
-							<input type="text" name="tanggal_sp[]" id="datepicker" class="form-control docs-date" placeholder="Pilih Tanggal" required>
-							<div class="input-group-append">
-								<button type="button" class="btn btn-outline-secondary docs-datepicker-trigger" disabled="">
-									<i class="fa fa-calendar" aria-hidden="true"></i>
-								</button>
-				            </div>
-				        </div>
-				    	<textarea type="textarea" class="form-control ml-3" name="tujuan[]" placeholder="Tujuan" rows="1" style="width: 67%" required></textarea>	
-					</div>
-				    
-				</td>
-			</tr>`;
-
-    	$("#tabel_tanggal").append(text);
-    	for(var i = 1; i <= total-1; i++){
+    
+    $("#jumlah_nota").change(function(){
+    	var total = $("#jumlah_nota").val();
+    	$("#tabel_kepada").empty();
+    	
+    	for(var i = 1; i <= total; i++){
     		var baris = 
 		    	`<tr>
-					<td></td>
-					<td style="width: 80%">
-						<div class="form-inline">
-							<div class="input-group">
-								<input type="text" name="tanggal_sp[]" id="datepicker" class="form-control docs-date" placeholder="Pilih Tanggal" required>
-								<div class="input-group-append">
-									<button type="button" class="btn btn-outline-secondary docs-datepicker-trigger" disabled="">
-										<i class="fa fa-calendar" aria-hidden="true"></i>
-									</button>
-					            </div>
-					        </div>
-					    	<textarea type="textarea" class="form-control ml-3" name="tujuan[]" placeholder="Tujuan" rows="1" style="width: 67%" required></textarea>	
-						</div>
-					    
+					<td style="width: 20%">Kepada</td>
+					<td>
+						<input type="text" name="kepada[]" class="form-control" required="">
 					</td>
 				</tr>`;
-			$("#tabel_tanggal").append(baris);
+			$("#tabel_kepada").append(baris);
     	}
     });
 
