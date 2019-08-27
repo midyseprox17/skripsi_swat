@@ -1,5 +1,3 @@
-<link  href="<?=base_url().'assets/'?>vendor/jquery/datepicker.css" rel="stylesheet">
-<script src="<?=base_url().'assets/'?>vendor/jquery/datepicker.js"></script>
 <link rel="stylesheet" href="<?=base_url().'assets/'?>css/bootstrap-select.min.css">
 <script src="<?=base_url().'assets/'?>js/bootstrap-select.min.js"></script>
 
@@ -119,7 +117,7 @@
 							</tr>
 						</table>
 						<div class="tile-footer">
-			            	<button class="btn btn-primary" type="submit" name="submit">Tambah Data</button>
+			            	<button class="btn btn-primary" type="submit" name="submit" value="1">Tambah Data</button>
 			            </div>
 					</form>
 				</div>

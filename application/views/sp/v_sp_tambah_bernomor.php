@@ -113,7 +113,7 @@
 							</tr>
 						</table>
 						<div class="tile-footer">
-			            	<button class="btn btn-primary" type="submit" name="submit">Tambah Data</button>
+			            	<button class="btn btn-primary" type="submit" name="submit" value="1">Tambah Data</button>
 			            </div>
 					</form>
 				</div>

@@ -36,7 +36,7 @@
 							</tr>
 						</table>
 						<div class="tile-footer">
-			            	<button class="btn btn-primary" type="submit" name="submit">Ubah Data</button>
+			            	<button class="btn btn-primary" type="submit" name="submit" value="1">Ubah Data</button>
 			            </div>
 					</form>
 				</div>
