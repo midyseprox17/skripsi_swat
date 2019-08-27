@@ -160,4 +160,36 @@ class sm extends CI_Controller
 			redirect(base_url().'login');
 		}
 	}
+
+	public function arsipkan(){
+		if($this->session->userdata('masuk') == 1){
+			$where['id'] = $this->uri->segment(3);
+			$data = [
+				'tgl_diarsipkan' => date("Y-m-d"),
+				'diedit_oleh' => $this->session->userdata('pegawai_id'),
+				'tgl_edit' => date("Y-m-d H:i:s")
+			];
+
+			$this->m_uptd->ubah('tbl_sm', $data, $where);
+			redirect(base_url().'sm');
+		}else{
+			redirect(base_url().'login');
+		}
+	}
+
+	public function teruskan(){
+		if($this->session->userdata('masuk') == 1){
+			$where['id'] = $this->uri->segment(3);
+			$data = [
+				'tgl_diteruskan' => date("Y-m-d"),
+				'diedit_oleh' => $this->session->userdata('pegawai_id'),
+				'tgl_edit' => date("Y-m-d H:i:s")
+			];
+
+			$this->m_uptd->ubah('tbl_sm', $data, $where);
+			redirect(base_url().'sm');
+		}else{
+			redirect(base_url().'login');
+		}
+	}
 }

@@ -50,7 +50,7 @@
                       <input type="password" class="rounded form-control form-control-user" name="password" id="password" placeholder="Password">
                     </div>
                     <div class="form-group">
-                      <button type="submit" class="rounded btn btn-primary btn-user btn-block" id="submit" name="submit">Masuk</button>
+                      <button type="submit" class="rounded btn btn-primary btn-user btn-block" id="submit" name="submit" value="1">Masuk</button>
                     </div>
                   </form>
                 </div>
