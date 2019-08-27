@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class sp extends CI_Controller
+class suket extends CI_Controller
 {
 	public function __construct(){
 		parent::__construct();
@@ -24,16 +24,16 @@ class sp extends CI_Controller
 	public function tambah(){
 		if($this->session->userdata('masuk') == '1'){
 			
-			if($this->input->post('submit') != NULL){
+			if(isset($_POST['submit'])){
 				$this->m_sp->lock_tbl_sp();
 
-				$status_tanggal = $this->input->post('status_tanggal');
-				$jumlah_sp = $this->input->post('jumlah_sp');
-				$pegawai = $this->input->post('pegawai'); //array
-				$tanggal_sp = $this->input->post('tanggal_sp'); //array
-				$tujuan = $this->input->post('tujuan'); //array
-				$hal = $this->input->post('hal');
-				$keterangan = $this->input->post('keterangan');
+				$status_tanggal = $_POST['status_tanggal'];
+				$jumlah_sp = $_POST['jumlah_sp'];
+				$pegawai = $_POST['pegawai']; //array
+				$tanggal_sp = $_POST['tanggal_sp']; //array
+				$tujuan = $_POST['tujuan']; //array
+				$hal = $_POST['hal'];
+				$keterangan = $_POST['keterangan'];
 				$tgl_terakhir = '';
 				$data_warning['hasil'] = array();
 
@@ -59,9 +59,9 @@ class sp extends CI_Controller
 						$hasil = $this->m_sp->id_terakhir()->row();
 						$nomor = $hasil->nomor+1;
 					}else if($status_tanggal == "pilih"){
-						$tgl_d = $this->input->post('tgl_d');
-						$tgl_m = $this->input->post('tgl_m');
-						$tgl_y = $this->input->post('tgl_y');
+						$tgl_d = $_POST['tgl_d'];
+						$tgl_m = $_POST['tgl_m'];
+						$tgl_y = $_POST['tgl_y'];
 
 						$data['nomor_list'] = $this->m_sp->nomor_cari($tgl_d, $tgl_m, $tgl_y);
 						if($data['nomor_list']->num_rows() > 0){
@@ -151,17 +151,17 @@ class sp extends CI_Controller
 	public function tambah_bernomor(){
 		if($this->session->userdata('masuk') == '1'){
 			
-			if($this->input->post('submit') != NULL){
-				$nomor_awal = $this->input->post('nomor_awal');
-				$nomor_akhir = $this->input->post('nomor_akhir');
-				$tgl_d = $this->input->post('tgl_d');
-				$tgl_m = $this->input->post('tgl_m');
-				$tgl_y = $this->input->post('tgl_y');
-				$pegawai = $this->input->post('pegawai'); //array
-				$tanggal_sp = $this->input->post('tanggal_sp'); //array
-				$tujuan = $this->input->post('tujuan'); //array
-				$hal = $this->input->post('hal');
-				$keterangan = $this->input->post('keterangan');
+			if(isset($_POST['submit'])){
+				$nomor_awal = $_POST['nomor_awal'];
+				$nomor_akhir = $_POST['nomor_akhir'];
+				$tgl_d = $_POST['tgl_d'];
+				$tgl_m = $_POST['tgl_m'];
+				$tgl_y = $_POST['tgl_y'];
+				$pegawai = $_POST['pegawai']; //array
+				$tanggal_sp = $_POST['tanggal_sp']; //array
+				$tujuan = $_POST['tujuan']; //array
+				$hal = $_POST['hal'];
+				$keterangan = $_POST['keterangan'];
 
 				$total = $nomor_akhir - $nomor_awal + 1;
 				if($total < 1){

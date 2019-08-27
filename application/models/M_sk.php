@@ -1,7 +1,7 @@
 <?php
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class m_nota extends CI_Model
+class m_sk extends CI_Model
 {
 	function nomor_cari($tanggal, $bulan, $tahun){
 		return $this->db->query("SELECT * FROM tbl_nota WHERE tanggal BETWEEN ".$this->db->escape($tanggal-1)." AND ".$this->db->escape($tanggal+1)." AND bulan = ".$this->db->escape($bulan)." AND tahun = ".$this->db->escape($tahun)." AND dihapus='0' ORDER BY nomor ASC");

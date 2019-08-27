@@ -58,13 +58,13 @@ class pegawai extends CI_Controller
 
 	public function tambah(){
 		if($this->session->userdata('masuk') == '1' && $this->session->userdata('id_hak_akses') == '1'){
-			if(isset($_POST['submit'])){
+			if($this->input->post('submit') != NULL){
 				$data = [
-					'nip' => $_POST['nip'],
-					'nama' => $_POST['nama'],
-					'pangkat' => $_POST['pangkat'],
-					'golongan' => $_POST['golongan'],
-					'jabatan' => $_POST['jabatan'],
+					'nip' => $this->input->post('nip'),
+					'nama' => $this->input->post('nama'),
+					'pangkat' => $this->input->post('pangkat'),
+					'golongan' => $this->input->post('golongan'),
+					'jabatan' => $this->input->post('jabatan'),
 					'dihapus' => '0',
 					'ditambah_oleh' => $this->session->userdata('pegawai_id'),
 					'tgl_tambah' => date("Y-m-d H:i:s")
@@ -74,8 +74,8 @@ class pegawai extends CI_Controller
 
 				$data_login = [
 					'pegawai_id' => $insert_id,
-					'username' => $_POST['nip'],
-					'password' => password_hash($_POST['nip'], PASSWORD_DEFAULT),
+					'username' => $this->input->post('nip'),
+					'password' => password_hash($this->input->post('nip'), PASSWORD_DEFAULT),
 					'id_hak_akses' => '1',
 					'dihapus' => '0',
 					'ditambah_oleh' => $this->session->userdata('pegawai_id'),
@@ -103,17 +103,17 @@ class pegawai extends CI_Controller
 
 	public function ubah(){
 		if($this->session->userdata('masuk') == '1' && $this->session->userdata('id_hak_akses') == '1'){
-			if(isset($_POST['submit'])){
+			if($this->input->post('submit') != NULL){
 				$where = [
-					'id' => $_POST['id']
+					'id' => $this->input->post('id')
 				];
 
 				$data = [
-					'nip' => $_POST['nip'],
-					'nama' => $_POST['nama'],
-					'pangkat' => $_POST['pangkat'],
-					'golongan' => $_POST['golongan'],
-					'jabatan' => $_POST['jabatan'],
+					'nip' => $this->input->post('nip'),
+					'nama' => $this->input->post('nama'),
+					'pangkat' => $this->input->post('pangkat'),
+					'golongan' => $this->input->post('golongan'),
+					'jabatan' => $this->input->post('jabatan'),
 					'diedit_oleh' => $this->session->userdata('pegawai_id'),
 					'tgl_edit' => date("Y-m-d H:i:s")
 				];

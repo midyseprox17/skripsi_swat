@@ -81,6 +81,8 @@ class Breadcrumb {
 
     if ($judul == "Sp") {
       $judul = "Surat Perintah";
+    }else if($judul == "Sk"){
+      $judul = "Surat Keluar";
     }
 
     $html = '<div class="app-title">';

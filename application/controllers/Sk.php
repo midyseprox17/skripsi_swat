@@ -1,20 +1,20 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class nota extends CI_Controller
+class sk extends CI_Controller
 {
 	public function __construct(){
 		parent::__construct();
-		$this->load->model('m_nota');
+		$this->load->model('m_sk');
 	}
 
 	public function index(){
 		if($this->session->userdata('masuk') == '1'){
 			$where['dihapus'] = '0';
-			$data['nota'] = $this->m_uptd->tampil_where('v_nota', $where);
+			$data['sk'] = $this->m_uptd->tampil_where('v_sk', $where);
 
 			$this->load->view('global/v_sidebar');
-			$this->load->view('nota/v_nota', $data);
+			$this->load->view('sk/v_sk', $data);
 			$this->load->view('global/v_footer');
 		}else{
 			redirect(base_url().'login');
@@ -24,33 +24,33 @@ class nota extends CI_Controller
 	public function tambah(){
 		if($this->session->userdata('masuk') == '1'){
 			
-			if(isset($_POST['submit'])){
-				$this->m_nota->lock_tbl_nota();
+			if($this->input->post('submit') != NULL){
+				$this->m_sk->lock_tbl_sk();
 
-				$penomoran_id = $_POST['penomoran_id'];
-				$status_tanggal = $_POST['status_tanggal'];
-				$jumlah_nota = $_POST['jumlah_nota'];
-				$hal = $_POST['hal'];
-				$isi = $_POST['isi'];
-				$catatan = $_POST['catatan'];
-				$kepada = $_POST['kepada']; //array
-				$pegawai = $_POST['pegawai']; //array
+				$penomoran_id = $this->input->post('penomoran_id');
+				$status_tanggal = $this->input->post('status_tanggal');
+				$jumlah_sk = $this->input->post('jumlah_sk');
+				$hal = $this->input->post('hal');
+				$isi = $this->input->post('isi');
+				$catatan = $this->input->post('catatan');
+				$kepada = $this->input->post('kepada'); //array
+				$pegawai = $this->input->post('pegawai'); //array
 				
 				$tgl_terakhir = '';
 				$data_warning['hasil'] = array();
 
-				$hasil = $this->m_nota->id_terakhir()->row();
+				$hasil = $this->m_sk->id_terakhir()->row();
 				$tgl_terakhir = $hasil->tahun.'-'.$hasil->bulan.'-'.$hasil->tanggal;
 
 
-				for($i = 1; $i <= $jumlah_nota; $i++){
+				for($i = 1; $i <= $jumlah_sk; $i++){
 					$tgl_d = date('d');
 					$tgl_m = date('m');
 					$tgl_y = date('Y');
 					$nomor = 0;
 
 					if($status_tanggal == "sekarang" && $i == 1){
-						$hasil = $this->m_nota->id_terakhir()->row();
+						$hasil = $this->m_sk->id_terakhir()->row();
 						if(strtotime($tgl_terakhir) < strtotime(date("Y-m-d"))){
 							$nomor = $hasil->nomor+6;
 						}else{
@@ -58,23 +58,23 @@ class nota extends CI_Controller
 						}
 						
 					}else if($status_tanggal == "sekarang" && $i != 1){
-						$hasil = $this->m_nota->id_terakhir()->row();
+						$hasil = $this->m_sk->id_terakhir()->row();
 						$nomor = $hasil->nomor+1;
 					}else if($status_tanggal == "pilih"){
-						$tgl_d = $_POST['tgl_d'];
-						$tgl_m = $_POST['tgl_m'];
-						$tgl_y = $_POST['tgl_y'];
+						$tgl_d = $this->input->post('tgl_d');
+						$tgl_m = $this->input->post('tgl_m');
+						$tgl_y = $this->input->post('tgl_y');
 
-						$data['nomor_list'] = $this->m_nota->nomor_cari($tgl_d, $tgl_m, $tgl_y);
+						$data['nomor_list'] = $this->m_sk->nomor_cari($tgl_d, $tgl_m, $tgl_y);
 						if($data['nomor_list']->num_rows() > 0){
-							$data['nomor_minmax'] = $this->m_nota->nomor_minmax($tgl_d, $tgl_m, $tgl_y)->row();
+							$data['nomor_minmax'] = $this->m_sk->nomor_minmax($tgl_d, $tgl_m, $tgl_y)->row();
 							$nomor_min = $data['nomor_minmax']->nomor_min;
 							$nomor_max = $data['nomor_minmax']->nomor_max;
 
-							$nomor_max = $nomor_max + $jumlah_nota;
+							$nomor_max = $nomor_max + $jumlah_sk;
 
 							for($no = $nomor_min; $no <= $nomor_max; $no++){
-								$data = $this->m_uptd->tampil_where('tbl_nota', array('nomor'=>$no))->row();
+								$data = $this->m_uptd->tampil_where('tbl_sk', array('nomor'=>$no))->row();
 								if($data == NULL){
 									$nomor = $no;
 									break;
@@ -82,7 +82,7 @@ class nota extends CI_Controller
 							}
 
 							if($nomor == 0){
-								$hasil = $this->m_nota->id_terakhir()->row();
+								$hasil = $this->m_sk->id_terakhir()->row();
 								if(strtotime($tgl_terakhir) < strtotime(date("Y-m-d"))){
 									$nomor = $hasil->nomor+6;
 								}else{
@@ -91,7 +91,7 @@ class nota extends CI_Controller
 								
 							}
 						}else{
-							$hasil = $this->m_nota->id_terakhir()->row();
+							$hasil = $this->m_sk->id_terakhir()->row();
 							if(strtotime($tgl_terakhir) < strtotime(date("Y-m-d"))){
 								$nomor = $hasil->nomor+6;
 							}else{
@@ -118,22 +118,22 @@ class nota extends CI_Controller
 						'ditambah_oleh' => $this->session->userdata('pegawai_id'),
 						'tgl_tambah' => date("Y-m-d H:i:s")
 					];
-					$nota_terakhir = $this->m_uptd->tambah('tbl_nota', $data);
+					$sk_terakhir = $this->m_uptd->tambah('tbl_sk', $data);
 
 					for($peg = 0; $peg < count($pegawai); $peg++){
 						$data_pegawai = [
-							'nota_id' => $nota_terakhir,
+							'sk_id' => $sk_terakhir,
 							'pegawai_id' => $pegawai[$peg],
 							'ditambah_oleh' => $this->session->userdata('pegawai_id'),
 							'tgl_tambah' => date("Y-m-d H:i:s")
 						];
-						$this->m_uptd->tambah('tbl_nota_pengolah', $data_pegawai);
+						$this->m_uptd->tambah('tbl_sk_pengolah', $data_pegawai);
 					}
 
 					array_push($data_warning['hasil'], array('nomor' => $nomor, 'tanggal' => $data['tanggal'].'-'.$data['bulan'].'-'.$data['tahun']));
 				}
 
-				$this->m_nota->unlock_tbl_nota();
+				$this->m_sk->unlock_tbl_sk();
 
 				$this->load->view('global/v_sidebar');
 				$this->load->view('global/v_warning', $data_warning);
@@ -144,7 +144,7 @@ class nota extends CI_Controller
 				$data['penomoran'] = $this->m_uptd->tampil_where('tbl_penomoran', array('nama' => 'Kendali', 'dihapus' => '0'));
 
 				$this->load->view('global/v_sidebar');
-				$this->load->view('nota/v_nota_tambah', $data);
+				$this->load->view('sk/v_sk_tambah', $data);
 				$this->load->view('global/v_footer');
 			}
 		}else{
@@ -155,18 +155,18 @@ class nota extends CI_Controller
 	public function tambah_bernomor(){
 		if($this->session->userdata('masuk') == '1'){
 			
-			if(isset($_POST['submit'])){
-				$penomoran_id = $_POST['penomoran_id'];
-				$nomor_awal = $_POST['nomor_awal'];
-				$nomor_akhir = $_POST['nomor_akhir'];
-				$tgl_d = $_POST['tgl_d'];
-				$tgl_m = $_POST['tgl_m'];
-				$tgl_y = $_POST['tgl_y'];
-				$hal = $_POST['hal'];
-				$isi = $_POST['isi'];
-				$catatan = $_POST['catatan'];
-				$kepada = $_POST['kepada']; //array
-				$pegawai = $_POST['pegawai']; //array
+			if($this->input->post('submit') != NULL){
+				$penomoran_id = $this->input->post('penomoran_id');
+				$nomor_awal = $this->input->post('nomor_awal');
+				$nomor_akhir = $this->input->post('nomor_akhir');
+				$tgl_d = $this->input->post('tgl_d');
+				$tgl_m = $this->input->post('tgl_m');
+				$tgl_y = $this->input->post('tgl_y');
+				$hal = $this->input->post('hal');
+				$isi = $this->input->post('isi');
+				$catatan = $this->input->post('catatan');
+				$kepada = $this->input->post('kepada'); //array
+				$pegawai = $this->input->post('pegawai'); //array
 				
 				$total = $nomor_akhir - $nomor_awal + 1;
 				if($total < 1){
@@ -188,26 +188,26 @@ class nota extends CI_Controller
 						'ditambah_oleh' => $this->session->userdata('pegawai_id'),
 						'tgl_tambah' => date("Y-m-d H:i:s")
 					];
-					$nota_terakhir = $this->m_uptd->tambah('tbl_nota', $data);
+					$sk_terakhir = $this->m_uptd->tambah('tbl_sk', $data);
 
 					for($peg = 0; $peg < count($pegawai); $peg++){
 						$data_pegawai = [
-							'nota_id' => $nota_terakhir,
+							'sk_id' => $sk_terakhir,
 							'pegawai_id' => $pegawai[$peg],
 							'ditambah_oleh' => $this->session->userdata('pegawai_id'),
 							'tgl_tambah' => date("Y-m-d H:i:s")
 						];
-						$this->m_uptd->tambah('tbl_nota_pengolah', $data_pegawai);
+						$this->m_uptd->tambah('tbl_sk_pengolah', $data_pegawai);
 					}
 				}
-				redirect(base_url().'nota');
+				redirect(base_url().'sk');
 
 			}else{
 				$data['pegawai'] = $this->m_uptd->tampil_where('tbl_pegawai', array('dihapus' => '0'));
 				$data['penomoran'] = $this->m_uptd->tampil_where('tbl_penomoran', array('nama' => 'Kendali', 'dihapus' => '0'));
 
 				$this->load->view('global/v_sidebar');
-				$this->load->view('nota/v_nota_tambah_bernomor', $data);
+				$this->load->view('sk/v_sk_tambah_bernomor', $data);
 				$this->load->view('global/v_footer');
 			}
 		}else{
@@ -226,8 +226,8 @@ class nota extends CI_Controller
 				'tgl_edit' => date("Y-m-d H:i:s")
 			];
 
-			$this->m_uptd->ubah('tbl_nota', $data, $where);
-			redirect(base_url().'nota');
+			$this->m_uptd->ubah('tbl_sk', $data, $where);
+			redirect(base_url().'sk');
 		}else{
 			redirect(base_url().'login');
 		}

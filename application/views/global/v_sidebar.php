@@ -80,9 +80,15 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="<?=base_url().'nota'?>">
+        <a class="nav-link" href="<?=base_url().'sm'?>">
           <i class="fas fa-fw fa-file-alt"></i>
-          <span>Nota</span></a>
+          <span>Surat Masuk</span></a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="<?=base_url().'sk'?>">
+          <i class="fas fa-fw fa-file-alt"></i>
+          <span>Surat Keluar</span></a>
       </li>
 
       <!-- Divider -->

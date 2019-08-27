@@ -8,14 +8,14 @@
 		<div class="col-xl-12">
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
-				  <h6 class="m-0 font-weight-bold text-primary" style="color: #15406a;">Tambah Data Nota</h6>
+				  <h6 class="m-0 font-weight-bold text-primary" style="color: #15406a;">Tambah Data Surat Keluar</h6>
 				</div>
 				<div class="card-body">
-					<form method="post" action="<?=base_url().'nota/tambah'?>">
+					<form method="post" action="<?=base_url().'sk/tambah_bernomor'?>">
 						<input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" style="display: none">
 						<table class="table">	
 							<tr>
-								<td colspan="2" align="right"><a href="<?=base_url().'nota/tambah_bernomor'?>">Sudah punya nomor? Klik Disini</a></td>
+								<td colspan="2" align="right"><a href="<?=base_url().'sk/tambah'?>">Belum punya nomor? Klik Disini</a></td>
 							</tr>
 							<tr>
 								<td>Kode</td>
@@ -33,46 +33,29 @@
 								</td>
 							</tr>
 							<tr>
-								<td style="width: 20%; color: #000000">Jumlah Nomor Nota</td>
+								<td style="width: 20%; color: #000000">Nomor sk</td>
 								<td>
-									<div class="float-left" style="width: 30%">
-								      	<select class="custom-select form-control form-control-sm" id="jumlah_nota" name="jumlah_nota" required="">
-										    <option value="1">1</option>
-										    <option value="2">2</option>
-										    <option value="3">3</option>
-										    <option value="4">4</option>
-										    <option value="5">5</option>
-										    <option value="6">6</option>
-										    <option value="7">7</option>
-										    <option value="8">8</option>
-										    <option value="9">9</option>
-										    <option value="10">10</option>
-									  	</select>
-								    </div>
+									<div class="form-group row mt-1">
+										<div class="col-sm-2">
+							        		Dari Nomor<input type="number" class="form-control" name="nomor_awal" id="nomor_awal" min="1">
+							        	</div>
+							        	<div class="col-sm-2">
+							        		Sampai Nomor<input type="number" class="form-control" name="nomor_akhir" id="nomor_akhir" min="0" value="0" disabled="">
+							        	</div>
+							        	<font color="red">*biarkan 0 jika hanya 1 nomor</font>
+							        </div>
 								</td>
 							</tr>
 							<tr>
 								<td style="color: #000000">Tanggal Surat</td>
 								<td>
 									<div class="col-sm-10">
-								        <div class="form-check">
-								          <input class="form-check-input" type="radio" name="status_tanggal" id="status_tanggal" onclick="status_tgl(0)" value="sekarang" checked="">
-								          <label class="form-check-label">
-								            Tanggal Sekarang
-								          </label>
-								        </div>
-								        <div class="form-check">
-								          <input class="form-check-input" type="radio" name="status_tanggal" id="status_tanggal" value="pilih" onclick="status_tgl(1)">
-								          <label class="form-check-label">
-								            Pilih Tanggal
-								          </label>
-								        </div>
 								        <div class="form-group row mt-2" id="show_status_tanggal">
 								        	<div class="col-sm-2">
-								        		Tanggal<input type="number" class="form-control" placeholder="Tgl" name="tgl_d" id="tgl_d" min="1" max="31" disabled="">
+								        		Tanggal<input type="number" class="form-control" placeholder="Tgl" name="tgl_d" id="tgl_d" min="1" max="31">
 								        	</div>
 								        	<div class="col-sm-2">
-								        		Bulan<select class="custom-select form-control form-control-sm" id="tgl_m" name="tgl_m" disabled="">
+								        		Bulan<select class="custom-select form-control form-control-sm" id="tgl_m" name="tgl_m">
 												    <option value="1">Januari</option>
 												    <option value="2">Februari</option>
 												    <option value="3">Maret</option>
@@ -109,7 +92,6 @@
 								<td><input type="text" name="catatan" class="form-control"></td>
 							</tr>
 						</table>
-						<!-- Dynamic Add & Remove Field -->
 						<table class="table" id="tabel_kepada">
 							<tr id="tabel_pegawai1">
 								<td style="width: 20%; color: #000000">Kepada</td>
@@ -136,7 +118,6 @@
 								</td>
 							</tr>
 						</table>
-				
 						<div class="tile-footer">
 			            	<button class="btn btn-primary" type="submit" name="submit">Tambah Data</button>
 			            </div>
@@ -156,9 +137,18 @@ $(document).ready(function() {
         	format: 'yyyy-mm-dd'
         });
     });
-    
-    $("#jumlah_nota").change(function(){
-    	var total = $("#jumlah_nota").val();
+
+    $("#nomor_awal").focusout(function(){
+    	if($("#nomor_awal").val() == 0){
+    		$("#nomor_akhir").prop('disabled', true);
+    	}else{
+    		$("#nomor_akhir").prop('disabled', false);
+    	}
+    	
+    });
+
+    $("#nomor_akhir").focusout(function(){
+    	var total = $("#nomor_akhir").val() - $("#nomor_awal").val() + 1;
     	$("#tabel_kepada").empty();
     	
     	for(var i = 1; i <= total; i++){
@@ -198,16 +188,6 @@ function tambah_baris_pegawai(){
 function hapus_baris_pegawai(rowno)
 {
 	$('#tabel_pegawai'+rowno).remove();
-}
-
-function status_tgl(x){
-	if (x == 1) {
-		document.getElementById('tgl_d').disabled = false;
-		document.getElementById('tgl_m').disabled = false;
-	}else{
-		document.getElementById('tgl_d').disabled = true;
-		document.getElementById('tgl_m').disabled = true;
-	}
 }
 </script>
 

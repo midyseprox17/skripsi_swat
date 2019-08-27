@@ -8,7 +8,7 @@ class uptd extends CI_Controller
 		if($this->session->userdata('masuk') == '1'){
 			$data['pegawai_total'] = $this->m_uptd->tampil_where('tbl_pegawai', ['dihapus'=>'0'])->num_rows();
 			$data['sp_total'] = $this->m_uptd->tampil('tbl_sp')->num_rows();
-			$data['nota_total'] = $this->m_uptd->tampil_where('tbl_nota', ['dihapus' => '0'])->num_rows();
+			$data['sk_total'] = $this->m_uptd->tampil_where('tbl_sk', ['dihapus' => '0'])->num_rows();
 
 			$this->load->view('global/v_sidebar');
 			$this->load->view('global/v_content', $data);
@@ -20,10 +20,10 @@ class uptd extends CI_Controller
 	}
 
 	function login(){
-		if(isset($_POST['submit'])){
+		if($this->input->post('submit') != NULL){
 
-			$username = $_POST['username'];
-			$password = $_POST['password'];
+			$username = $this->input->post('username');
+			$password = $this->input->post('password');
 
 			if(!$this->auth->login($username,$password)){
 				$this->session->set_flashdata('pesan', 'Login Gagal. Pastikan Username/Password Benar');

@@ -7,15 +7,15 @@
 		<div class="col-xl-2">
 		</div>
 		<div class="col-xl-10">
-			<a href="<?=base_url().'nota/tambah'?>" class="float-right d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mb-3"><i class="fas fa-plus fa-sm text-white-50"></i> Tambah Data(Belum Bernomor)</a>
-			<a href="<?=base_url().'nota/tambah_bernomor'?>" class="float-right d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mb-3  mr-2"><i class="fas fa-plus fa-sm text-white-50"></i> Tambah Data(Sudah Bernomor)</a>		
+			<a href="<?=base_url().'sk/tambah'?>" class="float-right d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mb-3"><i class="fas fa-plus fa-sm text-white-50"></i> Tambah Data(Belum Bernomor)</a>
+			<a href="<?=base_url().'sk/tambah_bernomor'?>" class="float-right d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mb-3  mr-2"><i class="fas fa-plus fa-sm text-white-50"></i> Tambah Data(Sudah Bernomor)</a>		
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-xl-12">
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
-				  <h6 class="m-0 font-weight-bold text-primary">Tabel Data NOTA</h6>
+				  <h6 class="m-0 font-weight-bold text-primary">Tabel Data Surat Keluar</h6>
 				</div>
 				<div class="card-body">
 				  <div class="table-responsive">
@@ -35,7 +35,7 @@
 				      </thead>
 				      <tbody>
 				      	<?php 
-				      	foreach($nota->result() as $n)
+				      	foreach($sk->result() as $n)
 						{ 
 						?>
 					        <tr>
@@ -48,7 +48,7 @@
 					          <td><?=str_replace('; ', ' | ', $n->pegawai_nama)?></td>
 					          <td><?=$n->catatan?></td>
 					          <td>
-					          	<a href="<?=base_url().'nota/hapus/'.$n->id?>" class="btn btn-danger btn-circle" onclick="return confirm('Apakah Anda yakin untuk menghapus data <?=$n->nomor?>?');">
+					          	<a href="<?=base_url().'sk/hapus/'.$n->id?>" class="btn btn-danger btn-circle" onclick="return confirm('Apakah Anda yakin untuk menghapus data <?=$n->nomor?>?');">
 					          		<i class="fas fa-trash"></i>
 				                </a>
 					          </td>

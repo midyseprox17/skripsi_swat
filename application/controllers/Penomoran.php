@@ -44,12 +44,12 @@ class penomoran extends CI_Controller
 
 	public function tambah(){
 		if($this->session->userdata('masuk') == '1' && $this->session->userdata('id_hak_akses') == '1'){
-			if(isset($_POST['submit'])){
+			if($this->input->post('submit') != NULL){
 				$data = [
-					'kode' => $_POST['kode'],
-					'nama' => $_POST['nama'],
-					'ket' => $_POST['ket'],
-					'format' => $_POST['format'],
+					'kode' => $this->input->post('kode'),
+					'nama' => $this->input->post('nama'),
+					'ket' => $this->input->post('ket'),
+					'format' => $this->input->post('format'),
 					'dihapus' => '0',
 					'ditambah_oleh' => $this->session->userdata('pegawai_id'),
 					'tgl_tambah' => date("Y-m-d H:i:s")
@@ -76,16 +76,16 @@ class penomoran extends CI_Controller
 
 	public function ubah(){
 		if($this->session->userdata('masuk') == '1' && $this->session->userdata('id_hak_akses') == '1'){
-			if(isset($_POST['submit'])){
+			if($this->input->post('submit') != NULL){
 				$where = [
-					'id' => $_POST['id']
+					'id' => $this->input->post('id')
 				];
 
 				$data = [
-					'kode' => $_POST['kode'],
-					'nama' => $_POST['nama'],
-					'ket' => $_POST['ket'],
-					'format' => $_POST['format'],
+					'kode' => $this->input->post('kode'),
+					'nama' => $this->input->post('nama'),
+					'ket' => $this->input->post('ket'),
+					'format' => $this->input->post('format'),
 					'diedit_oleh' => $this->session->userdata('pegawai_id'),
 					'tgl_edit' => date("Y-m-d H:i:s")
 				];
