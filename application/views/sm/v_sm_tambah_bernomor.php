@@ -87,6 +87,72 @@
 								<td style="color: #000000; width: 20%">Catatan</td>
 								<td><input type="text" name="catatan" class="form-control"></td>
 							</tr>
+							<tr>
+								<td style="color: #000000; width: 20%">Tgl Diarsipkan</td>
+								<td>
+									<div class="form-group row mt-2">
+							        	<div class="col-sm-2">
+							        		Tanggal<input type="number" class="form-control" placeholder="Tgl" name="arsip_tgl_d" id="arsip_tgl_d" min="1" max="31">
+							        	</div>
+							        	<div class="col-sm-2">
+							        		Bulan<select class="custom-select form-control form-control-sm" id="arsip_tgl_m" name="arsip_tgl_m">
+											    <option value="1">Januari</option>
+											    <option value="2">Februari</option>
+											    <option value="3">Maret</option>
+											    <option value="4">April</option>
+											    <option value="5">Mei</option>
+											    <option value="6">Juni</option>
+											    <option value="7">Juli</option>
+											    <option value="8">Agustus</option>
+											    <option value="9">September</option>
+											    <option value="10">Oktober</option>
+											    <option value="11">November</option>
+											    <option value="12">Desember</option>
+											</select>
+							        	</div>
+							        	<div class="col-sm-2">
+							        		Tahun<input type="number" class="form-control" placeholder="Tahun" name="arsip_tgl_y" id="arsip_tgl_y" value="<?=date('Y')?>" readonly="">
+							        	</div>
+							        	<div>
+							        		<font color="red">*Biarkan jika belum diarsipkan</font>
+							        	</div>
+							        </div>
+							    </div>
+								</td>
+							</tr>
+							<tr>
+								<td style="color: #000000; width: 20%">Tgl Diteruskan</td>
+								<td>
+									<div class="form-group row mt-2">
+							        	<div class="col-sm-2">
+							        		Tanggal<input type="number" class="form-control" placeholder="Tgl" name="terus_tgl_d" id="terus_tgl_d" min="1" max="31">
+							        	</div>
+							        	<div class="col-sm-2">
+							        		Bulan<select class="custom-select form-control form-control-sm" id="terus_tgl_m" name="terus_tgl_m">
+											    <option value="1">Januari</option>
+											    <option value="2">Februari</option>
+											    <option value="3">Maret</option>
+											    <option value="4">April</option>
+											    <option value="5">Mei</option>
+											    <option value="6">Juni</option>
+											    <option value="7">Juli</option>
+											    <option value="8">Agustus</option>
+											    <option value="9">September</option>
+											    <option value="10">Oktober</option>
+											    <option value="11">November</option>
+											    <option value="12">Desember</option>
+											</select>
+							        	</div>
+							        	<div class="col-sm-2">
+							        		Tahun<input type="number" class="form-control" placeholder="Tahun" name="terus_tgl_y" id="terus_tgl_y" value="<?=date('Y')?>" readonly="">
+							        	</div>
+							        	<div>
+							        		<font color="red">*Biarkan jika belum diteruskan</font>
+							        	</div>
+							        </div>
+							    </div>
+								</td>
+							</tr>
 						</table>
 				
 						<div class="tile-footer">

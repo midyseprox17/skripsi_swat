@@ -109,6 +109,7 @@ class sm extends CI_Controller
 					$tgl_y = $this->input->post('tgl_y');
 				}
 
+				
 				$data = [
 					'nomor' => $nomor,
 					'tanggal' => $tgl_d,
@@ -124,6 +125,14 @@ class sm extends CI_Controller
 					'ditambah_oleh' => $this->session->userdata('pegawai_id'),
 					'tgl_tambah' => date("Y-m-d H:i:s")
 				];
+
+				if($this->input->post('arsip_tgl_d') != NULL && $this->input->post('arsip_tgl_m') != NULL){
+					$data['tgl_diarsipkan'] = $this->input->post('arsip_tgl_y').'-'.$this->input->post('arsip_tgl_m').'-'.$this->input->post('arsip_tgl_d');
+				}
+
+				if($this->input->post('terus_tgl_d') != NULL && $this->input->post('terus_tgl_m') != NULL){
+					$data['tgl_diteruskan'] = $this->input->post('terus_tgl_y').'-'.$this->input->post('terus_tgl_m').'-'.$this->input->post('terus_tgl_d');
+				}
 
 				$this->m_uptd->tambah('tbl_sm', $data);
 
