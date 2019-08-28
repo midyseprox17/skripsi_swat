@@ -74,7 +74,7 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="<?=base_url().'sp'?>">
+        <a class="nav-link" href="<?=base_url().'suket'?>">
           <i class="fas fa-fw fa-file-alt"></i>
           <span>Surat Keterangan</span></a>
       </li>

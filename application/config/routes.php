@@ -55,3 +55,5 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['login'] = 'uptd/login';
 $route['logout'] = 'uptd/logout';
+$route['suket/:num'] = 'suket';
+$route['suket/all'] = 'suket';

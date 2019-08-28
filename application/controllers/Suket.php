@@ -5,16 +5,27 @@ class suket extends CI_Controller
 {
 	public function __construct(){
 		parent::__construct();
-		$this->load->model('m_sp');
+		$this->load->model('m_suket');
 	}
 
 	public function index(){
 		if($this->session->userdata('masuk') == '1'){
+			$penomoran_id = $this->uri->segment(2);
+			echo $penomoran_id;
+
+			if($penomoran_id == NULL){
+
+			}else if($penomoran_id != 'all'){
+				$where['penomoran_id'] = $penomoran_id;
+			}
+
 			$where['dihapus'] = '0';
-			$data['sp'] = $this->m_uptd->tampil_where('v_sp', $where);
+
+			$data['penomoran'] = $this->m_uptd->tampil_where('tbl_penomoran', ['jenis' => 'suket']);
+			$data['suket'] = $this->m_uptd->tampil_where('v_suket', $where);
 
 			$this->load->view('global/v_sidebar');
-			$this->load->view('sp/v_sp', $data);
+			$this->load->view('suket/v_suket', $data);
 			$this->load->view('global/v_footer');
 		}else{
 			redirect(base_url().'login');
@@ -24,80 +35,38 @@ class suket extends CI_Controller
 	public function tambah(){
 		if($this->session->userdata('masuk') == '1'){
 			
-			if(isset($_POST['submit'])){
-				$this->m_sp->lock_tbl_sp();
+			if($this->input->post('submit') != NULL){
+				$this->m_suket->lock_tbl_suket();
 
-				$status_tanggal = $_POST['status_tanggal'];
-				$jumlah_sp = $_POST['jumlah_sp'];
-				$pegawai = $_POST['pegawai']; //array
-				$tanggal_sp = $_POST['tanggal_sp']; //array
-				$tujuan = $_POST['tujuan']; //array
-				$hal = $_POST['hal'];
-				$keterangan = $_POST['keterangan'];
-				$tgl_terakhir = '';
+				$penomoran_id = $this->input->post('penomoran_id');
+				$jumlah_suket = $this->input->post('jumlah_suket');
+				$status_tanggal = $this->input->post('status_tanggal');
+				$kepada = $this->input->post('kepada');
+				$hal = $this->input->post('hal');
+				$datab = $this->input->post('datab'); //array
+				$alamat = $this->input->post('alamat');
+				$kota_id = $this->input->post('kota_id');
+				$ket = $this->input->post('ket');
+
 				$data_warning['hasil'] = array();
 
-				$hasil = $this->m_sp->id_terakhir()->row();
-				$tgl_terakhir = $hasil->tahun.'-'.$hasil->bulan.'-'.$hasil->tanggal;
-
-
-				for($i = 1; $i <= $jumlah_sp; $i++){
+				for($i = 0; $i < $jumlah_suket; $i++){
 					$tgl_d = date('d');
 					$tgl_m = date('m');
 					$tgl_y = date('Y');
 					$nomor = 0;
 
-					if($status_tanggal == "sekarang" && $i == 1){
-						$hasil = $this->m_sp->id_terakhir()->row();
-						if(strtotime($tgl_terakhir) < strtotime(date("Y-m-d"))){
-							$nomor = $hasil->nomor+6;
-						}else{
-							$nomor = $hasil->nomor+1;
-						}
-						
-					}else if($status_tanggal == "sekarang" && $i != 1){
-						$hasil = $this->m_sp->id_terakhir()->row();
-						$nomor = $hasil->nomor+1;
-					}else if($status_tanggal == "pilih"){
-						$tgl_d = $_POST['tgl_d'];
-						$tgl_m = $_POST['tgl_m'];
-						$tgl_y = $_POST['tgl_y'];
+					if($status_tanggal == "pilih"){
+						$tgl_d = $this->input->post('tgl_d');
+						$tgl_m = $this->input->post('tgl_m');
+						$tgl_y = $this->input->post('tgl_y');
+					}
 
-						$data['nomor_list'] = $this->m_sp->nomor_cari($tgl_d, $tgl_m, $tgl_y);
-						if($data['nomor_list']->num_rows() > 0){
-							$data['nomor_minmax'] = $this->m_sp->nomor_minmax($tgl_d, $tgl_m, $tgl_y)->row();
-							$nomor_min = $data['nomor_minmax']->nomor_min;
-							$nomor_max = $data['nomor_minmax']->nomor_max;
-
-							$nomor_max = $nomor_max + $jumlah_sp;
-
-							for($no = $nomor_min; $no <= $nomor_max; $no++){
-								$data = $this->m_uptd->tampil_where('tbl_sp', array('nomor'=>$no))->row();
-								if($data == NULL){
-									$nomor = $no;
-									break;
-								}
-							}
-
-							if($nomor == 0){
-								$hasil = $this->m_sp->id_terakhir()->row();
-								if(strtotime($tgl_terakhir) < strtotime(date("Y-m-d"))){
-									$nomor = $hasil->nomor+6;
-								}else{
-									$nomor = $hasil->nomor+1;
-								}
-								
-							}
-						}else{
-							$hasil = $this->m_sp->id_terakhir()->row();
-							if(strtotime($tgl_terakhir) < strtotime(date("Y-m-d"))){
-								$nomor = $hasil->nomor+6;
-							}else{
-								$nomor = $hasil->nomor+1;
-							}
-							
-						}
-						
+					$hasil = $this->m_suket->id_terakhir($penomoran_id)->row();
+					if($hasil == NULL){
+						$nomor = 1;
+					}else {
+						$nomor = $hasil->nomor + 1;
 					}
 
 					//SCRIPT INPUT
@@ -106,41 +75,34 @@ class suket extends CI_Controller
 						'tanggal' => $tgl_d,
 						'bulan' => $tgl_m,
 						'tahun' => $tgl_y,
-						'tanggal_sp' => date('Y-m-d', strtotime($tanggal_sp[$i-1])),
-						'tujuan' => $tujuan[$i-1],
+						'kepada' => $kepada,
 						'hal' => $hal,
-						'ket' => $keterangan,
+						'datab' => $datab[$i],
+						'alamat' => $alamat,
+						'kota_id' => $kota_id,
+						'ket' => $ket,
+						'penomoran_id' => $penomoran_id,
 						'dihapus' => '0',
-						'penomoran_id' => '3',
 						'ditambah_oleh' => $this->session->userdata('pegawai_id'),
 						'tgl_tambah' => date("Y-m-d H:i:s")
 					];
-					$sp_terakhir = $this->m_uptd->tambah('tbl_sp', $data);
+					$suket_terakhir = $this->m_uptd->tambah('tbl_suket', $data);
 
-					for($peg = 0; $peg < count($pegawai); $peg++){
-						$data_pegawai = [
-							'sp_id' => $sp_terakhir,
-							'pegawai_id' => $pegawai[$peg],
-							'ditambah_oleh' => $this->session->userdata('pegawai_id'),
-							'tgl_tambah' => date("Y-m-d H:i:s")
-						];
-						$this->m_uptd->tambah('tbl_sp_pegawai', $data_pegawai);
-					}
-
-					array_push($data_warning['hasil'], array('nomor' => $nomor, 'tanggal' => $data['tanggal_sp']));
+					array_push($data_warning['hasil'], array('nomor' => $nomor, 'tanggal' => $data['datab']));
 				}
 
-				$this->m_sp->unlock_tbl_sp();
+				$this->m_suket->unlock_tbl_suket();
 
 				$this->load->view('global/v_sidebar');
 				$this->load->view('global/v_warning', $data_warning);
 				$this->load->view('global/v_footer');
 
 			}else{
-				$data['pegawai'] = $this->m_uptd->tampil_where('tbl_pegawai', array('dihapus' => '0'));
+				$data['penomoran'] = $this->m_uptd->tampil_where('tbl_penomoran', array('jenis' => 'suket', 'dihapus' => '0'));
+				$data['kota'] = $this->m_uptd->tampil('tbl_kota');
 
 				$this->load->view('global/v_sidebar');
-				$this->load->view('sp/v_sp_tambah', $data);
+				$this->load->view('suket/v_suket_tambah', $data);
 				$this->load->view('global/v_footer');
 			}
 		}else{
@@ -151,56 +113,66 @@ class suket extends CI_Controller
 	public function tambah_bernomor(){
 		if($this->session->userdata('masuk') == '1'){
 			
-			if(isset($_POST['submit'])){
-				$nomor_awal = $_POST['nomor_awal'];
-				$nomor_akhir = $_POST['nomor_akhir'];
-				$tgl_d = $_POST['tgl_d'];
-				$tgl_m = $_POST['tgl_m'];
-				$tgl_y = $_POST['tgl_y'];
-				$pegawai = $_POST['pegawai']; //array
-				$tanggal_sp = $_POST['tanggal_sp']; //array
-				$tujuan = $_POST['tujuan']; //array
-				$hal = $_POST['hal'];
-				$keterangan = $_POST['keterangan'];
+			if($this->input->post('submit') != NULL){
+				$this->m_suket->lock_tbl_suket();
+
+				$penomoran_id = $this->input->post('penomoran_id');
+				$nomor_awal = $this->input->post('nomor_awal');
+				$nomor_akhir = $this->input->post('nomor_akhir');
+				$tgl_d = $this->input->post('tgl_d');
+				$tgl_m = $this->input->post('tgl_m');
+				$tgl_y = $this->input->post('tgl_y');
+				$kepada = $this->input->post('kepada');
+				$hal = $this->input->post('hal');
+				$datab = $this->input->post('datab'); //array
+				$alamat = $this->input->post('alamat');
+				$kota_id = $this->input->post('kota_id');
+				$ket = $this->input->post('ket');
+
+				$data_warning['hasil'] = array();
 
 				$total = $nomor_akhir - $nomor_awal + 1;
 				if($total < 1){
 					$total = 1;
 				}
+				
 
 				for($i = 0; $i < $total; $i++){
+					
+					//SCRIPT INPUT
 					$data = [
 						'nomor' => $nomor_awal+$i,
 						'tanggal' => $tgl_d,
 						'bulan' => $tgl_m,
 						'tahun' => $tgl_y,
-						'tanggal_sp' => date('Y-m-d', strtotime($tanggal_sp[$i])),
-						'tujuan' => $tujuan[$i],
+						'kepada' => $kepada,
 						'hal' => $hal,
-						'ket' => $keterangan,
+						'datab' => $datab[$i],
+						'alamat' => $alamat,
+						'kota_id' => $kota_id,
+						'ket' => $ket,
+						'penomoran_id' => $penomoran_id,
 						'dihapus' => '0',
 						'ditambah_oleh' => $this->session->userdata('pegawai_id'),
 						'tgl_tambah' => date("Y-m-d H:i:s")
 					];
-					$sp_terakhir = $this->m_uptd->tambah('tbl_sp', $data);
+					$this->m_uptd->tambah('tbl_suket', $data);
 
-					for($peg = 0; $peg < count($pegawai); $peg++){
-						$data_pegawai = [
-							'sp_id' => $sp_terakhir,
-							'pegawai_id' => $pegawai[$peg],
-							'ditambah_oleh' => $this->session->userdata('pegawai_id'),
-							'tgl_tambah' => date("Y-m-d H:i:s")
-						];
-						$this->m_uptd->tambah('tbl_sp_pegawai', $data_pegawai);
-					}
+					array_push($data_warning['hasil'], array('nomor' => $data['nomor'], 'tanggal' => $data['datab']));
 				}
-				redirect(base_url().'sp');
 
-			}else{
-				$data['pegawai'] = $this->m_uptd->tampil_where('tbl_pegawai', array('dihapus' => '0'));
+				$this->m_suket->unlock_tbl_suket();
 
 				$this->load->view('global/v_sidebar');
-				$this->load->view('sp/v_sp_tambah_bernomor', $data);
+				$this->load->view('global/v_warning', $data_warning);
+				$this->load->view('global/v_footer');
+
+			}else{
+				$data['penomoran'] = $this->m_uptd->tampil_where('tbl_penomoran', array('jenis' => 'suket', 'dihapus' => '0'));
+				$data['kota'] = $this->m_uptd->tampil('tbl_kota');
+
+				$this->load->view('global/v_sidebar');
+				$this->load->view('suket/v_suket_tambah_bernomor', $data);
 				$this->load->view('global/v_footer');
 			}
 		}else{
@@ -211,7 +183,10 @@ class suket extends CI_Controller
 
 	public function hapus(){
 		if($this->session->userdata('masuk') == 1){
-			$where['id'] = $this->uri->segment(3);
+			$where = [
+				'penomoran_id' => $this->uri->segment(3),
+				'id' => $this->uri->segment(4)
+			];
 			$data = [
 				'nomor' => NULL,
 				'dihapus' => '1',
@@ -219,8 +194,9 @@ class suket extends CI_Controller
 				'tgl_edit' => date("Y-m-d H:i:s")
 			];
 
-			$this->m_uptd->ubah('tbl_sp', $data, $where);
-			redirect(base_url().'sp');
+			// var_dump($where);
+			$this->m_uptd->ubah('tbl_suket', $data, $where);
+			redirect(base_url().'suket');
 		}else{
 			redirect(base_url().'login');
 		}

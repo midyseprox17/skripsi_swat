@@ -20,7 +20,7 @@
 							<tr>
 								<td style="width: 20%; color: #000000">Jumlah Nomor SP</td>
 								<td>
-									<div class="float-left" style="width: 30%">
+									<div class="float-left" style="width: 10%">
 								      	<select class="custom-select form-control form-control-sm" id="jumlah_sp" name="jumlah_sp" required="">
 										    <option value="1">1</option>
 										    <option value="2">2</option>

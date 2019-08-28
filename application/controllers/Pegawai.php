@@ -45,6 +45,9 @@ class pegawai extends CI_Controller
 			];	
 
 			$this->m_uptd->ubah('tbl_pegawai', $data, $where);
+
+			$this->m_uptd->ubah('tbl_user', $data, $where);
+
 			redirect(base_url().'pegawai');
 		}else if($this->session->userdata('masuk') == '1' && $this->session->userdata('id_hak_akses') != '1'){
 			$this->load->view('global/v_sidebar');
@@ -76,7 +79,7 @@ class pegawai extends CI_Controller
 					'pegawai_id' => $insert_id,
 					'username' => $this->input->post('nip'),
 					'password' => password_hash($this->input->post('nip'), PASSWORD_DEFAULT),
-					'id_hak_akses' => '1',
+					'id_hak_akses' => $this->input->post('id_hak_akses'),
 					'dihapus' => '0',
 					'ditambah_oleh' => $this->session->userdata('pegawai_id'),
 					'tgl_tambah' => date("Y-m-d H:i:s")
@@ -86,8 +89,10 @@ class pegawai extends CI_Controller
 
 				redirect(base_url().'pegawai');
 			}else{
+				$data['hak_akses'] = $this->m_uptd->tampil('tbl_hak_akses');
+
 				$this->load->view('global/v_sidebar');
-				$this->load->view('pegawai/v_pegawai_tambah');
+				$this->load->view('pegawai/v_pegawai_tambah', $data);
 				$this->load->view('global/v_footer');
 			}
 		}else if($this->session->userdata('masuk') == '1' && $this->session->userdata('id_hak_akses') != '1'){

@@ -7,8 +7,8 @@
     	<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 	      	<thead>
 				<tr>
-					<th>Tanggal</th>
 					<th>Nomor</th>
+					<th>Tanggal/Ket</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -17,8 +17,8 @@
 					for($i = 0; $i < count($hasil); $i++) {
 					?>
 						<tr>
-							<td><?=$hasil[$i]['tanggal']?></td>
 							<td><?=$hasil[$i]['nomor']?></td>
+							<td><?=$hasil[$i]['tanggal']?></td>
 						</tr>
 					<?php
 					}

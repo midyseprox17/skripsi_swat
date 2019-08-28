@@ -39,6 +39,20 @@
 									<input type="text" class="form-control" placeholder="Jabatan" name="jabatan" id="jabatan" style="width: 50%" required="">
 								</td>
 							</tr>
+							<tr>
+								<td style="width: 20%; color: #000000">Hak Akses</td>
+								<td style="width: 100%" class="float-left">
+									<select name="id_hak_akses" class="form-control" style="width: 50%" required="">
+										<?php
+										foreach ($hak_akses->result() as $value) {
+										?>
+											<option value="<?=$value->id?>"><?=$value->nama?></option>
+										<?php
+										}
+										?>
+									</select>
+								</td>
+							</tr>
 						</table>
 						<div class="tile-footer">
 			            	<button class="btn btn-primary" type="submit" name="submit" value="1">Tambah Data</button>

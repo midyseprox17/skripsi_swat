@@ -141,7 +141,7 @@ class sk extends CI_Controller
 
 			}else{
 				$data['pegawai'] = $this->m_uptd->tampil_where('tbl_pegawai', array('dihapus' => '0'));
-				$data['penomoran'] = $this->m_uptd->tampil_where('tbl_penomoran', array('nama' => 'Kendali', 'dihapus' => '0'));
+				$data['penomoran'] = $this->m_uptd->tampil_where('tbl_penomoran', array('jenis' => 'nota', 'dihapus' => '0'));
 
 				$this->load->view('global/v_sidebar');
 				$this->load->view('sk/v_sk_tambah', $data);
@@ -204,7 +204,7 @@ class sk extends CI_Controller
 
 			}else{
 				$data['pegawai'] = $this->m_uptd->tampil_where('tbl_pegawai', array('dihapus' => '0'));
-				$data['penomoran'] = $this->m_uptd->tampil_where('tbl_penomoran', array('nama' => 'Kendali', 'dihapus' => '0'));
+				$data['penomoran'] = $this->m_uptd->tampil_where('tbl_penomoran', array('jenis' => 'nota', 'dihapus' => '0'));
 
 				$this->load->view('global/v_sidebar');
 				$this->load->view('sk/v_sk_tambah_bernomor', $data);

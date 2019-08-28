@@ -83,6 +83,12 @@ class Breadcrumb {
       $judul = "Surat Perintah";
     }else if($judul == "Sk"){
       $judul = "Surat Keluar";
+    }else if($judul == "Sm"){
+      $judul = "Surat Masuk";
+    }else if($judul == "Suket"){
+      $judul = "Surat Keterangan";
+    }else if($this->ci->uri->segment(1) == 'suket' && is_numeric($this->ci->uri->segment(2))){
+      $judul = "Surat Keterangan";
     }
 
     $html = '<div class="app-title">';

@@ -20,7 +20,7 @@
 							<tr>
 								<td style="width: 20%; color: #000000">Nomor SP</td>
 								<td>
-									<div class="form-group row mt-1" id="show_status_tanggal">
+									<div class="form-group row mt-1">
 										<div class="col-sm-2">
 							        		Dari Nomor<input type="number" class="form-control" name="nomor_awal" id="nomor_awal" min="1">
 							        	</div>
