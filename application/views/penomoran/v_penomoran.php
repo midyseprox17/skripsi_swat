@@ -25,6 +25,7 @@
 				          <th>Kode</th>
 				          <th>Nama</th>
 				          <th>Ket</th>
+				          <th>Jenis</th>
 				          <th>Format</th>
 				          <th>Tindakan</th>
 				        </tr>
@@ -40,6 +41,7 @@
 					          <td><?=$p->kode?></td>
 					          <td><?=$p->nama?></td>
 					          <td><?=$p->ket?></td>
+					          <td><?=$p->jenis?></td>
 					          <td><?=$p->format?></td>
 					          <td>
 					          	<a href="<?=base_url().'penomoran/ubah/'.$p->id?>" class="btn btn-primary btn-circle">

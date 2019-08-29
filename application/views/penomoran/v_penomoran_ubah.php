@@ -29,6 +29,12 @@
 								</td>
 							</tr>
 							<tr>
+								<td style="width: 20%; color: #000000">Jenis</td>
+								<td style="width: 100%" class="float-left">
+									<input type="text" class="form-control" placeholder="suket/sp/nota" name="jenis" id="jenis" style="width: 50%" required="" value="<?=$penomoran->jenis?>">
+								</td>
+							</tr>
+							<tr>
 								<td style="width: 20%; color: #000000">Format</td>
 								<td style="width: 100%" class="float-left">
 									<input type="text" class="form-control" placeholder="Format" name="format" id="format" style="width: 50%" required="" value="<?=$penomoran->format?>">

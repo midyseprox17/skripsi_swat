@@ -90,7 +90,7 @@
       <li class="nav-item">
         <a class="nav-link" href="<?=base_url().'sk'?>">
           <i class="fas fa-fw fa-file-alt"></i>
-          <span>Surat Keluar</span></a>
+          <span>Surat Keluar/Nota</span></a>
       </li>
 
       <!-- Divider -->

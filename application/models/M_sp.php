@@ -12,7 +12,7 @@ class m_sp extends CI_Model
 	}
 
 	function lock_tbl_sp(){
-		$this->db->query('LOCK TABLES tbl_sp WRITE, tbl_sp_pegawai WRITE, v_sp_last_nomor WRITE');
+		$this->db->query('LOCK TABLES tbl_sp WRITE, tbl_sp_pegawai WRITE');
 	}
 
 	function unlock_tbl_sp(){

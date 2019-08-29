@@ -49,6 +49,7 @@ class penomoran extends CI_Controller
 					'kode' => $this->input->post('kode'),
 					'nama' => $this->input->post('nama'),
 					'ket' => $this->input->post('ket'),
+					'jenis' => $this->input->post('jenis'),
 					'format' => $this->input->post('format'),
 					'dihapus' => '0',
 					'ditambah_oleh' => $this->session->userdata('pegawai_id'),
@@ -85,6 +86,7 @@ class penomoran extends CI_Controller
 					'kode' => $this->input->post('kode'),
 					'nama' => $this->input->post('nama'),
 					'ket' => $this->input->post('ket'),
+					'jenis' => $this->input->post('jenis'),
 					'format' => $this->input->post('format'),
 					'diedit_oleh' => $this->session->userdata('pegawai_id'),
 					'tgl_edit' => date("Y-m-d H:i:s")
