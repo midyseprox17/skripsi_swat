@@ -19,7 +19,15 @@ class m_sk extends CI_Model
 		$this->db->query('UNLOCK TABLES');
 	}
 
-	function id_terakhir(){
-		return $this->db->query("SELECT * FROM tbl_sk ORDER BY nomor DESC LIMIT 1");
+	function id_terakhir($tahun){
+		return $this->db->query("SELECT * FROM tbl_sk WHERE tahun = ".$this->db->escape($tahun)." ORDER BY nomor DESC LIMIT 1");
+	}
+
+	function grup_hal(){
+		return $this->db->query("SELECT hal FROM tbl_sk GROUP by hal ORDER by hal ASC");
+	}
+
+	function grup_kepada(){
+		return $this->db->query("SELECT kepada FROM tbl_sk GROUP by kepada ORDER by kepada ASC");
 	}
 }

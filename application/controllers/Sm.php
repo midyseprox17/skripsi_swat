@@ -10,7 +10,10 @@ class sm extends CI_Controller
 
 	public function index(){
 		if($this->session->userdata('masuk') == '1'){
-			$where['dihapus'] = '0';
+			$where = [
+				'tahun' => date('Y'),
+				'dihapus' => '0'
+			];
 			$data['sm'] = $this->m_uptd->tampil_where('tbl_sm', $where);
 
 			$this->load->view('global/v_sidebar');
@@ -36,7 +39,7 @@ class sm extends CI_Controller
 
 				$data_warning['hasil'] = array();
 
-				$hasil = $this->m_sm->id_terakhir()->row();
+				$hasil = $this->m_sm->id_terakhir(date('Y'))->row();
 				$nomor = $hasil->nomor + 1;
 
 				$tgl_d = date('d');
@@ -67,15 +70,17 @@ class sm extends CI_Controller
 
 				$this->m_uptd->tambah('tbl_sm', $data);
 
-				array_push($data_warning['hasil'], array('nomor' => $nomor, 'tanggal' => $data['tanggal'].'-'.$data['bulan'].'-'.$data['tahun']));
+				array_push($data_warning['hasil'], array('nomor' => $nomor, 'ket' => $data['tanggal'].'-'.$data['bulan'].'-'.$data['tahun']));
 
 				$this->load->view('global/v_sidebar');
 				$this->load->view('global/v_warning', $data_warning);
 				$this->load->view('global/v_footer');
 
 			}else{
+				$data['grup_dari'] = $this->m_sm->grup_dari();
+
 				$this->load->view('global/v_sidebar');
-				$this->load->view('sm/v_sm_tambah');
+				$this->load->view('sm/v_sm_tambah', $data);
 				$this->load->view('global/v_footer');
 			}
 		}else{
@@ -136,15 +141,18 @@ class sm extends CI_Controller
 
 				$this->m_uptd->tambah('tbl_sm', $data);
 
-				array_push($data_warning['hasil'], array('nomor' => $nomor, 'tanggal' => $data['tanggal'].'-'.$data['bulan'].'-'.$data['tahun']));
+				array_push($data_warning['hasil'], array('nomor' => $nomor, 'ket' => $data['tanggal'].'-'.$data['bulan'].'-'.$data['tahun']));
 
 				$this->load->view('global/v_sidebar');
 				$this->load->view('global/v_warning', $data_warning);
 				$this->load->view('global/v_footer');
 
 			}else{
+
+				$data['grup_dari'] = $this->m_sm->grup_dari();
+
 				$this->load->view('global/v_sidebar');
-				$this->load->view('sm/v_sm_tambah_bernomor');
+				$this->load->view('sm/v_sm_tambah_bernomor', $data);
 				$this->load->view('global/v_footer');
 			}
 		}else{

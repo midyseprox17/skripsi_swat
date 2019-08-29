@@ -96,11 +96,11 @@
 						<table class="table">
 							<tr>
 								<td style="color: #000000; width: 20%">Kepada</td>
-								<td><input type="text" name="kepada" class="form-control" required=""></td>
+								<td><input type="text" name="kepada" class="form-control" required="" onkeyup="grup_kepada(this)"></td>
 							</tr>
 							<tr>
 								<td style="color: #000000">Hal</td>
-								<td><input type="text" name="hal" class="form-control" required=""></td>
+								<td><input type="text" name="hal" class="form-control" required="" onkeyup="grup_hal(this)"></td>
 							</tr>
 						</table>
 						<!-- Dynamic Add & Remove Field -->
@@ -121,7 +121,7 @@
 								<td style="color: #000000">Kota</td>
 								<td>
 									<div class="float-left" style="width: 30%">
-										<select name="kota_id" class="custom-select form-control">
+										<select name="kota_id" class="custom-select form-control" required="">
 											<?php foreach ($kota->result() as $k) {
 											?>
 												<option value="<?=$k->id?>"><?=$k->nama?></option>
@@ -177,6 +177,42 @@ function status_tgl(x){
 		document.getElementById('tgl_d').disabled = true;
 		document.getElementById('tgl_m').disabled = true;
 	}
+}
+
+function grup_hal(el){
+	<?php
+	$arrayphp = array();
+	foreach ($grup_hal->result() as $value) {
+		if($value->hal != NULL){
+			array_push($arrayphp, $value->hal);
+		}
+	}
+
+	$arrayjs = json_encode($arrayphp);
+	echo "var grup = ". $arrayjs . ";\n";
+	?>
+
+    $(el).autocomplete({
+      source: grup
+    });
+}
+
+function grup_kepada(el){
+	<?php
+	$arrayphp = array();
+	foreach ($grup_kepada->result() as $value) {
+		if($value->kepada != NULL){
+			array_push($arrayphp, $value->kepada);
+		}
+	}
+
+	$arrayjs = json_encode($arrayphp);
+	echo "var grup = ". $arrayjs . ";\n";
+	?>
+
+    $(el).autocomplete({
+      source: grup
+    });
 }
 </script>
 

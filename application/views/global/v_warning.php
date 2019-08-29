@@ -8,7 +8,7 @@
 	      	<thead>
 				<tr>
 					<th>Nomor</th>
-					<th>Tanggal/Ket</th>
+					<th>Ket</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -18,7 +18,7 @@
 					?>
 						<tr>
 							<td><?=$hasil[$i]['nomor']?></td>
-							<td><?=$hasil[$i]['tanggal']?></td>
+							<td><?=$hasil[$i]['ket']?></td>
 						</tr>
 					<?php
 					}

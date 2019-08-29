@@ -11,15 +11,19 @@ class suket extends CI_Controller
 	public function index(){
 		if($this->session->userdata('masuk') == '1'){
 			$penomoran_id = $this->uri->segment(2);
-			echo $penomoran_id;
 
 			if($penomoran_id == NULL){
-
+				$where = [
+					'tahun' => date('Y'),
+					'dihapus' => '0'
+				];
 			}else if($penomoran_id != 'all'){
-				$where['penomoran_id'] = $penomoran_id;
+				$where = [
+					'tahun' => date('Y'),
+					'penomoran_id' => $penomoran_id,
+					'dihapus' => '0'
+				];
 			}
-
-			$where['dihapus'] = '0';
 
 			$data['penomoran'] = $this->m_uptd->tampil_where('tbl_penomoran', ['jenis' => 'suket']);
 			$data['suket'] = $this->m_uptd->tampil_where('v_suket', $where);
@@ -62,7 +66,7 @@ class suket extends CI_Controller
 						$tgl_y = $this->input->post('tgl_y');
 					}
 
-					$hasil = $this->m_suket->id_terakhir($penomoran_id)->row();
+					$hasil = $this->m_suket->id_terakhir($penomoran_id, date('Y'))->row();
 					if($hasil == NULL){
 						$nomor = 1;
 					}else {
@@ -88,7 +92,7 @@ class suket extends CI_Controller
 					];
 					$suket_terakhir = $this->m_uptd->tambah('tbl_suket', $data);
 
-					array_push($data_warning['hasil'], array('nomor' => $nomor, 'tanggal' => $data['datab']));
+					array_push($data_warning['hasil'], array('nomor' => $nomor, 'ket' => $data['datab']));
 				}
 
 				$this->m_suket->unlock_tbl_suket();
@@ -100,6 +104,8 @@ class suket extends CI_Controller
 			}else{
 				$data['penomoran'] = $this->m_uptd->tampil_where('tbl_penomoran', array('jenis' => 'suket', 'dihapus' => '0'));
 				$data['kota'] = $this->m_uptd->tampil('tbl_kota');
+				$data['grup_hal'] = $this->m_suket->grup_hal();
+				$data['grup_kepada'] = $this->m_suket->grup_kepada();
 
 				$this->load->view('global/v_sidebar');
 				$this->load->view('suket/v_suket_tambah', $data);
@@ -156,9 +162,20 @@ class suket extends CI_Controller
 						'ditambah_oleh' => $this->session->userdata('pegawai_id'),
 						'tgl_tambah' => date("Y-m-d H:i:s")
 					];
-					$this->m_uptd->tambah('tbl_suket', $data);
 
-					array_push($data_warning['hasil'], array('nomor' => $data['nomor'], 'tanggal' => $data['datab']));
+					$where = [
+						'nomor' => $data['nomor'],
+						'tahun' => $data['tahun'],
+						'penomoran_id' => $data['penomoran_id']
+					];
+					$data = $this->m_uptd->tampil_where('tbl_suket', $where)->row();
+					if($data == NULL){
+						$this->m_uptd->tambah('tbl_suket', $data);
+
+						array_push($data_warning['hasil'], array('nomor' => $data['nomor'], 'ket' => $data['datab']));
+					}else{
+						array_push($data_warning['hasil'], array('nomor' => $data['nomor'], 'ket' => 'SUDAH TERPAKAI'));
+					}
 				}
 
 				$this->m_suket->unlock_tbl_suket();
@@ -170,7 +187,9 @@ class suket extends CI_Controller
 			}else{
 				$data['penomoran'] = $this->m_uptd->tampil_where('tbl_penomoran', array('jenis' => 'suket', 'dihapus' => '0'));
 				$data['kota'] = $this->m_uptd->tampil('tbl_kota');
-
+				$data['grup_hal'] = $this->m_suket->grup_hal();
+				$data['grup_kepada'] = $this->m_suket->grup_kepada();
+				
 				$this->load->view('global/v_sidebar');
 				$this->load->view('suket/v_suket_tambah_bernomor', $data);
 				$this->load->view('global/v_footer');

@@ -10,7 +10,10 @@ class sk extends CI_Controller
 
 	public function index(){
 		if($this->session->userdata('masuk') == '1'){
-			$where['dihapus'] = '0';
+			$where = [
+				'tahun' => date('Y'),
+				'dihapus' => '0'
+			];
 			$data['sk'] = $this->m_uptd->tampil_where('v_sk', $where);
 
 			$this->load->view('global/v_sidebar');
@@ -39,7 +42,7 @@ class sk extends CI_Controller
 				$tgl_terakhir = '';
 				$data_warning['hasil'] = array();
 
-				$hasil = $this->m_sk->id_terakhir()->row();
+				$hasil = $this->m_sk->id_terakhir(date('Y'))->row();
 				$tgl_terakhir = $hasil->tahun.'-'.$hasil->bulan.'-'.$hasil->tanggal;
 
 
@@ -50,7 +53,7 @@ class sk extends CI_Controller
 					$nomor = 0;
 
 					if($status_tanggal == "sekarang" && $i == 1){
-						$hasil = $this->m_sk->id_terakhir()->row();
+						$hasil = $this->m_sk->id_terakhir(date('Y'))->row();
 						if(strtotime($tgl_terakhir) < strtotime(date("Y-m-d"))){
 							$nomor = $hasil->nomor+6;
 						}else{
@@ -58,7 +61,7 @@ class sk extends CI_Controller
 						}
 						
 					}else if($status_tanggal == "sekarang" && $i != 1){
-						$hasil = $this->m_sk->id_terakhir()->row();
+						$hasil = $this->m_sk->id_terakhir(date('Y'))->row();
 						$nomor = $hasil->nomor+1;
 					}else if($status_tanggal == "pilih"){
 						$tgl_d = $this->input->post('tgl_d');
@@ -74,7 +77,11 @@ class sk extends CI_Controller
 							$nomor_max = $nomor_max + $jumlah_sk;
 
 							for($no = $nomor_min; $no <= $nomor_max; $no++){
-								$data = $this->m_uptd->tampil_where('tbl_sk', array('nomor'=>$no))->row();
+								$where = [
+									'nomor' => $no,
+									'tahun' => $tgl_y
+								];
+								$data = $this->m_uptd->tampil_where('tbl_sk', $where)->row();
 								if($data == NULL){
 									$nomor = $no;
 									break;
@@ -82,7 +89,7 @@ class sk extends CI_Controller
 							}
 
 							if($nomor == 0){
-								$hasil = $this->m_sk->id_terakhir()->row();
+								$hasil = $this->m_sk->id_terakhir(date('Y'))->row();
 								if(strtotime($tgl_terakhir) < strtotime(date("Y-m-d"))){
 									$nomor = $hasil->nomor+6;
 								}else{
@@ -91,7 +98,7 @@ class sk extends CI_Controller
 								
 							}
 						}else{
-							$hasil = $this->m_sk->id_terakhir()->row();
+							$hasil = $this->m_sk->id_terakhir(date('Y'))->row();
 							if(strtotime($tgl_terakhir) < strtotime(date("Y-m-d"))){
 								$nomor = $hasil->nomor+6;
 							}else{
@@ -130,7 +137,7 @@ class sk extends CI_Controller
 						$this->m_uptd->tambah('tbl_sk_pengolah', $data_pegawai);
 					}
 
-					array_push($data_warning['hasil'], array('nomor' => $nomor, 'tanggal' => $data['tanggal'].'-'.$data['bulan'].'-'.$data['tahun']));
+					array_push($data_warning['hasil'], array('nomor' => $nomor, 'ket' => $data['tanggal'].'-'.$data['bulan'].'-'.$data['tahun']));
 				}
 
 				$this->m_sk->unlock_tbl_sk();
@@ -142,6 +149,8 @@ class sk extends CI_Controller
 			}else{
 				$data['pegawai'] = $this->m_uptd->tampil_where('tbl_pegawai', array('dihapus' => '0'));
 				$data['penomoran'] = $this->m_uptd->tampil_where('tbl_penomoran', array('jenis' => 'nota', 'dihapus' => '0'));
+				$data['grup_hal'] = $this->m_sk->grup_hal();
+				$data['grup_kepada'] = $this->m_sk->grup_kepada();
 
 				$this->load->view('global/v_sidebar');
 				$this->load->view('sk/v_sk_tambah', $data);
@@ -167,6 +176,8 @@ class sk extends CI_Controller
 				$catatan = $this->input->post('catatan');
 				$kepada = $this->input->post('kepada'); //array
 				$pegawai = $this->input->post('pegawai'); //array
+
+				$data_warning['hasil'] = array();
 				
 				$total = $nomor_akhir - $nomor_awal + 1;
 				if($total < 1){
@@ -188,23 +199,40 @@ class sk extends CI_Controller
 						'ditambah_oleh' => $this->session->userdata('pegawai_id'),
 						'tgl_tambah' => date("Y-m-d H:i:s")
 					];
-					$sk_terakhir = $this->m_uptd->tambah('tbl_sk', $data);
 
-					for($peg = 0; $peg < count($pegawai); $peg++){
-						$data_pegawai = [
-							'sk_id' => $sk_terakhir,
-							'pegawai_id' => $pegawai[$peg],
-							'ditambah_oleh' => $this->session->userdata('pegawai_id'),
-							'tgl_tambah' => date("Y-m-d H:i:s")
-						];
-						$this->m_uptd->tambah('tbl_sk_pengolah', $data_pegawai);
+					$where = [
+						'nomor' => $data['nomor'],
+						'tahun' => $data['tahun']
+					];
+					$data = $this->m_uptd->tampil_where('tbl_sk', $where)->row();
+					if($data == NULL){
+						$sk_terakhir = $this->m_uptd->tambah('tbl_sk', $data);
+
+						for($peg = 0; $peg < count($pegawai); $peg++){
+							$data_pegawai = [
+								'sk_id' => $sk_terakhir,
+								'pegawai_id' => $pegawai[$peg],
+								'ditambah_oleh' => $this->session->userdata('pegawai_id'),
+								'tgl_tambah' => date("Y-m-d H:i:s")
+							];
+							$this->m_uptd->tambah('tbl_sk_pengolah', $data_pegawai);
+
+							array_push($data_warning['hasil'], array('nomor' => $data['nomor'], 'ket' => $data['kepada']));
+						}	
+					}else{
+						array_push($data_warning['hasil'], array('nomor' => $data['nomor'], 'ket' => 'SUDAH TERPAKAI'));
 					}
 				}
-				redirect(base_url().'sk');
+				
+				$this->load->view('global/v_sidebar');
+				$this->load->view('global/v_warning', $data_warning);
+				$this->load->view('global/v_footer');
 
 			}else{
 				$data['pegawai'] = $this->m_uptd->tampil_where('tbl_pegawai', array('dihapus' => '0'));
 				$data['penomoran'] = $this->m_uptd->tampil_where('tbl_penomoran', array('jenis' => 'nota', 'dihapus' => '0'));
+				$data['grup_hal'] = $this->m_sk->grup_hal();
+				$data['grup_kepada'] = $this->m_sk->grup_kepada();
 
 				$this->load->view('global/v_sidebar');
 				$this->load->view('sk/v_sk_tambah_bernomor', $data);

@@ -10,7 +10,10 @@ class sp extends CI_Controller
 
 	public function index(){
 		if($this->session->userdata('masuk') == '1'){
-			$where['dihapus'] = '0';
+			$where = [
+				'tahun' => date('Y'),
+				'dihapus' => '0'
+			];
 			$data['sp'] = $this->m_uptd->tampil_where('v_sp', $where);
 
 			$this->load->view('global/v_sidebar');
@@ -37,7 +40,7 @@ class sp extends CI_Controller
 				$tgl_terakhir = '';
 				$data_warning['hasil'] = array();
 
-				$hasil = $this->m_sp->id_terakhir()->row();
+				$hasil = $this->m_sp->id_terakhir(date('Y'))->row();
 				$tgl_terakhir = $hasil->tahun.'-'.$hasil->bulan.'-'.$hasil->tanggal;
 
 
@@ -48,7 +51,7 @@ class sp extends CI_Controller
 					$nomor = 0;
 
 					if($status_tanggal == "sekarang" && $i == 1){
-						$hasil = $this->m_sp->id_terakhir()->row();
+						$hasil = $this->m_sp->id_terakhir(date('Y'))->row();
 						if(strtotime($tgl_terakhir) < strtotime(date("Y-m-d"))){
 							$nomor = $hasil->nomor+6;
 						}else{
@@ -56,7 +59,7 @@ class sp extends CI_Controller
 						}
 						
 					}else if($status_tanggal == "sekarang" && $i != 1){
-						$hasil = $this->m_sp->id_terakhir()->row();
+						$hasil = $this->m_sp->id_terakhir(date('Y'))->row();
 						$nomor = $hasil->nomor+1;
 					}else if($status_tanggal == "pilih"){
 						$tgl_d = $this->input->post('tgl_d');
@@ -72,7 +75,11 @@ class sp extends CI_Controller
 							$nomor_max = $nomor_max + $jumlah_sp;
 
 							for($no = $nomor_min; $no <= $nomor_max; $no++){
-								$data = $this->m_uptd->tampil_where('tbl_sp', array('nomor'=>$no))->row();
+								$where = [
+									'nomor' => $no,
+									'tahun' => $tgl_y
+								];
+								$data = $this->m_uptd->tampil_where('tbl_sp', $where)->row();
 								if($data == NULL){
 									$nomor = $no;
 									break;
@@ -80,7 +87,7 @@ class sp extends CI_Controller
 							}
 
 							if($nomor == 0){
-								$hasil = $this->m_sp->id_terakhir()->row();
+								$hasil = $this->m_sp->id_terakhir(date('Y'))->row();
 								if(strtotime($tgl_terakhir) < strtotime(date("Y-m-d"))){
 									$nomor = $hasil->nomor+6;
 								}else{
@@ -89,7 +96,7 @@ class sp extends CI_Controller
 								
 							}
 						}else{
-							$hasil = $this->m_sp->id_terakhir()->row();
+							$hasil = $this->m_sp->id_terakhir(date('Y'))->row();
 							if(strtotime($tgl_terakhir) < strtotime(date("Y-m-d"))){
 								$nomor = $hasil->nomor+6;
 							}else{
@@ -127,7 +134,7 @@ class sp extends CI_Controller
 						$this->m_uptd->tambah('tbl_sp_pegawai', $data_pegawai);
 					}
 
-					array_push($data_warning['hasil'], array('nomor' => $nomor, 'tanggal' => $data['tanggal_sp']));
+					array_push($data_warning['hasil'], array('nomor' => $nomor, 'ket' => $data['tanggal_sp']));
 				}
 
 				$this->m_sp->unlock_tbl_sp();
@@ -163,6 +170,8 @@ class sp extends CI_Controller
 				$hal = $this->input->post('hal');
 				$keterangan = $this->input->post('keterangan');
 
+				$data_warning['hasil'] = array();
+
 				$total = $nomor_akhir - $nomor_awal + 1;
 				if($total < 1){
 					$total = 1;
@@ -182,19 +191,33 @@ class sp extends CI_Controller
 						'ditambah_oleh' => $this->session->userdata('pegawai_id'),
 						'tgl_tambah' => date("Y-m-d H:i:s")
 					];
-					$sp_terakhir = $this->m_uptd->tambah('tbl_sp', $data);
 
-					for($peg = 0; $peg < count($pegawai); $peg++){
-						$data_pegawai = [
-							'sp_id' => $sp_terakhir,
-							'pegawai_id' => $pegawai[$peg],
-							'ditambah_oleh' => $this->session->userdata('pegawai_id'),
-							'tgl_tambah' => date("Y-m-d H:i:s")
-						];
-						$this->m_uptd->tambah('tbl_sp_pegawai', $data_pegawai);
+					$where = [
+						'nomor' => $data['nomor'],
+						'tahun' => $data['tahun']
+					];
+					$data = $this->m_uptd->tampil_where('tbl_sp', $where)->row();
+					if($data == NULL){
+						$sp_terakhir = $this->m_uptd->tambah('tbl_sp', $data);
+
+						for($peg = 0; $peg < count($pegawai); $peg++){
+							$data_pegawai = [
+								'sp_id' => $sp_terakhir,
+								'pegawai_id' => $pegawai[$peg],
+								'ditambah_oleh' => $this->session->userdata('pegawai_id'),
+								'tgl_tambah' => date("Y-m-d H:i:s")
+							];
+							$this->m_uptd->tambah('tbl_sp_pegawai', $data_pegawai);
+
+							array_push($data_warning['hasil'], array('nomor' => $data['nomor'], 'ket' => $data['tujuan']));
+						}
+					}else{
+						array_push($data_warning['hasil'], array('nomor' => $data['nomor'], 'ket' => 'SUDAH TERPAKAI'));
 					}
 				}
-				redirect(base_url().'sp');
+				$this->load->view('global/v_sidebar');
+				$this->load->view('global/v_warning', $data_warning);
+				$this->load->view('global/v_footer');
 
 			}else{
 				$data['pegawai'] = $this->m_uptd->tampil_where('tbl_pegawai', array('dihapus' => '0'));

@@ -11,7 +11,11 @@ class m_sm extends CI_Model
 		$this->db->query('UNLOCK TABLES');
 	}
 
-	function id_terakhir(){
-		return $this->db->query("SELECT * FROM tbl_sm ORDER BY nomor DESC LIMIT 1");
+	function id_terakhir($tahun){
+		return $this->db->query("SELECT * FROM tbl_sm WHERE tahun = ".$this->db->escape($tahun)."  ORDER BY nomor DESC LIMIT 1");
+	}
+
+	function grup_dari(){
+		return $this->db->query("SELECT dari FROM tbl_sm GROUP by dari ORDER by dari ASC");
 	}
 }

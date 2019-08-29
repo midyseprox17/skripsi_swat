@@ -79,7 +79,7 @@
 						<table class="table">
 							<tr>
 								<td style="color: #000000; width: 20%">Hal</td>
-								<td><input type="text" name="hal" class="form-control" required=""></td>
+								<td><input type="text" name="hal" class="form-control" required="" onkeyup="grup_hal(this)"></td>
 							</tr>
 							<tr>
 								<td style="color: #000000">Isi Ringkasan</td>
@@ -94,7 +94,7 @@
 							<tr id="tabel_pegawai1">
 								<td style="width: 20%; color: #000000">Kepada</td>
 								<td>
-									<input type="text" name="kepada[]" class="form-control" required="">
+									<input type="text" name="kepada[]" class="form-control" required="" onkeyup="grup_kepada(this)">
 								</td>
 							</tr>
 						</table>
@@ -150,9 +150,9 @@ $(document).ready(function() {
     	$("#tabel_kepada").empty();
     	var baris = 
 	    	`<tr>
-				<td style="width: 20%">Kepada</td>
+				<td style="width: 20%; color: #000000">Kepada</td>
 				<td>
-					<input type="text" name="kepada[]" class="form-control" required="">
+					<input type="text" name="kepada[]" class="form-control" required="" onkeyup="grup_kepada(this)">
 				</td>
 			</tr>`;
 		$("#tabel_kepada").append(baris);
@@ -160,9 +160,9 @@ $(document).ready(function() {
     	for(var i = 1; i < total; i++){
     		var baris = 
 		    	`<tr>
-					<td style="width: 20%">Kepada</td>
+					<td style="width: 20%; color: #000000">Kepada</td>
 					<td>
-						<input type="text" name="kepada[]" class="form-control" required="">
+						<input type="text" name="kepada[]" class="form-control" required="" onkeyup="grup_kepada(this)">
 					</td>
 				</tr>`;
 			$("#tabel_kepada").append(baris);
@@ -179,7 +179,7 @@ function tambah_baris_pegawai(){
         method : "POST",
         dataType : 'json',
         success: function(data){
-            var html = '<tr id="tabel_pegawai'+$rowno+'"><td>Nama</td><td><select class="form-control selectpicker" data-live-search="true" name="pegawai[]" style="width: 40%" placeholder="Nama" required="">';
+            var html = '<tr id="tabel_pegawai'+$rowno+'"><td style="width: 20%; color: #000000">Nama</td><td><select class="form-control selectpicker" data-live-search="true" name="pegawai[]" style="width: 40%" placeholder="Nama" required="">';
             var i;
             for(var i = 0; i < data.length; i++){
                 html += '<option value="'+data[i]['id']+'">'+data[i]['nip']+' | '+data[i]['nama']+'</option>';
@@ -194,6 +194,42 @@ function tambah_baris_pegawai(){
 function hapus_baris_pegawai(rowno)
 {
 	$('#tabel_pegawai'+rowno).remove();
+}
+
+function grup_hal(el){
+	<?php
+	$arrayphp = array();
+	foreach ($grup_hal->result() as $value) {
+		if($value->hal != NULL){
+			array_push($arrayphp, $value->hal);
+		}
+	}
+
+	$arrayjs = json_encode($arrayphp);
+	echo "var grup = ". $arrayjs . ";\n";
+	?>
+
+    $(el).autocomplete({
+      source: grup
+    });
+}
+
+function grup_kepada(el){
+	<?php
+	$arrayphp = array();
+	foreach ($grup_kepada->result() as $value) {
+		if($value->kepada != NULL){
+			array_push($arrayphp, $value->kepada);
+		}
+	}
+
+	$arrayjs = json_encode($arrayphp);
+	echo "var grup = ". $arrayjs . ";\n";
+	?>
+
+    $(el).autocomplete({
+      source: grup
+    });
 }
 </script>
 

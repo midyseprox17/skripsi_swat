@@ -67,7 +67,7 @@
 							</tr>
 							<tr>
 								<td style="color: #000000; width: 20%">Dari</td>
-								<td><input type="text" name="dari" class="form-control"></td>
+								<td><input type="text" name="dari" class="form-control" onkeyup="grup_dari(this)"></td>
 							</tr>
 							<tr>
 								<td style="color: #000000; width: 20%">Nomor Surat</td>
@@ -99,6 +99,24 @@ function status_tgl(x){
 		document.getElementById('tgl_d').disabled = true;
 		document.getElementById('tgl_m').disabled = true;
 	}
+}
+
+function grup_dari(el){
+	<?php
+	$arrayphp = array();
+	foreach ($grup_dari->result() as $value) {
+		if($value->dari != NULL){
+			array_push($arrayphp, $value->dari);
+		}
+	}
+
+	$arrayjs = json_encode($arrayphp);
+	echo "var grup = ". $arrayjs . ";\n";
+	?>
+
+    $(el).autocomplete({
+      source: grup
+    });
 }
 </script>
 

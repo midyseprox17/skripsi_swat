@@ -19,7 +19,7 @@ class m_sp extends CI_Model
 		$this->db->query('UNLOCK TABLES');
 	}
 
-	function id_terakhir(){
-		return $this->db->query("SELECT * FROM tbl_sp ORDER BY nomor DESC LIMIT 1");
+	function id_terakhir($tahun){
+		return $this->db->query("SELECT * FROM tbl_sp WHERE tahun = ".$this->db->escape($tahun)."  ORDER BY nomor DESC LIMIT 1");
 	}
 }
