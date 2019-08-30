@@ -7,8 +7,13 @@
     	<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 	      	<thead>
 				<tr>
-					<th>Nomor</th>
-					<th>Ket</th>
+					<?php
+					foreach ($header as $value) {
+					?>
+						<th><?=$value?></th>
+					<?php
+					}
+					?>
 				</tr>
 			</thead>
 			<tbody>
@@ -17,8 +22,9 @@
 					for($i = 0; $i < count($hasil); $i++) {
 					?>
 						<tr>
-							<td><?=$hasil[$i]['nomor']?></td>
-							<td><?=$hasil[$i]['ket']?></td>
+							<td><?=$hasil[$i]['ket1']?></td>
+							<td><?=$hasil[$i]['ket2']?></td>
+							<td><?=$hasil[$i]['ket3']?></td>
 						</tr>
 					<?php
 					}

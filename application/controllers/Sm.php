@@ -37,6 +37,7 @@ class sm extends CI_Controller
 				$nomor_surat = $this->input->post('nomor_surat');
 				$catatan = $this->input->post('catatan');
 
+				$data_warning['header'] = array("Nomor", "Tanggal", "Dari");
 				$data_warning['hasil'] = array();
 
 				$hasil = $this->m_sm->id_terakhir(date('Y'))->row();
@@ -70,7 +71,7 @@ class sm extends CI_Controller
 
 				$this->m_uptd->tambah('tbl_sm', $data);
 
-				array_push($data_warning['hasil'], array('nomor' => $nomor, 'ket' => $data['tanggal'].'-'.$data['bulan'].'-'.$data['tahun']));
+				array_push($data_warning['hasil'], array('ket1' => $data['nomor'], 'ket2' => $data['tanggal'].'-'.$data['bulan'].'-'.$data['tahun'], 'ket3' => $data['dari']));
 
 				$this->load->view('global/v_sidebar');
 				$this->load->view('global/v_warning', $data_warning);
@@ -102,6 +103,7 @@ class sm extends CI_Controller
 				$nomor_surat = $this->input->post('nomor_surat');
 				$catatan = $this->input->post('catatan');
 
+				$data_warning['header'] = array("Nomor", "Tanggal", "Dari");
 				$data_warning['hasil'] = array();
 
 				$tgl_d = date('d');
@@ -141,7 +143,7 @@ class sm extends CI_Controller
 
 				$this->m_uptd->tambah('tbl_sm', $data);
 
-				array_push($data_warning['hasil'], array('nomor' => $nomor, 'ket' => $data['tanggal'].'-'.$data['bulan'].'-'.$data['tahun']));
+				array_push($data_warning['hasil'], array('ket1' => $data['nomor'], 'ket2' => $data['tanggal'].'-'.$data['bulan'].'-'.$data['tahun'], 'ket3' => $data['dari']));
 
 				$this->load->view('global/v_sidebar');
 				$this->load->view('global/v_warning', $data_warning);

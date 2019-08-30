@@ -52,6 +52,7 @@ class suket extends CI_Controller
 				$kota_id = $this->input->post('kota_id');
 				$ket = $this->input->post('ket');
 
+				$data_warning['header'] = array("Nomor", "Tanggal", "Data B");
 				$data_warning['hasil'] = array();
 
 				for($i = 0; $i < $jumlah_suket; $i++){
@@ -92,7 +93,7 @@ class suket extends CI_Controller
 					];
 					$suket_terakhir = $this->m_uptd->tambah('tbl_suket', $data);
 
-					array_push($data_warning['hasil'], array('nomor' => $nomor, 'ket' => $data['datab']));
+					array_push($data_warning['hasil'], array('ket1' => $data['nomor'], 'ket2' => $data['tanggal'].'-'.$data['bulan'].'-'.$data['tahun'], 'ket3' => $data['datab']));
 				}
 
 				$this->m_suket->unlock_tbl_suket();
@@ -135,6 +136,7 @@ class suket extends CI_Controller
 				$kota_id = $this->input->post('kota_id');
 				$ket = $this->input->post('ket');
 
+				$data_warning['header'] = array("Nomor", "Tanggal", "Data B");
 				$data_warning['hasil'] = array();
 
 				$total = $nomor_akhir - $nomor_awal + 1;
@@ -168,13 +170,13 @@ class suket extends CI_Controller
 						'tahun' => $data['tahun'],
 						'penomoran_id' => $data['penomoran_id']
 					];
-					$data = $this->m_uptd->tampil_where('tbl_suket', $where)->row();
-					if($data == NULL){
+					$hasil = $this->m_uptd->tampil_where('tbl_suket', $where)->row();
+					if($hasil == NULL){
 						$this->m_uptd->tambah('tbl_suket', $data);
 
-						array_push($data_warning['hasil'], array('nomor' => $data['nomor'], 'ket' => $data['datab']));
+						array_push($data_warning['hasil'], array('ket1' => $data['nomor'], 'ket2' => $data['tanggal'].'-'.$data['bulan'].'-'.$data['tahun'], 'ket3' => $data['datab']));
 					}else{
-						array_push($data_warning['hasil'], array('nomor' => $data['nomor'], 'ket' => 'SUDAH TERPAKAI'));
+						array_push($data_warning['hasil'], array('ket1' => $data['nomor'], 'ket2' => $data['tanggal'].'-'.$data['bulan'].'-'.$data['tahun'], 'ket3' => 'NOMOR SUDHA DIPAKAI'));
 					}
 				}
 

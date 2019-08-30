@@ -40,11 +40,13 @@ class sk extends CI_Controller
 				$pegawai = $this->input->post('pegawai'); //array
 				
 				$tgl_terakhir = '';
+				$data_warning['header'] = array("Nomor", "Tanggal", "Kepada");
 				$data_warning['hasil'] = array();
 
 				$hasil = $this->m_sk->id_terakhir(date('Y'))->row();
-				$tgl_terakhir = $hasil->tahun.'-'.$hasil->bulan.'-'.$hasil->tanggal;
-
+				if($hasil != NULL){
+					$tgl_terakhir = $hasil->tahun.'-'.$hasil->bulan.'-'.$hasil->tanggal;
+				}
 
 				for($i = 1; $i <= $jumlah_sk; $i++){
 					$tgl_d = date('d');
@@ -137,7 +139,7 @@ class sk extends CI_Controller
 						$this->m_uptd->tambah('tbl_sk_pengolah', $data_pegawai);
 					}
 
-					array_push($data_warning['hasil'], array('nomor' => $nomor, 'ket' => $data['tanggal'].'-'.$data['bulan'].'-'.$data['tahun']));
+					array_push($data_warning['hasil'], array('ket1' => $nomor, 'ket2' => $data->tanggal.'-'.$data->bulan.'-'.$data->tahun, 'ket3' => $data->kepada));
 				}
 
 				$this->m_sk->unlock_tbl_sk();
@@ -177,6 +179,7 @@ class sk extends CI_Controller
 				$kepada = $this->input->post('kepada'); //array
 				$pegawai = $this->input->post('pegawai'); //array
 
+				$data_warning['header'] = array("Nomor", "Tanggal", "Kepada");
 				$data_warning['hasil'] = array();
 				
 				$total = $nomor_akhir - $nomor_awal + 1;
@@ -204,8 +207,8 @@ class sk extends CI_Controller
 						'nomor' => $data['nomor'],
 						'tahun' => $data['tahun']
 					];
-					$data = $this->m_uptd->tampil_where('tbl_sk', $where)->row();
-					if($data == NULL){
+					$hasil = $this->m_uptd->tampil_where('tbl_sk', $where)->row();
+					if($hasil == NULL){
 						$sk_terakhir = $this->m_uptd->tambah('tbl_sk', $data);
 
 						for($peg = 0; $peg < count($pegawai); $peg++){
@@ -217,10 +220,10 @@ class sk extends CI_Controller
 							];
 							$this->m_uptd->tambah('tbl_sk_pengolah', $data_pegawai);
 
-							array_push($data_warning['hasil'], array('nomor' => $data['nomor'], 'ket' => $data['kepada']));
+							array_push($data_warning['hasil'], array('ket1' => $data['nomor'], 'ket2' => $data['tanggal'].'-'.$data['bulan'].'-'.$data['tahun'], 'ket3' => $data['kepada']));
 						}	
 					}else{
-						array_push($data_warning['hasil'], array('nomor' => $data['nomor'], 'ket' => 'SUDAH TERPAKAI'));
+						array_push($data_warning['hasil'], array('ket1' => $data['nomor'], 'ket2' => $data['tanggal'].'-'.$data['bulan'].'-'.$data['tahun'], 'ket3' => 'NOMOR SUDAH DIPAKAI'));
 					}
 				}
 				

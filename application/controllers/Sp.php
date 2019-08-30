@@ -38,6 +38,8 @@ class sp extends CI_Controller
 				$hal = $this->input->post('hal');
 				$keterangan = $this->input->post('keterangan');
 				$tgl_terakhir = '';
+
+				$data_warning['header'] = array("Nomor", "Tanggal SP", "Tujuan");
 				$data_warning['hasil'] = array();
 
 				$hasil = $this->m_sp->id_terakhir(date('Y'))->row();
@@ -134,7 +136,7 @@ class sp extends CI_Controller
 						$this->m_uptd->tambah('tbl_sp_pegawai', $data_pegawai);
 					}
 
-					array_push($data_warning['hasil'], array('nomor' => $nomor, 'ket' => $data['tanggal_sp']));
+					array_push($data_warning['hasil'], array('ket1' => $data['nomor'], 'ket2' => $data['tanggal_sp'], 'ket3' => $data['tujuan']));
 				}
 
 				$this->m_sp->unlock_tbl_sp();
@@ -170,6 +172,7 @@ class sp extends CI_Controller
 				$hal = $this->input->post('hal');
 				$keterangan = $this->input->post('keterangan');
 
+				$data_warning['header'] = array("Nomor", "Tanggal SP", "Tujuan");
 				$data_warning['hasil'] = array();
 
 				$total = $nomor_akhir - $nomor_awal + 1;
@@ -196,8 +199,8 @@ class sp extends CI_Controller
 						'nomor' => $data['nomor'],
 						'tahun' => $data['tahun']
 					];
-					$data = $this->m_uptd->tampil_where('tbl_sp', $where)->row();
-					if($data == NULL){
+					$hasil = $this->m_uptd->tampil_where('tbl_sp', $where)->row();
+					if($hasil == NULL){
 						$sp_terakhir = $this->m_uptd->tambah('tbl_sp', $data);
 
 						for($peg = 0; $peg < count($pegawai); $peg++){
@@ -209,10 +212,10 @@ class sp extends CI_Controller
 							];
 							$this->m_uptd->tambah('tbl_sp_pegawai', $data_pegawai);
 
-							array_push($data_warning['hasil'], array('nomor' => $data['nomor'], 'ket' => $data['tujuan']));
+							array_push($data_warning['hasil'], array('ket1' => $data['nomor'], 'ket2' => $data['tanggal_sp'], 'ket3' => $data['tujuan']));
 						}
 					}else{
-						array_push($data_warning['hasil'], array('nomor' => $data['nomor'], 'ket' => 'SUDAH TERPAKAI'));
+						array_push($data_warning['hasil'], array('ket1' => $data['nomor'], 'Tujuan' => $data['tujuan'], 'ket3' => 'SUDAH TERPAKAI'));
 					}
 				}
 				$this->load->view('global/v_sidebar');
