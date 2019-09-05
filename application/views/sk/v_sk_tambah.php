@@ -118,7 +118,7 @@
 						</table>
 						<table class="table" id="tabel_pegawai">
 							<tr id="tabel_pegawai1">
-								<td style="width: 20%; color: #000000">Nama</td>
+								<td style="width: 20%; color: #000000">Pengolah</td>
 								<td>
 									<select class="form-control selectpicker" data-live-search="true" name="pegawai[]" style="width: 40%" placeholder="Nama" required="">
 										<?php foreach ($pegawai->result() as $p) {
