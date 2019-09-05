@@ -1,6 +1,5 @@
 <head>
 	<link href="<?=base_url().'assets/'?>vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-	<link href="<?=base_url().'assets/'?>vendor/datatables/jquery.dataTables.min.css" rel="stylesheet">
 	<link href="<?=base_url().'assets/'?>vendor/datatables/buttons.dataTables.min.css" rel="stylesheet">
 </head>
 
