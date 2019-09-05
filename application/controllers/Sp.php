@@ -251,4 +251,14 @@ class sp extends CI_Controller
 			redirect(base_url().'login');
 		}
 	}
+
+
+	public function list_sp(){
+		if($this->session->userdata('masuk') == '1'){
+			$hasil = $this->m_uptd->tampil_where('v_sp', array('dihapus' => '0'))->result();
+			echo json_encode($hasil);
+		}else{
+			redirect(base_url().'login');
+		}
+	}
 }

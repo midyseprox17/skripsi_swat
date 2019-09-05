@@ -1,5 +1,7 @@
 <head>
 	<link href="<?=base_url().'assets/'?>vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+	<link href="<?=base_url().'assets/'?>vendor/datatables/jquery.dataTables.min.css" rel="stylesheet">
+	<link href="<?=base_url().'assets/'?>vendor/datatables/buttons.dataTables.min.css" rel="stylesheet">
 </head>
 
 <div class="container">
@@ -17,7 +19,7 @@
 				</div>
 				<div class="card-body">
 				  <div class="table-responsive">
-				    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+				    <table class="table table-bordered" id="tabel" width="100%" cellspacing="0">
 				    	<thead>
 					      	<tr>
 						        <th>No</th>
@@ -78,6 +80,25 @@
 <!-- Page level plugins -->
 <script src="<?=base_url().'assets/'?>vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="<?=base_url().'assets/'?>vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="<?=base_url().'assets/'?>vendor/datatables/dataTables.buttons.min.js"></script>
+<script src="<?=base_url().'assets/'?>vendor/datatables/jszip.min.js"></script>
+<script src="<?=base_url().'assets/'?>vendor/datatables/pdfmake.min.js"></script>
+<script src="<?=base_url().'assets/'?>vendor/datatables/vfs_fonts.js"></script>
+<script src="<?=base_url().'assets/'?>vendor/datatables/buttons.html5.min.js"></script>
 
 <!-- Page level custom scripts -->
 <script src="<?=base_url().'assets/'?>js/demo/datatables-demo.js"></script>
+
+<script>
+	$(document).ready(function() {
+    $('#tabel').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5'
+        ]
+    } );
+} );
+</script>

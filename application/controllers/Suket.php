@@ -11,6 +11,7 @@ class suket extends CI_Controller
 	public function index(){
 		if($this->session->userdata('masuk') == '1'){
 			$penomoran_id = $this->uri->segment(2);
+			$where = [];
 
 			if($penomoran_id == NULL){
 				$where = [
@@ -21,6 +22,11 @@ class suket extends CI_Controller
 				$where = [
 					'tahun' => date('Y'),
 					'penomoran_id' => $penomoran_id,
+					'dihapus' => '0'
+				];
+			}else if($penomoran_id == 'all'){
+				$where = [
+					'tahun' => date('Y'),
 					'dihapus' => '0'
 				];
 			}
