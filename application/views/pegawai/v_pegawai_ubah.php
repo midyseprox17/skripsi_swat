@@ -40,6 +40,15 @@
 									<input type="text" class="form-control" placeholder="Jabatan" name="jabatan" id="jabatan" style="width: 50%" required="" value="<?=$pegawai->jabatan?>">
 								</td>
 							</tr>
+							<tr>
+								<td style="width: 20%; color: #000000">Status</td>
+								<td style="width: 100%" class="float-left">
+									<select name="ans" class="form-control" style="width: 50%">
+										<option value="1" <?=$pegawai->ans == '1' ? 'selected' : ''?>>ANS</option>
+										<option value="0" <?=$pegawai->ans == '0' ? 'selected' : ''?>>Non ANS</option>
+									</select>
+								</td>
+							</tr>
 						</table>
 						<div class="tile-footer">
 			            	<button class="btn btn-primary" type="submit" name="submit" value="1">Ubah Data</button>

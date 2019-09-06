@@ -68,6 +68,7 @@ class pegawai extends CI_Controller
 					'pangkat' => $this->input->post('pangkat'),
 					'golongan' => $this->input->post('golongan'),
 					'jabatan' => $this->input->post('jabatan'),
+					'ans' => $this->input->post('ans'),
 					'dihapus' => '0',
 					'ditambah_oleh' => $this->session->userdata('pegawai_id'),
 					'tgl_tambah' => date("Y-m-d H:i:s")
@@ -119,6 +120,7 @@ class pegawai extends CI_Controller
 					'pangkat' => $this->input->post('pangkat'),
 					'golongan' => $this->input->post('golongan'),
 					'jabatan' => $this->input->post('jabatan'),
+					'ans' => $this->input->post('ans'),
 					'diedit_oleh' => $this->session->userdata('pegawai_id'),
 					'tgl_edit' => date("Y-m-d H:i:s")
 				];

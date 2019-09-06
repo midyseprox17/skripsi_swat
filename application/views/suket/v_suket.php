@@ -57,7 +57,7 @@
 					        <tr>
 					          <td><?=$value->nomor?></td>
 					          <td><?=$value->penomoran_ket?></td>
-					          <td><?=$value->tanggal.'-'.$value->bulan.'-'.$value->tahun?></td>
+					          <td><?=$value->tahun.'-'.$value->bulan.'-'.$value->tanggal?></td>
 					          <td><?=$value->kepada?></td>
 					          <td><?=$value->hal?></td>
 					          <td><?=$value->datab?></td>
@@ -97,16 +97,34 @@
 
 <script>
 	$(document).ready(function() {
-    $('#tabel').DataTable( {
-        dom: 'Bfrtip',
-        buttons: [
-            'copyHtml5',
-            'excelHtml5',
-            'csvHtml5',
-            'pdfHtml5'
-        ]
-    } );
-} );
+	    // Setup - add a text input to each footer cell
+	    $('#tabel thead tr').clone(true).appendTo( '#tabel thead' );
+	    $('#tabel thead tr:eq(1) th').each( function (i) {
+	        var title = $(this).text();
+	        $(this).html( '<input type="text" placeholder="Cari '+title+'" />' );
+	 
+	        $( 'input', this ).on( 'keyup change', function () {
+	            if ( table.column(i).search() !== this.value ) {
+	                table
+	                    .column(i)
+	                    .search( this.value )
+	                    .draw();
+	            }
+	        } );
+	    } );
+	 
+	    var table = $('#tabel').DataTable( {
+	        orderCellsTop: true,
+	        fixedHeader: true,
+	        dom: 'Bfrtip',
+	        buttons: [
+	            'copyHtml5',
+	            'excelHtml5',
+	            'csvHtml5',
+	            'pdfHtml5'
+	        ]
+	    } );
+	} );
 </script>
 
 <script>

@@ -40,6 +40,15 @@
 								</td>
 							</tr>
 							<tr>
+								<td style="width: 20%; color: #000000">Status</td>
+								<td style="width: 100%" class="float-left">
+									<select name="ans" class="form-control">
+										<option value="1">ANS</option>
+										<option value="0">Non ANS</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
 								<td style="width: 20%; color: #000000">Hak Akses</td>
 								<td style="width: 100%" class="float-left">
 									<select name="id_hak_akses" class="form-control" style="width: 50%" required="">

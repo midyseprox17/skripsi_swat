@@ -56,7 +56,7 @@ class suket extends CI_Controller
 				$datab = $this->input->post('datab'); //array
 				$alamat = $this->input->post('alamat');
 				$kota_id = $this->input->post('kota_id');
-				$ket = $this->input->post('ket');
+				$pegawai_id = $this->input->post('pegawai_id');
 
 				$data_warning['header'] = array("Nomor", "Tanggal", "Data B");
 				$data_warning['hasil'] = array();
@@ -91,7 +91,7 @@ class suket extends CI_Controller
 						'datab' => $datab[$i],
 						'alamat' => $alamat,
 						'kota_id' => $kota_id,
-						'ket' => $ket,
+						'pegawai_id' => $pegawai_id,
 						'penomoran_id' => $penomoran_id,
 						'dihapus' => '0',
 						'ditambah_oleh' => $this->session->userdata('pegawai_id'),
@@ -110,6 +110,7 @@ class suket extends CI_Controller
 
 			}else{
 				$data['penomoran'] = $this->m_uptd->tampil_where('tbl_penomoran', array('jenis' => 'suket', 'dihapus' => '0'));
+				$data['pegawai'] = $this->m_uptd->tampil_where('tbl_pegawai', array('dihapus' => '0'));
 				$data['kota'] = $this->m_uptd->tampil('tbl_kota');
 				$data['grup_hal'] = $this->m_suket->grup_hal();
 				$data['grup_kepada'] = $this->m_suket->grup_kepada();
@@ -140,7 +141,7 @@ class suket extends CI_Controller
 				$datab = $this->input->post('datab'); //array
 				$alamat = $this->input->post('alamat');
 				$kota_id = $this->input->post('kota_id');
-				$ket = $this->input->post('ket');
+				$pegawai_id = $this->input->post('pegawai_id');
 
 				$data_warning['header'] = array("Nomor", "Tanggal", "Data B");
 				$data_warning['hasil'] = array();
@@ -164,7 +165,7 @@ class suket extends CI_Controller
 						'datab' => $datab[$i],
 						'alamat' => $alamat,
 						'kota_id' => $kota_id,
-						'ket' => $ket,
+						'pegawai_id' => $pegawai_id,
 						'penomoran_id' => $penomoran_id,
 						'dihapus' => '0',
 						'ditambah_oleh' => $this->session->userdata('pegawai_id'),
@@ -194,6 +195,7 @@ class suket extends CI_Controller
 
 			}else{
 				$data['penomoran'] = $this->m_uptd->tampil_where('tbl_penomoran', array('jenis' => 'suket', 'dihapus' => '0'));
+				$data['pegawai'] = $this->m_uptd->tampil_where('tbl_pegawai', array('dihapus' => '0'));
 				$data['kota'] = $this->m_uptd->tampil('tbl_kota');
 				$data['grup_hal'] = $this->m_suket->grup_hal();
 				$data['grup_kepada'] = $this->m_suket->grup_kepada();

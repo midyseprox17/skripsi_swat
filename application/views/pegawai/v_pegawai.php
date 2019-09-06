@@ -15,7 +15,7 @@
 		<div class="col-xl-12">
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
-				  <h6 class="m-0 font-weight-bold text-primary">Tabel Data Pegawai</h6>
+				  	<h6 class="m-0 font-weight-bold text-primary">Tabel Data Pegawai</h6>
 				</div>
 				<div class="card-body">
 				  <div class="table-responsive">
@@ -83,14 +83,32 @@
 
 <script>
 	$(document).ready(function() {
-    $('#tabel').DataTable( {
-        dom: 'Bfrtip',
-        buttons: [
-            'copyHtml5',
-            'excelHtml5',
-            'csvHtml5',
-            'pdfHtml5'
-        ]
-    } );
-} );
+	    // Setup - add a text input to each footer cell
+	    $('#tabel thead tr').clone(true).appendTo( '#tabel thead' );
+	    $('#tabel thead tr:eq(1) th').each( function (i) {
+	        var title = $(this).text();
+	        $(this).html( '<input type="text" placeholder="Cari '+title+'" />' );
+	 
+	        $( 'input', this ).on( 'keyup change', function () {
+	            if ( table.column(i).search() !== this.value ) {
+	                table
+	                    .column(i)
+	                    .search( this.value )
+	                    .draw();
+	            }
+	        } );
+	    } );
+	 
+	    var table = $('#tabel').DataTable( {
+	        orderCellsTop: true,
+	        fixedHeader: true,
+	        dom: 'Bfrtip',
+	        buttons: [
+	            'copyHtml5',
+	            'excelHtml5',
+	            'csvHtml5',
+	            'pdfHtml5'
+	        ]
+	    } );
+	} );
 </script>

@@ -133,8 +133,17 @@
 								</td>
 							</tr>
 							<tr>
-								<td style="color: #000000; width: 20%">Keterangan</td>
-								<td><input name="ket" class="form-control" placeholder="Keterangan"></td>
+								<td style="color: #000000; width: 20%">Pengawas</td>
+								<td>
+									<select class="form-control selectpicker" data-live-search="true" name="pegawai_id" style="width: 40%" placeholder="Nama Pengawas" required="">
+										<?php foreach ($pegawai->result() as $p) {
+										?>
+											<option value="<?=$p->id?>"><?=$p->nip.' | '.$p->nama?></option>
+										<?php
+										}
+										?>
+									</select>
+								</td>
 							</tr>
 						</table>
 					

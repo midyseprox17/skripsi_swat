@@ -110,12 +110,12 @@
 									</select>
 								</td>
 							</tr>
-							<tr id="tr_isi">
-								<td style="color: #000000; width: 20%">Isi Ringkasan</td>
-								<td><textarea type="textarea" name="isi" class="form-control" id="isi" placeholder="Isi Ringkasan" rows="5" required=""></textarea></td>
-							</tr>
 						</table>
 						<table class="table">
+							<tr id="tr_isi">
+								<td style="color: #000000; width: 20%">Isi Ringkasan</td>
+								<td><textarea type="textarea" name="isi" class="form-control" id="isi" placeholder="Isi Ringkasan (Isi '-' Jika Hal Nota Pemeriksaan)" rows="5" required=""></textarea></td>
+							</tr>
 							<tr>
 								<td style="color: #000000; width: 20%">Catatan</td>
 								<td><input type="text" name="catatan" class="form-control"></td>
@@ -249,10 +249,6 @@ function status_tgl(x){
 function perihal(){
 	var hal = $("#hal").val();
 	hal = hal.toLowerCase();
-	var tr_isi = `<tr id="tr_isi">
-					<td style="color: #000000; width: 20%">Isi Ringkasan</td>
-					<td><textarea type="textarea" name="isi" class="form-control" id="isi" placeholder="Isi Ringkasan" rows="5" required=""></textarea></td>
-				</tr>`;
 	var tr_hal = `<tr id="tr_hal">
 					<td style="width: 20%; color: #000000">Hal Lainnya</td>
 					<td><input name="hal" class="form-control" placeholder="Masukan Perihal" required></td>
@@ -268,10 +264,9 @@ function perihal(){
 	        success: function(data){
 	        	$("#tr_sp").remove();
 				$("#tr_hal").remove();
-				$("#tr_isi").remove();
 				$(".tr_pelanggaran").remove();
 
-	            var html = `<tr id="tr_sp"><td style="width: 20%; color: #000000">Nomor SP</td><td><select class="form-control sp_selectpicker" data-live-search="true" name="sp_nomor" style="width: 40%" placeholder="SP" required="">`;
+	            var html = `<tr id="tr_sp"><td style="width: 20%; color: #000000">Nomor SP</td><td><select class="form-control sp_selectpicker" data-live-search="true" name="sp_id" style="width: 40%" placeholder="SP" required="">`;
 	            var i;
 	            for(var i = 0; i < data.length; i++){
 	                html += `<option value="`+data[i]['id']+`">`+data[i]['nomor']+` | `+data[i]['tanggal']+`-`+data[i]['bulan']+`-`+data[i]['tahun']+` | `+data[i]['tujuan']+`</option>`;
@@ -301,18 +296,13 @@ function perihal(){
 	}else if(hal == 'lainnya'){
 		$("#tr_sp").remove();
 		$("#tr_hal").remove();
-		$("#tr_isi").remove();
 		$(".tr_pelanggaran").remove();
 
 		$("#tabel_hal tr:last").after(tr_hal); 
-		$("#tabel_hal tr:last").after(tr_isi); 
 	}else{
 		$("#tr_sp").remove();
 		$("#tr_hal").remove();
-		$("#tr_isi").remove();
 		$(".tr_pelanggaran").remove();
-
-		$("#tabel_hal tr:last").after(tr_isi); 
 	}
 }
 

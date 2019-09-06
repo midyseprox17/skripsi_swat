@@ -127,7 +127,23 @@ class sk extends CI_Controller
 						'ditambah_oleh' => $this->session->userdata('pegawai_id'),
 						'tgl_tambah' => date("Y-m-d H:i:s")
 					];
+					if(strpos(strtolower($data['hal']), 'nota pemeriksaan') !== false){
+						array_push($data, array('sp_id' => $this->input->post('sp_id')));
+					}
+
 					$sk_terakhir = $this->m_uptd->tambah('tbl_sk', $data);
+
+					if(strpos(strtolower($data['hal']), 'nota pemeriksaan') !== false){
+						$pelanggaran = $this->input->post('pelanggaran'); // array
+
+						for($pel = 0; $pel < count($pelanggaran); $pel++){
+							$data_pelanggaran = [
+								'sk_id' => $sk_terakhir,
+								'jenis_pelanggaran_id' => $pelanggaran[$pel]
+							];
+							$this->m_uptd->tambah('tbl_sk_pemeriksaan', $data_pelanggaran);
+						}
+					}
 
 					for($peg = 0; $peg < count($pegawai); $peg++){
 						$data_pegawai = [
@@ -139,7 +155,7 @@ class sk extends CI_Controller
 						$this->m_uptd->tambah('tbl_sk_pengolah', $data_pegawai);
 					}
 
-					array_push($data_warning['hasil'], array('ket1' => $nomor, 'ket2' => $data->tanggal.'-'.$data->bulan.'-'.$data->tahun, 'ket3' => $data->kepada));
+					array_push($data_warning['hasil'], array('ket1' => $nomor, 'ket2' => $data['tanggal'].'-'.$data['bulan'].'-'.$data['tahun'], 'ket3' => $data['kepada']));
 				}
 
 				$this->m_sk->unlock_tbl_sk();
