@@ -29,6 +29,7 @@
 				          <th>Pangkat</th>
 				          <th>Gol</th>
 				          <th>Jabatan</th>
+				          <th>Status</th>
 				          <th>Tindakan</th>
 				        </tr>
 				      </thead>
@@ -45,6 +46,7 @@
 					          <td><?=$p->pangkat?></td>
 					          <td><?=$p->golongan?></td>
 					          <td><?=$p->jabatan?></td>
+					          <td><?=$p->ans == '1'? 'ANS' : 'Non ANS'?></td>
 					          <td>
 					          	<a href="<?=base_url().'pegawai/ubah/'.$p->id?>" class="btn btn-primary btn-circle">
 					          		<i class="fas fa-fw fa-edit"></i>
