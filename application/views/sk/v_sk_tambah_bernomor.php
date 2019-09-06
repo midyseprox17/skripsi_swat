@@ -105,7 +105,7 @@
 							</tr>
 						</table>
 						<table class="table" id="tabel_kepada">
-							<tr id="tabel_pegawai1">
+							<tr id="tabel_kepada">
 								<td style="width: 20%; color: #000000">Kepada</td>
 								<td>
 									<input type="text" name="kepada[]" class="form-control" required="" onkeyup="grup_kepada(this)">
