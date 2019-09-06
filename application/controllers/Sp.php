@@ -190,6 +190,7 @@ class sp extends CI_Controller
 						'tujuan' => $tujuan[$i],
 						'hal' => $hal,
 						'ket' => $keterangan,
+						'penomoran_id' => '3',
 						'dihapus' => '0',
 						'ditambah_oleh' => $this->session->userdata('pegawai_id'),
 						'tgl_tambah' => date("Y-m-d H:i:s")
