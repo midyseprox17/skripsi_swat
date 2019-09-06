@@ -45,7 +45,7 @@
 				          <th>Data B</th>
 				          <th>Alamat</th>
 				          <th>Kota</th>
-				          <th>Ket</th>
+				          <th>Pengawas</th>
 				          <th>Tindakan</th>
 				        </tr>
 				      </thead>
@@ -63,7 +63,7 @@
 					          <td><?=$value->datab?></td>
 					          <td><?=$value->alamat?></td>
 					          <td><?=$value->kota_nama?></td>
-					          <td><?=$value->ket?></td>
+					          <td><?=$value->pegawai_nama?></td>
 					          <td>
 					          	<a href="<?=base_url().'suket/hapus/'.$value->penomoran_id.'/'.$value->id?>" class="btn btn-danger btn-circle" onclick="return confirm('Apakah Anda yakin untuk menghapus data <?=$value->nomor?> dari <?=$value->penomoran_nama?>?');">
 					          		<i class="fas fa-trash"></i>
