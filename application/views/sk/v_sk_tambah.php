@@ -121,7 +121,6 @@
 								<td><input type="text" name="catatan" class="form-control"></td>
 							</tr>
 						</table>
-						<!-- Dynamic Add & Remove Field -->
 						<table class="table" id="tabel_kepada">
 							<tr id="tabel_kepada1">
 								<td style="width: 20%; color: #000000">Kepada</td>

@@ -12,7 +12,7 @@ class m_sk extends CI_Model
 	}
 
 	function lock_tbl_sk(){
-		$this->db->query('LOCK TABLES tbl_sk WRITE, tbl_sk_pengolah WRITE, v_sk_pengolah_pegawai WRITE');
+		$this->db->query('LOCK TABLES tbl_sk WRITE, tbl_sk_pengolah WRITE, v_sk_pengolah_pegawai WRITE, tbl_sk_pemeriksaan WRITE');
 	}
 
 	function unlock_tbl_sk(){

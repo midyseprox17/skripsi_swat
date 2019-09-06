@@ -105,16 +105,16 @@
 							</tr>
 						</table>
 						<table class="table" id="tabel_kepada">
-							<tr id="tabel_kepada">
+							<tr id="tabel_kepada1">
 								<td style="width: 20%; color: #000000">Kepada</td>
 								<td>
-									<input type="text" name="kepada[]" class="form-control" required="" onkeyup="grup_kepada(this)">
+									<input type="text" name="kepada[]" id="kepada" class="form-control" required="" onkeyup="grup_kepada(this)">
 								</td>
 							</tr>
 						</table>
 						<table class="table" id="tabel_pegawai">
 							<tr id="tabel_pegawai1">
-								<td style="width: 20%; color: #000000">Nama Pengolah</td>
+								<td style="width: 20%; color: #000000">Pengolah</td>
 								<td>
 									<select class="form-control selectpicker" data-live-search="true" name="pegawai[]" style="width: 40%" placeholder="Nama" required="">
 										<?php foreach ($pegawai->result() as $p) {
@@ -205,22 +205,57 @@ function tambah_baris_pegawai(){
     });
 }
 
+function tambah_baris_pelanggaran(){
+	$rowno = $("#tabel_hal tr").length;
+	$rowno = $rowno + 1;
+    $.ajax({
+        url : "<?=base_url().'jenispelanggaran/list_jenis_pelanggaran'?>",
+        method : "POST",
+        dataType : 'json',
+        success: function(data){
+            var html = `<tr id="tr_pelanggaran`+$rowno+`" class="tr_pelanggaran"><td style="width: 20%; color: #000000">Pelanggaran</td><td><select class="form-control pelanggaran_selecpicker" data-live-search="true" name="pelanggaran[]" style="width: 40%" placeholder="Pelanggaran" required="">`;
+            var i;
+            for(var i = 0; i < data.length; i++){
+                html += `<option value="`+data[i]['id']+`">`+data[i]['nama']+`</option>`;
+            }
+            html += `</select></td><td><button class="btn btn-danger mx-3" onclick=hapus_baris_pelanggaran(`+$rowno+`)><i class="fa fa-minus"></i></button></td></tr>`;
+            $("#tabel_hal tr:last").after(html); 
+            $('.pelanggaran_selecpicker').selectpicker('refresh');
+        }
+    });
+}
+
 function hapus_baris_pegawai(rowno)
 {
 	$('#tabel_pegawai'+rowno).remove();
 }
 
+function hapus_baris_pelanggaran(rowno)
+{
+	$('#tr_pelanggaran'+rowno).remove();
+}
+
 function perihal(){
 	var hal = $("#hal").val();
 	hal = hal.toLowerCase();
+	var tr_hal = `<tr id="tr_hal">
+					<td style="width: 20%; color: #000000">Hal Lainnya</td>
+					<td><input name="hal" class="form-control" placeholder="Masukan Perihal" required></td>
+				</tr>`;
+
+
 	if(hal.includes('nota pemeriksaan')){
+
 		$.ajax({
 	        url : "<?=base_url().'sp/list_sp'?>",
 	        method : "POST",
 	        dataType : 'json',
 	        success: function(data){
-	        	$("#hal_tr").remove();
-	            var html = `<tr id="hal_tr"><td style="width: 20%; color: #000000">Nomor SP</td><td><select class="form-control sp_selectpicker" data-live-search="true" name="sp_nomor" style="width: 40%" placeholder="SP" required="">`;
+	        	$("#tr_sp").remove();
+				$("#tr_hal").remove();
+				$(".tr_pelanggaran").remove();
+
+	            var html = `<tr id="tr_sp"><td style="width: 20%; color: #000000">Nomor SP</td><td><select class="form-control sp_selectpicker" data-live-search="true" name="sp_id" style="width: 40%" placeholder="SP" required="">`;
 	            var i;
 	            for(var i = 0; i < data.length; i++){
 	                html += `<option value="`+data[i]['id']+`">`+data[i]['nomor']+` | `+data[i]['tanggal']+`-`+data[i]['bulan']+`-`+data[i]['tahun']+` | `+data[i]['tujuan']+`</option>`;
@@ -230,13 +265,33 @@ function perihal(){
 	            $('.sp_selectpicker').selectpicker('refresh');
 	        }
 	    });
+
+	    $.ajax({
+	        url : "<?=base_url().'jenispelanggaran/list_jenis_pelanggaran'?>",
+	        method : "POST",
+	        dataType : 'json',
+	        success: function(data){
+	            var html = `<tr class="tr_pelanggaran"><td style="width: 20%; color: #000000">Pelanggaran</td><td><select class="form-control pelanggaran_selecpicker" data-live-search="true" name="pelanggaran[]" style="width: 40%" placeholder="Pelanggaran" required="">`;
+	            var i;
+	            for(var i = 0; i < data.length; i++){
+	                html += `<option value="`+data[i]['id']+`">`+data[i]['nama']+`</option>`;
+	            }
+	            html += `</select></td><td><button type="button" class="btn btn-primary mx-3" onclick="tambah_baris_pelanggaran()"><i class="fa fa-plus"></i></button></td></tr>`;
+	            $("#tabel_hal tr:last").after(html); 
+	            $('.pelanggaran_selecpicker').selectpicker('refresh');
+	        }
+	    });
+
 	}else if(hal == 'lainnya'){
-		$("#hal_tr").remove();
-		var html = `<tr id="hal_tr"><td style="width: 20%; color: #000000">Hal Lainnya</td>`;
-		html += `<td><input name="hal" class="form-control" placeholder="Masukan Perihal" required></td></tr>`;
-		$("#tabel_hal tr:last").after(html); 
+		$("#tr_sp").remove();
+		$("#tr_hal").remove();
+		$(".tr_pelanggaran").remove();
+
+		$("#tabel_hal tr:last").after(tr_hal); 
 	}else{
-		$("#hal_tr").remove();
+		$("#tr_sp").remove();
+		$("#tr_hal").remove();
+		$(".tr_pelanggaran").remove();
 	}
 }
 
