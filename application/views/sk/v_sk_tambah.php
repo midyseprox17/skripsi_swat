@@ -254,7 +254,7 @@ function perihal(){
 				</tr>`;
 
 
-	if(hal.includes('nota pemeriksaan')){
+	if((hal.includes('nota pemeriksaan')) && !(hal.includes('balasan'))){
 
 		$.ajax({
 	        url : "<?=base_url().'sp/list_sp'?>",

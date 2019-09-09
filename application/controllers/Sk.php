@@ -127,13 +127,15 @@ class sk extends CI_Controller
 						'ditambah_oleh' => $this->session->userdata('pegawai_id'),
 						'tgl_tambah' => date("Y-m-d H:i:s")
 					];
-					if(strpos(strtolower($data['hal']), 'nota pemeriksaan') !== false){
+					if((strpos(strtolower($data['hal']), 'nota pemeriksaan') !== false) && !(strpos(strtolower($data['hal']), 'balasan') !== false)){
+
 						$data['sp_id'] = $this->input->post('sp_id');
 					}
 
 					$sk_terakhir = $this->m_uptd->tambah('tbl_sk', $data);
 
-					if(strpos(strtolower($data['hal']), 'nota pemeriksaan') !== false){
+					if((strpos(strtolower($data['hal']), 'nota pemeriksaan') !== false) && !(strpos(strtolower($data['hal']), 'balasan') !== false)){
+
 						$pelanggaran = $this->input->post('pelanggaran'); // array
 
 						for($pel = 0; $pel < count($pelanggaran); $pel++){
@@ -219,7 +221,8 @@ class sk extends CI_Controller
 						'tgl_tambah' => date("Y-m-d H:i:s")
 					];
 
-					if(strpos(strtolower($data['hal']), 'nota pemeriksaan') !== false){
+					if((strpos(strtolower($data['hal']), 'nota pemeriksaan') !== false) && !(strpos(strtolower($data['hal']), 'balasan') !== false)){
+
 						$data['sp_id'] = $this->input->post('sp_id');
 					}
 
@@ -231,7 +234,8 @@ class sk extends CI_Controller
 					if($hasil == NULL){
 						$sk_terakhir = $this->m_uptd->tambah('tbl_sk', $data);
 
-						if(strpos(strtolower($data['hal']), 'nota pemeriksaan') !== false){
+						if((strpos(strtolower($data['hal']), 'nota pemeriksaan') !== false) && !(strpos(strtolower($data['hal']), 'balasan') !== false)){
+
 							$pelanggaran = $this->input->post('pelanggaran'); // array
 
 							for($pel = 0; $pel < count($pelanggaran); $pel++){
