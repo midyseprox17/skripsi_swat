@@ -22,7 +22,7 @@
 								<td>
 									<div class="form-group row mt-1">
 										<div class="col-sm-2">
-							        		Dari Nomor<input type="number" class="form-control" name="nomor_awal" id="nomor_awal" min="1">
+							        		Dari Nomor<input type="number" class="form-control" name="nomor_awal" id="nomor_awal" min="1" required="">
 							        	</div>
 							        	<div class="col-sm-2">
 							        		Sampai Nomor<input type="number" class="form-control" name="nomor_akhir" id="nomor_akhir" min="0" value="0" disabled="">
@@ -37,10 +37,10 @@
 									<div class="col-sm-10">
 								        <div class="form-group row mt-2" id="show_status_tanggal">
 								        	<div class="col-sm-2">
-								        		Tanggal<input type="number" class="form-control" placeholder="Tgl" name="tgl_d" id="tgl_d" min="1" max="31">
+								        		Tanggal<input type="number" class="form-control" placeholder="Tgl" name="tgl_d" id="tgl_d" min="1" max="31" required="">
 								        	</div>
 								        	<div class="col-sm-2">
-								        		Bulan<select class="custom-select form-control form-control-sm" id="tgl_m" name="tgl_m">
+								        		Bulan<select class="custom-select form-control form-control-sm" id="tgl_m" name="tgl_m" required="">
 												    <option value="1">Januari</option>
 												    <option value="2">Februari</option>
 												    <option value="3">Maret</option>

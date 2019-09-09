@@ -54,10 +54,10 @@
 								        </div>
 								        <div class="form-group row mt-2" id="show_status_tanggal">
 								        	<div class="col-sm-2">
-								        		Tanggal<input type="number" class="form-control" placeholder="Tgl" name="tgl_d" id="tgl_d" min="1" max="31" disabled="">
+								        		Tanggal<input type="number" class="form-control" placeholder="Tgl" name="tgl_d" id="tgl_d" min="1" max="31" required="" disabled="">
 								        	</div>
 								        	<div class="col-sm-2">
-								        		Bulan<select class="custom-select form-control form-control-sm" id="tgl_m" name="tgl_m" disabled="">
+								        		Bulan<select class="custom-select form-control form-control-sm" id="tgl_m" name="tgl_m" required="" disabled="">
 												    <option value="1">Januari</option>
 												    <option value="2">Februari</option>
 												    <option value="3">Maret</option>

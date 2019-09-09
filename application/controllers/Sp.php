@@ -212,9 +212,8 @@ class sp extends CI_Controller
 								'tgl_tambah' => date("Y-m-d H:i:s")
 							];
 							$this->m_uptd->tambah('tbl_sp_pegawai', $data_pegawai);
-
-							array_push($data_warning['hasil'], array('ket1' => $data['nomor'], 'ket2' => $data['tanggal_sp'], 'ket3' => $data['tujuan']));
 						}
+						array_push($data_warning['hasil'], array('ket1' => $data['nomor'], 'ket2' => $data['tanggal_sp'], 'ket3' => $data['tujuan']));
 					}else{
 						array_push($data_warning['hasil'], array('ket1' => $data['nomor'], 'Tujuan' => $data['tujuan'], 'ket3' => 'SUDAH TERPAKAI'));
 					}
