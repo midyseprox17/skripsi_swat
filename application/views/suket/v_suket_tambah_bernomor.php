@@ -35,10 +35,10 @@
 								<td>
 									<div class="form-group row mt-1">
 										<div class="col-sm-2">
-							        		Dari Nomor<input type="number" class="form-control" name="nomor_awal" id="nomor_awal" min="1">
+							        		Dari Nomor<input type="number" class="form-control" name="nomor_awal" id="nomor_awal" min="1" required="">
 							        	</div>
 							        	<div class="col-sm-2">
-							        		Sampai Nomor<input type="number" class="form-control" name="nomor_akhir" id="nomor_akhir" min="0" value="0" disabled="">
+							        		Sampai Nomor<input type="number" class="form-control" name="nomor_akhir" id="nomor_akhir" min="0" value="0" disabled="" required="">
 							        	</div>
 							        	<font color="red">*biarkan 0 jika hanya 1 nomor</font>
 							        </div>
@@ -118,7 +118,7 @@
 							<tr>
 								<td style="color: #000000; width: 20%">Keterangan</td>
 								<td>
-									<select class="form-control selectpicker" data-live-search="true" name="pegawai" style="width: 40%" placeholder="Nama Pengawas" required="">
+									<select class="form-control selectpicker" data-live-search="true" name="pegawai_id" style="width: 40%" placeholder="Nama Pengawas" required="">
 										<?php foreach ($pegawai->result() as $p) {
 										?>
 											<option value="<?=$p->id?>"><?=$p->nip.' | '.$p->nama?></option>

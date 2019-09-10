@@ -183,7 +183,7 @@ class suket extends CI_Controller
 
 						array_push($data_warning['hasil'], array('ket1' => $data['nomor'], 'ket2' => $data['tanggal'].'-'.$data['bulan'].'-'.$data['tahun'], 'ket3' => $data['datab']));
 					}else{
-						array_push($data_warning['hasil'], array('ket1' => $data['nomor'], 'ket2' => $data['tanggal'].'-'.$data['bulan'].'-'.$data['tahun'], 'ket3' => 'NOMOR SUDHA DIPAKAI'));
+						array_push($data_warning['hasil'], array('ket1' => $data['nomor'], 'ket2' => $data['tanggal'].'-'.$data['bulan'].'-'.$data['tahun'], 'ket3' => 'NOMOR SUDAH DIPAKAI'));
 					}
 				}
 

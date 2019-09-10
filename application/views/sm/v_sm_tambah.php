@@ -67,7 +67,7 @@
 							</tr>
 							<tr>
 								<td style="color: #000000; width: 20%">Dari</td>
-								<td><input type="text" name="dari" class="form-control" onkeyup="grup_dari(this)"></td>
+								<td><input type="text" name="dari" class="form-control" onkeyup="grup_dari(this)" required=""></td>
 							</tr>
 							<tr>
 								<td style="color: #000000; width: 20%">Nomor Surat</td>

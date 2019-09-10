@@ -35,10 +35,10 @@
 								<td>
 									<div class="form-group row mt-1">
 										<div class="col-sm-2">
-							        		Dari Nomor<input type="number" class="form-control" name="nomor_awal" id="nomor_awal" min="1">
+							        		Dari Nomor<input type="number" class="form-control" name="nomor_awal" id="nomor_awal" min="1" required="">
 							        	</div>
 							        	<div class="col-sm-2">
-							        		Sampai Nomor<input type="number" class="form-control" name="nomor_akhir" id="nomor_akhir" min="0" value="0" disabled="">
+							        		Sampai Nomor<input type="number" class="form-control" name="nomor_akhir" id="nomor_akhir" min="0" value="0" disabled="" required="">
 							        	</div>
 							        	<font color="red">*biarkan 0 jika hanya 1 nomor</font>
 							        </div>
@@ -97,7 +97,7 @@
 						<table class="table">
 							<tr>
 								<td style="color: #000000">Isi Ringkasan</td>
-								<td><textarea type="textarea" name="isi" class="form-control" placeholder="Isi Ringkasan" rows="5" required=""></textarea></td>
+								<td><textarea type="textarea" name="isi" class="form-control" placeholder="Isi Ringkasan (Isi '-' Jika Hal Nota Pemeriksaan)" rows="5" required=""></textarea></td>
 							</tr>
 							<tr>
 								<td style="color: #000000; width: 20%">Catatan</td>
@@ -116,7 +116,7 @@
 							<tr id="tabel_pegawai1">
 								<td style="width: 20%; color: #000000">Pengolah</td>
 								<td>
-									<select class="form-control selectpicker" data-live-search="true" name="pegawai[]" style="width: 40%" placeholder="Nama" required="">
+									<select class="form-control selectpicker" data-live-search="true" name="pegawai[]" style="width: 40%" placeholder="Pengolah" required="">
 										<?php foreach ($pegawai->result() as $p) {
 										?>
 											<option value="<?=$p->id?>"><?=$p->nip.' | '.$p->nama?></option>
@@ -193,7 +193,7 @@ function tambah_baris_pegawai(){
         method : "POST",
         dataType : 'json',
         success: function(data){
-            var html = '<tr id="tabel_pegawai'+$rowno+'"><td style="width: 20%; color: #000000">Nama</td><td><select class="form-control selectpicker" data-live-search="true" name="pegawai[]" style="width: 40%" placeholder="Nama" required="">';
+            var html = '<tr id="tabel_pegawai'+$rowno+'"><td style="width: 20%; color: #000000">Pengolah</td><td><select class="form-control selectpicker" data-live-search="true" name="pegawai[]" style="width: 40%" placeholder="Pengolah" required="">';
             var i;
             for(var i = 0; i < data.length; i++){
                 html += '<option value="'+data[i]['id']+'">'+data[i]['nip']+' | '+data[i]['nama']+'</option>';
@@ -258,7 +258,7 @@ function perihal(){
 	            var html = `<tr id="tr_sp"><td style="width: 20%; color: #000000">Nomor SP</td><td><select class="form-control sp_selectpicker" data-live-search="true" name="sp_id" style="width: 40%" placeholder="SP" required="">`;
 	            var i;
 	            for(var i = 0; i < data.length; i++){
-	                html += `<option value="`+data[i]['id']+`">`+data[i]['nomor']+` | `+data[i]['tanggal']+`-`+data[i]['bulan']+`-`+data[i]['tahun']+` | `+data[i]['tujuan']+`</option>`;
+	                html += `<option value="`+data[i]['id']+`">`+data[i]['nomor']+` | `+data[i]['tanggal']+`-`+data[i]['bulan']+`-`+data[i]['tahun']+` | `+ data[i]['tujuan'].substring(0, 50)+`</option>`;
 	            }
 	            html += `</select></td></tr>`;
 	            $("#tabel_hal tr:last").after(html); 
