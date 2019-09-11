@@ -68,31 +68,23 @@
       <?php
       }
       ?>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSurat" aria-expanded="true" aria-controls="collapseSurat">
+          <i class="fas fa-fw fa-file-alt"></i>
+          <span>Surat</span>
+        </a>
+        <div id="collapseSurat" class="collapse" aria-labelledby="headingSurat" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Jenis Surat:</h6>
+            <a class="collapse-item" href="<?=base_url().'sp'?>">Surat Perintah</a>
+            <a class="collapse-item" href="<?=base_url().'suket'?>">Surat Keterangan</a>
+            <a class="collapse-item" href="<?=base_url().'sm'?>">Surat Masuk</a>
+            <a class="collapse-item" href="<?=base_url().'sk'?>">Surat Keluar/Nota</a>
+          </div>
+        </div>
+      </li>
       
-      <li class="nav-item">
-        <a class="nav-link" href="<?=base_url().'sp'?>">
-          <i class="fas fa-fw fa-file-alt"></i>
-          <span>Surat Perintah</span></a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href="<?=base_url().'suket'?>">
-          <i class="fas fa-fw fa-file-alt"></i>
-          <span>Surat Keterangan</span></a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href="<?=base_url().'sm'?>">
-          <i class="fas fa-fw fa-file-alt"></i>
-          <span>Surat Masuk</span></a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href="<?=base_url().'sk'?>">
-          <i class="fas fa-fw fa-file-alt"></i>
-          <span>Surat Keluar/Nota</span></a>
-      </li>
-
       <li class="nav-item">
         <a class="nav-link" href="<?=base_url().'sk/diagram'?>">
           <i class="fas fa-fw fa-file-alt"></i>
