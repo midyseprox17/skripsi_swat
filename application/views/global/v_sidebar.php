@@ -93,6 +93,12 @@
           <span>Surat Keluar/Nota</span></a>
       </li>
 
+      <li class="nav-item">
+        <a class="nav-link" href="<?=base_url().'sk/diagram'?>">
+          <i class="fas fa-fw fa-file-alt"></i>
+          <span>Diagram Nota Pemeriksaan</span></a>
+      </li>
+
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
 

@@ -56,7 +56,7 @@
 												</select>
 								        	</div>
 								        	<div class="col-sm-2">
-								        		Tahun<input type="number" class="form-control" placeholder="Tahun" name="tgl_y" id="tgl_y" value="<?=date('Y')?>" readonly="">
+								        		Tahun<input type="number" class="form-control" placeholder="Tahun" name="tgl_y" id="tgl_y" value="<?=date('Y')?>">
 								        	</div>
 								        </div>
 								    </div>

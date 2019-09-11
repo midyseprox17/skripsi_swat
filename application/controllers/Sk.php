@@ -299,4 +299,27 @@ class sk extends CI_Controller
 			redirect(base_url().'login');
 		}
 	}
+
+	function diagram()
+	{
+		if($this->session->userdata('masuk') == '1'){
+			$this->load->view('global/v_sidebar');
+			$this->load->view('sk/v_sk_diagram');
+			$this->load->view('global/v_footer');
+		}else{
+			redirect(base_url().'login');
+		}
+	}
+
+	function get_pelanggaran(){
+		if($this->session->userdata('masuk') == '1'){
+			$bulan = $this->input->post('bulan');
+			$tahun = date('Y');
+			$jenis_pelanggaran = $this->m_uptd->chart_pelanggaran($bulan,$tahun)->result();
+			echo json_encode($jenis_pelanggaran);
+
+		}else{
+			redirect(base_url().'login');
+		}
+	}
 }

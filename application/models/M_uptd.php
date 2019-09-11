@@ -48,4 +48,8 @@ class m_uptd extends CI_Model
 		$this->db->insert($table,$data);
 		return $this->db->insert_id();
 	}
+
+	function chart_pelanggaran($bulan, $tahun){
+		return $this->db->query("CALL p_pemeriksaan_pelanggaran_chart(".$this->db->escape($bulan).",".$this->db->escape($tahun).")");
+	}
 }

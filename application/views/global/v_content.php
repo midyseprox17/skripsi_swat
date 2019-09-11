@@ -71,4 +71,4 @@
 		  	<img class="mt-5" src="<?=base_url().'assets/'?>img/logo.png" width="30%">
 		</center> -->
 
-</div>
+	</div>
