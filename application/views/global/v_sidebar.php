@@ -87,7 +87,7 @@
       
       <li class="nav-item">
         <a class="nav-link" href="<?=base_url().'sk/diagram'?>">
-          <i class="fas fa-fw fa-file-alt"></i>
+          <i class="as fa-fw fa-pie"></i>
           <span>Diagram Nota Pemeriksaan</span></a>
       </li>
 
