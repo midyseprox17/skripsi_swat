@@ -29,6 +29,7 @@
 				          <th>Hal</th>
 				          <th>Isi</th>
 				          <th>Kepada</th>
+				          <th>Pelanggaran</th>
 				          <th>Pengolah</th>
 				          <th>Catatan</th>
 				          <th>Tindakan</th>
@@ -46,6 +47,7 @@
 					          <td><?=$n->hal?></td>
 					          <td><?=$n->isi?></td>
 					          <td><?=str_replace('; ', ' | ', $n->kepada)?></td>
+					          <td><?=str_replace('; ', ';<br> ', $n->pelanggaran)?></td>
 					          <td><?=str_replace('; ', ' | ', $n->pegawai_nama)?></td>
 					          <td><?=$n->catatan?></td>
 					          <td>
