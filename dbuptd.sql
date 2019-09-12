@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v12.5.1 (64 bit)
-MySQL - 10.1.41-MariaDB-cll-lve : Database - vpaoosto_dbuptd
+MySQL - 10.1.41-MariaDB-cll-lve : Database - dbuptd
 *********************************************************************
 */
 
@@ -12,9 +12,9 @@ MySQL - 10.1.41-MariaDB-cll-lve : Database - vpaoosto_dbuptd
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`vpaoosto_dbuptd` /*!40100 DEFAULT CHARACTER SET latin1 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`dbuptd` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
-USE `vpaoosto_dbuptd`;
+USE `dbuptd`;
 
 /*Table structure for table `tbl_hak_akses` */
 
@@ -7057,7 +7057,7 @@ insert  into `tbl_user`(`id`,`pegawai_id`,`username`,`password`,`id_hak_akses`,`
 
 DELIMITER $$
 
-/*!50003 CREATE DEFINER=`vpaoosto_uptdpk`@`%` PROCEDURE `p_pemeriksaan_pelanggaran_chart`(in bulan1 int(2), in tahun1 int(4))
+/*!50003 CREATE PROCEDURE `p_pemeriksaan_pelanggaran_chart`(in bulan1 int(2), in tahun1 int(4))
 BEGIN
 		SELECT nama, warna, COUNT(*) AS total FROM v_sk_pemeriksaan_pelanggaran 
 		WHERE bulan = bulan1 AND tahun = tahun1
@@ -7226,49 +7226,49 @@ DROP TABLE IF EXISTS `v_user_pegawai`;
 /*!50001 DROP TABLE IF EXISTS `v_sk` */;
 /*!50001 DROP VIEW IF EXISTS `v_sk` */;
 
-/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`vpaoosto_uptdpk`@`%` SQL SECURITY DEFINER VIEW `v_sk` AS (select `a`.`id` AS `id`,`a`.`nomor` AS `nomor`,`a`.`tanggal` AS `tanggal`,`a`.`bulan` AS `bulan`,`a`.`tahun` AS `tahun`,`a`.`hal` AS `hal`,`a`.`isi` AS `isi`,`a`.`kepada` AS `kepada`,group_concat(`b`.`nama` separator '; ') AS `pegawai_nama`,`a`.`catatan` AS `catatan`,`a`.`dihapus` AS `dihapus`,`a`.`penomoran_id` AS `penomoran_id`,`c`.`kode` AS `penomoran_kode`,`c`.`nama` AS `penomoran_nama`,`c`.`ket` AS `penomoran_ket`,replace(replace(`c`.`format`,'{kode}',`c`.`kode`),'{nomor}',`a`.`nomor`) AS `kode` from ((`tbl_sk` `a` join `v_sk_pengolah_pegawai` `b` on((`a`.`id` = `b`.`sk_id`))) join `tbl_penomoran` `c` on((`a`.`penomoran_id` = `c`.`id`))) group by `b`.`sk_id`) */;
+/*!50001 CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `v_sk` AS (select `a`.`id` AS `id`,`a`.`nomor` AS `nomor`,`a`.`tanggal` AS `tanggal`,`a`.`bulan` AS `bulan`,`a`.`tahun` AS `tahun`,`a`.`hal` AS `hal`,`a`.`isi` AS `isi`,`a`.`kepada` AS `kepada`,group_concat(`b`.`nama` separator '; ') AS `pegawai_nama`,`a`.`catatan` AS `catatan`,`a`.`dihapus` AS `dihapus`,`a`.`penomoran_id` AS `penomoran_id`,`c`.`kode` AS `penomoran_kode`,`c`.`nama` AS `penomoran_nama`,`c`.`ket` AS `penomoran_ket`,replace(replace(`c`.`format`,'{kode}',`c`.`kode`),'{nomor}',`a`.`nomor`) AS `kode` from ((`tbl_sk` `a` join `v_sk_pengolah_pegawai` `b` on((`a`.`id` = `b`.`sk_id`))) join `tbl_penomoran` `c` on((`a`.`penomoran_id` = `c`.`id`))) group by `b`.`sk_id`) */;
 
 /*View structure for view v_sk_pemeriksaan_pelanggaran */
 
 /*!50001 DROP TABLE IF EXISTS `v_sk_pemeriksaan_pelanggaran` */;
 /*!50001 DROP VIEW IF EXISTS `v_sk_pemeriksaan_pelanggaran` */;
 
-/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`vpaoosto_uptdpk`@`%` SQL SECURITY DEFINER VIEW `v_sk_pemeriksaan_pelanggaran` AS (select `a`.`id` AS `id`,`a`.`tanggal` AS `tanggal`,`a`.`bulan` AS `bulan`,`a`.`tahun` AS `tahun`,`b`.`jenis_pelanggaran_id` AS `jenis_pelanggaran_id`,`c`.`nama` AS `nama`,`c`.`warna` AS `warna` from ((`tbl_sk` `a` join `tbl_sk_pemeriksaan` `b` on((`a`.`id` = `b`.`sk_id`))) join `tbl_jenis_pelanggaran` `c` on((`b`.`jenis_pelanggaran_id` = `c`.`id`))) where (`a`.`hal` like '%Nota Pemeriksaan%')) */;
+/*!50001 CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `v_sk_pemeriksaan_pelanggaran` AS (select `a`.`id` AS `id`,`a`.`tanggal` AS `tanggal`,`a`.`bulan` AS `bulan`,`a`.`tahun` AS `tahun`,`b`.`jenis_pelanggaran_id` AS `jenis_pelanggaran_id`,`c`.`nama` AS `nama`,`c`.`warna` AS `warna` from ((`tbl_sk` `a` join `tbl_sk_pemeriksaan` `b` on((`a`.`id` = `b`.`sk_id`))) join `tbl_jenis_pelanggaran` `c` on((`b`.`jenis_pelanggaran_id` = `c`.`id`))) where (`a`.`hal` like '%Nota Pemeriksaan%')) */;
 
 /*View structure for view v_sk_pengolah_pegawai */
 
 /*!50001 DROP TABLE IF EXISTS `v_sk_pengolah_pegawai` */;
 /*!50001 DROP VIEW IF EXISTS `v_sk_pengolah_pegawai` */;
 
-/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`vpaoosto_uptdpk`@`%` SQL SECURITY DEFINER VIEW `v_sk_pengolah_pegawai` AS (select `a`.`id` AS `id`,`a`.`sk_id` AS `sk_id`,`a`.`pegawai_id` AS `pegawai_id`,`b`.`nip` AS `nip`,`b`.`nama` AS `nama`,`b`.`pangkat` AS `pangkat`,`b`.`golongan` AS `golongan`,`b`.`jabatan` AS `jabatan` from (`tbl_sk_pengolah` `a` left join `tbl_pegawai` `b` on((`a`.`pegawai_id` = `b`.`id`)))) */;
+/*!50001 CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `v_sk_pengolah_pegawai` AS (select `a`.`id` AS `id`,`a`.`sk_id` AS `sk_id`,`a`.`pegawai_id` AS `pegawai_id`,`b`.`nip` AS `nip`,`b`.`nama` AS `nama`,`b`.`pangkat` AS `pangkat`,`b`.`golongan` AS `golongan`,`b`.`jabatan` AS `jabatan` from (`tbl_sk_pengolah` `a` left join `tbl_pegawai` `b` on((`a`.`pegawai_id` = `b`.`id`)))) */;
 
 /*View structure for view v_sp */
 
 /*!50001 DROP TABLE IF EXISTS `v_sp` */;
 /*!50001 DROP VIEW IF EXISTS `v_sp` */;
 
-/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`vpaoosto_uptdpk`@`%` SQL SECURITY DEFINER VIEW `v_sp` AS (select `a`.`id` AS `id`,`a`.`nomor` AS `nomor`,`a`.`tanggal` AS `tanggal`,`a`.`bulan` AS `bulan`,`a`.`tahun` AS `tahun`,group_concat(`b`.`nama` separator '; ') AS `pegawai_nama`,`a`.`tanggal_sp` AS `tanggal_sp`,`a`.`tujuan` AS `tujuan`,`a`.`hal` AS `hal`,`a`.`ket` AS `ket`,`a`.`dihapus` AS `dihapus`,`a`.`penomoran_id` AS `penomoran_id`,`c`.`kode` AS `penomoran_kode`,`c`.`nama` AS `penomoran_nama`,`c`.`ket` AS `penomoran_ket`,replace(replace(`c`.`format`,'{kode}',`c`.`kode`),'{nomor}',`a`.`nomor`) AS `kode` from ((`tbl_sp` `a` join `v_sp_pegawai_pegawai` `b` on((`a`.`id` = `b`.`sp_id`))) join `tbl_penomoran` `c` on((`a`.`penomoran_id` = `c`.`id`))) group by `b`.`sp_id`) */;
+/*!50001 CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `v_sp` AS (select `a`.`id` AS `id`,`a`.`nomor` AS `nomor`,`a`.`tanggal` AS `tanggal`,`a`.`bulan` AS `bulan`,`a`.`tahun` AS `tahun`,group_concat(`b`.`nama` separator '; ') AS `pegawai_nama`,`a`.`tanggal_sp` AS `tanggal_sp`,`a`.`tujuan` AS `tujuan`,`a`.`hal` AS `hal`,`a`.`ket` AS `ket`,`a`.`dihapus` AS `dihapus`,`a`.`penomoran_id` AS `penomoran_id`,`c`.`kode` AS `penomoran_kode`,`c`.`nama` AS `penomoran_nama`,`c`.`ket` AS `penomoran_ket`,replace(replace(`c`.`format`,'{kode}',`c`.`kode`),'{nomor}',`a`.`nomor`) AS `kode` from ((`tbl_sp` `a` join `v_sp_pegawai_pegawai` `b` on((`a`.`id` = `b`.`sp_id`))) join `tbl_penomoran` `c` on((`a`.`penomoran_id` = `c`.`id`))) group by `b`.`sp_id`) */;
 
 /*View structure for view v_sp_pegawai_pegawai */
 
 /*!50001 DROP TABLE IF EXISTS `v_sp_pegawai_pegawai` */;
 /*!50001 DROP VIEW IF EXISTS `v_sp_pegawai_pegawai` */;
 
-/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`vpaoosto_uptdpk`@`%` SQL SECURITY DEFINER VIEW `v_sp_pegawai_pegawai` AS (select `a`.`id` AS `id`,`a`.`sp_id` AS `sp_id`,`a`.`pegawai_id` AS `pegawai_id`,`b`.`nip` AS `nip`,`b`.`nama` AS `nama`,`b`.`pangkat` AS `pangkat`,`b`.`golongan` AS `golongan`,`b`.`jabatan` AS `jabatan` from (`tbl_sp_pegawai` `a` left join `tbl_pegawai` `b` on((`a`.`pegawai_id` = `b`.`id`)))) */;
+/*!50001 CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `v_sp_pegawai_pegawai` AS (select `a`.`id` AS `id`,`a`.`sp_id` AS `sp_id`,`a`.`pegawai_id` AS `pegawai_id`,`b`.`nip` AS `nip`,`b`.`nama` AS `nama`,`b`.`pangkat` AS `pangkat`,`b`.`golongan` AS `golongan`,`b`.`jabatan` AS `jabatan` from (`tbl_sp_pegawai` `a` left join `tbl_pegawai` `b` on((`a`.`pegawai_id` = `b`.`id`)))) */;
 
 /*View structure for view v_suket */
 
 /*!50001 DROP TABLE IF EXISTS `v_suket` */;
 /*!50001 DROP VIEW IF EXISTS `v_suket` */;
 
-/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`vpaoosto_uptdpk`@`%` SQL SECURITY DEFINER VIEW `v_suket` AS (select `a`.`id` AS `id`,`a`.`nomor` AS `nomor`,`a`.`tanggal` AS `tanggal`,`a`.`bulan` AS `bulan`,`a`.`tahun` AS `tahun`,`a`.`kepada` AS `kepada`,`a`.`hal` AS `hal`,`a`.`datab` AS `datab`,`a`.`alamat` AS `alamat`,`a`.`kota_id` AS `kota_id`,`a`.`penomoran_id` AS `penomoran_id`,`a`.`dihapus` AS `dihapus`,`a`.`ditambah_oleh` AS `ditambah_oleh`,`a`.`tgl_tambah` AS `tgl_tambah`,`a`.`diedit_oleh` AS `diedit_oleh`,`a`.`tgl_edit` AS `tgl_edit`,`b`.`nama` AS `kota_nama`,`c`.`kode` AS `penomoran_kode`,`c`.`nama` AS `penomoran_nama`,`c`.`ket` AS `penomoran_ket`,replace(replace(`c`.`format`,'{kode}',`c`.`kode`),'{nomor}',`a`.`nomor`) AS `kode`,`d`.`nama` AS `pegawai_nama` from (((`tbl_suket` `a` left join `tbl_kota` `b` on((`a`.`kota_id` = `b`.`id`))) left join `tbl_penomoran` `c` on((`a`.`penomoran_id` = `c`.`id`))) left join `tbl_pegawai` `d` on((`a`.`pegawai_id` = `d`.`id`)))) */;
+/*!50001 CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `v_suket` AS (select `a`.`id` AS `id`,`a`.`nomor` AS `nomor`,`a`.`tanggal` AS `tanggal`,`a`.`bulan` AS `bulan`,`a`.`tahun` AS `tahun`,`a`.`kepada` AS `kepada`,`a`.`hal` AS `hal`,`a`.`datab` AS `datab`,`a`.`alamat` AS `alamat`,`a`.`kota_id` AS `kota_id`,`a`.`penomoran_id` AS `penomoran_id`,`a`.`dihapus` AS `dihapus`,`a`.`ditambah_oleh` AS `ditambah_oleh`,`a`.`tgl_tambah` AS `tgl_tambah`,`a`.`diedit_oleh` AS `diedit_oleh`,`a`.`tgl_edit` AS `tgl_edit`,`b`.`nama` AS `kota_nama`,`c`.`kode` AS `penomoran_kode`,`c`.`nama` AS `penomoran_nama`,`c`.`ket` AS `penomoran_ket`,replace(replace(`c`.`format`,'{kode}',`c`.`kode`),'{nomor}',`a`.`nomor`) AS `kode`,`d`.`nama` AS `pegawai_nama` from (((`tbl_suket` `a` left join `tbl_kota` `b` on((`a`.`kota_id` = `b`.`id`))) left join `tbl_penomoran` `c` on((`a`.`penomoran_id` = `c`.`id`))) left join `tbl_pegawai` `d` on((`a`.`pegawai_id` = `d`.`id`)))) */;
 
 /*View structure for view v_user_pegawai */
 
 /*!50001 DROP TABLE IF EXISTS `v_user_pegawai` */;
 /*!50001 DROP VIEW IF EXISTS `v_user_pegawai` */;
 
-/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`vpaoosto_uptdpk`@`%` SQL SECURITY DEFINER VIEW `v_user_pegawai` AS (select `a`.`id` AS `id`,`a`.`pegawai_id` AS `pegawai_id`,`a`.`username` AS `username`,`a`.`password` AS `password`,`a`.`id_hak_akses` AS `id_hak_akses`,`b`.`nama` AS `nama`,`b`.`jabatan` AS `jabatan`,`b`.`pangkat` AS `pangkat`,`a`.`dihapus` AS `dihapus` from (`tbl_user` `a` left join `tbl_pegawai` `b` on((`a`.`pegawai_id` = `b`.`id`)))) */;
+/*!50001 CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `v_user_pegawai` AS (select `a`.`id` AS `id`,`a`.`pegawai_id` AS `pegawai_id`,`a`.`username` AS `username`,`a`.`password` AS `password`,`a`.`id_hak_akses` AS `id_hak_akses`,`b`.`nama` AS `nama`,`b`.`jabatan` AS `jabatan`,`b`.`pangkat` AS `pangkat`,`a`.`dihapus` AS `dihapus` from (`tbl_user` `a` left join `tbl_pegawai` `b` on((`a`.`pegawai_id` = `b`.`id`)))) */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
