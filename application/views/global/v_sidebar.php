@@ -56,7 +56,7 @@
       ?>
         <li class="nav-item">
           <a class="nav-link" href="<?=base_url().'penomoran'?>">
-            <i class="fas fa-fw fa-users"></i>
+            <i class="fas fa-fw fa-file-alt"></i>
             <span>Kode Surat</span></a>
         </li>
 
@@ -87,7 +87,7 @@
       
       <li class="nav-item">
         <a class="nav-link" href="<?=base_url().'sk/diagram'?>">
-          <i class="fas fa-fw chart-pie-alt"></i>
+          <i class="fas fa-fw fa-chart-pie"></i>
           <span>Diagram Nota Pemeriksaan</span></a>
       </li>
 
