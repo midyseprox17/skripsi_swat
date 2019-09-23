@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v12.5.1 (64 bit)
-MySQL - 10.1.41-MariaDB-cll-lve : Database - dbuptd
+MySQL - 10.1.41-MariaDB-cll-lve : Database - vpaoosto_dbuptd
 *********************************************************************
 */
 
@@ -12,9 +12,9 @@ MySQL - 10.1.41-MariaDB-cll-lve : Database - dbuptd
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`dbuptd` /*!40100 DEFAULT CHARACTER SET latin1 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`vpaoosto_dbuptd` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
-USE `dbuptd`;
+USE `vpaoosto_dbuptd`;
 
 /*Table structure for table `tbl_hak_akses` */
 
@@ -111,7 +111,6 @@ CREATE TABLE `tbl_pegawai` (
 /*Data for the table `tbl_pegawai` */
 
 insert  into `tbl_pegawai`(`id`,`nip`,`nama`,`pangkat`,`golongan`,`jabatan`,`ans`,`dihapus`,`ditambah_oleh`,`tgl_tambah`,`diedit_oleh`,`tgl_edit`) values 
-(00001,'1','U D I N','GM','Kanan','-','1','0',NULL,NULL,'00107','2019-08-29 10:46:40'),
 (00051,'196303311991031003','Drs. Erwin., M.M.','Pembina','IV / a',NULL,'1','0',NULL,NULL,NULL,NULL),
 (00052,'196202251986032004','Ika Mulia Trikalaksani, BA','Penata Tk I','III / d',NULL,'1','0',NULL,NULL,NULL,NULL),
 (00053,'197302221995101001','Danila Dias Quintas DS. S.Pd','Penata Tk I','III / d','-','1','0',NULL,NULL,'00107','2019-09-06 03:56:40'),
@@ -164,8 +163,7 @@ insert  into `tbl_pegawai`(`id`,`nip`,`nama`,`pangkat`,`golongan`,`jabatan`,`ans
 (00104,'10116297','UDIN','Major','Kiri','Tukang Sapu','1','0',NULL,NULL,NULL,NULL),
 (00105,'129191','Heddy Cahya Firdaus','-','-','Kerja Praktek','1','0','00001','2019-08-28 10:35:53',NULL,NULL),
 (00106,'129192','Rizalu Ilman','-','-','-','1','0','00001','2019-08-28 10:37:09',NULL,NULL),
-(00107,'11111','U D I N','-','-','-','1','0','00001','2019-08-28 10:41:07',NULL,NULL),
-(00108,'1111111111','Namass','Pangkatss','Golonganss','Jabatanss','1','1','00107','2019-09-09 08:24:43','00107','2019-09-09 08:25:35');
+(00107,'11111','A D M I N','-','-','-','1','0','00001','2019-08-28 10:41:07',NULL,NULL);
 
 /*Table structure for table `tbl_penomoran` */
 
@@ -238,7 +236,6 @@ insert  into `tbl_sk`(`id`,`nomor`,`tanggal`,`bulan`,`tahun`,`hal`,`sp_id`,`isi`
 (42,03684,5,9,2019,'Pemeriksaan Ketenagakerjaan',NULL,'Mengadakan pemeriksaan/ inspeksi terhadap perusahaan dengan membawa data-data yang diperlukan','PT. Japan Tobaco','',01,'0','00107','2019-09-10 04:30:52',NULL,NULL),
 (43,03685,5,9,2019,'Pemeriksaan Ketenagakerjaan',NULL,'Mengadakan pemeriksaan/ inspeksi terhadap perusahaan dengan membawa data-data yang diperlukan','Pizza Hit','',01,'0','00107','2019-09-10 04:30:52',NULL,NULL),
 (44,03686,5,9,2019,'Pemeriksaan Ketenagakerjaan',NULL,'Mengadakan pemeriksaan/ inspeksi terhadap perusahaan dengan membawa data-data yang diperlukan','PT. Tekad Mandiri','',01,'0','00107','2019-09-10 04:30:52',NULL,NULL),
-(45,NULL,NULL,NULL,NULL,'Nota Pemeriksaan I',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
 (46,03648,4,9,2019,'Nota Pemeriksaan I',000000000129,'-','CV. Sariwangi','',01,'0','00107','2019-09-10 04:45:45',NULL,NULL),
 (47,03480,27,8,2019,'Nota Pemeriksaan I',000000000157,'-','CV. Kanca Kemas Lestari','-',01,'0','00107','2019-09-10 05:08:03',NULL,NULL),
 (48,03495,27,8,2019,'Permohonan Narasumber',NULL,'Hari selasa 10 Sept 2019\r\nPukul 08.00 El. Royale Hotel','BPJS Kesehatan Cab. Bandung','Pengolah Kasi Norma',01,'0','00107','2019-09-10 05:26:41',NULL,NULL);
@@ -304,11 +301,11 @@ insert  into `tbl_sk_pengolah`(`id`,`sk_id`,`pegawai_id`,`ditambah_oleh`,`tgl_ta
 (65,47,00078,'00107','2019-09-10 05:08:03',NULL,NULL),
 (66,47,00061,'00107','2019-09-10 05:08:03',NULL,NULL),
 (67,47,00094,'00107','2019-09-10 05:08:03',NULL,NULL),
-(68,48,00001,'00107','2019-09-10 05:26:41',NULL,NULL),
-(69,NULL,00001,'00107','2019-09-10 05:33:24',NULL,NULL),
-(70,NULL,00001,'00107','2019-09-10 05:33:25',NULL,NULL),
-(71,NULL,00001,'00107','2019-09-10 05:35:32',NULL,NULL),
-(72,NULL,00001,'00107','2019-09-10 05:35:33',NULL,NULL);
+(68,48,NULL,'00107','2019-09-10 05:26:41',NULL,NULL),
+(69,NULL,NULL,'00107','2019-09-10 05:33:24',NULL,NULL),
+(70,NULL,NULL,'00107','2019-09-10 05:33:25',NULL,NULL),
+(71,NULL,NULL,'00107','2019-09-10 05:35:32',NULL,NULL),
+(72,NULL,NULL,'00107','2019-09-10 05:35:33',NULL,NULL);
 
 /*Table structure for table `tbl_sm` */
 
@@ -471,16 +468,16 @@ insert  into `tbl_sp_pegawai`(`id`,`sp_id`,`pegawai_id`,`ditambah_oleh`,`tgl_tam
 (179,148,93,'00107','2019-09-09 10:17:56',NULL,NULL),
 (180,149,51,'00107','2019-09-09 10:25:24',NULL,NULL),
 (181,150,51,'00107','2019-09-09 10:31:40',NULL,NULL),
-(182,150,1,'00107','2019-09-09 10:31:40',NULL,NULL),
-(183,151,1,'00107','2019-09-09 10:32:41',NULL,NULL),
-(184,152,1,'00107','2019-09-09 10:32:41',NULL,NULL),
-(185,153,1,'00107','2019-09-09 10:32:41',NULL,NULL),
+(182,150,NULL,'00107','2019-09-09 10:31:40',NULL,NULL),
+(183,151,NULL,'00107','2019-09-09 10:32:41',NULL,NULL),
+(184,152,NULL,'00107','2019-09-09 10:32:41',NULL,NULL),
+(185,153,NULL,'00107','2019-09-09 10:32:41',NULL,NULL),
 (186,154,52,'00107','2019-09-09 10:33:24',NULL,NULL),
 (187,154,56,'00107','2019-09-09 10:33:24',NULL,NULL),
 (188,155,52,'00107','2019-09-09 10:33:24',NULL,NULL),
 (189,155,56,'00107','2019-09-09 10:33:24',NULL,NULL),
 (190,156,52,'00107','2019-09-10 03:47:22',NULL,NULL),
-(191,157,1,NULL,NULL,NULL,NULL);
+(191,157,NULL,NULL,NULL,NULL,NULL);
 
 /*Table structure for table `tbl_suket` */
 
@@ -519,7 +516,7 @@ insert  into `tbl_suket`(`id`,`nomor`,`tanggal`,`bulan`,`tahun`,`kepada`,`hal`,`
 (256,NULL,5,9,2019,'PT. Sukses Investa Anugrah Propertindo','Bejana Tekan','Air Compressor. Tegak. Jepang-2017','Jl. Nanjung No. 192 Kota Cimahi',04,NULL,08,'1','00107','2019-09-10 04:08:52','00107','2019-09-10 04:11:07'),
 (257,00759,5,9,2019,'PT. Sukses Investa Anugrah Propertindo','Bejana Tekan','Air Compressor. Tegak. Jepang - 2017','Jl. Nanjung No. 192 Kota Cimahi',04,57,08,'0','00107','2019-09-10 04:12:10',NULL,NULL),
 (258,NULL,10,9,2019,'PT. Sukses Investa Anugrah Propertindo','Tidak tau','data','Alamat',04,57,08,'1','00107','2019-09-10 04:13:31','00107','2019-09-10 04:13:40'),
-(259,NULL,10,9,2019,'d','d','d','d',01,1,04,'1','00107','2019-09-10 04:14:10','00107','2019-09-10 04:14:22'),
+(259,NULL,10,9,2019,'d','d','d','d',01,NULL,04,'1','00107','2019-09-10 04:14:10','00107','2019-09-10 04:14:22'),
 (260,00001,27,3,2019,'Universitas Kristen Maranatha','IPK','Instalasi Hydrant Dan MCFA','JL. Prof. Dr. Surya Sumantri No. 65 Kota Bandung',NULL,NULL,09,'0',NULL,NULL,NULL,NULL),
 (261,00002,29,3,2019,'PT. Bandung Indah Permai','IPK','Hotel, Beton Bertulang Â± 78 M, 22 lantai','Jl. Lembang No. 19 Kota Bandung',NULL,NULL,09,'0',NULL,NULL,NULL,NULL),
 (262,00003,29,3,2019,'PT. Bahana Boga Sari Lestari','IPK','Hydrant 2003','Jl. Pasirkaliki No. 18 Kota Bandung',NULL,NULL,09,'0',NULL,NULL,NULL,NULL),
@@ -7048,8 +7045,7 @@ insert  into `tbl_user`(`id`,`pegawai_id`,`username`,`password`,`id_hak_akses`,`
 (00154,00099,'196309301989302004','$2y$10$lPEH9QBifFDkGqS2I.FXJuD9l.ARXBMUL3fV9Fw9nZXMNGiJ0PK/K',002,'0',NULL,NULL,NULL,NULL),
 (00156,00105,'129191','$2y$10$8algDL5YqZb5VzgKJs6MUOg4/j2aJB9rPHRH66Y6cYO5VKga04DTK',003,'0','00001','2019-08-28 10:35:53',NULL,NULL),
 (00157,00106,'129192','$2y$10$L0plZVhAqLOgR/IZoAd/9Ol4iRWvlbc.aaJ/5QMAGZZ9IS/wCKVYi',003,'0','00001','2019-08-28 10:37:09',NULL,NULL),
-(00158,00107,'11111','$2y$10$.Lg01pDzoP5DZiIIZRstw.gnE54k6Sta3hbkUA19zKhDphHieTXLO',001,'0','00001','2019-08-28 10:41:08',NULL,NULL),
-(00159,00108,'1111111111','$2y$10$e/j0u9k2Vgq2HkVDNH3JNuypQpqkJd9CUWvXqeqO8OC5VZoE./0O6',003,'0','00107','2019-09-09 08:24:44',NULL,NULL);
+(00158,00107,'11111','$2y$10$.Lg01pDzoP5DZiIIZRstw.gnE54k6Sta3hbkUA19zKhDphHieTXLO',001,'0','00001','2019-08-28 10:41:08',NULL,NULL);
 
 /* Procedure structure for procedure `p_pemeriksaan_pelanggaran_chart` */
 
@@ -7057,7 +7053,7 @@ insert  into `tbl_user`(`id`,`pegawai_id`,`username`,`password`,`id_hak_akses`,`
 
 DELIMITER $$
 
-/*!50003 CREATE PROCEDURE `p_pemeriksaan_pelanggaran_chart`(in bulan1 int(2), in tahun1 int(4))
+/*!50003 CREATE DEFINER=`vpaoosto_uptdpk`@`%` PROCEDURE `p_pemeriksaan_pelanggaran_chart`(in bulan1 int(2), in tahun1 int(4))
 BEGIN
 		SELECT nama, warna, COUNT(*) AS total FROM v_sk_pemeriksaan_pelanggaran 
 		WHERE bulan = bulan1 AND tahun = tahun1
@@ -7079,6 +7075,7 @@ DROP TABLE IF EXISTS `v_sk`;
  `bulan` int(2) ,
  `tahun` int(4) ,
  `hal` varchar(100) ,
+ `pelanggaran` text ,
  `isi` text ,
  `kepada` varchar(100) ,
  `pegawai_nama` text ,
@@ -7226,49 +7223,49 @@ DROP TABLE IF EXISTS `v_user_pegawai`;
 /*!50001 DROP TABLE IF EXISTS `v_sk` */;
 /*!50001 DROP VIEW IF EXISTS `v_sk` */;
 
-/*!50001 CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `v_sk` AS (select `a`.`id` AS `id`,`a`.`nomor` AS `nomor`,`a`.`tanggal` AS `tanggal`,`a`.`bulan` AS `bulan`,`a`.`tahun` AS `tahun`,`a`.`hal` AS `hal`,`a`.`isi` AS `isi`,`a`.`kepada` AS `kepada`,group_concat(`b`.`nama` separator '; ') AS `pegawai_nama`,`a`.`catatan` AS `catatan`,`a`.`dihapus` AS `dihapus`,`a`.`penomoran_id` AS `penomoran_id`,`c`.`kode` AS `penomoran_kode`,`c`.`nama` AS `penomoran_nama`,`c`.`ket` AS `penomoran_ket`,replace(replace(`c`.`format`,'{kode}',`c`.`kode`),'{nomor}',`a`.`nomor`) AS `kode` from ((`tbl_sk` `a` join `v_sk_pengolah_pegawai` `b` on((`a`.`id` = `b`.`sk_id`))) join `tbl_penomoran` `c` on((`a`.`penomoran_id` = `c`.`id`))) group by `b`.`sk_id`) */;
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`vpaoosto_uptdpk`@`%` SQL SECURITY DEFINER VIEW `v_sk` AS (select `a`.`id` AS `id`,`a`.`nomor` AS `nomor`,`a`.`tanggal` AS `tanggal`,`a`.`bulan` AS `bulan`,`a`.`tahun` AS `tahun`,`a`.`hal` AS `hal`,group_concat(`d`.`nama` separator '; ') AS `pelanggaran`,`a`.`isi` AS `isi`,`a`.`kepada` AS `kepada`,group_concat(`b`.`nama` separator '; ') AS `pegawai_nama`,`a`.`catatan` AS `catatan`,`a`.`dihapus` AS `dihapus`,`a`.`penomoran_id` AS `penomoran_id`,`c`.`kode` AS `penomoran_kode`,`c`.`nama` AS `penomoran_nama`,`c`.`ket` AS `penomoran_ket`,replace(replace(`c`.`format`,'{kode}',`c`.`kode`),'{nomor}',`a`.`nomor`) AS `kode` from (((`tbl_sk` `a` join `v_sk_pengolah_pegawai` `b` on((`a`.`id` = `b`.`sk_id`))) join `tbl_penomoran` `c` on((`a`.`penomoran_id` = `c`.`id`))) left join `v_sk_pemeriksaan_pelanggaran` `d` on((`a`.`id` = `d`.`id`))) group by `b`.`sk_id`) */;
 
 /*View structure for view v_sk_pemeriksaan_pelanggaran */
 
 /*!50001 DROP TABLE IF EXISTS `v_sk_pemeriksaan_pelanggaran` */;
 /*!50001 DROP VIEW IF EXISTS `v_sk_pemeriksaan_pelanggaran` */;
 
-/*!50001 CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `v_sk_pemeriksaan_pelanggaran` AS (select `a`.`id` AS `id`,`a`.`tanggal` AS `tanggal`,`a`.`bulan` AS `bulan`,`a`.`tahun` AS `tahun`,`b`.`jenis_pelanggaran_id` AS `jenis_pelanggaran_id`,`c`.`nama` AS `nama`,`c`.`warna` AS `warna` from ((`tbl_sk` `a` join `tbl_sk_pemeriksaan` `b` on((`a`.`id` = `b`.`sk_id`))) join `tbl_jenis_pelanggaran` `c` on((`b`.`jenis_pelanggaran_id` = `c`.`id`))) where (`a`.`hal` like '%Nota Pemeriksaan%')) */;
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`vpaoosto_uptdpk`@`%` SQL SECURITY DEFINER VIEW `v_sk_pemeriksaan_pelanggaran` AS (select `a`.`id` AS `id`,`a`.`tanggal` AS `tanggal`,`a`.`bulan` AS `bulan`,`a`.`tahun` AS `tahun`,`b`.`jenis_pelanggaran_id` AS `jenis_pelanggaran_id`,`c`.`nama` AS `nama`,`c`.`warna` AS `warna` from ((`tbl_sk` `a` join `tbl_sk_pemeriksaan` `b` on((`a`.`id` = `b`.`sk_id`))) join `tbl_jenis_pelanggaran` `c` on((`b`.`jenis_pelanggaran_id` = `c`.`id`))) where (`a`.`hal` like '%Nota Pemeriksaan%')) */;
 
 /*View structure for view v_sk_pengolah_pegawai */
 
 /*!50001 DROP TABLE IF EXISTS `v_sk_pengolah_pegawai` */;
 /*!50001 DROP VIEW IF EXISTS `v_sk_pengolah_pegawai` */;
 
-/*!50001 CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `v_sk_pengolah_pegawai` AS (select `a`.`id` AS `id`,`a`.`sk_id` AS `sk_id`,`a`.`pegawai_id` AS `pegawai_id`,`b`.`nip` AS `nip`,`b`.`nama` AS `nama`,`b`.`pangkat` AS `pangkat`,`b`.`golongan` AS `golongan`,`b`.`jabatan` AS `jabatan` from (`tbl_sk_pengolah` `a` left join `tbl_pegawai` `b` on((`a`.`pegawai_id` = `b`.`id`)))) */;
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`vpaoosto_uptdpk`@`%` SQL SECURITY DEFINER VIEW `v_sk_pengolah_pegawai` AS (select `a`.`id` AS `id`,`a`.`sk_id` AS `sk_id`,`a`.`pegawai_id` AS `pegawai_id`,`b`.`nip` AS `nip`,`b`.`nama` AS `nama`,`b`.`pangkat` AS `pangkat`,`b`.`golongan` AS `golongan`,`b`.`jabatan` AS `jabatan` from (`tbl_sk_pengolah` `a` left join `tbl_pegawai` `b` on((`a`.`pegawai_id` = `b`.`id`)))) */;
 
 /*View structure for view v_sp */
 
 /*!50001 DROP TABLE IF EXISTS `v_sp` */;
 /*!50001 DROP VIEW IF EXISTS `v_sp` */;
 
-/*!50001 CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `v_sp` AS (select `a`.`id` AS `id`,`a`.`nomor` AS `nomor`,`a`.`tanggal` AS `tanggal`,`a`.`bulan` AS `bulan`,`a`.`tahun` AS `tahun`,group_concat(`b`.`nama` separator '; ') AS `pegawai_nama`,`a`.`tanggal_sp` AS `tanggal_sp`,`a`.`tujuan` AS `tujuan`,`a`.`hal` AS `hal`,`a`.`ket` AS `ket`,`a`.`dihapus` AS `dihapus`,`a`.`penomoran_id` AS `penomoran_id`,`c`.`kode` AS `penomoran_kode`,`c`.`nama` AS `penomoran_nama`,`c`.`ket` AS `penomoran_ket`,replace(replace(`c`.`format`,'{kode}',`c`.`kode`),'{nomor}',`a`.`nomor`) AS `kode` from ((`tbl_sp` `a` join `v_sp_pegawai_pegawai` `b` on((`a`.`id` = `b`.`sp_id`))) join `tbl_penomoran` `c` on((`a`.`penomoran_id` = `c`.`id`))) group by `b`.`sp_id`) */;
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`vpaoosto_uptdpk`@`%` SQL SECURITY DEFINER VIEW `v_sp` AS (select `a`.`id` AS `id`,`a`.`nomor` AS `nomor`,`a`.`tanggal` AS `tanggal`,`a`.`bulan` AS `bulan`,`a`.`tahun` AS `tahun`,group_concat(`b`.`nama` separator '; ') AS `pegawai_nama`,`a`.`tanggal_sp` AS `tanggal_sp`,`a`.`tujuan` AS `tujuan`,`a`.`hal` AS `hal`,`a`.`ket` AS `ket`,`a`.`dihapus` AS `dihapus`,`a`.`penomoran_id` AS `penomoran_id`,`c`.`kode` AS `penomoran_kode`,`c`.`nama` AS `penomoran_nama`,`c`.`ket` AS `penomoran_ket`,replace(replace(`c`.`format`,'{kode}',`c`.`kode`),'{nomor}',`a`.`nomor`) AS `kode` from ((`tbl_sp` `a` join `v_sp_pegawai_pegawai` `b` on((`a`.`id` = `b`.`sp_id`))) join `tbl_penomoran` `c` on((`a`.`penomoran_id` = `c`.`id`))) group by `b`.`sp_id`) */;
 
 /*View structure for view v_sp_pegawai_pegawai */
 
 /*!50001 DROP TABLE IF EXISTS `v_sp_pegawai_pegawai` */;
 /*!50001 DROP VIEW IF EXISTS `v_sp_pegawai_pegawai` */;
 
-/*!50001 CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `v_sp_pegawai_pegawai` AS (select `a`.`id` AS `id`,`a`.`sp_id` AS `sp_id`,`a`.`pegawai_id` AS `pegawai_id`,`b`.`nip` AS `nip`,`b`.`nama` AS `nama`,`b`.`pangkat` AS `pangkat`,`b`.`golongan` AS `golongan`,`b`.`jabatan` AS `jabatan` from (`tbl_sp_pegawai` `a` left join `tbl_pegawai` `b` on((`a`.`pegawai_id` = `b`.`id`)))) */;
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`vpaoosto_uptdpk`@`%` SQL SECURITY DEFINER VIEW `v_sp_pegawai_pegawai` AS (select `a`.`id` AS `id`,`a`.`sp_id` AS `sp_id`,`a`.`pegawai_id` AS `pegawai_id`,`b`.`nip` AS `nip`,`b`.`nama` AS `nama`,`b`.`pangkat` AS `pangkat`,`b`.`golongan` AS `golongan`,`b`.`jabatan` AS `jabatan` from (`tbl_sp_pegawai` `a` left join `tbl_pegawai` `b` on((`a`.`pegawai_id` = `b`.`id`)))) */;
 
 /*View structure for view v_suket */
 
 /*!50001 DROP TABLE IF EXISTS `v_suket` */;
 /*!50001 DROP VIEW IF EXISTS `v_suket` */;
 
-/*!50001 CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `v_suket` AS (select `a`.`id` AS `id`,`a`.`nomor` AS `nomor`,`a`.`tanggal` AS `tanggal`,`a`.`bulan` AS `bulan`,`a`.`tahun` AS `tahun`,`a`.`kepada` AS `kepada`,`a`.`hal` AS `hal`,`a`.`datab` AS `datab`,`a`.`alamat` AS `alamat`,`a`.`kota_id` AS `kota_id`,`a`.`penomoran_id` AS `penomoran_id`,`a`.`dihapus` AS `dihapus`,`a`.`ditambah_oleh` AS `ditambah_oleh`,`a`.`tgl_tambah` AS `tgl_tambah`,`a`.`diedit_oleh` AS `diedit_oleh`,`a`.`tgl_edit` AS `tgl_edit`,`b`.`nama` AS `kota_nama`,`c`.`kode` AS `penomoran_kode`,`c`.`nama` AS `penomoran_nama`,`c`.`ket` AS `penomoran_ket`,replace(replace(`c`.`format`,'{kode}',`c`.`kode`),'{nomor}',`a`.`nomor`) AS `kode`,`d`.`nama` AS `pegawai_nama` from (((`tbl_suket` `a` left join `tbl_kota` `b` on((`a`.`kota_id` = `b`.`id`))) left join `tbl_penomoran` `c` on((`a`.`penomoran_id` = `c`.`id`))) left join `tbl_pegawai` `d` on((`a`.`pegawai_id` = `d`.`id`)))) */;
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`vpaoosto_uptdpk`@`%` SQL SECURITY DEFINER VIEW `v_suket` AS (select `a`.`id` AS `id`,`a`.`nomor` AS `nomor`,`a`.`tanggal` AS `tanggal`,`a`.`bulan` AS `bulan`,`a`.`tahun` AS `tahun`,`a`.`kepada` AS `kepada`,`a`.`hal` AS `hal`,`a`.`datab` AS `datab`,`a`.`alamat` AS `alamat`,`a`.`kota_id` AS `kota_id`,`a`.`penomoran_id` AS `penomoran_id`,`a`.`dihapus` AS `dihapus`,`a`.`ditambah_oleh` AS `ditambah_oleh`,`a`.`tgl_tambah` AS `tgl_tambah`,`a`.`diedit_oleh` AS `diedit_oleh`,`a`.`tgl_edit` AS `tgl_edit`,`b`.`nama` AS `kota_nama`,`c`.`kode` AS `penomoran_kode`,`c`.`nama` AS `penomoran_nama`,`c`.`ket` AS `penomoran_ket`,replace(replace(`c`.`format`,'{kode}',`c`.`kode`),'{nomor}',`a`.`nomor`) AS `kode`,`d`.`nama` AS `pegawai_nama` from (((`tbl_suket` `a` left join `tbl_kota` `b` on((`a`.`kota_id` = `b`.`id`))) left join `tbl_penomoran` `c` on((`a`.`penomoran_id` = `c`.`id`))) left join `tbl_pegawai` `d` on((`a`.`pegawai_id` = `d`.`id`)))) */;
 
 /*View structure for view v_user_pegawai */
 
 /*!50001 DROP TABLE IF EXISTS `v_user_pegawai` */;
 /*!50001 DROP VIEW IF EXISTS `v_user_pegawai` */;
 
-/*!50001 CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `v_user_pegawai` AS (select `a`.`id` AS `id`,`a`.`pegawai_id` AS `pegawai_id`,`a`.`username` AS `username`,`a`.`password` AS `password`,`a`.`id_hak_akses` AS `id_hak_akses`,`b`.`nama` AS `nama`,`b`.`jabatan` AS `jabatan`,`b`.`pangkat` AS `pangkat`,`a`.`dihapus` AS `dihapus` from (`tbl_user` `a` left join `tbl_pegawai` `b` on((`a`.`pegawai_id` = `b`.`id`)))) */;
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`vpaoosto_uptdpk`@`%` SQL SECURITY DEFINER VIEW `v_user_pegawai` AS (select `a`.`id` AS `id`,`a`.`pegawai_id` AS `pegawai_id`,`a`.`username` AS `username`,`a`.`password` AS `password`,`a`.`id_hak_akses` AS `id_hak_akses`,`b`.`nama` AS `nama`,`b`.`jabatan` AS `jabatan`,`b`.`pangkat` AS `pangkat`,`a`.`dihapus` AS `dihapus` from (`tbl_user` `a` left join `tbl_pegawai` `b` on((`a`.`pegawai_id` = `b`.`id`)))) */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
