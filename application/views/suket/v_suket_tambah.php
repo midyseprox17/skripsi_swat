@@ -60,11 +60,6 @@
 								            Tanggal Sekarang
 								          </label>
 								        </div>
-								        <div class="form-group row mt-2" id="show_status_tanggal">
-								        	<div class="col-sm-6">
-								        		<input type="text" class="form-control" disabled="1" value="<?php echo date('d / M / y');?>">
-								        	</div>
-								        </div>
 
 								        <!-- Tanggal Sekarang -->
 								        <div class="form-check">
