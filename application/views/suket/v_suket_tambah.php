@@ -53,12 +53,20 @@
 								<td style="color: #000000">Tanggal Surat</td>
 								<td>
 									<div class="col-sm-10">
+								        <!-- Tanggal Sekarang -->
 								        <div class="form-check">
 								          <input class="form-check-input" type="radio" name="status_tanggal" id="status_tanggal" onclick="status_tgl(0)" value="sekarang" checked="">
 								          <label class="form-check-label">
 								            Tanggal Sekarang
 								          </label>
 								        </div>
+								        <div class="form-group row mt-2" id="show_status_tanggal">
+								        	<div class="col-sm-6">
+								        		<input type="text" class="form-control" disabled="1" value="<?php echo date('d / M / y');?>">
+								        	</div>
+								        </div>
+
+								        <!-- Tanggal Sekarang -->
 								        <div class="form-check">
 								          <input class="form-check-input" type="radio" name="status_tanggal" id="status_tanggal" value="pilih" onclick="status_tgl(1)">
 								          <label class="form-check-label">
@@ -96,11 +104,11 @@
 						<table class="table">
 							<tr>
 								<td style="color: #000000; width: 20%">Kepada</td>
-								<td><input type="text" name="kepada" class="form-control" required="" onkeyup="grup_kepada(this)"></td>
+								<td><input type="text" name="kepada" class="form-control" placeholder="Isi dengan nama perusahaan" required="" onkeyup="grup_kepada(this)"></td>
 							</tr>
 							<tr>
 								<td style="color: #000000">Hal</td>
-								<td><input type="text" name="hal" class="form-control" required="" onkeyup="grup_hal(this)"></td>
+								<td><input type="text" name="hal" class="form-control" placeholder="isi dengan perihal jenis pengujian" required="" onkeyup="grup_hal(this)"></td>
 							</tr>
 						</table>
 						<!-- Dynamic Add & Remove Field -->
@@ -108,14 +116,14 @@
 							<tr id="tabel_datab">
 								<td style="width: 20%; color: #000000">Data B</td>
 								<td>
-									<input type="text" name="datab[]" class="form-control" required="">
+									<input type="text" name="datab[]" class="form-control" placeholder="Isi dengan data mesin yang diuji" required="">
 								</td>
 							</tr>
 						</table>
 						<table class="table">
 							<tr>
 								<td style="color: #000000; width: 20%">Alamat</td>
-								<td><textarea type="textarea" name="alamat" class="form-control" placeholder="Alamat" rows="5" required=""></textarea></td>
+								<td><textarea type="textarea" name="alamat" class="form-control" placeholder="Isi dengan alamat lengkap perusahaan" rows="5" required=""></textarea></td>
 							</tr>
 							<tr>
 								<td style="color: #000000">Kota</td>

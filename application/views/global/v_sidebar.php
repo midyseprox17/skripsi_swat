@@ -52,6 +52,22 @@
           <span>Dashboard</span></a>
       </li>
       
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSurat" aria-expanded="true" aria-controls="collapseSurat">
+          <i class="fas fa-fw fa-file-alt"></i>
+          <span>Surat</span>
+        </a>
+        <div id="collapseSurat" class="collapse" aria-labelledby="headingSurat" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Jenis Surat:</h6>
+            <a class="collapse-item" href="<?=base_url().'sp'?>">Surat Perintah</a>
+            <a class="collapse-item" href="<?=base_url().'suket'?>">Surat Keterangan</a>
+            <a class="collapse-item" href="<?=base_url().'sm'?>">Surat Masuk</a>
+            <a class="collapse-item" href="<?=base_url().'sk'?>">Surat Keluar/Nota</a>
+          </div>
+        </div>
+      </li>
+
       <?php if($this->session->userdata('id_hak_akses') == '1'){
       ?>
         <li class="nav-item">
@@ -68,23 +84,7 @@
       <?php
       }
       ?>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSurat" aria-expanded="true" aria-controls="collapseSurat">
-          <i class="fas fa-fw fa-file-alt"></i>
-          <span>Surat</span>
-        </a>
-        <div id="collapseSurat" class="collapse" aria-labelledby="headingSurat" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Jenis Surat:</h6>
-            <a class="collapse-item" href="<?=base_url().'sp'?>">Surat Perintah</a>
-            <a class="collapse-item" href="<?=base_url().'suket'?>">Surat Keterangan</a>
-            <a class="collapse-item" href="<?=base_url().'sm'?>">Surat Masuk</a>
-            <a class="collapse-item" href="<?=base_url().'sk'?>">Surat Keluar/Nota</a>
-          </div>
-        </div>
-      </li>
-      
+  
       <li class="nav-item">
         <a class="nav-link" href="<?=base_url().'sk/diagram'?>">
           <i class="fas fa-fw fa-chart-pie"></i>
@@ -162,11 +162,6 @@
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
-
-          <!-- Page Heading -->
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <?=$this->breadcrumb->generate()?>
-          </div>
 
         </div>
         <!-- /.container-fluid -->

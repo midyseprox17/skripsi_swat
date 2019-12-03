@@ -2,15 +2,12 @@
 if (!defined('BASEPATH')) exit('No direct script access allowed!');
   
 /**
- * @author Rijal Tanjung
  * 
  * @license MIT
  * 
  * @category Third Party Library for auto generated breadcrumb
  * 
  * @access Load the library, then $this->breadcrumb->generate()
- * 
- * @link https://github.com/devrijal/Codeigniter-auto-breadcrumb
  * 
  * Created since august 2015
  * 
