@@ -41,7 +41,7 @@
 						<table class="table" id="tabel_tanggal">	
 							<tr id="tabel_tanggal1">
 								<td style="width: 20%; color: #000000">Tanggal Keluar</td>
-								<td style="width: 70%">
+								<td style="width: 64%">
 									<div class="form-inline">
 										<div class="input-group">
 											<input type="text" name="tanggal_sp[]" id="datepicker" class="form-control docs-date" placeholder="Pilih Tanggal" required="">
@@ -51,7 +51,7 @@
 												</button>
 								            </div>
 								        </div>
-								    	<textarea type="textarea" class="form-control ml-3" name="tujuan[]" placeholder="Masukan Tempat Tujuan" rows="1" style="width: 50%" required=""></textarea>	
+								    	<textarea type="textarea" class="form-control ml-3" name="tujuan[]" placeholder="Masukan Tempat Tujuan" rows="1" style="width: 58%" required=""></textarea>	
 									</div>
 					    		</td>
 					    		<td>
