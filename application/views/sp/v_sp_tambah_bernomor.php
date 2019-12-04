@@ -96,7 +96,7 @@
 												</button>
 								            </div>
 								        </div>
-								    	<textarea type="textarea" class="form-control ml-3" name="tujuan[]" placeholder="Tujuan" rows="1" style="width: 67%" required=""></textarea>	
+								    	<textarea type="textarea" class="form-control ml-3" name="tujuan[]" placeholder="Masukan Tempat Tujuan" rows="1" style="width: 67%" required=""></textarea>	
 									</div>
 								    
 					    		</td>
@@ -105,11 +105,11 @@
 						<table class="table">
 							<tr>
 								<td style="color: #000000; width: 20%">Hal</td>
-								<td><textarea type="textarea" name="hal" class="form-control" placeholder="Hal" rows="5" required=""></textarea>
+								<td><textarea type="textarea" name="hal" class="form-control" placeholder="Maksud dari kunjungan pada tempat diatas" rows="5" required=""></textarea>
 							</tr>
 							<tr>
 								<td style="color: #000000">Keterangan</td>
-								<td><textarea type="textarea" name="keterangan" class="form-control" placeholder="Keterangan" rows="5"></textarea>
+								<td><textarea type="textarea" name="keterangan" class="form-control" placeholder="Keterangan tambahan (optional)" rows="5"></textarea>
 							</tr>
 						</table>
 						<div class="tile-footer">
@@ -157,7 +157,7 @@ $(document).ready(function() {
 								</button>
 				            </div>
 				        </div>
-				    	<textarea type="textarea" class="form-control ml-3" name="tujuan[]" placeholder="Tujuan" rows="1" style="width: 67%" required></textarea>	
+				    	<textarea type="textarea" class="form-control ml-3" name="tujuan[]" placeholder="Masukan Tempat Tujuan" rows="1" style="width: 67%" required></textarea>	
 					</div>
 				    
 				</td>
@@ -178,7 +178,7 @@ $(document).ready(function() {
 									</button>
 					            </div>
 					        </div>
-					    	<textarea type="textarea" class="form-control ml-3" name="tujuan[]" placeholder="Tujuan" rows="1" style="width: 67%" required></textarea>	
+					    	<textarea type="textarea" class="form-control ml-3" name="tujuan[]" placeholder="Masukan Tempat Tujuan" rows="1" style="width: 67%" required></textarea>	
 						</div>
 					    
 					</td>
