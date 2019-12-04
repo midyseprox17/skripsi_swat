@@ -31,7 +31,6 @@ class sp extends CI_Controller
 				$this->m_sp->lock_tbl_sp();
 
 				$status_tanggal = $this->input->post('status_tanggal');
-				$jumlah_sp = $this->input->post('jumlah_sp');
 				$pegawai = $this->input->post('pegawai'); //array
 				$tanggal_sp = $this->input->post('tanggal_sp'); //array
 				$tujuan = $this->input->post('tujuan'); //array
@@ -46,7 +45,7 @@ class sp extends CI_Controller
 				$tgl_terakhir = $hasil->tahun.'-'.$hasil->bulan.'-'.$hasil->tanggal;
 
 
-				for($i = 1; $i <= $jumlah_sp; $i++){
+				for($i = 1; $i <= count($tanggal_sp); $i++){
 					$tgl_d = date('d');
 					$tgl_m = date('m');
 					$tgl_y = date('Y');
@@ -74,7 +73,7 @@ class sp extends CI_Controller
 							$nomor_min = $data['nomor_minmax']->nomor_min;
 							$nomor_max = $data['nomor_minmax']->nomor_max;
 
-							$nomor_max = $nomor_max + $jumlah_sp;
+							$nomor_max = $nomor_max + count($tanggal_sp);
 
 							for($no = $nomor_min; $no <= $nomor_max; $no++){
 								$where = [
