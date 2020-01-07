@@ -22,7 +22,7 @@
 						<table class="table" id="tabel_pegawai">
 							<tr id="tabel_pegawai1">
 								<td style="width: 20%; color: #000000">Nama</td>
-								<td>
+								<td style="width: 64%">
 									<select class="form-control selectpicker" data-live-search="true" name="pegawai[]" style="width: 40%" placeholder="Nama" required="">
 										<?php foreach ($pegawai->result() as $p) {
 										?>
@@ -33,7 +33,7 @@
 									</select>
 								</td>
 								<td>
-									<button type="button" class="btn btn-primary mx-3" onclick="tambah_baris_pegawai()"><i class="fa fa-plus"></i></button>
+									<button type="button" class="btn btn-primary" onclick="tambah_baris_pegawai()"><i class="fa fa-plus"></i></button>
 								</td>
 							</tr>
 						</table>
@@ -41,7 +41,7 @@
 						<table class="table" id="tabel_tanggal">	
 							<tr id="tabel_tanggal1">
 								<td style="width: 20%; color: #000000">Tanggal Keluar</td>
-								<td style="width: 70%">
+								<td style="width: 64%">
 									<div class="form-inline">
 										<div class="input-group">
 											<input type="text" name="tanggal_sp[]" id="datepicker" class="form-control docs-date" placeholder="Pilih Tanggal" required="">
@@ -51,11 +51,11 @@
 												</button>
 								            </div>
 								        </div>
-								    	<textarea type="textarea" class="form-control ml-3" name="tujuan[]" placeholder="Masukan Tempat Tujuan" rows="1" style="width: 50%" required=""></textarea>	
+								    	<textarea type="textarea" class="form-control ml-3" name="tujuan[]" placeholder="Masukan Tempat Tujuan" rows="1" style="width: 58%" required=""></textarea>	
 									</div>
 					    		</td>
-					    		<td>
-									<button type="button" class="btn btn-primary mx-3" onclick="tambah_baris_tanggal()"><i class="fa fa-plus"></i></button>
+					    		<td style="width: 16%">
+									<button type="button" class="btn btn-primary" onclick="tambah_baris_tanggal()"><i class="fa fa-plus"></i></button>
 								</td>
 							</tr>
 						</table>
@@ -99,12 +99,12 @@ function tambah_baris_pegawai(){
         method : "POST",
         dataType : 'json',
         success: function(data){
-            var html = '<tr id="tabel_pegawai'+$rowno+'"><td>Nama</td><td><select class="form-control selectpicker" data-live-search="true" name="pegawai[]" style="width: 40%" placeholder="Nama" required="">';
+            var html = '<tr id="tabel_pegawai'+$rowno+'"><td style="width:20%">Nama</td><td style="width:64%"><select class="form-control selectpicker" data-live-search="true" name="pegawai[]" style="width: 58%" placeholder="Nama" required="">';
             var i;
             for(var i = 0; i < data.length; i++){
                 html += '<option value="'+data[i]['id']+'">'+data[i]['nip']+' | '+data[i]['nama']+'</option>';
             }
-            html += '</select></td><td><button class="btn btn-danger mx-3" onclick=hapus_baris_pegawai('+$rowno+')><i class="fa fa-minus"></i></button></td></tr>';
+            html += '</select></td><td style="width:16%"><button class="btn btn-danger" onclick=hapus_baris_pegawai('+$rowno+')><i class="fa fa-minus"></i></button></td></tr>';
             $("#tabel_pegawai tr:last").after(html); 
             $('.selectpicker').selectpicker('refresh');
         }
@@ -121,7 +121,7 @@ function tambah_baris_tanggal(){
 	$rowno = $rowno + 1;
     var html = `<tr id="tabel_tanggal`+$rowno+`">
 					<td style="width: 20%; color: #000000"></td>
-					<td>
+					<td style="width: 64%">
 						<div class="form-inline">
 							<div class="input-group">
 								<input type="text" name="tanggal_sp[]" id="datepicker" class="form-control docs-date" placeholder="Pilih Tanggal" required="">
@@ -131,10 +131,10 @@ function tambah_baris_tanggal(){
 									</button>
 					            </div>
 					        </div>
-					    	<textarea type="textarea" class="form-control ml-3" name="tujuan[]" placeholder="Masukan Tempat Tujuan" rows="1" style="width: 50%" required=""></textarea>	
+					    	<textarea type="textarea" class="form-control ml-3" name="tujuan[]" placeholder="Masukan Tempat Tujuan" rows="1" style="width: 58%" required=""></textarea>	
 						</div>
 		    		</td>
-		    		<td><button class="btn btn-danger mx-3" onclick=hapus_baris_tanggal(`+$rowno+`)><i class="fa fa-minus"></i></button></td>
+		    		<td style="width: 16%"><button class="btn btn-danger" onclick=hapus_baris_tanggal(`+$rowno+`)><i class="fa fa-minus"></i></button></td>
 				</tr>`;
 	$("#tabel_tanggal tr:last").after(html); 
 }
