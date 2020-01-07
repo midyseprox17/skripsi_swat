@@ -30,7 +30,6 @@ class sp extends CI_Controller
 			if($this->input->post('submit') != NULL){
 				$this->m_sp->lock_tbl_sp();
 
-				$status_tanggal = $this->input->post('status_tanggal');
 				$pegawai = $this->input->post('pegawai'); //array
 				$tanggal_sp = $this->input->post('tanggal_sp'); //array
 				$tujuan = $this->input->post('tujuan'); //array
@@ -51,7 +50,7 @@ class sp extends CI_Controller
 					$tgl_y = date('Y');
 					$nomor = 0;
 
-					if($status_tanggal == "sekarang" && $i == 1){
+					if($i == 1){
 						$hasil = $this->m_sp->id_terakhir(date('Y'))->row();
 						if(strtotime($tgl_terakhir) < strtotime(date("Y-m-d"))){
 							$nomor = $hasil->nomor+6;
@@ -59,53 +58,9 @@ class sp extends CI_Controller
 							$nomor = $hasil->nomor+1;
 						}
 						
-					}else if($status_tanggal == "sekarang" && $i != 1){
+					}else if($i != 1){
 						$hasil = $this->m_sp->id_terakhir(date('Y'))->row();
 						$nomor = $hasil->nomor+1;
-					}else if($status_tanggal == "pilih"){
-						$tgl_d = $this->input->post('tgl_d');
-						$tgl_m = $this->input->post('tgl_m');
-						$tgl_y = $this->input->post('tgl_y');
-
-						$data['nomor_list'] = $this->m_sp->nomor_cari($tgl_d, $tgl_m, $tgl_y);
-						if($data['nomor_list']->num_rows() > 0){
-							$data['nomor_minmax'] = $this->m_sp->nomor_minmax($tgl_d, $tgl_m, $tgl_y)->row();
-							$nomor_min = $data['nomor_minmax']->nomor_min;
-							$nomor_max = $data['nomor_minmax']->nomor_max;
-
-							$nomor_max = $nomor_max + count($tanggal_sp);
-
-							for($no = $nomor_min; $no <= $nomor_max; $no++){
-								$where = [
-									'nomor' => $no,
-									'tahun' => $tgl_y
-								];
-								$data = $this->m_uptd->tampil_where('tbl_sp', $where)->row();
-								if($data == NULL){
-									$nomor = $no;
-									break;
-								}
-							}
-
-							if($nomor == 0){
-								$hasil = $this->m_sp->id_terakhir(date('Y'))->row();
-								if(strtotime($tgl_terakhir) < strtotime(date("Y-m-d"))){
-									$nomor = $hasil->nomor+6;
-								}else{
-									$nomor = $hasil->nomor+1;
-								}
-								
-							}
-						}else{
-							$hasil = $this->m_sp->id_terakhir(date('Y'))->row();
-							if(strtotime($tgl_terakhir) < strtotime(date("Y-m-d"))){
-								$nomor = $hasil->nomor+6;
-							}else{
-								$nomor = $hasil->nomor+1;
-							}
-							
-						}
-						
 					}
 
 					//SCRIPT INPUT

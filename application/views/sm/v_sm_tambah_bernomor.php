@@ -26,24 +26,12 @@
 								<td style="color: #000000">Tanggal Surat</td>
 								<td>
 									<div class="col-sm-10">
-								        <div class="form-check">
-								          <input class="form-check-input" type="radio" name="status_tanggal" id="status_tanggal" onclick="status_tgl(0)" value="sekarang" checked="">
-								          <label class="form-check-label">
-								            Tanggal Sekarang
-								          </label>
-								        </div>
-								        <div class="form-check">
-								          <input class="form-check-input" type="radio" name="status_tanggal" id="status_tanggal" value="pilih" onclick="status_tgl(1)">
-								          <label class="form-check-label">
-								            Pilih Tanggal
-								          </label>
-								        </div>
 								        <div class="form-group row mt-2" id="show_status_tanggal">
 								        	<div class="col-sm-2">
-								        		Tanggal<input type="number" class="form-control" placeholder="Tgl" name="tgl_d" id="tgl_d" min="1" max="31" disabled="">
+								        		Tanggal<input type="number" class="form-control" placeholder="Tgl" name="tgl_d" id="tgl_d" min="1" max="31">
 								        	</div>
 								        	<div class="col-sm-2">
-								        		Bulan<select class="custom-select form-control form-control-sm" id="tgl_m" name="tgl_m" disabled="">
+								        		Bulan<select class="custom-select form-control form-control-sm" id="tgl_m" name="tgl_m">
 												    <option value="1">Januari</option>
 												    <option value="2">Februari</option>
 												    <option value="3">Maret</option>
@@ -59,7 +47,7 @@
 												</select>
 								        	</div>
 								        	<div class="col-sm-2">
-								        		Tahun<input type="number" class="form-control" placeholder="Tahun" name="tgl_y" id="tgl_y" value="<?=date('Y')?>" >
+								        		Tahun<input type="number" class="form-control" placeholder="Tahun" name="tgl_y" id="tgl_y" value="<?=date('Y')?>" readonly>
 								        	</div>
 								        </div>
 								    </div>

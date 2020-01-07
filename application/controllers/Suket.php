@@ -49,8 +49,6 @@ class suket extends CI_Controller
 				$this->m_suket->lock_tbl_suket();
 
 				$penomoran_id = $this->input->post('penomoran_id');
-				$jumlah_suket = $this->input->post('jumlah_suket');
-				$status_tanggal = $this->input->post('status_tanggal');
 				$kepada = $this->input->post('kepada');
 				$hal = $this->input->post('hal');
 				$datab = $this->input->post('datab'); //array
@@ -61,17 +59,11 @@ class suket extends CI_Controller
 				$data_warning['header'] = array("Nomor", "Tanggal", "Data B");
 				$data_warning['hasil'] = array();
 
-				for($i = 0; $i < $jumlah_suket; $i++){
+				for($i = 0; $i < count($datab); $i++){
 					$tgl_d = date('d');
 					$tgl_m = date('m');
 					$tgl_y = date('Y');
 					$nomor = 0;
-
-					if($status_tanggal == "pilih"){
-						$tgl_d = $this->input->post('tgl_d');
-						$tgl_m = $this->input->post('tgl_m');
-						$tgl_y = $this->input->post('tgl_y');
-					}
 
 					$hasil = $this->m_suket->id_terakhir($penomoran_id, date('Y'))->row();
 					if($hasil == NULL){

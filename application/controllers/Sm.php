@@ -30,7 +30,6 @@ class sm extends CI_Controller
 			if($this->input->post('submit') != NULL){
 				$this->m_sm->lock_tbl_sm();
 
-				$status_tanggal = $this->input->post('status_tanggal');
 				$hal = $this->input->post('hal');
 				$isi = $this->input->post('isi');
 				$dari = $this->input->post('dari');
@@ -46,12 +45,6 @@ class sm extends CI_Controller
 				$tgl_d = date('d');
 				$tgl_m = date('m');
 				$tgl_y = date('Y');
-
-				if($status_tanggal != "sekarang"){
-					$tgl_d = $this->input->post('tgl_d');
-					$tgl_m = $this->input->post('tgl_m');
-					$tgl_y = $this->input->post('tgl_y');
-				}
 
 				$data = [
 					'nomor' => $nomor,
@@ -96,7 +89,6 @@ class sm extends CI_Controller
 				$this->m_sm->lock_tbl_sm();
 
 				$nomor = $this->input->post('nomor');
-				$status_tanggal = $this->input->post('status_tanggal');
 				$hal = $this->input->post('hal');
 				$isi = $this->input->post('isi');
 				$dari = $this->input->post('dari');
@@ -106,16 +98,9 @@ class sm extends CI_Controller
 				$data_warning['header'] = array("Nomor", "Tanggal", "Dari");
 				$data_warning['hasil'] = array();
 
-				$tgl_d = date('d');
-				$tgl_m = date('m');
-				$tgl_y = date('Y');
-
-				if($status_tanggal != "sekarang"){
-					$tgl_d = $this->input->post('tgl_d');
-					$tgl_m = $this->input->post('tgl_m');
-					$tgl_y = $this->input->post('tgl_y');
-				}
-
+				$tgl_d = $this->input->post('tgl_d');
+				$tgl_m = $this->input->post('tgl_m');
+				$tgl_y = $this->input->post('tgl_y');
 				
 				$data = [
 					'nomor' => $nomor,
