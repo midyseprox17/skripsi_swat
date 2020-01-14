@@ -11,7 +11,7 @@
 				  <h6 class="m-0 font-weight-bold text-primary" style="color: #15406a;">Tambah Data Surat Perintah</h6>
 				</div>
 				<div class="card-body">
-					<form name="tambah_sp" id="tambah_sp" method="post" action="<?=base_url().'sp/tambah'?>">
+					<form name="tambah_sp" id="tambah_sp" method="post" action="<?=base_url().'sp/tambah'?>" autocomplete="off">
 						<input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" style="display: none">
 						<table class="table">	
 							<tr>
@@ -65,8 +65,8 @@
 								<td><textarea type="textarea" name="hal" class="form-control" placeholder="Maksud dari kunjungan pada tempat diatas" rows="5" required=""></textarea>
 							</tr>
 							<tr>
-								<td style="color: #000000">Keterangan</td>
-								<td><textarea type="textarea" name="keterangan" class="form-control" placeholder="Keterangan tambahan (optional)" rows="5"></textarea>
+								<td style="color: #000000">Keterangan(Optional)</td>
+								<td><textarea type="textarea" name="keterangan" class="form-control" placeholder="Keterangan tambahan" rows="5"></textarea>
 							</tr>
 						</table>
 						<div class="tile-footer">

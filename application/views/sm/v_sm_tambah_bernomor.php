@@ -17,7 +17,7 @@
 								<td>
 									<div class="form-group row">
 										<div class="col-xs-2">
-											<input type="number" name="nomor" required="" class="form-control sm">
+											<input type="number" name="nomor" required="" class="form-control sm" placeholder="Nomor">
 										</div>
 									</div>
 								</td>
@@ -65,18 +65,18 @@
 							</tr>
 							<tr>
 								<td style="color: #000000; width: 20%">Dari</td>
-								<td><input type="text" name="dari" class="form-control" onkeyup="grup_dari(this)" required=""></td>
+								<td><input type="text" name="dari" class="form-control" placeholder="isi dengan pengirim surat" onkeyup="grup_dari(this)" required=""></td>
 							</tr>
 							<tr>
-								<td style="color: #000000; width: 20%">Nomor Surat</td>
-								<td><input type="text" name="nomor_surat" class="form-control"></td>
+								<td style="color: #000000; width: 20%">Nomor Surat(Optional)</td>
+								<td><input type="text" name="nomor_surat" class="form-control" placeholder="isi dengan nomor surat yang tertera"></td>
 							</tr>
 							<tr>
-								<td style="color: #000000; width: 20%">Catatan</td>
+								<td style="color: #000000; width: 20%">Catatan(Optional)</td>
 								<td><input type="text" name="catatan" class="form-control"></td>
 							</tr>
 							<tr>
-								<td style="color: #000000; width: 20%">Tgl Diarsipkan</td>
+								<td style="color: #000000; width: 20%">Tgl Diarsipkan(Optional)</td>
 								<td>
 									<div class="form-group row mt-2">
 							        	<div class="col-sm-2">

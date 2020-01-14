@@ -46,9 +46,9 @@
 					          <td><?=$n->tahun.'-'.$n->bulan.'-'.$n->tanggal?></td>
 					          <td><?=$n->hal?></td>
 					          <td><?=$n->isi?></td>
-					          <td><?=str_replace('; ', ' | ', $n->kepada)?></td>
-					          <td><?=str_replace('; ', ';<br> ', $n->pelanggaran)?></td>
-					          <td><?=str_replace('; ', ' | ', $n->pegawai_nama)?></td>
+					          <td><li><?=str_replace('; ', '<br><li>', $n->kepada)?></td>
+					          <td><li><?=str_replace('; ', '<br><li>', $n->pelanggaran)?></td>
+					          <td><li><?=str_replace('; ', '<br><li>', $n->pegawai_nama)?></td>
 					          <td><?=$n->catatan?></td>
 					          <td>
 					          	<a href="<?=base_url().'sk/hapus/'.$n->id?>" class="btn btn-danger btn-circle" onclick="return confirm('Apakah Anda yakin untuk menghapus data <?=$n->nomor?>?');">

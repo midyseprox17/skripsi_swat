@@ -35,10 +35,10 @@
 								<td>
 									<div class="form-group row mt-1">
 										<div class="col-sm-2">
-							        		Dari Nomor<input type="number" class="form-control" name="nomor_awal" id="nomor_awal" min="1" required="">
+							        		Dari<br>Nomor<input type="number" class="form-control" name="nomor_awal" id="nomor_awal" min="1" required="">
 							        	</div>
 							        	<div class="col-sm-2">
-							        		Sampai Nomor<input type="number" class="form-control" name="nomor_akhir" id="nomor_akhir" min="0" value="0" disabled="" required="">
+							        		Sampai<br>Nomor<input type="number" class="form-control" name="nomor_akhir" id="nomor_akhir" min="0" value="0" disabled="" required="">
 							        	</div>
 							        	<font color="red">*biarkan 0 jika hanya 1 nomor</font>
 							        </div>

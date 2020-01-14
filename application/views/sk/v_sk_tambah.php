@@ -16,7 +16,7 @@
 								<td colspan="2" align="right"><a href="<?=base_url().'sk/tambah_bernomor'?>">Sudah punya nomor? Klik Disini</a></td>
 							</tr>
 							<tr>
-								<td>Kode</td>
+								<td style="color: #000000; width: 20%">Kode</td>
 								<td>
 									<div class="float-left" style="width: 30%">
 										<select name="penomoran_id" class="custom-select form-control">
