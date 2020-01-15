@@ -41,7 +41,7 @@
                     <h6><font color="red"><?=$_SESSION['pesan']?></font></h6>
                     <hr class=" mb-4" style="width: 100%">
                   </div>
-                  <form method="post" class="user" action="<?=base_url().'login'?>">
+                  <form method="post" class="user" action="<?=base_url().'login'?>" autocomplete="off">
                     <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" style="display: none">
                     <div class="form-group">
                       <input class="rounded form-control form-control-user" name="username" id="username" aria-describedby="username" placeholder="Masukan NIP">
