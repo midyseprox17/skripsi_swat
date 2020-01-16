@@ -29,7 +29,7 @@
 				          <th>Tanggal SP</th>
 				          <th>Tujuan</th>
 				          <th>Hal</th>
-				          <th>Ket</th>
+				          <th>Keterangan</th>
 				          <th>Tindakan</th>
 				        </tr>
 				      </thead>

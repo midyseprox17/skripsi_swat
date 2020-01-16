@@ -25,7 +25,7 @@
 				          <th>No</th>
 				          <th>Kode</th>
 				          <th>Nama</th>
-				          <th>Ket</th>
+				          <th>Keterangan</th>
 				          <th>Jenis</th>
 				          <th>Format</th>
 				          <th>Tindakan</th>
