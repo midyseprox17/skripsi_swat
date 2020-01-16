@@ -1,6 +1,8 @@
 <head>
 	<link href="<?=base_url().'assets/'?>vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 	<link href="<?=base_url().'assets/'?>vendor/datatables/buttons.dataTables.min.css" rel="stylesheet">
+	<link href="<?=base_url().'assets/'?>vendor/jquery/jquery-confirm.min.css" rel="stylesheet">
+	<script src="<?=base_url().'assets/'?>vendor/jquery/jquery-confirm.min.js"></script>
 </head>
 
 <div class="container">
@@ -65,7 +67,7 @@
 					          <td><?=$value->kota_nama?></td>
 					          <td><?=$value->pegawai_nama?></td>
 					          <td>
-					          	<a href="<?=base_url().'suket/hapus/'.$value->penomoran_id.'/'.$value->id?>" class="btn btn-danger btn-circle" onclick="return confirm('Apakah Anda yakin untuk menghapus data <?=$value->nomor?> dari <?=$value->penomoran_nama?>?');">
+					          	<a href="#" class="btn btn-danger btn-circle" onclick="confirm_dialog('<?=$value->penomoran_id?>','<?=$value->id?>','<?=$value->kepada?>(<?=$value->hal?>,<?=$value->datab?>)')">
 					          		<i class="fas fa-trash"></i>
 				                </a>
 					          </td>
@@ -131,4 +133,19 @@
 	function ganti_jenis(){
 		window.location.href = "<?=base_url().'suket/'?>"+$('#penomoran_id').val();
 	}
+
+	function confirm_dialog(penomoran_id, id, teks){
+		$.confirm({
+		    title: 'Hapus Data',
+		    content: 'Apakah anda yakin ingin menghapus data Surat Keterangan '+ teks + ' ?',
+		    buttons: {
+		        konfirmasi: function () {
+		            window.location.href = "<?=base_url()?>suket/hapus/"+penomoran_id+"/"+id;
+		        },
+		         batal: function () {
+		        }
+		    }
+		});
+	}
+	
 </script>
