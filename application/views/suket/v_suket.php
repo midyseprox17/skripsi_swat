@@ -57,7 +57,7 @@
 					        <tr>
 					          <td><?=$value->nomor?></td>
 					          <td><?=$value->penomoran_ket?></td>
-					          <td><?=$value->tahun.'-'.$value->bulan.'-'.$value->tanggal?></td>
+					          <td><?=$value->tanggal.'-'.$value->bulan.'-'.$value->tahun?></td>
 					          <td><?=$value->kepada?></td>
 					          <td><?=$value->hal?></td>
 					          <td><?=$value->datab?></td>

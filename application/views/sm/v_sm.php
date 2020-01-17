@@ -41,7 +41,7 @@
 						?>
 					        <tr>
 						          <td><?=$value->nomor?></td>
-						          <td><?=$value->tahun.'-'.$value->bulan.'-'.$value->tanggal?></td>
+						          <td><?=$value->tanggal.'-'.$value->bulan.'-'.$value->tahun?></td>
 						          <td><?=$value->hal?></td>
 						          <td><?=$value->isi?></td>
 						          <td><?=$value->dari?></td>

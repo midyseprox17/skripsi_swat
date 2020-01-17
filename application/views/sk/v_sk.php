@@ -43,7 +43,7 @@
 					        <tr>
 					          <td><?=$n->nomor?></td>
 					          <td><?=$n->penomoran_kode?></td>
-					          <td><?=$n->tahun.'-'.$n->bulan.'-'.$n->tanggal?></td>
+					          <td><?=$n->tanggal.'-'.$n->bulan.'-'.$n->tahun?></td>
 					          <td><?=$n->hal?></td>
 					          <td><?=$n->isi?></td>
 					          <td><li><?=str_replace('; ', '<br><li>', $n->kepada)?></td>

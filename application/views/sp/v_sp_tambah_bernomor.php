@@ -128,7 +128,7 @@ $(document).ready(function() {
         $(this).datepicker({
         	autoHide : true,
         	inline : true,
-        	format: 'yyyy-mm-dd'
+        	format: 'dd-mm-yyyy'
         });
     });
 

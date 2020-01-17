@@ -41,7 +41,7 @@
 						?>
 					        <tr>
 					          <td><?=$s->nomor?></td>
-					          <td><?=$s->tahun.'-'.$s->bulan.'-'.$s->tanggal?></td>
+					          <td><?=$s->tanggal.'-'.$s->bulan.'-'.$s->tahun?></td>
 					          <td><li><?=str_replace('; ', '<br><li>', $s->pegawai_nama)?></li></td>
 					          <td><?=$s->tanggal_sp?></td>
 					          <td><?=$s->tujuan?></td>
