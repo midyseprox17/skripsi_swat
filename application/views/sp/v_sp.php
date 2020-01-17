@@ -127,9 +127,9 @@
 										margin:[30,20,0,0]
 									},
 									{
-										alignment: 'left',
+										alignment: 'center',
 										fontSize: 14,
-										text: 'UPTD Pengawasan Keterangan Wilayah IV Bandung \nasdasdasdasd\nasdasdasd',
+										text: 'UPTD Pengawasan Keterangan Wilayah IV Bandung \nJl. L. L. Martadinata, Babakan Ciamis, Kecamatan Sumur Bandung, Kota Bandung, Jawa Barat 40117\nTelepon: (022) 4265361',
 										margin:[30,20,0,0]
 									}
 								],
