@@ -1,8 +1,6 @@
 <head>
 	<link href="<?=base_url().'assets/'?>vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 	<link href="<?=base_url().'assets/'?>vendor/datatables/buttons.dataTables.min.css" rel="stylesheet">
-	<link href="<?=base_url().'assets/'?>vendor/jquery/jquery-confirm.min.css" rel="stylesheet">
-	<script src="<?=base_url().'assets/'?>vendor/jquery/jquery-confirm.min.js"></script>
 </head>
 
 <div class="container">

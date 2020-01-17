@@ -48,7 +48,7 @@
 					          	<a href="<?=base_url().'penomoran/ubah/'.$p->id?>" class="btn btn-primary btn-circle">
 					          		<i class="fas fa-fw fa-edit"></i>
 				                </a>
-					          	<a href="<?=base_url().'penomoran/hapus/'.$p->id?>" class="btn btn-danger btn-circle" onclick="return confirm('Apakah Anda yakin untuk menghapus data <?=$p->nama?>?');">
+				                <a href="#" class="btn btn-danger btn-circle" onclick="confirm_dialog('<?=$p->id?>','<?=$p->nama?>')">
 					          		<i class="fas fa-trash"></i>
 				                </a>
 					          </td>
@@ -109,4 +109,18 @@
 	        ]
 	    } );
 	} );
+
+	function confirm_dialog(id, teks){
+		$.confirm({
+		    title: 'Hapus Data',
+		    content: 'Apakah anda yakin ingin menghapus data Penomoran '+ teks + ' ?',
+		    buttons: {
+		        konfirmasi: function () {
+		            window.location.href = "<?=base_url()?>penomoran/hapus/"+id;
+		        },
+		         batal: function () {
+		        }
+		    }
+		});
+	}
 </script>

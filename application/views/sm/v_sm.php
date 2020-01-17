@@ -58,9 +58,9 @@
 					                </a>
 					            </td>
 					            <td>
-						          	<a href="<?=base_url().'sm/hapus/'.$value->id?>" class="btn btn-danger btn-circle" onclick="return confirm('Apakah Anda yakin untuk menghapus data <?=$value->nomor?>?');">
-						          		<i class="fas fa-trash"></i>
-					                </a>
+					                <a href="#" class="btn btn-danger btn-circle" onclick="confirm_dialog('<?=$value->id?>','<?=$value->nomor?>')">
+					          			<i class="fas fa-trash"></i>
+				                	</a>
 						        </td>
 					        </tr>
 					    <?php
@@ -118,4 +118,18 @@
 	        ]
 	    } );
 	} );
+
+	function confirm_dialog(id, teks){
+		$.confirm({
+		    title: 'Hapus Data',
+		    content: 'Apakah anda yakin ingin menghapus Surat Masuk '+ teks + ' ?',
+		    buttons: {
+		        konfirmasi: function () {
+		            window.location.href = "<?=base_url()?>sm/hapus/"+id;
+		        },
+		         batal: function () {
+		        }
+		    }
+		});
+	}
 </script>

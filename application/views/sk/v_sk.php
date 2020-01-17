@@ -51,7 +51,7 @@
 					          <td><li><?=str_replace('; ', '<br><li>', $n->pegawai_nama)?></td>
 					          <td><?=$n->catatan?></td>
 					          <td>
-					          	<a href="<?=base_url().'sk/hapus/'.$n->id?>" class="btn btn-danger btn-circle" onclick="return confirm('Apakah Anda yakin untuk menghapus data <?=$n->nomor?>?');">
+				                <a href="#" class="btn btn-danger btn-circle" onclick="confirm_dialog('<?=$n->id?>','<?=$n->nomor?>')">
 					          		<i class="fas fa-trash"></i>
 				                </a>
 					          </td>
@@ -111,4 +111,18 @@
 	        ]
 	    } );
 	} );
+
+	function confirm_dialog(id, teks){
+		$.confirm({
+		    title: 'Hapus Data',
+		    content: 'Apakah anda yakin ingin menghapus Surat Keluar '+ teks + ' ?',
+		    buttons: {
+		        konfirmasi: function () {
+		            window.location.href = "<?=base_url()?>sk/hapus/"+id;
+		        },
+		         batal: function () {
+		        }
+		    }
+		});
+	}
 </script>
