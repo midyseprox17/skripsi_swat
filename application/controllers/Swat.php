@@ -55,7 +55,7 @@ class swat extends CI_Controller
 				'pertanyaan1' => $this->input->post('pertanyaan1'),
 				'jawaban1' => $this->input->post('jawaban1'),
 				'pertanyaan2' => $this->input->post('pertanyaan2'),
-				'jawaban2' => $this->input->post('jawaban2')
+				'jawaban2' => $this->input->post('jawaban2')1
 			];
 			$username = $this->input->post('username');
 			$password = $this->input->post('password');
