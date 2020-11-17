@@ -39,9 +39,9 @@
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?=base_url()?>">
         <div class="sidebar-brand-icon">
-         <img src="<?=base_url().'assets/'?>img/logo.png" class="mx-auto d-block" style="width: 80%">
+         <img src="<?=base_url().'assets/'?>img/logo-2.png" class="mx-auto d-block" style="width: 80%">
         </div>
-        <div class="sidebar-brand-text"><p class="h6 mx-4 my-3">Aplikasi UPTD</p></div>
+        <div class="sidebar-brand-text"><p class="h6 mx-4 my-3">APLIKASI SIM</p></div>
       </a>
 
       <!-- Divider -->
@@ -150,6 +150,10 @@
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                  <i class="fas fa-key fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Ubah Data Login
+                </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>

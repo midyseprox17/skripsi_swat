@@ -37,21 +37,22 @@
                 <div class="p-5">
                   <div class="text-center">
                     <img src="<?=base_url().'assets/'?>img/logo.png" class="rounded mx-auto d-block mb-4" style="width: 50%">
-                    <h1 class="h3 text-gray-900 mb-4">Login Aplikasi UPTD</h1>
+                    <h1 class="h3 text-gray-900 mb-4">Login SIM</h1>
                     <h6><font color="red"><?=$_SESSION['pesan']?></font></h6>
                     <hr class=" mb-4" style="width: 100%">
                   </div>
                   <form method="post" class="user" action="<?=base_url().'login'?>" autocomplete="off">
                     <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" style="display: none">
                     <div class="form-group">
-                      <input class="rounded form-control form-control-user" name="username" id="username" aria-describedby="username" placeholder="Masukan NIP">
+                      <input class="rounded form-control form-control-user" name="username" id="username" aria-describedby="username" placeholder="Masukan Username">
                     </div>
                     <div class="form-group">
-                      <input type="password" class="rounded form-control form-control-user" name="password" id="password" placeholder="Password">
+                      <input type="password" class="rounded form-control form-control-user" name="password" id="password" placeholder="Masukan Password">
                     </div>
                     <div class="form-group">
                       <button type="submit" class="rounded btn btn-primary btn-user btn-block" id="submit" name="submit" value="1">Masuk</button>
                     </div>
+                    <a href="#">Lupa Password?</a>
                   </form>
                 </div>
               </div>

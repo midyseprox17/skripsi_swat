@@ -1,7 +1,7 @@
 <?php
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class m_uptd extends CI_Model
+class m_swat extends CI_Model
 {
 	public function tampil($table)
 	{

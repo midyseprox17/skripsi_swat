@@ -11,16 +11,13 @@ class auth{
 			'username' => $username,
 			'dihapus'=>'0'
 		);
-		$login = $this->CI->db->get_where('v_user_pegawai', $data)->row();
+		$login = $this->CI->db->get_where('tbl_user', $data)->row();
 		if($login != NULL){
 			if(password_verify($password, $login->password)){
 				$sess_data['masuk'] = '1';
-				$sess_data['pegawai_id'] = $login->pegawai_id;
-				$sess_data['nip'] = $login->username;
+				$sess_data['username'] = $login->username;
 				$sess_data['nama'] = $login->nama;
-				$sess_data['jabatan'] = $login->jabatan;
-				$sess_data['pangkat'] = $login->pangkat;
-				$sess_data['id_hak_akses'] = $login->id_hak_akses;
+				$sess_data['hak_akses'] = $login->hak_akses;
 				$this->CI->session->set_userdata($sess_data);
 				return true;
 			}
