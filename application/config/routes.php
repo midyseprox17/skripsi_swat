@@ -54,3 +54,5 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['login'] = 'swat/login';
+$route['logout'] = 'swat/logout';
+$route['lupa_password'] = 'swat/lupa_password';

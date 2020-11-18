@@ -1,98 +1,78 @@
-<link rel="stylesheet" href="<?=base_url().'assets/'?>css/bootstrap-select.min.css">
-<script src="<?=base_url().'assets/'?>js/bootstrap-select.min.js"></script>
-
 <div class="container">
-	<div class="row">
-		<div class="col-xl-12">
+	<div class="row justify-content-center">
+		<div class="col-xl-8">
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
-				  <h6 class="m-0 font-weight-bold text-primary" style="color: #15406a;">Data Login</h6>
+				  <h6 class="m-0 font-weight-bold text-primary" style="color: #15406a;">Ubah Data Login</h6>
 				</div>
 				<div class="card-body">
-					<form method="post" action="<?=base_url().'sk/tambah'?>">
+					<form method="post" action="<?=base_url('swat/data_login')?>">
 						<input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" style="display: none">
-						<table class="table">	
+						<table class="table" style="width: 100%">
 							<tr>
-								<td colspan="2" align="right"><a href="<?=base_url().'sk/tambah_bernomor'?>">Sudah punya nomor? Klik Disini</a></td>
-							</tr>
-							<tr>
-								<td style="color: #000000; width: 20%">Kode</td>
-								<td>
-									<div class="float-left" style="width: 30%">
-										<select name="penomoran_id" class="custom-select form-control">
-											<?php foreach ($penomoran->result() as $p) {
-											?>
-												<option value="<?=$p->id?>"><?=$p->kode?> | <?=$p->nama?></option>
-											<?php
-											}
-											?>
-										</select>
-									</div>
+								<td style="width: 20%; color: #000000">Username</td>
+								<td style="width: 100%" class="float-left">
+									<input type="text" class="form-control" placeholder="Username" name="username" required="" value="<?=$data_login->username?>" readonly>
 								</td>
 							</tr>
-							
-						</table>
-						<table class="table" id="tabel_hal">
 							<tr>
-								<td style="color: #000000; width: 20%">Hal</td>
-								<td>
-									<select name="hal" id="hal" class="form-control" onchange="perihal()">
-										<option value="-">---</option>
-										<?php
-										foreach ($grup_hal->result() as $value) {
-										?>
-											<option value="<?=$value->hal?>"><?=$value->hal?></option>
-										<?php
-										}
-										?>
-										<option value="lainnya">Lainnya</option>
+								<td style="width: 20%; color: #000000">Nama</td>
+								<td style="width: 100%" class="float-left">
+									<input type="text" class="form-control" placeholder="Nama" name="nama" id="nama" required="" value="<?=$data_login->nama?>">
+								</td>
+							</tr>
+							<tr>
+								<td style="width: 20%; color: #000000">Pertanyaan 1</td>
+								<td style="width: 100%" class="float-left">
+									<select name="pertanyaan1" class="form-control">
+										<option value=" " <?=$data_login->pertanyaan1 == ' ' ? 'selected' : ''?>> </option>
+										<option value="Apa makanan kesukaanmu?" <?=$data_login->pertanyaan1 == 'Apa makanan kesukaanmu?' ? 'selected' : ''?>>Apa makanan kesukaanmu?</option>
+										<option value="Apa minuman kesukaanmu?" <?=$data_login->pertanyaan1 == 'Apa minuman kesukaanmu?' ? 'selected' : ''?>>Apa minuman kesukaanmu?</option>
+										<option value="Siapa nama ibumu?" <?=$data_login->pertanyaan1 == 'Siapa nama ibumu?' ? 'selected' : ''?>>Siapa nama ibumu?</option>
+										<option value="Siapa nama ayahmu?" <?=$data_login->pertanyaan1 == 'Siapa nama ayahmu?' ? 'selected' : ''?>>Siapa nama ayahmu?</option>
+										<option value="Hewan apa yang pertama kali kamu pelihara?" <?=$data_login->pertanyaan1 == 'Hewan apa yang pertama kali kamu pelihara?' ? 'selected' : ''?>>Hewan apa yang pertama kali kamu pelihara?</option>
+										<option value="Siapa nama orang yang kamu sayang?" <?=$data_login->pertanyaan1 == 'Siapa nama orang yang kamu sayang?' ? 'selected' : ''?>>Siapa nama orang yang kamu sayang?</option>
+										<option value="Apa warna kesukaanmu?" <?=$data_login->pertanyaan1 == 'Apa warna kesukaanmu?' ? 'selected' : ''?>>Apa warna kesukaanmu?</option>
 									</select>
 								</td>
 							</tr>
-						</table>
-						<table class="table">
-							<tr id="tr_isi">
-								<td style="color: #000000; width: 20%">Isi Ringkasan</td>
-								<td><textarea type="textarea" name="isi" class="form-control" id="isi" placeholder="Isi Ringkasan (Isi '-' Jika Hal Nota Pemeriksaan)" rows="5" required=""></textarea></td>
+							<tr>
+								<td style="width: 20%; color: #000000">Jawaban</td>
+								<td style="width: 100%" class="float-left">
+									<input type="text" class="form-control" placeholder="Jawaban" name="jawaban1" id="jawaban1" required="" value="<?=$data_login->jawaban1?>">
+								</td>
 							</tr>
 							<tr>
-								<td style="color: #000000; width: 20%">Catatan</td>
-								<td><input type="text" name="catatan" class="form-control"></td>
-							</tr>
-						</table>
-						<table class="table" id="tabel_kepada">
-							<tr id="tabel_kepada1">
-								<td style="width: 20%; color: #000000">Kepada</td>
-								<td>
-									<input type="text" name="kepada[]" id="kepada" class="form-control" required="" onkeyup="grup_kepada(this)">
-								</td>
-								<td>
-									<button type="button" class="btn btn-primary mx-3" onclick="tambah_baris_kepada()"><i class="fa fa-plus"></i></button>
-								</td>
-							</tr>
-						</table>
-						<table class="table" id="tabel_pegawai">
-							<tr id="tabel_pegawai1">
-								<td style="width: 20%; color: #000000">Pengolah</td>
-								<td>
-									<select class="form-control selectpicker" data-live-search="true" name="pegawai[]" style="width: 40%" placeholder="Nama" required="">
-										<?php foreach ($pegawai->result() as $p) {
-										?>
-											<option value="<?=$p->id?>"><?=$p->nip.' | '.$p->nama?></option>
-										<?php
-										}
-										?>
+								<td style="width: 20%; color: #000000">Pertanyaan 2</td>
+								<td style="width: 100%" class="float-left">
+									<select name="pertanyaan2" class="form-control">
+										<option value=" " <?=$data_login->pertanyaan2 == ' ' ? 'selected' : ''?>> </option>
+										<option value="Apa makanan kesukaanmu?" <?=$data_login->pertanyaan2 == 'Apa makanan kesukaanmu?' ? 'selected' : ''?>>Apa makanan kesukaanmu?</option>
+										<option value="Apa minuman kesukaanmu?" <?=$data_login->pertanyaan2 == 'Apa minuman kesukaanmu?' ? 'selected' : ''?>>Apa minuman kesukaanmu?</option>
+										<option value="Siapa nama ibumu?" <?=$data_login->pertanyaan2 == 'Siapa nama ibumu?' ? 'selected' : ''?>>Siapa nama ibumu?</option>
+										<option value="Siapa nama ayahmu?" <?=$data_login->pertanyaan2 == 'Siapa nama ayahmu?' ? 'selected' : ''?>>Siapa nama ayahmu?</option>
+										<option value="Hewan apa yang pertama kali kamu pelihara?" <?=$data_login->pertanyaan2 == 'Hewan apa yang pertama kali kamu pelihara?' ? 'selected' : ''?>>Hewan apa yang pertama kali kamu pelihara?</option>
+										<option value="Siapa nama orang yang kamu sayang?" <?=$data_login->pertanyaan2 == 'Siapa nama orang yang kamu sayang?' ? 'selected' : ''?>>Siapa nama orang yang kamu sayang?</option>
+										<option value="Apa warna kesukaanmu?" <?=$data_login->pertanyaan2 == 'Apa warna kesukaanmu?' ? 'selected' : ''?>>Apa warna kesukaanmu?</option>
 									</select>
 								</td>
-								<td>
-									<button type="button" class="btn btn-primary mx-3" onclick="tambah_baris_pegawai()"><i class="fa fa-plus"></i></button>
+							</tr>
+							<tr>
+								<td style="width: 20%; color: #000000">Jawaban 2</td>
+								<td style="width: 100%" class="float-left">
+									<input type="text" class="form-control" placeholder="Jawaban" name="jawaban2" id="jawaban2" required="" value="<?=$data_login->jawaban2?>">
+								</td>
+							</tr>
+							<tr>
+								<td style="width: 20%; color: #000000"></td>
+								<td style="width: 100%" class="float-left" align="right">
+									<button class="btn btn-primary" type="submit" name="submit" value="1">Simpan Data</button>
 								</td>
 							</tr>
 						</table>
-				
-						<div class="tile-footer">
-			            	<button class="btn btn-primary" type="submit" name="submit" value="1">Tambah Data</button>
-			            </div>
+						<!-- <div class="tile-footer">
+			            	<button class="btn btn-primary" type="submit" name="submit" value="1">Simpan Data</button>
+			            </div> -->
 					</form>
 				</div>
 			</div>

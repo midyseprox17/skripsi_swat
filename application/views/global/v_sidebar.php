@@ -53,45 +53,17 @@
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
-      
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSurat" aria-expanded="true" aria-controls="collapseSurat">
-          <i class="fas fa-fw fa-file-alt"></i>
-          <span>Surat</span>
-        </a>
-        <div id="collapseSurat" class="collapse" aria-labelledby="headingSurat" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Jenis Surat:</h6>
-            <a class="collapse-item" href="<?=base_url().'sp'?>">Surat Perintah</a>
-            <a class="collapse-item" href="<?=base_url().'suket'?>">Surat Keterangan</a>
-            <a class="collapse-item" href="<?=base_url().'sm'?>">Surat Masuk</a>
-            <a class="collapse-item" href="<?=base_url().'sk'?>">Surat Keluar/Nota</a>
-          </div>
-        </div>
-      </li>
 
-      <?php if($this->session->userdata('id_hak_akses') == '1'){
+      <?php if($this->session->userdata('hak_akses') == 'adm'){
       ?>
         <li class="nav-item">
-          <a class="nav-link" href="<?=base_url().'penomoran'?>">
-            <i class="fas fa-fw fa-file-alt"></i>
-            <span>Kode Surat</span></a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="<?=base_url().'pegawai'?>">
+          <a class="nav-link" href="<?=base_url().'user'?>">
             <i class="fas fa-fw fa-users"></i>
-            <span>Pegawai</span></a>
+            <span>User</span></a>
         </li>
       <?php
       }
       ?>
-  
-      <li class="nav-item">
-        <a class="nav-link" href="<?=base_url().'sk/diagram'?>">
-          <i class="fas fa-fw fa-chart-pie"></i>
-          <span>Diagram Nota Pemeriksaan</span></a>
-      </li>
 
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
@@ -150,9 +122,13 @@
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                <a class="dropdown-item" href="<?=base_url('swat/data_login')?>">
+                  <i class="fas fa-user-circle fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Ubah Data
+                </a>
+                <a class="dropdown-item" href="<?=base_url('swat/ubah_password')?>">
                   <i class="fas fa-key fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Ubah Data Login
+                  Ubah Password
                 </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
