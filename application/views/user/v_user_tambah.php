@@ -37,9 +37,6 @@
 								</td>
 							</tr>
 						</table>
-						<!-- <div class="tile-footer">
-			            	<button class="btn btn-primary" type="submit" name="submit" value="1">Simpan Data</button>
-			            </div> -->
 					</form>
 				</div>
 			</div>

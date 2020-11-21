@@ -24,7 +24,7 @@
 
 <body class="bg-gradient-primary" style="background: #15406a">
 
-  <div class="container">
+  <div class="container" style="width:50%">
 
     <!-- Outer Row -->
     <div class="row justify-content-center">

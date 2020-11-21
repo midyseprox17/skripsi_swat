@@ -49,7 +49,20 @@ class m_swat extends CI_Model
 		return $this->db->insert_id();
 	}
 
-	function chart_pelanggaran($bulan, $tahun){
-		return $this->db->query("CALL p_pemeriksaan_pelanggaran_chart(".$this->db->escape($bulan).",".$this->db->escape($tahun).")");
+	function tampil_pegawai($where){
+		$this->db->select("tbl_pegawai.*, tbl_devisi.nama AS `devisi_nama`")
+		->from("tbl_pegawai")
+		->join("tbl_devisi", "tbl_pegawai.devisi_id = tbl_devisi.id")
+		->where($where);
+		return $this->db->get();
+	}
+
+	function tampil_kontrak($where){
+		$this->db->select("tbl_kontrak.*, tbl_klien.nama AS `klien`, tbl_devisi.nama AS `devisi`")
+		->from("tbl_kontrak")
+		->join("tbl_klien", "tbl_kontrak.klien_id = tbl_klien.id")
+		->join("tbl_devisi", "tbl_kontrak.devisi_id = tbl_devisi.id")
+		->where($where);
+		return $this->db->get();
 	}
 }

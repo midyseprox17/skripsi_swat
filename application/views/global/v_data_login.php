@@ -12,55 +12,61 @@
 							<tr>
 								<td style="width: 20%; color: #000000">Username</td>
 								<td style="width: 100%" class="float-left">
-									<input type="text" class="form-control" placeholder="Username" name="username" required="" value="<?=$data_login->username?>" readonly>
+									<input type="text" class="form-control" placeholder="Username" name="username" required="" value="<?=$data->username?>" readonly>
 								</td>
 							</tr>
 							<tr>
 								<td style="width: 20%; color: #000000">Nama</td>
 								<td style="width: 100%" class="float-left">
-									<input type="text" class="form-control" placeholder="Nama" name="nama" id="nama" required="" value="<?=$data_login->nama?>">
+									<input type="text" class="form-control" placeholder="Nama" name="nama" id="nama" required="" value="<?=$data->nama?>">
+								</td>
+							</tr>
+							<tr>
+								<td style="width: 20%; color: #000000">Jabatan</td>
+								<td style="width: 100%" class="float-left">
+									<input type="text" class="form-control" value="<?=strtoupper($data->hak_akses)?>" readonly>
 								</td>
 							</tr>
 							<tr>
 								<td style="width: 20%; color: #000000">Pertanyaan 1</td>
 								<td style="width: 100%" class="float-left">
 									<select name="pertanyaan1" class="form-control">
-										<option value=" " <?=$data_login->pertanyaan1 == ' ' ? 'selected' : ''?>> </option>
-										<option value="Apa makanan kesukaanmu?" <?=$data_login->pertanyaan1 == 'Apa makanan kesukaanmu?' ? 'selected' : ''?>>Apa makanan kesukaanmu?</option>
-										<option value="Apa minuman kesukaanmu?" <?=$data_login->pertanyaan1 == 'Apa minuman kesukaanmu?' ? 'selected' : ''?>>Apa minuman kesukaanmu?</option>
-										<option value="Siapa nama ibumu?" <?=$data_login->pertanyaan1 == 'Siapa nama ibumu?' ? 'selected' : ''?>>Siapa nama ibumu?</option>
-										<option value="Siapa nama ayahmu?" <?=$data_login->pertanyaan1 == 'Siapa nama ayahmu?' ? 'selected' : ''?>>Siapa nama ayahmu?</option>
-										<option value="Hewan apa yang pertama kali kamu pelihara?" <?=$data_login->pertanyaan1 == 'Hewan apa yang pertama kali kamu pelihara?' ? 'selected' : ''?>>Hewan apa yang pertama kali kamu pelihara?</option>
-										<option value="Siapa nama orang yang kamu sayang?" <?=$data_login->pertanyaan1 == 'Siapa nama orang yang kamu sayang?' ? 'selected' : ''?>>Siapa nama orang yang kamu sayang?</option>
-										<option value="Apa warna kesukaanmu?" <?=$data_login->pertanyaan1 == 'Apa warna kesukaanmu?' ? 'selected' : ''?>>Apa warna kesukaanmu?</option>
+										<option value=" " <?=$data->pertanyaan1 == ' ' ? 'selected' : ''?>> </option>
+										<option value="Apa makanan kesukaanmu?" <?=$data->pertanyaan1 == 'Apa makanan kesukaanmu?' ? 'selected' : ''?>>Apa makanan kesukaanmu?</option>
+										<option value="Apa minuman kesukaanmu?" <?=$data->pertanyaan1 == 'Apa minuman kesukaanmu?' ? 'selected' : ''?>>Apa minuman kesukaanmu?</option>
+										<option value="Siapa nama ibumu?" <?=$data->pertanyaan1 == 'Siapa nama ibumu?' ? 'selected' : ''?>>Siapa nama ibumu?</option>
+										<option value="Siapa nama ayahmu?" <?=$data->pertanyaan1 == 'Siapa nama ayahmu?' ? 'selected' : ''?>>Siapa nama ayahmu?</option>
+										<option value="Hewan apa yang pertama kali kamu pelihara?" <?=$data->pertanyaan1 == 'Hewan apa yang pertama kali kamu pelihara?' ? 'selected' : ''?>>Hewan apa yang pertama kali kamu pelihara?</option>
+										<option value="Siapa nama orang yang kamu sayang?" <?=$data->pertanyaan1 == 'Siapa nama orang yang kamu sayang?' ? 'selected' : ''?>>Siapa nama orang yang kamu sayang?</option>
+										<option value="Apa warna kesukaanmu?" <?=$data->pertanyaan1 == 'Apa warna kesukaanmu?' ? 'selected' : ''?>>Apa warna kesukaanmu?</option>
 									</select>
 								</td>
 							</tr>
 							<tr>
 								<td style="width: 20%; color: #000000">Jawaban</td>
 								<td style="width: 100%" class="float-left">
-									<input type="text" class="form-control" placeholder="Jawaban" name="jawaban1" id="jawaban1" required="" value="<?=$data_login->jawaban1?>">
+									<input type="text" class="form-control" placeholder="Jawaban" name="jawaban1" id="jawaban1" required="" value="<?=$data->jawaban1?>">
 								</td>
 							</tr>
 							<tr>
 								<td style="width: 20%; color: #000000">Pertanyaan 2</td>
 								<td style="width: 100%" class="float-left">
 									<select name="pertanyaan2" class="form-control">
-										<option value=" " <?=$data_login->pertanyaan2 == ' ' ? 'selected' : ''?>> </option>
-										<option value="Apa makanan kesukaanmu?" <?=$data_login->pertanyaan2 == 'Apa makanan kesukaanmu?' ? 'selected' : ''?>>Apa makanan kesukaanmu?</option>
-										<option value="Apa minuman kesukaanmu?" <?=$data_login->pertanyaan2 == 'Apa minuman kesukaanmu?' ? 'selected' : ''?>>Apa minuman kesukaanmu?</option>
-										<option value="Siapa nama ibumu?" <?=$data_login->pertanyaan2 == 'Siapa nama ibumu?' ? 'selected' : ''?>>Siapa nama ibumu?</option>
-										<option value="Siapa nama ayahmu?" <?=$data_login->pertanyaan2 == 'Siapa nama ayahmu?' ? 'selected' : ''?>>Siapa nama ayahmu?</option>
-										<option value="Hewan apa yang pertama kali kamu pelihara?" <?=$data_login->pertanyaan2 == 'Hewan apa yang pertama kali kamu pelihara?' ? 'selected' : ''?>>Hewan apa yang pertama kali kamu pelihara?</option>
-										<option value="Siapa nama orang yang kamu sayang?" <?=$data_login->pertanyaan2 == 'Siapa nama orang yang kamu sayang?' ? 'selected' : ''?>>Siapa nama orang yang kamu sayang?</option>
-										<option value="Apa warna kesukaanmu?" <?=$data_login->pertanyaan2 == 'Apa warna kesukaanmu?' ? 'selected' : ''?>>Apa warna kesukaanmu?</option>
+										<option value=" " <?=$data->pertanyaan2 == ' ' ? 'selected' : ''?>> </option>
+										<option value="Apa makanan kesukaanmu?" <?=$data->pertanyaan2 == 'Apa makanan kesukaanmu?' ? 'selected' : ''?>>Apa makanan kesukaanmu?</option>
+										<option value="Apa minuman kesukaanmu?" <?=$data->pertanyaan2 == 'Apa minuman kesukaanmu?' ? 'selected' : ''?>>Apa minuman kesukaanmu?</option>
+										<option value="Siapa nama ibumu?" <?=$data->pertanyaan2 == 'Siapa nama ibumu?' ? 'selected' : ''?>>Siapa nama ibumu?</option>
+										<option value="Siapa nama ayahmu?" <?=$data->pertanyaan2 == 'Siapa nama ayahmu?' ? 'selected' : ''?>>Siapa nama ayahmu?</option>
+										<option value="Hewan apa yang pertama kali kamu pelihara?" <?=$data->pertanyaan2 == 'Hewan apa yang pertama kali kamu pelihara?' ? 'selected' : ''?>>Hewan apa yang pertama kali kamu pelihara?</option>
+										<option value="Siapa nama orang yang kamu sayang?" <?=$data->pertanyaan2 == 'Siapa nama orang yang kamu sayang?' ? 'selected' : ''?>>Siapa nama orang yang kamu sayang?</option>
+										<option value="Apa warna kesukaanmu?" <?=$data->pertanyaan2 == 'Apa warna kesukaanmu?' ? 'selected' : ''?>>Apa warna kesukaanmu?</option>
 									</select>
 								</td>
 							</tr>
 							<tr>
 								<td style="width: 20%; color: #000000">Jawaban 2</td>
 								<td style="width: 100%" class="float-left">
-									<input type="text" class="form-control" placeholder="Jawaban" name="jawaban2" id="jawaban2" required="" value="<?=$data_login->jawaban2?>">
+									<input type="text" class="form-control" placeholder="Jawaban" name="jawaban2" id="jawaban2" required="" value="<?=$data->jawaban2?>">
 								</td>
 							</tr>
 							<tr>

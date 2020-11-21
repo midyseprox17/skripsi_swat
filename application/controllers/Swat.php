@@ -10,10 +10,10 @@ class swat extends CI_Controller
 				'dihapus' => '0',
 				'tahun' => date('Y')
 			];
-			$data['total_security'] = $this->m_swat->tampil_where('tbl_pegawai', ['id_devisi' => '1', 'dihapus' => '0'])->num_rows();
-			$data['total_cleaningservice'] = $this->m_swat->tampil_where('tbl_pegawai', ['id_devisi' => '2', 'dihapus' => '0'])->num_rows();
-			$data['total_parkir'] = $this->m_swat->tampil_where('tbl_pegawai', ['id_devisi' => '3', 'dihapus' => '0'])->num_rows();
-			$data['total_backoffice'] = $this->m_swat->tampil_where('tbl_pegawai', ['id_devisi' => '4', 'dihapus' => '0'])->num_rows();
+			$data['total_security'] = $this->m_swat->tampil_where('tbl_pegawai', ['devisi_id' => '1', 'dihapus' => '0'])->num_rows();
+			$data['total_cleaningservice'] = $this->m_swat->tampil_where('tbl_pegawai', ['devisi_id' => '2', 'dihapus' => '0'])->num_rows();
+			$data['total_parkir'] = $this->m_swat->tampil_where('tbl_pegawai', ['devisi_id' => '3', 'dihapus' => '0'])->num_rows();
+			$data['total_backoffice'] = $this->m_swat->tampil_where('tbl_pegawai', ['devisi_id' => '4', 'dihapus' => '0'])->num_rows();
 
 			$this->load->view('global/v_sidebar');
 			$this->load->view('global/v_content', $data);
@@ -67,7 +67,7 @@ class swat extends CI_Controller
 			echo "<script>alert('Data Berhasil Disimpan'); window.location.href='".'data_login'."'; </script>";
 			
 		}else{
-			$data['data_login'] = $this->m_swat->tampil_where('tbl_user', ['username' => $this->session->userdata('username')])->row();
+			$data['data'] = $this->m_swat->tampil_where('tbl_user', ['username' => $this->session->userdata('username')])->row();
 
 			$this->load->view('global/v_sidebar');
 			$this->load->view('global/v_data_login', $data);

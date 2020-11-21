@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Aplikasi UPTD</title>
+  <title>Aplikasi SWAT</title>
   <link rel="icon" type="image/png" href="<?=base_url().'assets/'?>img/icon.png" sizes="16x32">
 
 
@@ -60,6 +60,29 @@
           <a class="nav-link" href="<?=base_url().'user'?>">
             <i class="fas fa-fw fa-users"></i>
             <span>User</span></a>
+        </li>
+      <?php
+      }else if($this->session->userdata('hak_akses') == 'staff'){
+      ?>
+        <li class="nav-item">
+          <a class="nav-link" href="<?=base_url().'pegawai'?>">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Pegawai</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<?=base_url().'klien'?>">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Klien</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<?=base_url().'kontrak'?>">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Kontrak</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<?=base_url().'#'?>">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Penempatan</span></a>
         </li>
       <?php
       }
