@@ -74,6 +74,27 @@
 									</div>
 								</td>
 							</tr>
+						</table>
+						<table class="table" id="tbl_kriteria">
+							<tr id="tbl_kriteria_1">
+								<td style="width: 20%; color: #000000">Kriteria</td>
+								<td style="width: 100%" class="float-left">
+									<div class="input-group">
+										<select name="kriteria[]" class="form-control" required="">
+											<option value="umur">Umur</option>
+											<option value="jenis_kelamin">Jenis Kelamin</option>
+											<option value="tinggi">Tinggi</option>
+											<option value="pendidikan_terakhir">Pendidikan Terakhir</option>
+											<option value="sertifikat">Sertifikat</option>
+											<option value="pengalaman">Pengalaman</option>
+											<option value="hijab">Hijab</option>
+											<option value="menikah">Menikah</option>
+										</select>
+										<input type="number" class="form-control" name="kriteria_bobot[]" placeholder="bobot" required="">
+										<button type="button" class="btn btn-success" onclick="tambah_baris()"><i class="fa fa-plus"></i></button>
+									</div>
+								</td>
+							</tr>
 							<tr>
 								<td style="width: 20%; color: #000000"></td>
 								<td style="width: 100%" class="float-left" align="right">
@@ -87,3 +108,19 @@
 		</div>		
 	</div>
 </div>
+
+
+<script type="text/javascript">
+	function delete_row(rowno)
+	{
+		$('#tbl_kriteria_'+rowno).remove();
+	}
+
+    function tambah_baris(){
+    	$rowno=$("#tbl_kriteria tr").length;
+    	$rowno = $rowno + 1;
+        var html = '<tr id="tbl_kriteria_'+$rowno+'"><td></td><td style="width: 100%" class="float-left"><div class="input-group"><select name="kriteria[]" class="form-control" required=""><option value="umur">Umur</option><option value="jenis_kelamin">Jenis Kelamin</option><option value="tinggi">Tinggi</option><option value="pendidikan_terakhir">Pendidikan Terakhir</option><option value="sertifikat">Sertifikat</option><option value="pengalaman">Pengalaman</option><option value="hijab">Hijab</option><option value="menikah">Menikah</option></select><input type="number" class="form-control" name="kriteria_bobot[]" placeholder="bobot" required="">';
+        html += '<button class="btn btn-danger" onclick=delete_row('+$rowno+')><i class="fa fa-minus"></i></button></div></td></tr>';
+        $("#tbl_kriteria tr:last").prev().after(html); 
+    }
+</script>
