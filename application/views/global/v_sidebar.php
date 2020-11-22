@@ -85,6 +85,19 @@
             <span>Penempatan</span></a>
         </li>
       <?php
+      }else if($this->session->userdata('hak_akses') == 'hrd'){
+      ?>
+        <li class="nav-item">
+          <a class="nav-link" href="<?=base_url().'kontrak'?>">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Kontrak</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<?=base_url().'#'?>">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Penempatan</span></a>
+        </li>
+      <?php
       }
       ?>
 

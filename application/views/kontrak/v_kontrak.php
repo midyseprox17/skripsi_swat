@@ -29,6 +29,7 @@
 				          <th>Lama Kontrak</th>
 				          <th>Tanggal Mulai</th>
 				          <th>Tanggal Selesai</th>
+				          <th>Status</th>
 				          <th>Tindakan</th>
 				        </tr>
 				      </thead>
@@ -47,6 +48,20 @@
 					          <td><?=$value->tgl_mulai?></td>
 					          <td><?=$value->tgl_selesai?></td>
 					          <td>
+					          	<?php
+					          	if($value->status == '0'){
+					          		echo 'Ditolak';
+					          	}else if($value->status == '1'){
+					          		echo 'Diterima';
+					          	}else{
+					          		echo 'Belum Diprose';
+					          	}
+					          	?>	
+					          </td>
+					          <td>
+					          	<a href="<?=base_url('kontrak/detail/'.$value->id)?>" class="btn btn-primary btn-circle">
+					          		<i class="fas fa-eye"></i>
+				                </a>
 				                <a href="#" class="btn btn-danger btn-circle" onclick="confirm_dialog('<?=$value->id?>', '<?=$value->klien?>')">
 					          		<i class="fas fa-trash"></i>
 				                </a>
