@@ -3,7 +3,18 @@
 		<div class="col-xl-5">
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
-				  <h6 class="m-0 font-weight-bold text-primary" style="color: #15406a;">Detail Kontrak <?=$data->klien?>(<?=$data->id?>)</h6>
+				  <h6 class="m-0 font-weight-bold text-primary" style="color: #15406a;">Detail Kontrak <?=$data->klien?>(<?=$data->id?>) - <b>
+				  	<?php
+		          	if($data->status == '0'){
+		          		echo 'DITOLAK';
+		          	}else if($data->status == '1'){
+		          		echo 'DITERIMA';
+		          	}else{
+		          		echo 'BELUM DIPROSES';
+		          	}
+		          	?>
+		          		
+		          	</b></h6>
 				</div>
 				<div class="card-body">
 					<form method="post" action="<?=base_url('kontrak/detail')?>">
@@ -72,6 +83,7 @@
 										<div class="input-group">
 											<input type="text" class="form-control" value="<?=$value->kriteria?>" readonly>
 											<input type="text" class="form-control" value="<?=$value->bobot?>" readonly>
+											<input type="text" class="form-control" value="<?=$value->keterangan?>" readonly>
 										</div>
 									</td>
 								</tr>
@@ -87,6 +99,10 @@
 										<button class="btn btn-primary" type="submit" name="submit" value="1"><i class="fas fa-check"></i> Setujui</button>
 										<button class="btn btn-danger" type="submit" name="submit" value="0"><i class="fas fa-times"></i> Tolak</button>
 									<?php	
+									}else if($this->session->userdata('hak_akses') == 'staff' && $data->status == '1'){
+									?>
+										<button class="btn btn-primary" type="submit" name="submit" value="cari_pegawai"><i class="fas fa-search"></i> Cari Pegawai</button>
+									<?php
 									}
 									?>
 									<a href="<?=base_url('kontrak')?>" class="btn btn-warning" role="button"><i class="fas fa-arrow-left"></i> Kembali</a>

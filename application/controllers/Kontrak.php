@@ -36,13 +36,15 @@ class kontrak extends CI_Controller
 
 				$kriterias = $this->input->post('kriteria');
 				$kriteria_bobot = $this->input->post('kriteria_bobot');
+				$keterangan = $this->input->post('keterangan');
 				$i = 0;
 
 				foreach($kriterias as $kriteria){
 					$data = [
 						'kontrak_id' => $last_id,
 						'kriteria' => $kriteria,
-						'bobot' => $kriteria_bobot[$i]
+						'bobot' => $kriteria_bobot[$i],
+						'keterangan' => $keterangan[$i]
 					];
 					$this->m_swat->tambah('tbl_kontrak_kriteria', $data);
 
@@ -78,15 +80,18 @@ class kontrak extends CI_Controller
 	public function detail(){
 		if($this->session->userdata('hak_akses') == 'staff' || $this->session->userdata('hak_akses') == 'hrd'){
 			if($this->input->post('submit') != NULL){
-				$data = [
-					'status' => $this->input->post('submit')
-				];
-				$where = [
-					'id' => $this->input->post('id')
-				];
-				$this->m_swat->ubah('tbl_kontrak', $data, $where);
-				redirect(base_url('kontrak'));
+				if($this->input->post('submit') == 'cari_pegawai'){
 
+				}else{
+					$data = [
+					'status' => $this->input->post('submit')
+					];
+					$where = [
+						'id' => $this->input->post('id')
+					];
+					$this->m_swat->ubah('tbl_kontrak', $data, $where);
+					redirect(base_url('kontrak'));
+				}
 			}else{
 				$where = [
 					'tbl_kontrak.dihapus' => '0',

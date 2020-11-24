@@ -54,7 +54,7 @@
 					          	}else if($value->status == '1'){
 					          		echo 'Diterima';
 					          	}else{
-					          		echo 'Belum Diprose';
+					          		echo 'Belum Diproses';
 					          	}
 					          	?>	
 					          </td>

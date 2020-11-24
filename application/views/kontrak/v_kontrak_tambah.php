@@ -91,6 +91,10 @@
 											<option value="menikah">Menikah</option>
 										</select>
 										<input type="number" class="form-control" name="kriteria_bobot[]" placeholder="bobot" required="">
+										<select name="keterangan[]" class="form-control" required="">
+											<option value="cost">Cost</option>
+											<option value="benefit">Benefit</option>
+										</select>
 										<button type="button" class="btn btn-success" onclick="tambah_baris()"><i class="fa fa-plus"></i></button>
 									</div>
 								</td>
@@ -119,7 +123,7 @@
     function tambah_baris(){
     	$rowno=$("#tbl_kriteria tr").length;
     	$rowno = $rowno + 1;
-        var html = '<tr id="tbl_kriteria_'+$rowno+'"><td></td><td style="width: 100%" class="float-left"><div class="input-group"><select name="kriteria[]" class="form-control" required=""><option value="umur">Umur</option><option value="jenis_kelamin">Jenis Kelamin</option><option value="tinggi">Tinggi</option><option value="pendidikan_terakhir">Pendidikan Terakhir</option><option value="sertifikat">Sertifikat</option><option value="pengalaman">Pengalaman</option><option value="hijab">Hijab</option><option value="menikah">Menikah</option></select><input type="number" class="form-control" name="kriteria_bobot[]" placeholder="bobot" required="">';
+        var html = '<tr id="tbl_kriteria_'+$rowno+'"><td></td><td style="width: 100%" class="float-left"><div class="input-group"><select name="kriteria[]" class="form-control" required=""><option value="umur">Umur</option><option value="jenis_kelamin">Jenis Kelamin</option><option value="tinggi">Tinggi</option><option value="pendidikan_terakhir">Pendidikan Terakhir</option><option value="sertifikat">Sertifikat</option><option value="pengalaman">Pengalaman</option><option value="hijab">Hijab</option><option value="menikah">Menikah</option></select><input type="number" class="form-control" name="kriteria_bobot[]" placeholder="bobot" required=""><select name="keterangan[]" class="form-control" required=""><option value="cost">Cost</option><option value="benefit">Benefit</option></select>';
         html += '<button class="btn btn-danger" onclick=delete_row('+$rowno+')><i class="fa fa-minus"></i></button></div></td></tr>';
         $("#tbl_kriteria tr:last").prev().after(html); 
     }
