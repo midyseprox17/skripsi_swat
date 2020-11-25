@@ -83,6 +83,7 @@ class kontrak extends CI_Controller
 				if($this->input->post('submit') == 'cari_pegawai'){
 					$id = $this->input->post('id');
 					$devisi_id = $this->input->post('devisi_id');
+					$jumlah_pegawai = $this->input->post('jumlah_pegawai');
 					$kriteria = $this->input->post('kriteria');
 					$bobot = $this->input->post('bobot');
 					$keterangan = $this->input->post('keterangan');
@@ -98,8 +99,8 @@ class kontrak extends CI_Controller
 					$dmin = [];
 					$preferensi = [];
 					$v = [];
-					echo '<pre>'; print_r($bobot); echo '</pre><br>==================================================';
-					echo '<pre>'; print_r($data); echo '</pre><br>==================================================';
+					// echo '<pre>'; print_r($bobot); echo '</pre><br>==================================================';
+					// echo '<pre>'; print_r($data); echo '</pre><br>==================================================';
 
 					for($i = 0; $i < count($kriteria); $i++){
 						$pembagi[$i] = 0;
@@ -115,7 +116,7 @@ class kontrak extends CI_Controller
 					for($i = 0; $i < count($temp); $i++){
 						$pembagi[$i] = round(sqrt($temp[$i]), 4);
 					}
-					echo '<pre>'; print_r($pembagi); echo '</pre><br>==================================================';
+					// echo '<pre>'; print_r($pembagi); echo '</pre><br>==================================================';
 
 					//NORMALISASI
 					for($i = 0; $i < count($data); $i++){
@@ -123,7 +124,7 @@ class kontrak extends CI_Controller
 							$data[$i][$kriteria[$a]] = round($data[$i][$kriteria[$a]]/$pembagi[$a], 4);
 						}
 					}
-					echo '<pre>'; print_r($data); echo '</pre><br>==================================================';
+					// echo '<pre>'; print_r($data); echo '</pre><br>==================================================';
 
 					//NORMALISASI TERBOBOT
 					for($i = 0; $i < count($data); $i++){
@@ -131,7 +132,7 @@ class kontrak extends CI_Controller
 							$data[$i][$kriteria[$a]] = round($data[$i][$kriteria[$a]]*$bobot[$a], 4);
 						}
 					}
-					echo '<pre>'; print_r($data); echo '</pre><br>==================================================';
+					// echo '<pre>'; print_r($data); echo '</pre><br>==================================================';
 
 					//SOLUSI IDEAL POSITIF DAN NEGATIF
 					for($i = 0; $i < count($kriteria); $i++){
@@ -143,8 +144,8 @@ class kontrak extends CI_Controller
 							$amin[$i] = max(array_column($data, $kriteria[$i]));
 						}
 					}
-					echo '<pre>'; print_r($aplus); echo '</pre><br>==================================================';
-					echo '<pre>'; print_r($amin); echo '</pre><br>==================================================';
+					// echo '<pre>'; print_r($aplus); echo '</pre><br>==================================================';
+					// echo '<pre>'; print_r($amin); echo '</pre><br>==================================================';
 
 					//D+ dan D-
 					for($i = 0; $i < count($data); $i++){
@@ -157,16 +158,36 @@ class kontrak extends CI_Controller
 						$dplus[$i] = round(sqrt($dplus[$i]), 4);
 						$dmin[$i] = round(sqrt($dmin[$i]), 4);
 					}
-					echo '<pre>'; print_r($dplus); echo '</pre><br>==================================================';
-					echo '<pre>'; print_r($dmin); echo '</pre><br>==================================================';
+					// echo '<pre>'; print_r($dplus); echo '</pre><br>==================================================';
+					// echo '<pre>'; print_r($dmin); echo '</pre><br>==================================================';
 
 					//MENCARI PREFERENSI
 					for($i = 0; $i < count($data); $i++){
-						$v[$i][0] = $data[$i];
+						$v[$i][0] = $data[$i]['nik'];
 						$v[$i][1] = $dmin[$i]/($dmin[$i]+$dplus[$i]);
 					}
 					array_multisort(array_column($v, 1), SORT_DESC, $v);
-					echo '<pre>'; print_r($v); echo '</pre><br>==================================================';
+					$terbesar = array_slice($v, 0, $jumlah_pegawai);
+					// echo '<pre>'; print_r($largest); echo '</pre><br>==================================================';
+					$nik = array_column($terbesar, 0);
+
+					$where = [
+						'tbl_kontrak.dihapus' => '0',
+						'tbl_kontrak.id' => $id
+					];
+					$data['data'] = $this->m_swat->tampil_kontrak($where)->row();
+
+					$where = [
+						'kontrak_id' => $id
+					];
+					$data['kriteria'] = $this->m_swat->tampil_where('tbl_kontrak_kriteria', $where);
+
+					$data['rekomendasi'] = $this->m_swat->cari_pegawai_in($nik, implode(',', $kriteria));
+
+					$this->load->view('global/v_sidebar');
+					$this->load->view('kontrak/v_kontrak_detail', $data);
+					$this->load->view('global/v_footer');
+
 
 				}else{
 					$data = [

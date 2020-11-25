@@ -76,6 +76,7 @@
 						<table class="table" id="tbl_kriteria">
 							<?php
 							$nomor = 1;
+							$kriteria1 = $kriteria->result_array();
 							foreach ($kriteria->result() as $value) {
 							?>
 								<tr>
@@ -110,6 +111,48 @@
 								</td>
 							</tr>
 						</table>
+						<?php if(isset($rekomendasi)){
+						?>
+							<table class="table">
+								<tr>
+									<th>No</th>
+									<th>NIK</th>
+									<th>Nama</th>
+									<th>Alamat</th>
+									<?php foreach ($kriteria1 as $value) {
+									?>
+									<th><?=$value['kriteria']?></th>
+									<?php
+									}
+									?>
+						        </tr>
+								<?php
+								$nomor = 1;
+								$array = 0;
+								
+								foreach ($rekomendasi->result_array() as $rekomen) {
+								?>
+									<tr>
+										<td><?=$nomor?></td>
+										<td><?=$rekomen['nik']?></td>
+										<td><?=$rekomen['nama']?></td>
+										<td><?=$rekomen['alamat']?></td>
+										<?php for($i = 0; $i < count($kriteria1); $i++){
+										?>
+											<td><?=$rekomen[$kriteria1[$i]['kriteria']]?></td>
+										<?php
+										}
+										?>
+									</tr>
+								<?php
+									$array++;
+									$nomor++;
+								}
+								?>
+							</table>
+						<?php	
+						}
+						?>
 					</form>
 				</div>
 			</div>
