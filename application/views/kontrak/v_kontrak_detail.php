@@ -20,6 +20,7 @@
 					<form method="post" action="<?=base_url('kontrak/detail')?>">
 						<input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" style="display: none">
 						<input type="hidden" name="id" value="<?=$data->id?>">
+						<input type="hidden" name="devisi_id" value="<?=$data->devisi_id?>">
 						<table class="table" style="width: 100%">
 							<tr>
 								<td style="width: 20%; color: #000000">Klien</td>
@@ -36,7 +37,7 @@
 							<tr>
 								<td style="width: 20%; color: #000000">Jumlah Pegawai</td>
 								<td style="width: 100%" class="float-left">
-									<input type="text" class="form-control" value="<?=$data->jumlah_pegawai?>" readonly>
+									<input type="text" name="jumlah_pegawai" class="form-control" value="<?=$data->jumlah_pegawai?>" readonly>
 								</td>
 							</tr>
 							<tr>
@@ -81,9 +82,9 @@
 									<td style="width: 20%; color: #000000">Kriteria <?=$nomor?></td>
 									<td style="width: 100%" class="float-right">
 										<div class="input-group">
-											<input type="text" class="form-control" value="<?=$value->kriteria?>" readonly>
-											<input type="text" class="form-control" value="<?=$value->bobot?>" readonly>
-											<input type="text" class="form-control" value="<?=$value->keterangan?>" readonly>
+											<input type="text" name="kriteria[]" class="form-control" value="<?=$value->kriteria?>" readonly>
+											<input type="text" name="bobot[]" class="form-control" value="<?=$value->bobot?>" readonly>
+											<input type="text" name="keterangan[]" class="form-control" value="<?=$value->keterangan?>" readonly>
 										</div>
 									</td>
 								</tr>

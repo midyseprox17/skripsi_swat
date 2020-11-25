@@ -65,4 +65,14 @@ class m_swat extends CI_Model
 		->where($where);
 		return $this->db->get();
 	}
+
+	function cari_pegawai($kolom, $devisi_id){
+		if(strpos($kolom, 'umur') !== false){
+			$kolom = str_replace('umur', 'TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()) AS umur', $kolom);
+		}
+		$this->db->select($kolom)
+		->from("tbl_pegawai")
+		->where(['devisi_id' => $devisi_id, 'dalam_kontrak' => '0', 'dihapus' => '0']);
+		return $this->db->get();
+	}
 }

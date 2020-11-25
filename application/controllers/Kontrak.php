@@ -81,6 +81,85 @@ class kontrak extends CI_Controller
 		if($this->session->userdata('hak_akses') == 'staff' || $this->session->userdata('hak_akses') == 'hrd'){
 			if($this->input->post('submit') != NULL){
 				if($this->input->post('submit') == 'cari_pegawai'){
+					$id = $this->input->post('id');
+					$devisi_id = $this->input->post('devisi_id');
+					$kriteria = $this->input->post('kriteria');
+					$bobot = $this->input->post('bobot');
+					$keterangan = $this->input->post('keterangan');
+
+					$data = $this->m_swat->cari_pegawai(implode(',', $kriteria), $devisi_id)->result_array();
+					
+					//INISIALISASI
+					$pembagi = [];
+					$temp = [];
+					$aplus = [];
+					$amin = [];
+					$dplus = [];
+					$dmin = [];
+					$preferensi = [];
+					echo '<pre>'; print_r($bobot); echo '</pre><br>==================================================';
+					echo '<pre>'; print_r($data); echo '</pre><br>==================================================';
+
+					for($i = 0; $i < count($kriteria); $i++){
+						$pembagi[$i] = 0;
+						$temp[$i] = 0;
+					}
+					
+					//PEMBAGI
+					for($i = 0; $i < count($data); $i++){
+						for($a = 0; $a < count($data[$i]); $a++){
+							$temp[$a] += pow($data[$i][$kriteria[$a]],2);
+						}
+					}
+					for($i = 0; $i < count($temp); $i++){
+						$pembagi[$i] = round(sqrt($temp[$i]), 4);
+					}
+					echo '<pre>'; print_r($pembagi); echo '</pre><br>==================================================';
+
+					//NORMALISASI
+					for($i = 0; $i < count($data); $i++){
+						for($a = 0; $a < count($data[$i]); $a++){
+							$data[$i][$kriteria[$a]] = round($data[$i][$kriteria[$a]]/$pembagi[$a], 4);
+						}
+					}
+					echo '<pre>'; print_r($data); echo '</pre><br>==================================================';
+
+					//NORMALISASI TERBOBOT
+					for($i = 0; $i < count($data); $i++){
+						for($a = 0; $a < count($data[$i]); $a++){
+							$data[$i][$kriteria[$a]] = round($data[$i][$kriteria[$a]]*$bobot[$a], 4);
+						}
+					}
+					echo '<pre>'; print_r($data); echo '</pre><br>==================================================';
+
+					//SOLUSI IDEAL POSITIF DAN NEGATIF
+					for($i = 0; $i < count($kriteria); $i++){
+						if($keterangan[$i] == 'benefit'){
+							$aplus[$i] = max(array_column($data, $kriteria[$i]));
+							$amin[$i] = min(array_column($data, $kriteria[$i]));
+						}else if($keterangan[$i] == 'cost'){
+							$aplus[$i] = min(array_column($data, $kriteria[$i]));
+							$amin[$i] = max(array_column($data, $kriteria[$i]));
+						}
+					}
+					echo '<pre>'; print_r($aplus); echo '</pre><br>==================================================';
+					echo '<pre>'; print_r($amin); echo '</pre><br>==================================================';
+
+					//D+ dan D-
+					for($i = 0; $i < count($data); $i++){
+						$dplus[$i] = 0;
+						$dmin[$i] = 0;
+						for($a = 0; $a < count($data[$i]); $a++){
+							$dplus[$i] += $dplus[$i] + pow($aplus[$a] - $data[$i][$kriteria[$a]], 2);
+							$dmin[$i] += $dmin[$i] + pow($data[$i][$kriteria[$a]] - $amin[$a], 2);
+						}
+						$dplus[$i] = round(sqrt($dplus[$i]), 4);
+						$dmin[$i] = round(sqrt($dmin[$i]), 4);
+					}
+					echo '<pre>'; print_r($dplus); echo '</pre><br>==================================================';
+					echo '<pre>'; print_r($dmin); echo '</pre><br>==================================================';
+
+
 
 				}else{
 					$data = [
