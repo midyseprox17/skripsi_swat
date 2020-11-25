@@ -97,6 +97,7 @@ class kontrak extends CI_Controller
 					$dplus = [];
 					$dmin = [];
 					$preferensi = [];
+					$v = [];
 					echo '<pre>'; print_r($bobot); echo '</pre><br>==================================================';
 					echo '<pre>'; print_r($data); echo '</pre><br>==================================================';
 
@@ -107,7 +108,7 @@ class kontrak extends CI_Controller
 					
 					//PEMBAGI
 					for($i = 0; $i < count($data); $i++){
-						for($a = 0; $a < count($data[$i]); $a++){
+						for($a = 0; $a < count($data[$i])-1; $a++){
 							$temp[$a] += pow($data[$i][$kriteria[$a]],2);
 						}
 					}
@@ -118,7 +119,7 @@ class kontrak extends CI_Controller
 
 					//NORMALISASI
 					for($i = 0; $i < count($data); $i++){
-						for($a = 0; $a < count($data[$i]); $a++){
+						for($a = 0; $a < count($data[$i])-1; $a++){
 							$data[$i][$kriteria[$a]] = round($data[$i][$kriteria[$a]]/$pembagi[$a], 4);
 						}
 					}
@@ -126,7 +127,7 @@ class kontrak extends CI_Controller
 
 					//NORMALISASI TERBOBOT
 					for($i = 0; $i < count($data); $i++){
-						for($a = 0; $a < count($data[$i]); $a++){
+						for($a = 0; $a < count($data[$i])-1; $a++){
 							$data[$i][$kriteria[$a]] = round($data[$i][$kriteria[$a]]*$bobot[$a], 4);
 						}
 					}
@@ -149,9 +150,9 @@ class kontrak extends CI_Controller
 					for($i = 0; $i < count($data); $i++){
 						$dplus[$i] = 0;
 						$dmin[$i] = 0;
-						for($a = 0; $a < count($data[$i]); $a++){
-							$dplus[$i] += $dplus[$i] + pow($aplus[$a] - $data[$i][$kriteria[$a]], 2);
-							$dmin[$i] += $dmin[$i] + pow($data[$i][$kriteria[$a]] - $amin[$a], 2);
+						for($a = 0; $a < count($data[$i])-1; $a++){
+							$dplus[$i] = $dplus[$i] + pow($aplus[$a] - $data[$i][$kriteria[$a]], 2);
+							$dmin[$i] = $dmin[$i] + pow($data[$i][$kriteria[$a]] - $amin[$a], 2);
 						}
 						$dplus[$i] = round(sqrt($dplus[$i]), 4);
 						$dmin[$i] = round(sqrt($dmin[$i]), 4);
@@ -159,7 +160,13 @@ class kontrak extends CI_Controller
 					echo '<pre>'; print_r($dplus); echo '</pre><br>==================================================';
 					echo '<pre>'; print_r($dmin); echo '</pre><br>==================================================';
 
-
+					//MENCARI PREFERENSI
+					for($i = 0; $i < count($data); $i++){
+						$v[$i][0] = $data[$i];
+						$v[$i][1] = $dmin[$i]/($dmin[$i]+$dplus[$i]);
+					}
+					array_multisort(array_column($v, 1), SORT_DESC, $v);
+					echo '<pre>'; print_r($v); echo '</pre><br>==================================================';
 
 				}else{
 					$data = [

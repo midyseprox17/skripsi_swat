@@ -70,7 +70,7 @@ class m_swat extends CI_Model
 		if(strpos($kolom, 'umur') !== false){
 			$kolom = str_replace('umur', 'TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()) AS umur', $kolom);
 		}
-		$this->db->select($kolom)
+		$this->db->select($kolom.',nik')
 		->from("tbl_pegawai")
 		->where(['devisi_id' => $devisi_id, 'dalam_kontrak' => '0', 'dihapus' => '0']);
 		return $this->db->get();
