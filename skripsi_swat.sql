@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 24, 2020 at 04:06 PM
+-- Generation Time: Nov 25, 2020 at 12:35 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.2.31
 
@@ -140,8 +140,7 @@ CREATE TABLE `tbl_kontrak` (
 --
 
 INSERT INTO `tbl_kontrak` (`id`, `klien_id`, `devisi_id`, `jumlah_pegawai`, `lama_kontrak`, `tgl_mulai`, `tgl_selesai`, `status`, `dihapus`) VALUES
-(0014, 0129, 3, 13, '3', '2020-01-23', '2020-04-23', '1', '0'),
-(0015, 0130, 3, 12, '12', '2020-03-01', '2021-03-01', '1', '0');
+(0017, 0127, 1, 5, '9', '2021-01-25', '2021-10-25', '1', '0');
 
 -- --------------------------------------------------------
 
@@ -161,14 +160,9 @@ CREATE TABLE `tbl_kontrak_kriteria` (
 --
 
 INSERT INTO `tbl_kontrak_kriteria` (`kontrak_id`, `kriteria`, `bobot`, `keterangan`) VALUES
-(NULL, 'pengalaman', 1, NULL),
-(NULL, 'tinggi', 2, NULL),
-(NULL, 'pengalaman', 3, NULL),
-(NULL, 'menikah', 4, NULL),
-(0014, 'umur', 5, NULL),
-(0014, 'tinggi', 1, NULL),
-(0014, 'jenis_kelamin', 2, NULL),
-(0015, 'umur', 12, 'benefit');
+(0017, 'umur', 4, 'cost'),
+(0017, 'tinggi', 3, 'benefit'),
+(0017, 'pengalaman', 2, 'benefit');
 
 -- --------------------------------------------------------
 
@@ -573,7 +567,7 @@ ALTER TABLE `tbl_klien`
 -- AUTO_INCREMENT for table `tbl_kontrak`
 --
 ALTER TABLE `tbl_kontrak`
-  MODIFY `id` int(4) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(4) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Constraints for dumped tables
