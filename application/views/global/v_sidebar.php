@@ -51,7 +51,7 @@
       <li class="nav-item">
         <a class="nav-link" href="<?=base_url()?>">
           <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Dashboard</span></a>
+          <span>Beranda</span></a>
       </li>
 
       <?php if($this->session->userdata('hak_akses') == 'adm'){

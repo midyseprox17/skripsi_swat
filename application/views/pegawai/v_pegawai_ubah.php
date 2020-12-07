@@ -163,13 +163,13 @@
 								<td style="width: 20%; color: #000000">Pendidikan</td>
 								<td style="width: 100%" class="float-left">
 									<select name="pendidikan_terakhir" class="form-control">
-										<option value="SMP" <?=$data->pendidikan_terakhir == 'SMP' ? 'selected' : ''?>>SMP Sederajat</option>
-										<option value="SMA" <?=$data->pendidikan_terakhir == 'SMA' ? 'selected' : ''?>>SMA Sederajat</option>
-										<option value="D1" <?=$data->pendidikan_terakhir == 'D1' ? 'selected' : ''?>>Diploma 1</option>
-										<option value="D2" <?=$data->pendidikan_terakhir == 'D2' ? 'selected' : ''?>>Diploma 2</option>
-										<option value="D3" <?=$data->pendidikan_terakhir == 'D3' ? 'selected' : ''?>>Diploma 3</option>
-										<option value="D4" <?=$data->pendidikan_terakhir == 'D4' ? 'selected' : ''?>>Diploma 4</option>
-										<option value="S1" <?=$data->pendidikan_terakhir == 'S1' ? 'selected' : ''?>>Srata 1</option>
+										<option value="1" <?=$data->pendidikan_terakhir == '1' ? 'selected' : ''?>>SMP Sederajat</option>
+										<option value="2" <?=$data->pendidikan_terakhir == '2' ? 'selected' : ''?>>SMA Sederajat</option>
+										<option value="3" <?=$data->pendidikan_terakhir == '3' ? 'selected' : ''?>>Diploma 1</option>
+										<option value="4" <?=$data->pendidikan_terakhir == '4' ? 'selected' : ''?>>Diploma 2</option>
+										<option value="5" <?=$data->pendidikan_terakhir == '5' ? 'selected' : ''?>>Diploma 3</option>
+										<option value="6" <?=$data->pendidikan_terakhir == '6' ? 'selected' : ''?>>Diploma 4</option>
+										<option value="7" <?=$data->pendidikan_terakhir == '7' ? 'selected' : ''?>>Srata 1</option>
 									</select>
 								</td>
 							</tr>

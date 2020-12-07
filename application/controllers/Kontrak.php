@@ -28,14 +28,42 @@ class kontrak extends CI_Controller
 					'lama_kontrak' => $this->input->post('lama_kontrak'),
 					'tgl_mulai' => $this->input->post('tgl_mulai_tahun').'-'.$this->input->post('tgl_mulai_bulan').'-'.$this->input->post('tgl_mulai_tanggal'),
 					'tgl_selesai' => date_format(date_add(date_create($this->input->post('tgl_mulai_tahun').'-'.$this->input->post('tgl_mulai_bulan').'-'.$this->input->post('tgl_mulai_tanggal')),date_interval_create_from_date_string($this->input->post('lama_kontrak').' months')),'Y-m-d'),
-					'status' => '2',
+					'status' => 'belum',
 					'dihapus' => '0'
 				];
 				
 				$last_id = $this->m_swat->tambah('tbl_kontrak', $data);
 
 				$kriterias = $this->input->post('kriteria');
-				$kriteria_bobot = $this->input->post('kriteria_bobot');
+				$total_kriteria = count($kriterias);
+				$kriteria_bobot = [];
+
+				switch($total_kriteria){
+					case 1:
+						$kriteria_bobot = [80];
+						break;
+					case 2:
+						$kriteria_bobot = [80,70];
+						break;
+					case 3:
+						$kriteria_bobot = [80,70,60];
+						break;
+					case 4:
+						$kriteria_bobot = [80,70,60,50];
+						break;
+					case 5:
+						$kriteria_bobot = [80,70,60,50,40];
+						break;
+					case 6:
+						$kriteria_bobot = [80,70,60,50,40,30];
+						break;
+					case 7:
+						$kriteria_bobot = [80,70,60,50,40,30,20];
+						break;
+					case 8:
+						$kriteria_bobot = [80,70,60,50,40,30,20,10];
+						break;
+				}
 				$keterangan = $this->input->post('keterangan');
 				$i = 0;
 
@@ -85,7 +113,35 @@ class kontrak extends CI_Controller
 					$devisi_id = $this->input->post('devisi_id');
 					$jumlah_pegawai = $this->input->post('jumlah_pegawai');
 					$kriteria = $this->input->post('kriteria');
-					$bobot = $this->input->post('bobot');
+					$total_kriteria = count($kriteria);
+					$bobot = [];
+
+					switch($total_kriteria){
+						case 1:
+							$bobot = [80];
+							break;
+						case 2:
+							$bobot = [80,70];
+							break;
+						case 3:
+							$bobot = [80,70,60];
+							break;
+						case 4:
+							$bobot = [80,70,60,50];
+							break;
+						case 5:
+							$bobot = [80,70,60,50,40];
+							break;
+						case 6:
+							$bobot = [80,70,60,50,40,30];
+							break;
+						case 7:
+							$bobot = [80,70,60,50,40,30,20];
+							break;
+						case 8:
+							$bobot = [80,70,60,50,40,30,20,10];
+							break;
+					}
 					$keterangan = $this->input->post('keterangan');
 
 					$data = $this->m_swat->cari_pegawai(implode(',', $kriteria), $devisi_id)->result_array();
@@ -197,7 +253,7 @@ class kontrak extends CI_Controller
 						'id' => $this->input->post('id')
 					];
 					$this->m_swat->ubah('tbl_kontrak', $data, $where);
-					redirect(base_url('kontrak'));
+					redirect(base_url('kontrak/detail/'.$where['id']));
 				}
 			}else{
 				$where = [
@@ -211,9 +267,34 @@ class kontrak extends CI_Controller
 				];
 				$data['kriteria'] = $this->m_swat->tampil_where('tbl_kontrak_kriteria', $where);
 
+				if($data['data']->status == 'penempatan'){
+					$data['penempatan'] = $this->m_swat->tampil_kontrak_penempatan($data['data']->id);
+				}
+
 				$this->load->view('global/v_sidebar');
 				$this->load->view('kontrak/v_kontrak_detail', $data);
 				$this->load->view('global/v_footer');
+			}
+		}else{
+			redirect(base_url('login'));
+		}
+	}
+
+
+	public function penempatan(){
+		if($this->session->userdata('hak_akses') == 'staff' || $this->session->userdata('hak_akses') == 'hrd'){
+			if($this->input->post('submit') != NULL){
+				$id = $this->input->post('id');
+				$nik = $this->input->post('nik');
+
+				foreach ($nik as $value) {
+					$this->m_swat->tambah('tbl_penempatan', ['kontrak_id' => $id, 'pegawai_nik' => $value]);
+					$this->m_swat->ubah('tbl_pegawai', ['dalam_kontrak' => '1'], ['nik' => $value]);
+					$this->m_swat->ubah('tbl_kontrak', ['status' => 'penempatan'], ['id' => $id]);
+				}
+				
+				redirect(base_url('kontrak'));
+			}else{
 			}
 		}else{
 			redirect(base_url('login'));

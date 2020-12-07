@@ -80,7 +80,7 @@
 								<td style="width: 20%; color: #000000">Kriteria</td>
 								<td style="width: 100%" class="float-left">
 									<div class="input-group">
-										<select name="kriteria[]" class="form-control" required="">
+										<select name="kriteria[]" class="form-control" onchange="get_keterangan(this, '1')" required="">
 											<option value="umur">Umur</option>
 											<option value="jenis_kelamin">Jenis Kelamin</option>
 											<option value="tinggi">Tinggi</option>
@@ -90,10 +90,8 @@
 											<option value="hijab">Hijab</option>
 											<option value="menikah">Menikah</option>
 										</select>
-										<input type="number" class="form-control" name="kriteria_bobot[]" placeholder="bobot" required="">
-										<select name="keterangan[]" class="form-control" required="">
-											<option value="cost">Cost</option>
-											<option value="benefit">Benefit</option>
+										<!-- <input type="number" class="form-control" name="kriteria_bobot[]" placeholder="bobot" required=""> -->
+										<select name="keterangan[]" class="form-control" id="keterangan_1" required="">
 										</select>
 										<button type="button" class="btn btn-success" onclick="tambah_baris()"><i class="fa fa-plus"></i></button>
 									</div>
@@ -123,8 +121,39 @@
     function tambah_baris(){
     	$rowno=$("#tbl_kriteria tr").length;
     	$rowno = $rowno + 1;
-        var html = '<tr id="tbl_kriteria_'+$rowno+'"><td></td><td style="width: 100%" class="float-left"><div class="input-group"><select name="kriteria[]" class="form-control" required=""><option value="umur">Umur</option><option value="jenis_kelamin">Jenis Kelamin</option><option value="tinggi">Tinggi</option><option value="pendidikan_terakhir">Pendidikan Terakhir</option><option value="sertifikat">Sertifikat</option><option value="pengalaman">Pengalaman</option><option value="hijab">Hijab</option><option value="menikah">Menikah</option></select><input type="number" class="form-control" name="kriteria_bobot[]" placeholder="bobot" required=""><select name="keterangan[]" class="form-control" required=""><option value="cost">Cost</option><option value="benefit">Benefit</option></select>';
+        var html = '<tr id="tbl_kriteria_'+$rowno+'"><td></td><td style="width: 100%" class="float-left"><div class="input-group"><select name="kriteria[]" class="form-control" onchange="get_keterangan(this, '+$rowno+')" required=""><option value="umur">Umur</option><option value="jenis_kelamin">Jenis Kelamin</option><option value="tinggi">Tinggi</option><option value="pendidikan_terakhir">Pendidikan Terakhir</option><option value="sertifikat">Sertifikat</option><option value="pengalaman">Pengalaman</option><option value="hijab">Hijab</option><option value="menikah">Menikah</option></select><select name="keterangan[]" class="form-control" id="keterangan_'+$rowno+'" required=""><option value="cost">Cost</option><option value="benefit">Benefit</option></select>';
         html += '<button class="btn btn-danger" onclick=delete_row('+$rowno+')><i class="fa fa-minus"></i></button></div></td></tr>';
         $("#tbl_kriteria tr:last").prev().after(html); 
     }
+
+	function get_keterangan(isi, rowno){
+		var kriteria = $(isi).val();
+		$('#keterangan_'+rowno).find('option').remove();
+   		if(kriteria == 'umur'){
+   			$('#keterangan_'+rowno).append('<option value="cost">Muda</option>');
+   			$('#keterangan_'+rowno).append('<option value="benefit">Tua</option>');
+   		}else if(kriteria == 'jenis_kelamin'){
+   			$('#keterangan_'+rowno).append('<option value="cost">Wanita</option>');
+   			$('#keterangan_'+rowno).append('<option value="benefit">Pria</option>');
+   		}else if(kriteria == 'tinggi'){
+   			$('#keterangan_'+rowno).append('<option value="cost">Pendek</option>');
+   			$('#keterangan_'+rowno).append('<option value="benefit">Tinggi</option>');
+   		}else if(kriteria == 'pendidikan_terakhir'){
+   			$('#keterangan_'+rowno).append('<option value="cost">Rendah</option>');
+   			$('#keterangan_'+rowno).append('<option value="benefit">Tinggi</option>');
+   		}else if(kriteria == 'sertifikat'){
+   			$('#keterangan_'+rowno).append('<option value="cost">Tidak ada</option>');
+   			$('#keterangan_'+rowno).append('<option value="benefit">Bersertifikat</option>');
+   		}else if(kriteria == 'pengalaman'){
+   			$('#keterangan_'+rowno).append('<option value="cost">Baru</option>');
+   			$('#keterangan_'+rowno).append('<option value="benefit">Lama</option>');
+   		}else if(kriteria == 'hijab'){
+   			$('#keterangan_'+rowno).append('<option value="cost">Tidak Berhijab</option>');
+   			$('#keterangan_'+rowno).append('<option value="benefit">Berhijab</option>');
+   		}else if(kriteria == 'menikah'){
+   			$('#keterangan_'+rowno).append('<option value="cost">Belum Menikah</option>');
+   			$('#keterangan_'+rowno).append('<option value="benefit">Sudah Menikah</option>');
+   		}
+   		
+	}
 </script>

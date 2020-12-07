@@ -85,4 +85,12 @@ class m_swat extends CI_Model
 			->where_in('nik', $nik);
 		return $this->db->get();
 	}
+	
+	function tampil_kontrak_penempatan($id){
+		$this->db->select("tbl_pegawai.*")
+		->from("tbl_penempatan")
+		->join("tbl_pegawai", "tbl_penempatan.pegawai_nik = tbl_pegawai.nik")
+		->where(['kontrak_id' => $id]);
+		return $this->db->get();
+	}
 }

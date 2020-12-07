@@ -49,12 +49,14 @@
 					          <td><?=$value->tgl_selesai?></td>
 					          <td>
 					          	<?php
-					          	if($value->status == '0'){
+					          	if($value->status == 'ditolak'){
 					          		echo 'Ditolak';
-					          	}else if($value->status == '1'){
-					          		echo 'Diterima';
-					          	}else{
+					          	}else if($value->status == 'disetujui'){
+					          		echo 'Disetujui';
+					          	}else if($value->status == 'belum'){
 					          		echo 'Belum Diproses';
+					          	}else if($value->status == 'penempatan'){
+					          		echo 'Sudah Penempatan';
 					          	}
 					          	?>	
 					          </td>
