@@ -166,7 +166,7 @@ class kontrak extends CI_Controller
 					//PEMBAGI
 					for($i = 0; $i < count($data); $i++){
 						for($a = 0; $a < count($data[$i])-1; $a++){
-							$temp[$a] += pow($data[$i][$kriteria[$a]],2);
+							$temp[$a] += pow(floatval($data[$i][$kriteria[$a]]),2);
 						}
 					}
 					for($i = 0; $i < count($temp); $i++){
@@ -177,7 +177,7 @@ class kontrak extends CI_Controller
 					//NORMALISASI
 					for($i = 0; $i < count($data); $i++){
 						for($a = 0; $a < count($data[$i])-1; $a++){
-							$data[$i][$kriteria[$a]] = round($data[$i][$kriteria[$a]]/$pembagi[$a], 4);
+							$data[$i][$kriteria[$a]] = round(floatval($data[$i][$kriteria[$a]])/$pembagi[$a], 4);
 						}
 					}
 					// echo '<pre>'; print_r($data); echo '</pre><br>==================================================';
@@ -293,9 +293,21 @@ class kontrak extends CI_Controller
 					$this->m_swat->ubah('tbl_kontrak', ['status' => 'penempatan'], ['id' => $id]);
 				}
 				
-				redirect(base_url('kontrak'));
+				redirect(base_url('kontrak/tampil_penempatan'));
 			}else{
 			}
+		}else{
+			redirect(base_url('login'));
+		}
+	}
+
+	public function tampil_penempatan(){
+		if($this->session->userdata('hak_akses') == 'staff' || $this->session->userdata('hak_akses') == 'hrd'){
+			$data['data'] = $this->m_swat->tampil_penempatan();
+
+			$this->load->view('global/v_sidebar');
+			$this->load->view('pegawai/v_pegawai_penempatan', $data);
+			$this->load->view('global/v_footer');
 		}else{
 			redirect(base_url('login'));
 		}

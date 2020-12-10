@@ -93,4 +93,16 @@ class m_swat extends CI_Model
 		->where(['kontrak_id' => $id]);
 		return $this->db->get();
 	}
+
+	function tampil_penempatan(){
+		$this->db->select("tbl_pegawai.*, tbl_klien.nama AS `klien`, tbl_devisi.nama AS `devisi`")
+		->from("tbl_pegawai")
+		->join("tbl_penempatan", "tbl_pegawai.nik = tbl_penempatan.pegawai_nik", "left")
+		->join("tbl_kontrak", "tbl_penempatan.kontrak_id = tbl_kontrak.id", "left")
+		->join("tbl_devisi", "tbl_pegawai.devisi_id = tbl_devisi.id", "left")
+		->join("tbl_klien", "tbl_kontrak.klien_id = tbl_klien.id", "left")
+		->where(['tbl_pegawai.dihapus' => '0'])
+		->order_by("tbl_klien.nama", "desc");
+		return $this->db->get();
+	}
 }
