@@ -62,7 +62,8 @@ class m_swat extends CI_Model
 		->from("tbl_kontrak")
 		->join("tbl_klien", "tbl_kontrak.klien_id = tbl_klien.id")
 		->join("tbl_devisi", "tbl_kontrak.devisi_id = tbl_devisi.id")
-		->where($where);
+		->where($where)
+		->order_by("tbl_kontrak.id");
 		return $this->db->get();
 	}
 
@@ -95,7 +96,7 @@ class m_swat extends CI_Model
 	}
 
 	function tampil_penempatan(){
-		$this->db->select("tbl_pegawai.*, tbl_klien.nama AS `klien`, tbl_devisi.nama AS `devisi`")
+		$this->db->select("tbl_pegawai.*, tbl_klien.nama AS `klien`, tbl_devisi.nama AS `devisi`, tbl_kontrak.tgl_mulai as tgl_mulai, tbl_kontrak.tgl_selesai as tgl_selesai, tbl_kontrak.status as status")
 		->from("tbl_pegawai")
 		->join("tbl_penempatan", "tbl_pegawai.nik = tbl_penempatan.pegawai_nik", "left")
 		->join("tbl_kontrak", "tbl_penempatan.kontrak_id = tbl_kontrak.id", "left")
@@ -104,5 +105,9 @@ class m_swat extends CI_Model
 		->where(['tbl_pegawai.dihapus' => '0'])
 		->order_by("tbl_klien.nama", "desc");
 		return $this->db->get();
+	}
+
+	function kontrak_habis(){
+		$this->db->query("UPDATE tbl_pegawai JOIN tbl_penempatan ON tbl_pegawai.nik = tbl_penempatan.pegawai_nik JOIN tbl_kontrak ON tbl_penempatan.kontrak_id = tbl_kontrak.id SET tbl_pegawai.dalam_kontrak = '0', tbl_kontrak.status = 'selesai' WHERE tbl_kontrak.tgl_selesai < CURDATE()");
 	}
 }

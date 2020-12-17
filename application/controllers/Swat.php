@@ -6,6 +6,8 @@ class swat extends CI_Controller
 	function index()
 	{
 		if($this->session->userdata('masuk') == '1'){
+			$this->m_swat->kontrak_habis();
+
 			$where = [
 				'dihapus' => '0',
 				'tahun' => date('Y')

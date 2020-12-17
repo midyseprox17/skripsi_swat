@@ -11,8 +11,10 @@
 		          		echo 'DISETUJUI';
 		          	}else if($data->status == 'belum'){
 		          		echo 'BELUM DIPROSES';
-		          	}else if($data->status == 'penempatan'){
-		          		echo 'SUDAH PENEMPATAN';
+		          	}else if($data->status == 'berjalan'){
+		          		echo 'SEDANG BERJALAN';
+		          	}else if($data->status == 'selesai'){
+		          		echo 'SELESAI';
 		          	}
 		          	?>
 		          		

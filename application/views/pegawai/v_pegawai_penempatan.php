@@ -14,6 +14,13 @@
 				<div class="card-header py-3">
 				  	<h6 class="m-0 font-weight-bold text-primary">Tabel Penempatan Pegawai</h6>
 				</div>
+				<div class="card-header py-3">
+					<div class="input-group" style="width:50%">
+						Filter Tanggal Mulai &nbsp;&nbsp;&nbsp;
+						<input type="text" id="min" name="min" placeholder="Tanggal Mulai Minimal" class="form-control">
+						<input type="text" id="max" name="max" placeholder="Tanggal Mulai Maksimal" class="form-control">
+					</div>
+				</div>
 				<div class="card-body">
 				  <div class="table-responsive">
 				    <table class="table table-bordered" id="tabel" width="100%" cellspacing="0">
@@ -24,6 +31,9 @@
 				          <th>NIK</th>
 				          <th>Nama</th>
 				          <th>Penempatan</th>
+				          <td>Tgl Mulai</td>
+					      <td>Tgl Selesai</td>
+					      <td>Status Kontrak</td>
 				        </tr>
 				      </thead>
 				      <tbody>
@@ -38,6 +48,23 @@
 					          <td><?=$value->nik?></td>
 					          <td><?=$value->nama?></td>
 					          <td><?=$value->klien?></td>
+					          <td><?=$value->tgl_mulai?></td>
+					          <td><?=$value->tgl_selesai?></td>
+					          <td>
+					          	<?php
+					          	if($value->status == 'ditolak'){
+					          		echo 'DITOLAK';
+					          	}else if($value->status == 'disetujui'){
+					          		echo 'DISETUJUI';
+					          	}else if($value->status == 'belum'){
+					          		echo 'BELUM DIPROSES';
+					          	}else if($value->status == 'berjalan'){
+					          		echo 'SEDANG BERJALAN';
+					          	}else if($value->status == 'selesai'){
+					          		echo 'SELESAI';
+					          	}
+					          	?>
+					          </td>
 					        </tr>
 					    <?php
 					    	$nomor++;
@@ -66,7 +93,27 @@
 <script src="<?=base_url().'assets/'?>js/demo/datatables-demo.js"></script>
 
 <script>
+	$.fn.dataTable.ext.search.push(
+	    function( settings, data, dataIndex ) {
+	        var min = new Date($('#min').val());
+	        var max = new Date($('#max').val());
+	        var age = new Date(data[5]); // use data for the age column
+	 
+	        if ( ( isNaN( min ) && isNaN( max ) ) ||
+	             ( isNaN( min ) && age <= max ) ||
+	             ( min <= age   && isNaN( max ) ) ||
+	             ( min <= age   && age <= max ) )
+	        {
+	            return true;
+	        }
+	        return false;
+	    }
+	);
+
+
 	$(document).ready(function() {
+		$('#min').datepicker({ dateFormat: 'yy-mm-dd' });
+		$('#max').datepicker({ dateFormat: 'yy-mm-dd' });
 	 
 	    var table = $('#tabel').DataTable( {
 	        orderCellsTop: true,
@@ -78,6 +125,10 @@
 	            'csvHtml5',
 	            'pdfHtml5'
 	        ]
+	    } );
+
+	    $('#min, #max').change( function() {
+	        table.draw();
 	    } );
 	} );
 

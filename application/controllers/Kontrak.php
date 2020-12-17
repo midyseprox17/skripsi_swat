@@ -290,7 +290,7 @@ class kontrak extends CI_Controller
 				foreach ($nik as $value) {
 					$this->m_swat->tambah('tbl_penempatan', ['kontrak_id' => $id, 'pegawai_nik' => $value]);
 					$this->m_swat->ubah('tbl_pegawai', ['dalam_kontrak' => '1'], ['nik' => $value]);
-					$this->m_swat->ubah('tbl_kontrak', ['status' => 'penempatan'], ['id' => $id]);
+					$this->m_swat->ubah('tbl_kontrak', ['status' => 'berjalan'], ['id' => $id]);
 				}
 				
 				redirect(base_url('kontrak/tampil_penempatan'));
