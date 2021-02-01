@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2020 at 10:26 AM
+-- Generation Time: Feb 01, 2021 at 02:47 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.2.31
 
@@ -140,8 +140,6 @@ CREATE TABLE `tbl_kontrak` (
 --
 
 INSERT INTO `tbl_kontrak` (`id`, `klien_id`, `devisi_id`, `jumlah_pegawai`, `lama_kontrak`, `tgl_mulai`, `tgl_selesai`, `status`, `dihapus`) VALUES
-(0020, 0127, 1, 3, '3', '2020-01-01', '2020-04-01', 'selesai', '0'),
-(0021, 0129, 1, 5, '6', '2020-01-17', '2020-07-17', 'selesai', '0'),
 (0022, 0130, 2, 2, '3', '2020-12-08', '2021-03-08', 'selesai', '0'),
 (0023, 0127, 1, 3, '3', '2021-01-21', '2021-04-21', 'disetujui', '0'),
 (0024, 0127, 2, 2, '3', '2021-01-12', '2021-04-12', 'selesai', '0'),
@@ -175,11 +173,11 @@ INSERT INTO `tbl_kontrak_kriteria` (`kontrak_id`, `kriteria`, `bobot`, `keterang
 (NULL, 'pengalaman', 4, 'benefit'),
 (NULL, 'pendidikan_terakhir', 5, 'benefit'),
 (NULL, 'tinggi', 3, 'benefit'),
-(0020, 'jenis_kelamin', 10, 'cost'),
-(0020, 'tinggi', 3, 'benefit'),
-(0021, 'umur', 3, 'cost'),
-(0021, 'tinggi', 1, 'benefit'),
-(0021, 'pengalaman', 2, 'benefit'),
+(NULL, 'jenis_kelamin', 10, 'cost'),
+(NULL, 'tinggi', 3, 'benefit'),
+(NULL, 'umur', 3, 'cost'),
+(NULL, 'tinggi', 1, 'benefit'),
+(NULL, 'pengalaman', 2, 'benefit'),
 (0022, 'tinggi', 80, 'benefit'),
 (0022, 'jenis_kelamin', 70, 'benefit'),
 (0022, 'pengalaman', 60, 'benefit'),
@@ -512,14 +510,14 @@ CREATE TABLE `tbl_penempatan` (
 --
 
 INSERT INTO `tbl_penempatan` (`kontrak_id`, `pegawai_nik`) VALUES
-(0021, '10120041'),
-(0021, '10120052'),
-(0021, '10120112'),
-(0021, '201001699'),
-(0021, '201001705'),
-(0020, '10120044'),
-(0020, '10120057'),
-(0020, '10120102'),
+(NULL, '10120041'),
+(NULL, '10120052'),
+(NULL, '10120112'),
+(NULL, '201001699'),
+(NULL, '201001705'),
+(NULL, '10120044'),
+(NULL, '10120057'),
+(NULL, '10120102'),
 (0022, '200301166'),
 (0022, '200301200'),
 (0024, '10120033'),
